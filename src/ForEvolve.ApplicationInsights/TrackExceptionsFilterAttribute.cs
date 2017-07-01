@@ -7,30 +7,24 @@ namespace ForEvolve.ApplicationInsights
 {
     public class TrackExceptionsFilterAttribute : ExceptionFilterAttribute
     {
-        private readonly TelemetryClient _telemetryClient;
-        public TrackExceptionsFilterAttribute(TelemetryClient telemetryClient)
+        private readonly ITelemetryClient _telemetryClient;
+        public TrackExceptionsFilterAttribute(ITelemetryClient telemetryClient)
         {
             _telemetryClient = telemetryClient ?? throw new ArgumentNullException(nameof(telemetryClient));
         }
 
         public override void OnException(ExceptionContext context)
         {
-            TrackException(context);
+            if (context != null && context.Exception != null)
+            {
+                _telemetryClient.TrackException(context.Exception);
+            }
             base.OnException(context);
         }
 
         public override Task OnExceptionAsync(ExceptionContext context)
         {
-            TrackException(context);
             return base.OnExceptionAsync(context);
-        }
-
-        private void TrackException(ExceptionContext context)
-        {
-            if (context != null && context.Exception != null)
-            {
-                _telemetryClient.TrackException(context.Exception);
-            }
         }
     }
 }

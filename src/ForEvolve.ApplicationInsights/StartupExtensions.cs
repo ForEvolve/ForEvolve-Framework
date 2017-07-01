@@ -16,6 +16,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddForEvolveApplicationInsights(this IServiceCollection services)
         {
+            services.AddTransient<ITelemetryClient, TelemetryClientWrapper>();
+            services.AddTransient<TrackExceptionsFilterAttribute>();
             return services;
         }
 
