@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Carl-Hugo Marcotte</Authors>
+    <Company>ForEvolve</Company>
+    <Description>ForEvolve Framework metapackage</Description>
+    <PackageProjectUrl>https://github.com/ForEvolve/dotnetcore</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ForEvolve/dotnetcore/blob/master/LICENSE</PackageLicenseUrl>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.0-omicron</Version>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Copyright>Carl-Hugo Marcotte</Copyright>
+    <RootNamespace>ForEvolve</RootNamespace>
+    <IncludeSymbols>True</IncludeSymbols>
+    <IncludeSource>True</IncludeSource>
+    <Product>ForEvolve Framework</Product>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="ForEvolve.DynamicInternalServerError.Swagger" Version="1.0.0-upsilon-00025" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ForEvolve.ApplicationInsights\ForEvolve.ApplicationInsights.csproj" />
+    <ProjectReference Include="..\ForEvolve.AspNetCore\ForEvolve.AspNetCore.csproj" />
+    <ProjectReference Include="..\ForEvolve.Azure\ForEvolve.Azure.csproj" />
+    <ProjectReference Include="..\ForEvolve.Core\ForEvolve.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,2 @@
+# ForEvolve.Azure
+Azure utilities.
