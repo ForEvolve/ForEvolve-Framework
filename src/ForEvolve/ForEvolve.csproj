@@ -6,8 +6,8 @@
     <Authors>Carl-Hugo Marcotte</Authors>
     <Company>ForEvolve</Company>
     <Description>ForEvolve Framework metapackage</Description>
-    <PackageProjectUrl>https://github.com/ForEvolve/dotnetcore</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/ForEvolve/dotnetcore/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve-Framework</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ForEvolve/ForEvolve-Framework/blob/master/LICENSE</PackageLicenseUrl>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <Version>1.0.0-omicron</Version>
