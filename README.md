@@ -6,9 +6,7 @@ This is a work in progress, so there is more stuff to come!
 
 ## The projects
 ### ForEvolve
-This is a meta package project that references all `ForEvolve.*` projects.
-
-To quickly add a reference to all ForEvolve Framework features, reference this NuGet package.
+You can find the meta-package that references all `ForEvolve.*` projects at the following repo: [ForEvolve/MetaPackages](https://github.com/ForEvolve/MetaPackages).
 
 ### ForEvolve.ApplicationInsights
 This project aims at adding features over ApplicationInsights.
@@ -59,8 +57,11 @@ I plan on evolving theses libraries as I use them in multiple projects.
 Examples of what I want to add:
 
 * Azure table repository with memory cache (to save HTTP calls)
-* Azure table batch request
+* Azure table repository with distributed cache (to save HTTP calls)
+* Azure table repository with both memory and distributed cache (decorators?)
+* Azure table batch operations
 * Azure cognitive services helpers
+* Easy Azure Cosmos DB support
 * ...
 
 If you would like to contribute to the Framework, feel free to contact me.
