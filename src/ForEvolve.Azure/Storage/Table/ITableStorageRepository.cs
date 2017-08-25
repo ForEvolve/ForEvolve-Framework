@@ -15,7 +15,10 @@ namespace ForEvolve.Azure.Storage.Table
         Task<IEnumerable<TModel>> ReadAllAsync();
         Task<TModel> InsertOrMergeAsync(TModel item);
         Task<TModel> InsertOrReplaceAsync(TModel item);
-        Task<TModel> RemoveAsync(string partitionKey, string rowkey);
-        Task<IEnumerable<TModel>> RemoveAsync(string partitionKey);
+        Task<TModel> DeleteOneAsync(string partitionKey, string rowkey);
+        Task<IEnumerable<TModel>> DeletePartitionAsync(string partitionKey);
+        Task<TModel> InsertAsync(TModel item);
+        Task<TModel> ReplaceAsync(TModel item);
+        Task<TModel> MergeAsync(TModel item);
     }
 }

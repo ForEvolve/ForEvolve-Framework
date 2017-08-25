@@ -24,7 +24,7 @@ namespace ForEvolve.Azure.Storage.Table
         public async Task<IEnumerable<TModel>> ReadAllAsync()
         {
             var query = new TableQuery<TModel>();
-            return await QueryTable(query);
+            return await QueryTableAsync(query);
         }
 
         public async Task<IEnumerable<TModel>> ReadPartitionAsync(string partitionKey)
@@ -32,46 +32,66 @@ namespace ForEvolve.Azure.Storage.Table
             var query = new TableQuery<TModel>()
                 .Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, partitionKey));
 
-            return await QueryTable(query);
+            return await QueryTableAsync(query);
         }
 
         public async Task<TModel> ReadOneAsync(string partitionKey, string rowkey)
         {
-            var typedResult = await ASFindAsync(partitionKey, rowkey);
+            var typedResult = await FindEntityAsync(partitionKey, rowkey);
             return typedResult ?? default(TModel);
         }
 
         public async Task<TModel> InsertOrMergeAsync(TModel item)
         {
             var insertOperation = TableOperation.InsertOrMerge(item);
-            var result = await ASExecuteTableOperation(insertOperation);
+            var result = await ExecuteTableOperationAsync(insertOperation);
             return result.Result as TModel;
         }
 
         public async Task<TModel> InsertOrReplaceAsync(TModel item)
         {
             var insertOperation = TableOperation.InsertOrReplace(item);
-            var result = await ASExecuteTableOperation(insertOperation);
+            var result = await ExecuteTableOperationAsync(insertOperation);
             return result.Result as TModel;
         }
 
-        public async Task<TModel> RemoveAsync(string partitionKey, string rowkey)
+        public async Task<TModel> DeleteOneAsync(string partitionKey, string rowkey)
         {
-            var entity = await ASFindAsync(partitionKey, rowkey);
+            var entity = await FindEntityAsync(partitionKey, rowkey);
             if (entity == null) { throw new AzureTableStorageException($"No entity found for keys {partitionKey} + {rowkey}."); }
             var deleteOperation = TableOperation.Delete(entity);
-            var result = await ASExecuteTableOperation(deleteOperation);
+            var result = await ExecuteTableOperationAsync(deleteOperation);
             return entity;
         }
 
-        public async Task<IEnumerable<TModel>> RemoveAsync(string partitionKey)
+        public async Task<IEnumerable<TModel>> DeletePartitionAsync(string partitionKey)
         {
             var models = await ReadPartitionAsync(partitionKey);
-            var tasks = models.Select(m => RemoveAsync(partitionKey, m.RowKey));
+            var tasks = models.Select(m => DeleteOneAsync(partitionKey, m.RowKey));
             var removedElements = await Task.WhenAll(tasks);
             return removedElements;
         }
 
+        public async Task<TModel> InsertAsync(TModel item)
+        {
+            var insertOperation = TableOperation.Insert(item, true);
+            var result = await ExecuteTableOperationAsync(insertOperation);
+            return result.Result as TModel;
+        }
+
+        public async Task<TModel> ReplaceAsync(TModel item)
+        {
+            var insertOperation = TableOperation.Replace(item);
+            var result = await ExecuteTableOperationAsync(insertOperation);
+            return result.Result as TModel;
+        }
+
+        public async Task<TModel> MergeAsync(TModel item)
+        {
+            var insertOperation = TableOperation.Merge(item);
+            var result = await ExecuteTableOperationAsync(insertOperation);
+            return result.Result as TModel;
+        }
 
         protected async Task<CloudTable> GetTableAsync()
         {
@@ -82,15 +102,15 @@ namespace ForEvolve.Azure.Storage.Table
             return table;
         }
 
-        protected async Task<TModel> ASFindAsync(string partitionKey, string rowkey)
+        protected async Task<TModel> FindEntityAsync(string partitionKey, string rowkey)
         {
             var retrieveOperation = TableOperation.Retrieve<TModel>(partitionKey, rowkey);
-            var result = await ASExecuteTableOperation(retrieveOperation);
+            var result = await ExecuteTableOperationAsync(retrieveOperation);
             ValidateTableResult(result);
             return result.Result as TModel;
         }
 
-        protected async Task<IEnumerable<TModel>> QueryTable(TableQuery<TModel> query)
+        protected async Task<IEnumerable<TModel>> QueryTableAsync(TableQuery<TModel> query)
         {
             var table = await GetTableAsync();
             TableContinuationToken continuationToken = null;
@@ -104,7 +124,7 @@ namespace ForEvolve.Azure.Storage.Table
             return list;
         }
 
-        protected async Task<TableResult> ASExecuteTableOperation(TableOperation operation)
+        protected async Task<TableResult> ExecuteTableOperationAsync(TableOperation operation)
         {
             var table = await GetTableAsync();
             var result = await table.ExecuteAsync(operation);
@@ -112,7 +132,7 @@ namespace ForEvolve.Azure.Storage.Table
             return result;
         }
 
-        protected void ValidateTableResult(TableResult result)
+        protected virtual void ValidateTableResult(TableResult result)
         {
             if (result == null)
             {
