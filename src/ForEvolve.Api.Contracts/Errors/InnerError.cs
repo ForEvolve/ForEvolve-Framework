@@ -26,5 +26,19 @@ namespace ForEvolve.Api.Contracts.Errors
             get { return this["stackTrace"]; }
             set { this["stackTrace"] = value; }
         }
+
+        [JsonProperty(PropertyName = "source")]
+        public string Source
+        {
+            get { return this["source"]; }
+            set { this["source"] = value; }
+        }
+
+        [JsonProperty(PropertyName = "helpLink")]
+        public string HelpLink
+        {
+            get { return this["helpLink"]; }
+            set { this["helpLink"] = value; }
+        }
     }
 }
