@@ -1,449 +1,169 @@
 using ForEvolve.Api.Contracts.Errors;
+using Moq;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
 {
     public class DefaultErrorFactoryTest
     {
-        [Fact(Skip = "DefaultErrorFactoryTest Should_be_Tested")]
-        public void Should_be_Tested()
+        private readonly Mock<IErrorFromExceptionFactory> _errorFromExceptionFactoryMock;
+        private readonly Mock<IErrorFromDictionaryFactory> _errorFromDictionaryFactoryMock;
+        private readonly Mock<IErrorFromKeyValuePairFactory> _errorFromKeyValuePairFactoryMock;
+        private readonly Mock<IErrorFromRawValuesFactory> _errorFromRawValuesFactoryMock;
+        private readonly DefaultErrorFactory _factoryUnderTest;
+
+        public DefaultErrorFactoryTest()
         {
-            // Arrange
-
-
-            // Act
-
-
-            // Assert
-            throw new NotImplementedException();
+            _errorFromExceptionFactoryMock = new Mock<IErrorFromExceptionFactory>();
+            _errorFromDictionaryFactoryMock = new Mock<IErrorFromDictionaryFactory>();
+            _errorFromKeyValuePairFactoryMock = new Mock<IErrorFromKeyValuePairFactory>();
+            _errorFromRawValuesFactoryMock = new Mock<IErrorFromRawValuesFactory>();
+            _factoryUnderTest = new DefaultErrorFactory(
+                _errorFromExceptionFactoryMock.Object,
+                _errorFromDictionaryFactoryMock.Object,
+                _errorFromKeyValuePairFactoryMock.Object,
+                _errorFromRawValuesFactoryMock.Object
+            );
         }
-    //    private readonly DefaultErrorFactory _factoryUnderTest;
-    //    public DefaultErrorFactoryTest()
-    //    {
-    //        _factoryUnderTest = new DefaultErrorFactory();
-    //    }
 
-    //    private void AssertError(object expectedResult, Error actualResult)
-    //    {
-    //        var settings = new JsonSerializerSettings
-    //        {
-    //            NullValueHandling = NullValueHandling.Ignore
-    //        };
-    //        var expectedJson = JsonConvert.SerializeObject(expectedResult, settings);
-    //        var actualJson = JsonConvert.SerializeObject(actualResult, settings);
-    //        Assert.Equal(expectedJson, actualJson);
-    //    }
+        public class Ctor : DefaultErrorFactoryTest
+        {
+            [Fact]
+            public void Should_guard_against_null()
+            {
+                // Arrange
+                IErrorFromExceptionFactory nullErrorFromExceptionFactory = null;
+                IErrorFromDictionaryFactory nullErrorFromDictionaryFactory = null;
+                IErrorFromKeyValuePairFactory nullErrorFromKeyValuePairFactory = null;
+                IErrorFromRawValuesFactory nullErrorFromRawValuesFactory = null;
 
-    //    public class Create_with_errorCode : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            var errorCode = "MyErrorCode";
-    //            var expectedError = new { code = errorCode };
+                // Act & Assert
+                Assert.Throws<ArgumentNullException>(
+                    () => new DefaultErrorFactory(
+                        nullErrorFromExceptionFactory,
+                        _errorFromDictionaryFactoryMock.Object,
+                        _errorFromKeyValuePairFactoryMock.Object,
+                        _errorFromRawValuesFactoryMock.Object
+                    )
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () => new DefaultErrorFactory(
+                        _errorFromExceptionFactoryMock.Object,
+                        nullErrorFromDictionaryFactory,
+                        _errorFromKeyValuePairFactoryMock.Object,
+                        _errorFromRawValuesFactoryMock.Object
+                    )
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () => new DefaultErrorFactory(
+                        _errorFromExceptionFactoryMock.Object,
+                        _errorFromDictionaryFactoryMock.Object,
+                        nullErrorFromKeyValuePairFactory,
+                        _errorFromRawValuesFactoryMock.Object
+                    )
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () => new DefaultErrorFactory(
+                        _errorFromExceptionFactoryMock.Object,
+                        _errorFromDictionaryFactoryMock.Object,
+                        _errorFromKeyValuePairFactoryMock.Object,
+                        nullErrorFromRawValuesFactory
+                    )
+                );
+            }
+        }
 
-    //            // Act
-    //            var result = _factoryUnderTest.Create(errorCode);
+        public class Create : DefaultErrorFactoryTest
+        {
+            public class ErrorFromException : Create
+            {
+                [Fact]
+                public void Should_delegate_the_call_to_IErrorFromExceptionFactory()
+                {
+                    // Arrange
+                    var expectedError = new Error();
+                    var exception = new ForEvolveException();
+                    _errorFromExceptionFactoryMock
+                        .Setup(x => x.Create(exception))
+                        .Returns(expectedError);
 
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
-    //    }
+                    // Act
+                    var result = _factoryUnderTest.Create(exception);
 
-    //    public class Create_with_errorCode_and_errorMessage : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            var errorCode = "MyErrorCode";
-    //            var errorMessage = "MyErrorMessage ";
-    //            var expectedError = new { code = errorCode, message = errorMessage };
+                    // Assert
+                    Assert.Same(expectedError, result);
+                }
+            }
 
-    //            // Act
-    //            var result = _factoryUnderTest.Create(errorCode, errorMessage);
+            public class ErrorFromDictionary : Create
+            {
+                [Fact]
+                public void Should_delegate_the_call_to_IErrorFromDictionaryFactory()
+                {
+                    // Arrange
+                    var expectedErrors = Enumerable.Empty<Error>();
+                    var errorCode = "SomeCode";
+                    Dictionary<string, object> details = new Dictionary<string, object>();
 
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
-    //    }
+                    _errorFromDictionaryFactoryMock
+                        .Setup(x => x.Create(errorCode, details))
+                        .Returns(expectedErrors);
 
-    //    public class Create_with_errorCode_and_errorMessage_and_target : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            var errorCode = "MyErrorCode";
-    //            var errorMessage = "MyErrorMessage ";
-    //            var errorTarget = "MyTarget";
-    //            var expectedError = new { code = errorCode, message = errorMessage, target = errorTarget };
+                    // Act
+                    var result = _factoryUnderTest.Create(errorCode, details);
 
-    //            // Act
-    //            var result = _factoryUnderTest.Create(errorCode, errorMessage, errorTarget);
+                    // Assert
+                    Assert.Same(expectedErrors, result);
+                }
+            }
 
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
-    //    }
+            public class ErrorFromKeyValuePair : Create
+            {
+                [Fact]
+                public void Should_delegate_the_call_to_IErrorFromKeyValuePairFactory()
+                {
+                    // Arrange
+                    var expectedError = new Error();
+                    var errorCode = "SomeCode";
+                    var keyValuePair = new KeyValuePair<string, object>("...", "...");
+                    _errorFromKeyValuePairFactoryMock
+                        .Setup(x => x.Create(errorCode, keyValuePair))
+                        .Returns(expectedError);
 
-    //    public class Create_TException : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            ArgumentException exception;
-    //            try
-    //            {
-    //                throw new ArgumentException("My error message");
-    //            }
-    //            catch (ArgumentException ex)
-    //            {
-    //                exception = ex;
-    //            }
-    //            var expectedError = new Error
-    //            {
-    //                Code = "ArgumentException",
-    //                Message = exception.Message,
-    //                Target = exception.TargetSite?.Name
-    //            };
+                    // Act
+                    var result = _factoryUnderTest.Create(errorCode, keyValuePair);
 
-    //            // Act
-    //            var result = _factoryUnderTest.Create(exception);
+                    // Assert
+                    Assert.Same(expectedError, result);
+                }
+            }
 
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
+            public class ErrorFromRawValues : Create
+            {
+                [Fact]
+                public void Should_delegate_the_call_to_IErrorFromRawValuesFactory()
+                {
+                    // Arrange
+                    var expectedError = new Error();
+                    var errorCode = "someCode";
+                    var errorTarget = "someTarget";
+                    var errorMessage = "someMessage";
 
-    //        [Fact]
-    //        public void Should_return_expected_Error_including_InnerException()
-    //        {
-    //            // Arrange
-    //            DivideByZeroException innerException;
-    //            try
-    //            {
-    //                throw new DivideByZeroException();
-    //            }
-    //            catch (DivideByZeroException ex)
-    //            {
-    //                innerException = ex;
-    //            }
-    //            ArgumentException exception;
-    //            try
-    //            {
-    //                throw new ArgumentException("My error message", innerException);
-    //            }
-    //            catch (ArgumentException ex)
-    //            {
-    //                exception = ex;
-    //            }
-    //            var expectedError = new Error
-    //            {
-    //                Code = "ArgumentException",
-    //                Message = exception.Message,
-    //                Target = exception.TargetSite?.Name,
-    //                Details = new List<Error>
-    //                {
-    //                    new Error
-    //                    {
-    //                        Code = "DivideByZeroException",
-    //                        Message = innerException.Message,
-    //                        Target = innerException.TargetSite?.Name
-    //                    }
-    //                }
-    //            };
+                    _errorFromRawValuesFactoryMock
+                        .Setup(x => x.Create(errorCode, errorTarget, errorMessage))
+                        .Returns(expectedError);
 
-    //            // Act
-    //            var result = _factoryUnderTest.Create(exception);
+                    // Act
+                    var result = _factoryUnderTest.Create(errorCode, errorTarget, errorMessage);
 
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
-    //    }
-
-    //    public class Create_TException_Detail_with_errorCode : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            var errorCode = "MyErrorCode";
-    //            ArgumentException exception;
-    //            try
-    //            {
-    //                throw new ArgumentException("My error message");
-    //            }
-    //            catch (ArgumentException ex)
-    //            {
-    //                exception = ex;
-    //            }
-
-    //            var expectedError = new Error
-    //            {
-    //                Code = errorCode,
-    //                Details = new List<Error>
-    //                {
-    //                    new Error
-    //                    {
-    //                        Code = "ArgumentException",
-    //                        Message = exception.Message,
-    //                        Target = exception.TargetSite?.Name
-    //                    }
-    //                }
-    //            };
-
-    //            // Act
-    //            var result = _factoryUnderTest.Create(errorCode, exception);
-
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
-    //    }
-
-    //    public class Create_TException_Detail_with_errorCode_and_errorMessage : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            var errorCode = "MyErrorCode";
-    //            var errorMessage = "MyErrorMessage ";
-    //            ArgumentException exception;
-    //            try
-    //            {
-    //                throw new ArgumentException("My error message");
-    //            }
-    //            catch (ArgumentException ex)
-    //            {
-    //                exception = ex;
-    //            }
-
-    //            var expectedError = new Error
-    //            {
-    //                Code = errorCode,
-    //                Message = errorMessage,
-    //                Details = new List<Error>
-    //                {
-    //                    new Error
-    //                    {
-    //                        Code = "ArgumentException",
-    //                        Message = exception.Message,
-    //                        Target = exception.TargetSite?.Name
-    //                    }
-    //                }
-    //            };
-
-    //            // Act
-    //            var result = _factoryUnderTest.Create(errorCode, errorMessage, exception);
-
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
-    //    }
-
-    //    public class Create_TException_Detail_with_errorCode_and_errorMessage_and_target : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            var errorCode = "MyErrorCode";
-    //            var errorMessage = "MyErrorMessage ";
-    //            var errorTarget = "MyTarget";
-    //            ArgumentException exception;
-    //            try
-    //            {
-    //                throw new ArgumentException("My error message");
-    //            }
-    //            catch (ArgumentException ex)
-    //            {
-    //                exception = ex;
-    //            }
-
-    //            var expectedError = new Error
-    //            {
-    //                Code = errorCode,
-    //                Message = errorMessage,
-    //                Target = errorTarget,
-    //                Details = new List<Error>
-    //                {
-    //                    new Error
-    //                    {
-    //                        Code = "ArgumentException",
-    //                        Message = exception.Message,
-    //                        Target = exception.TargetSite?.Name
-    //                    }
-    //                }
-    //            };
-
-    //            // Act
-    //            var result = _factoryUnderTest.Create(errorCode, errorMessage, errorTarget, exception);
-
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
-    //    }
-
-    //    public class Create_Dictionary_Detail_with_errorCode : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            var errorCode = "MyErrorCode";
-    //            var dictionary = new Dictionary<string, object>
-    //            {
-    //                { "MyKey1", "An error message" },
-    //                { "MyKey2", "An other error message" },
-    //            };
-    //            var expectedError = new Error
-    //            {
-    //                Code = errorCode,
-    //                Details = new List<Error>
-    //                {
-    //                    new Error
-    //                    {
-    //                        Code = $"{errorCode}Detail",
-    //                        Message = "An error message",
-    //                        Target = "MyKey1"
-    //                    },
-    //                    new Error
-    //                    {
-    //                        Code = $"{errorCode}Detail",
-    //                        Message = "An other error message",
-    //                        Target = "MyKey2"
-    //                    },
-    //                }
-    //            };
-
-    //            // Act
-    //            var result = _factoryUnderTest.Create(errorCode, dictionary);
-
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
-    //    }
-
-    //    public class Create_Dictionary_Detail_with_errorCode_and_errorMessage : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            var errorCode = "MyErrorCode";
-    //            var errorMessage = "MyErrorMessage";
-    //            var dictionary = new Dictionary<string, object>
-    //            {
-    //                { "MyKey1", "An error message" },
-    //                { "MyKey2", "An other error message" },
-    //            };
-    //            var expectedError = new Error
-    //            {
-    //                Code = errorCode,
-    //                Message = errorMessage,
-    //                Details = new List<Error>
-    //                {
-    //                    new Error
-    //                    {
-    //                        Code = $"{errorCode}Detail",
-    //                        Message = "An error message",
-    //                        Target = "MyKey1"
-    //                    },
-    //                    new Error
-    //                    {
-    //                        Code = $"{errorCode}Detail",
-    //                        Message = "An other error message",
-    //                        Target = "MyKey2"
-    //                    },
-    //                }
-    //            };
-
-    //            // Act
-    //            var result = _factoryUnderTest.Create(errorCode, errorMessage, dictionary);
-
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
-    //    }
-
-    //    public class Create_Dictionary_Detail_with_errorCode_and_errorMessage_and_target : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            var errorCode = "MyErrorCode";
-    //            var errorMessage = "MyErrorMessage";
-    //            var errorTarget = "MyTarget";
-    //            var dictionary = new Dictionary<string, object>
-    //            {
-    //                { "MyKey1", "An error message" },
-    //                { "MyKey2", "An other error message" },
-    //            };
-    //            var expectedError = new Error
-    //            {
-    //                Code = errorCode,
-    //                Message = errorMessage,
-    //                Target = errorTarget,
-    //                Details = new List<Error>
-    //                {
-    //                    new Error
-    //                    {
-    //                        Code = $"{errorCode}Detail",
-    //                        Message = "An error message",
-    //                        Target = "MyKey1"
-    //                    },
-    //                    new Error
-    //                    {
-    //                        Code = $"{errorCode}Detail",
-    //                        Message = "An other error message",
-    //                        Target = "MyKey2"
-    //                    },
-    //                }
-    //            };
-
-    //            // Act
-    //            var result = _factoryUnderTest.Create(errorCode, errorMessage, errorTarget, dictionary);
-
-    //            // Assert
-    //            AssertError(expectedError, result);
-    //        }
-    //    }
-
-    //    public class Create_KeyValuePair_with_errorCode : DefaultErrorFactoryTest
-    //    {
-    //        [Fact]
-    //        public void Should_return_expected_Error()
-    //        {
-    //            // Arrange
-    //            var errorCode = "MyErrorCode";
-    //            var errorMessage = "MyErrorMessage";
-    //            var errorTarget = "MyTarget";
-    //            var errorTargetAndMessage = new KeyValuePair<string, object>(errorTarget, errorMessage);
-    //            var expectedError = new Error
-    //            {
-    //                Code = errorCode,
-    //                Message = errorMessage,
-    //                Target = errorTarget
-    //            };
-
-    //            // Act
-    //            var result = _factoryUnderTest.Create(errorCode, errorTargetAndMessage);
-
-    //            // Assert
-    //            throw new NotImplementedException();
-    //        }
-
-    //        [Fact]
-    //        public void Should_return_expected_Error_and_details_when()
-    //        {
-
-    //        }
-    //    }
+                    // Assert
+                    Assert.Same(expectedError, result);
+                }
+            }
+        }
     }
 }
