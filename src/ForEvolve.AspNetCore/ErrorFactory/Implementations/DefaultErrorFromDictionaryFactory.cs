@@ -4,7 +4,7 @@ using System.Text;
 using ForEvolve.Api.Contracts.Errors;
 using System.Linq;
 
-namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
+namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
 {
     public class DefaultErrorFromDictionaryFactory : IErrorFromDictionaryFactory
     {

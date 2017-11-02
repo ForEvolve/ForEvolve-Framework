@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
+namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
 {
     public class DefaultErrorFromKeyValuePairFactoryTest
     {

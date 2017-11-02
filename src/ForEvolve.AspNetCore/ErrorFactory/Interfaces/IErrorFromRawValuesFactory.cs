@@ -1,6 +1,6 @@
 ﻿using ForEvolve.Api.Contracts.Errors;
 
-namespace ForEvolve.Api.Domain
+namespace ForEvolve.AspNetCore
 {
     public interface IErrorFromRawValuesFactory
     {

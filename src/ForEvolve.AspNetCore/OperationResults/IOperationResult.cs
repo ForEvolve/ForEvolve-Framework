@@ -6,7 +6,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using ForEvolve.Api.Contracts.Errors;
 
-namespace ForEvolve.Api.Domain
+namespace ForEvolve.AspNetCore
 {
     public interface IOperationResult
     {

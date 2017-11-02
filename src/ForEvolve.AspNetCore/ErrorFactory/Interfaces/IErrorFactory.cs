@@ -1,4 +1,4 @@
-﻿namespace ForEvolve.Api.Domain
+﻿namespace ForEvolve.AspNetCore
 {
     public interface IErrorFactory : IErrorFromExceptionFactory, IErrorFromDictionaryFactory, IErrorFromKeyValuePairFactory, IErrorFromRawValuesFactory
     {

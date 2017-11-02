@@ -1,5 +1,5 @@
-﻿using ForEvolve.Api.Domain;
-using ForEvolve.Api.Domain.ErrorFactory.Implementations;
+﻿using ForEvolve.AspNetCore;
+using ForEvolve.AspNetCore.ErrorFactory.Implementations;
 using System;
 using System.Collections.Generic;
 using System.Text;

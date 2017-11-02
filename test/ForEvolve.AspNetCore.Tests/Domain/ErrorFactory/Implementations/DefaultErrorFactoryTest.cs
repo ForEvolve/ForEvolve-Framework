@@ -4,10 +4,22 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
+namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
 {
-    //public class DefaultErrorFactoryTest
-    //{
+    public class DefaultErrorFactoryTest
+    {
+        [Fact(Skip = "DefaultErrorFactoryTest Should_be_Tested")]
+        public void Should_be_Tested()
+        {
+            // Arrange
+
+
+            // Act
+
+
+            // Assert
+            throw new NotImplementedException();
+        }
     //    private readonly DefaultErrorFactory _factoryUnderTest;
     //    public DefaultErrorFactoryTest()
     //    {
@@ -433,5 +445,5 @@ namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
 
     //        }
     //    }
-    //}
+    }
 }

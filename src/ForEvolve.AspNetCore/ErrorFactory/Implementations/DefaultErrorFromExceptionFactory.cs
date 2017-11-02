@@ -5,7 +5,7 @@ using ForEvolve.Api.Contracts.Errors;
 using Microsoft.AspNetCore.Hosting;
 using System.Collections;
 
-namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
+namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
 {
     public class DefaultErrorFromExceptionFactory : IErrorFromExceptionFactory
     {

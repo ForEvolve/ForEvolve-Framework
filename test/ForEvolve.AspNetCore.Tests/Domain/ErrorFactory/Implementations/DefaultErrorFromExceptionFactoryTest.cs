@@ -8,7 +8,7 @@ using ForEvolve.Api.Contracts.Errors;
 using System.Collections;
 using System.Reflection;
 
-namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
+namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
 {
     public class DefaultErrorFromExceptionFactoryTest
     {

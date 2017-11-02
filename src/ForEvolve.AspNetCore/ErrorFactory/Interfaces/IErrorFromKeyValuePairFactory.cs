@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using ForEvolve.Api.Contracts.Errors;
 
-namespace ForEvolve.Api.Domain
+namespace ForEvolve.AspNetCore
 {
     public interface IErrorFromKeyValuePairFactory
     {
