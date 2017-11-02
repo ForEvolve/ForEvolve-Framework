@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ForEvolve.Api.Contracts.Errors;
 
-namespace ForEvolve.Api.Domain
+namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
 {
     public class DefaultErrorFactory : IErrorFactory
     {

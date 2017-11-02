@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace ForEvolve.Api.Domain
+namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
 {
     //public class DefaultErrorFactoryTest
     //{

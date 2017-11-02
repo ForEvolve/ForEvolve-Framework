@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ForEvolve.Api.Domain
+namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
 {
     public class DefaultErrorFromRawValuesFactoryTest
     {

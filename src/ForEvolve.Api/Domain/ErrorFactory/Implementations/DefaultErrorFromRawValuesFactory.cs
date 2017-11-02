@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ForEvolve.Api.Contracts.Errors;
 
-namespace ForEvolve.Api.Domain
+namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
 {
     public class DefaultErrorFromRawValuesFactory : IErrorFromRawValuesFactory
     {
