@@ -29,7 +29,7 @@ namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
             public void Should_delegate_the_Error_creation_to_IErrorFromRawValuesFactory()
             {
                 // Arrange
-                var expectedEerrorCode = "SomeErrorCode";
+                var expectedErrorCode = "SomeErrorCode";
                 var expectedErrorTarget = "SomeErrorTarget";
                 var expectedErrorMessage = "SomeErrorMessage";
                 var errorTargetAndMessage = new KeyValuePair<string, object>(expectedErrorTarget, expectedErrorMessage);
@@ -37,14 +37,14 @@ namespace ForEvolve.Api.Domain.ErrorFactory.Implementations
                 var rawFactoryMock = new Mock<IErrorFromRawValuesFactory>();
                 var factoryUnderTest = new DefaultErrorFromKeyValuePairFactory(rawFactoryMock.Object);
                 rawFactoryMock
-                    .Setup(x => x.Create(expectedEerrorCode, expectedErrorTarget, expectedErrorMessage))
+                    .Setup(x => x.Create(expectedErrorCode, expectedErrorTarget, expectedErrorMessage))
                     .Verifiable();
 
                 // Act
-                var result = factoryUnderTest.Create(expectedEerrorCode, errorTargetAndMessage);
+                var result = factoryUnderTest.Create(expectedErrorCode, errorTargetAndMessage);
 
                 // Assert
-                rawFactoryMock.Verify(x => x.Create(expectedEerrorCode, expectedErrorTarget, expectedErrorMessage), Times.Once);
+                rawFactoryMock.Verify(x => x.Create(expectedErrorCode, expectedErrorTarget, expectedErrorMessage), Times.Once);
             }
         }
     }
