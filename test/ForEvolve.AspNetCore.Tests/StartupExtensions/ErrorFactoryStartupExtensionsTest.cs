@@ -10,42 +10,25 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public class ErrorFactoryStartupExtensionsTest
     {
-        private readonly Mock<IServiceCollection> _servicesMock;
-        private readonly List<ServiceDescriptor> _registeredDescriptors;
-
-        public ErrorFactoryStartupExtensionsTest()
+        public class AddErrorFactory : BaseStartupExtensionsTest
         {
-            _registeredDescriptors = new List<ServiceDescriptor>();
-            _servicesMock = new Mock<IServiceCollection>();
-            _servicesMock
-                .Setup(x => x.Add(It.IsAny<ServiceDescriptor>()))
-                .Callback((ServiceDescriptor d) => _registeredDescriptors.Add(d))
-                .Verifiable();
-        }
-
-        public class AddErrorFactory : ErrorFactoryStartupExtensionsTest
-        {
-            [Fact]
-            public void Should_register_default_services_implementations_as_Singleton()
+            public static readonly Type[] ExpectedSingletonServices = new Type[]
             {
-                // Arrange
-                var expectedServices = new Type[]
-                {
                     typeof(IErrorFromExceptionFactory),
                     typeof(IErrorFromDictionaryFactory),
                     typeof(IErrorFromKeyValuePairFactory),
                     typeof(IErrorFromRawValuesFactory),
                     typeof(IErrorFactory),
-                };
+            };
 
-                // Act
-                _servicesMock.Object.AddErrorFactory();
-
-                // Assert
-                var registeredServiceType = _registeredDescriptors
-                    .Where(x => x.Lifetime == ServiceLifetime.Singleton)
-                    .Select(x => x.ServiceType);
-                Assert.Equal(expectedServices, registeredServiceType);
+            [Fact]
+            public void Should_register_default_services_implementations()
+            {
+                // Arange, Act & Assert
+                AssertThatAllServicesAreRegistered(
+                    services => services.AddErrorFactory(),
+                    expectedSingletonServices: ExpectedSingletonServices
+                );
             }
         }
     }
