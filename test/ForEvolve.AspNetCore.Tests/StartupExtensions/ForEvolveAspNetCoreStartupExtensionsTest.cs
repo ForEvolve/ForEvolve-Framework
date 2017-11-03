@@ -10,8 +10,6 @@ namespace ForEvolve.AspNetCore.StartupExtensions
 {
     public class ForEvolveAspNetCoreStartupExtensionsTest
     {
-        //BaseStartupExtensionsTest
-        //ErrorFactoryStartupExtensionsTest.AddErrorFactory.ExpectedSingletonServices
         public class AddForEvolveAspNetCore : BaseStartupExtensionsTest
         {
             public readonly IEnumerable<Type> ExpectedSingletonServices;
@@ -29,7 +27,7 @@ namespace ForEvolve.AspNetCore.StartupExtensions
             [Fact]
             public void Should_register_default_services_implementations()
             {
-                // Arange, Act & Assert
+                // Arrange, Act & Assert
                 AssertThatAllServicesAreRegistered(
                     services => services.AddForEvolveAspNetCore(),
                     expectedSingletonServices: ExpectedSingletonServices

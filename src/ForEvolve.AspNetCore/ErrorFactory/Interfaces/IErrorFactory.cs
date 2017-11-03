@@ -1,20 +1,27 @@
-﻿namespace ForEvolve.AspNetCore
+﻿// ***********************************************************************
+// Assembly         : ForEvolve.AspNetCore
+// Author           : Carl-Hugo Marcotte
+// Created          : 11-02-2017
+//
+// Last Modified By : Carl-Hugo Marcotte
+// Last Modified On : 11-02-2017
+// ***********************************************************************
+// <copyright file="IErrorFactory.cs" company="ForEvolve">
+//     Carl-Hugo Marcotte
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
+namespace ForEvolve.AspNetCore
 {
+    /// <summary>
+    /// Aggregate and expose <c>ForEvolve.Api.Contracts.Errors</c> building methods.
+    /// </summary>
+    /// <seealso cref="ForEvolve.AspNetCore.IErrorFromExceptionFactory" />
+    /// <seealso cref="ForEvolve.AspNetCore.IErrorFromDictionaryFactory" />
+    /// <seealso cref="ForEvolve.AspNetCore.IErrorFromKeyValuePairFactory" />
+    /// <seealso cref="ForEvolve.AspNetCore.IErrorFromRawValuesFactory" />
     public interface IErrorFactory : IErrorFromExceptionFactory, IErrorFromDictionaryFactory, IErrorFromKeyValuePairFactory, IErrorFromRawValuesFactory
     {
-
-        //Error Create<TException>(string errorCode, TException details)
-        //    where TException : Exception;
-        //Error Create<TException>(string errorCode, string errorMessage, TException details)
-        //    where TException : Exception;
-        //Error Create<TException>(string errorCode, string errorMessage, string errorTarget, TException details)
-        //    where TException : Exception;
-
-        //Error Create(string errorCode, Dictionary<string, object> details);
-        //Error Create(string errorCode, string errorMessage, Dictionary<string, object> details);
-        //Error Create(string errorCode, string errorMessage, string errorTarget, Dictionary<string, object> details);
-
-        //Error Create(string errorCode, KeyValuePair<string, object> errorTargetAndMessage);
-
+        
     }
 }
