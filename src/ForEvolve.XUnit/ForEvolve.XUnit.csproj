@@ -16,6 +16,7 @@
     <IncludeSymbols>True</IncludeSymbols>
     <IncludeSource>True</IncludeSource>
     <DebugType>Full</DebugType>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
