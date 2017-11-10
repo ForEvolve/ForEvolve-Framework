@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ForEvolve.AspNetCore\ForEvolve.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\ForEvolve.XUnit\ForEvolve.XUnit.csproj" />
   </ItemGroup>
 
   <ItemGroup>

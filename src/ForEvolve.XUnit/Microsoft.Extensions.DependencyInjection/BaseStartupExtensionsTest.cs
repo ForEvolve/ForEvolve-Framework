@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Moq;
+﻿using Moq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
