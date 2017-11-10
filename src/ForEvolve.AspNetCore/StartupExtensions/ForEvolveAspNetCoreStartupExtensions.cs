@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using ForEvolve.AspNetCore;
 using Microsoft.AspNetCore.Http;
 
-namespace System
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ForEvolveAspNetCoreStartupExtensions
     {

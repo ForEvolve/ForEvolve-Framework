@@ -41,5 +41,24 @@ namespace ForEvolve.AspNetCore.OperationResults
                 Assert.IsType<DefaultOperationResult>(result);
             }
         }
+
+        public class CreateWithResult
+        {
+            [Fact]
+            public void Should_return_an_instance_of_type_DefaultOperationResultWithResult()
+            {
+                // Arrange
+                var errorFactoryMock = new Mock<IErrorFactory>();
+                var factoryUnderTest = new DefaultOperationResultFactory(errorFactoryMock.Object);
+                var expectedResult = new object();
+
+                // Act
+                var result = factoryUnderTest.Create(expectedResult);
+
+                // Assert
+                Assert.IsType<DefaultOperationResultWithResult<object>>(result);
+                Assert.Same(expectedResult, result.Result);
+            }
+        }
     }
 }
