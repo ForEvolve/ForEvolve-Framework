@@ -38,44 +38,5 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
             }
             return error;
         }
-
-        ////public Error Create(string errorCode, string errorMessage, KeyValuePair<string, object> detail)
-        ////{
-        ////    throw new NotImplementedException();
-        ////    //var error = new Error
-        ////    //{
-        ////    //    Code = errorCode,
-        ////    //    Message = errorMessage,
-        ////    //    Target = detail.Key
-        ////    //};
-
-        ////    //// TODO: unit test these scenarios
-        ////    //switch (detail.Value)
-        ////    //{
-        ////    //    case string str:
-        ////    //        error.Message = str;
-        ////    //        break;
-        ////    //    case IEnumerable<string> strCollection:
-        ////    //        if (strCollection.Count() == 1)
-        ////    //        {
-        ////    //            error.Message = strCollection.First();
-        ////    //        }
-        ////    //        else
-        ////    //        {
-        ////    //            error.Details = strCollection
-        ////    //                .Select(msg => new Error
-        ////    //                {
-        ////    //                    Code = CreateDetailsCode(errorCode),
-        ////    //                    Message = msg
-        ////    //                }).ToList();
-        ////    //        }
-        ////    //        break;
-        ////    //    default:
-        ////    //        error.Message = detail.ToString();
-        ////    //        break;
-        ////    //}
-
-        ////    //return error;
-        ////}
     }
 }
