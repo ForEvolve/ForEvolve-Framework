@@ -42,7 +42,7 @@ namespace ForEvolve.AspNetCore.OperationResults
             }
         }
 
-        public class CreateWithResult
+        public class Create_TResult_WithResult
         {
             [Fact]
             public void Should_return_an_instance_of_type_DefaultOperationResultWithResult()
@@ -58,6 +58,23 @@ namespace ForEvolve.AspNetCore.OperationResults
                 // Assert
                 Assert.IsType<DefaultOperationResultWithResult<object>>(result);
                 Assert.Same(expectedResult, result.Result);
+            }
+        }
+
+        public class Create_TResult
+        {
+            [Fact]
+            public void Should_return_an_instance_of_type_DefaultOperationResultWithResult()
+            {
+                // Arrange
+                var errorFactoryMock = new Mock<IErrorFactory>();
+                var factoryUnderTest = new DefaultOperationResultFactory(errorFactoryMock.Object);
+
+                // Act
+                var result = factoryUnderTest.Create<object>();
+
+                // Assert
+                Assert.IsType<DefaultOperationResultWithResult<object>>(result);
             }
         }
     }

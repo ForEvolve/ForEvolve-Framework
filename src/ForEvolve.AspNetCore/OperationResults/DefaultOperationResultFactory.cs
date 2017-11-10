@@ -23,5 +23,10 @@ namespace ForEvolve.AspNetCore
                 Result = result
             };
         }
+
+        public IOperationResult<TResult> Create<TResult>()
+        {
+            return new DefaultOperationResultWithResult<TResult>(_errorFactory);
+        }
     }
 }
