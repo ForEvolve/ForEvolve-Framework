@@ -34,7 +34,7 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                 error.InnerError.Source = exception.Source;
                 error.InnerError.StackTrace = exception.StackTrace;
                 error.InnerError.HelpLink = exception.HelpLink;
-                if(exception.Data != null && exception.Data.Count > 0)
+                if(exception.Data.Count > 0)
                 {
                     EnforceDetails(error);
                     var detailsCode = CreateDataErrorCode(error.Code);

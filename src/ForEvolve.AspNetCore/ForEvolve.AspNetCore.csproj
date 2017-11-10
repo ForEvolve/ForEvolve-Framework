@@ -15,11 +15,13 @@
     <Copyright>Carl-Hugo Marcotte</Copyright>
     <IncludeSymbols>True</IncludeSymbols>
     <IncludeSource>True</IncludeSource>
+    <DebugType>Full</DebugType>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+    <PackageReference Include="Microsoft.CodeCoverage" Version="1.0.3" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,19 @@
+﻿using System;
+
+namespace ForEvolve.AspNetCore
+{
+    public class DefaultOperationResultFactory : IOperationResultFactory
+    {
+        private readonly IErrorFactory _errorFactory;
+
+        public DefaultOperationResultFactory(IErrorFactory errorFactory)
+        {
+            _errorFactory = errorFactory ?? throw new ArgumentNullException(nameof(errorFactory));
+        }
+
+        public IOperationResult Create()
+        {
+            return new DefaultOperationResult(_errorFactory);
+        }
+    }
+}

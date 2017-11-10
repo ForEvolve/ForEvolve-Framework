@@ -171,9 +171,11 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
         public class Create : DefaultErrorFromExceptionFactoryTest
         {
             [Theory]
-            [InlineData(true)]
-            [InlineData(false)]
-            public void Should_return_an_Error_with_InnerError_HResult_and_StackTrace_set(bool isDevEnv)
+            [InlineData(true, true)]
+            [InlineData(true, false)]
+            [InlineData(false, true)]
+            [InlineData(false, false)]
+            public void Should_return_an_Error_with_InnerError_HResult_and_StackTrace_set(bool isDevEnv, bool addData)
             {
                 // Arrange
                 SetupEnvironmentMock(isDevEnv);
@@ -186,8 +188,12 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                 {
                     exception = ex;
                 }
-                exception.Data.Add("Some", "Data");
-                exception.Data.Add("SomeMore", "UsefulData");
+
+                if (addData)
+                {
+                    exception.Data.Add("Some", "Data");
+                    exception.Data.Add("SomeMore", "UsefulData");
+                }
 
                 var expectedErrorCode = _factoryUnderTest.CreateErrorCode(exception);
                 var expectedDetailsCode = _factoryUnderTest.CreateDataErrorCode(expectedErrorCode);
@@ -206,11 +212,14 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                     expectedError.InnerError.Source = exception.Source;
                     expectedError.InnerError.StackTrace = exception.StackTrace;
                     expectedError.InnerError.HelpLink = exception.HelpLink;
-                    expectedError.Details = new List<Error>
+                    if (addData)
                     {
-                        new Error(), // Same as _errorFromRawValuesFactoryMock.Create(...)
-                        new Error()
-                    };
+                        expectedError.Details = new List<Error>
+                        {
+                            new Error(), // Same as _errorFromRawValuesFactoryMock.Create(...)
+                            new Error()
+                        };
+                    }
                 }
                 _errorFromRawValuesFactoryMock
                     .Setup(x => x.Create(expectedDetailsCode, It.IsAny<string>(), It.IsAny<object>()))
@@ -223,16 +232,19 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                 // Assert
                 if (isDevEnv)
                 {
-                    _errorFromRawValuesFactoryMock
-                        .Verify(
-                            x => x.Create(expectedDetailsCode, "Some", "Data"),
-                            Times.Once
-                        );
-                    _errorFromRawValuesFactoryMock
-                        .Verify(
-                            x => x.Create(expectedDetailsCode, "SomeMore", "UsefulData"),
-                            Times.Once
-                        );
+                    if (addData)
+                    {
+                        _errorFromRawValuesFactoryMock
+                            .Verify(
+                                x => x.Create(expectedDetailsCode, "Some", "Data"),
+                                Times.Once
+                            );
+                        _errorFromRawValuesFactoryMock
+                            .Verify(
+                                x => x.Create(expectedDetailsCode, "SomeMore", "UsefulData"),
+                                Times.Once
+                            );
+                    }
                 }
                 else
                 {
