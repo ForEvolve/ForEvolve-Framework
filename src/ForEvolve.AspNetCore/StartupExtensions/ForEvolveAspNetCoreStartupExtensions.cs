@@ -16,6 +16,7 @@ namespace System
     {
         public static IServiceCollection AddForEvolveAspNetCore(this IServiceCollection services)
         {
+            services.AddErrorFactory();
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.TryAddSingleton<IHttpRequestValueFinder, HttpRequestValueFinder>();
 
