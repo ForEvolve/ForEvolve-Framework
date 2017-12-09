@@ -14,6 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             public static readonly Type[] ExpectedSingletonServices = new Type[]
             {
+                typeof(ForEvolveAspNetCoreSettings),
                 typeof(IErrorFromIdentityErrorFactory),
                 typeof(IErrorFromExceptionFactory),
                 typeof(IErrorFromDictionaryFactory),

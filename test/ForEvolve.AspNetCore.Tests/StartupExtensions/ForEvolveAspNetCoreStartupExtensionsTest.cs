@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,9 +30,12 @@ namespace ForEvolve.AspNetCore.StartupExtensions
             [Fact]
             public void Should_register_default_services_implementations()
             {
-                // Arrange, Act & Assert
+                // Arrange
+                IConfiguration nullConfigurationMock = null;
+
+                // Act & Assert
                 AssertThatAllServicesAreRegistered(
-                    services => services.AddForEvolveAspNetCore(),
+                    services => services.AddForEvolveAspNetCore(nullConfigurationMock),
                     expectedSingletonServices: ExpectedSingletonServices
                 );
             }
