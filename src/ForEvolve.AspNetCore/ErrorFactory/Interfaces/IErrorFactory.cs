@@ -20,7 +20,13 @@ namespace ForEvolve.AspNetCore
     /// <seealso cref="ForEvolve.AspNetCore.IErrorFromDictionaryFactory" />
     /// <seealso cref="ForEvolve.AspNetCore.IErrorFromKeyValuePairFactory" />
     /// <seealso cref="ForEvolve.AspNetCore.IErrorFromRawValuesFactory" />
-    public interface IErrorFactory : IErrorFromExceptionFactory, IErrorFromDictionaryFactory, IErrorFromKeyValuePairFactory, IErrorFromRawValuesFactory
+    /// <seealso cref="ForEvolve.AspNetCore.IErrorFromIdentityErrorFactory" />
+    public interface IErrorFactory : 
+        IErrorFromExceptionFactory, 
+        IErrorFromDictionaryFactory, 
+        IErrorFromKeyValuePairFactory, 
+        IErrorFromRawValuesFactory, 
+        IErrorFromIdentityErrorFactory
     {
         
     }

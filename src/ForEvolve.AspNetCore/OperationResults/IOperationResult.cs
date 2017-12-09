@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using ForEvolve.Api.Contracts.Errors;
+using Microsoft.AspNetCore.Identity;
 
 namespace ForEvolve.AspNetCore
 {
@@ -14,8 +15,11 @@ namespace ForEvolve.AspNetCore
         IEnumerable<Error> Errors { get; }
         IEnumerable<Exception> Exceptions { get; }
 
-        void AppendError(Error error);
-        void AppendException(Exception exception);
+        void AddError(Error error);
+        void AddErrors(IEnumerable<Error> errors);
+        void AddException(Exception exception);
+        void AddErrorsFrom(IdentityResult result);
+        void AddErrorsFrom(IOperationResult result);
 
         bool HasException();
         bool HasError();

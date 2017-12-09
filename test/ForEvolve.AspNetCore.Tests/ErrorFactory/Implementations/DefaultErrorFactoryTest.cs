@@ -1,4 +1,5 @@
 using ForEvolve.Api.Contracts.Errors;
+using Microsoft.AspNetCore.Identity;
 using Moq;
 using Newtonsoft.Json;
 using System;
@@ -14,19 +15,25 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
         private readonly Mock<IErrorFromDictionaryFactory> _errorFromDictionaryFactoryMock;
         private readonly Mock<IErrorFromKeyValuePairFactory> _errorFromKeyValuePairFactoryMock;
         private readonly Mock<IErrorFromRawValuesFactory> _errorFromRawValuesFactoryMock;
+        private readonly Mock<IErrorFromIdentityErrorFactory> _errorFromIdentityErrorFactoryMock;
         private readonly DefaultErrorFactory _factoryUnderTest;
 
         public DefaultErrorFactoryTest()
         {
+            // Arrange dependencies
             _errorFromExceptionFactoryMock = new Mock<IErrorFromExceptionFactory>();
             _errorFromDictionaryFactoryMock = new Mock<IErrorFromDictionaryFactory>();
             _errorFromKeyValuePairFactoryMock = new Mock<IErrorFromKeyValuePairFactory>();
             _errorFromRawValuesFactoryMock = new Mock<IErrorFromRawValuesFactory>();
+            _errorFromIdentityErrorFactoryMock = new Mock<IErrorFromIdentityErrorFactory>();
+
+            // Arrange the test subject
             _factoryUnderTest = new DefaultErrorFactory(
                 _errorFromExceptionFactoryMock.Object,
                 _errorFromDictionaryFactoryMock.Object,
                 _errorFromKeyValuePairFactoryMock.Object,
-                _errorFromRawValuesFactoryMock.Object
+                _errorFromRawValuesFactoryMock.Object,
+                _errorFromIdentityErrorFactoryMock.Object
             );
         }
 
@@ -40,6 +47,7 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                 IErrorFromDictionaryFactory nullErrorFromDictionaryFactory = null;
                 IErrorFromKeyValuePairFactory nullErrorFromKeyValuePairFactory = null;
                 IErrorFromRawValuesFactory nullErrorFromRawValuesFactory = null;
+                IErrorFromIdentityErrorFactory nullErrorFromIdentityErrorFactory = null;
 
                 // Act & Assert
                 Assert.Throws<ArgumentNullException>(
@@ -47,7 +55,8 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                         nullErrorFromExceptionFactory,
                         _errorFromDictionaryFactoryMock.Object,
                         _errorFromKeyValuePairFactoryMock.Object,
-                        _errorFromRawValuesFactoryMock.Object
+                        _errorFromRawValuesFactoryMock.Object,
+                        _errorFromIdentityErrorFactoryMock.Object
                     )
                 );
                 Assert.Throws<ArgumentNullException>(
@@ -55,7 +64,8 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                         _errorFromExceptionFactoryMock.Object,
                         nullErrorFromDictionaryFactory,
                         _errorFromKeyValuePairFactoryMock.Object,
-                        _errorFromRawValuesFactoryMock.Object
+                        _errorFromRawValuesFactoryMock.Object,
+                        _errorFromIdentityErrorFactoryMock.Object
                     )
                 );
                 Assert.Throws<ArgumentNullException>(
@@ -63,7 +73,8 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                         _errorFromExceptionFactoryMock.Object,
                         _errorFromDictionaryFactoryMock.Object,
                         nullErrorFromKeyValuePairFactory,
-                        _errorFromRawValuesFactoryMock.Object
+                        _errorFromRawValuesFactoryMock.Object,
+                        _errorFromIdentityErrorFactoryMock.Object
                     )
                 );
                 Assert.Throws<ArgumentNullException>(
@@ -71,7 +82,17 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                         _errorFromExceptionFactoryMock.Object,
                         _errorFromDictionaryFactoryMock.Object,
                         _errorFromKeyValuePairFactoryMock.Object,
-                        nullErrorFromRawValuesFactory
+                        nullErrorFromRawValuesFactory,
+                        _errorFromIdentityErrorFactoryMock.Object
+                    )
+                );
+                Assert.Throws<ArgumentNullException>(
+                    () => new DefaultErrorFactory(
+                        _errorFromExceptionFactoryMock.Object,
+                        _errorFromDictionaryFactoryMock.Object,
+                        _errorFromKeyValuePairFactoryMock.Object,
+                        _errorFromRawValuesFactoryMock.Object,
+                        nullErrorFromIdentityErrorFactory
                     )
                 );
             }
@@ -159,6 +180,27 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
 
                     // Act
                     var result = _factoryUnderTest.Create(errorCode, errorTarget, errorMessage);
+
+                    // Assert
+                    Assert.Same(expectedError, result);
+                }
+            }
+
+            public class ErrorFromIdentityError : Create
+            {
+                [Fact]
+                public void Should_delegate_the_call_to_IErrorFromIdentityErrorFactory()
+                {
+                    // Arrange
+                    var expectedError = new Error();
+                    var identityError = new IdentityError();
+
+                    _errorFromIdentityErrorFactoryMock
+                        .Setup(x => x.Create(identityError))
+                        .Returns(expectedError);
+
+                    // Act
+                    var result = _factoryUnderTest.Create(identityError);
 
                     // Assert
                     Assert.Same(expectedError, result);

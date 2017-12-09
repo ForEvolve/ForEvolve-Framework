@@ -7,11 +7,11 @@
         {
         }
 
-        public TResult Result { get; set; }
+        public TResult Value { get; set; }
 
         public bool HasResult()
         {
-            return Result != null;
+            return Value != null;
         }
     }
 }

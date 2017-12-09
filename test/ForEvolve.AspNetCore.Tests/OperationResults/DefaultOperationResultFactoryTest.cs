@@ -57,7 +57,7 @@ namespace ForEvolve.AspNetCore.OperationResults
 
                 // Assert
                 Assert.IsType<DefaultOperationResultWithResult<object>>(result);
-                Assert.Same(expectedResult, result.Result);
+                Assert.Same(expectedResult, result.Value);
             }
         }
 
