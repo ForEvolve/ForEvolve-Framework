@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Routing;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace ForEvolve.AspNetCore.Services
 {
@@ -31,11 +32,30 @@ namespace ForEvolve.AspNetCore.Services
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
 
-        public async Task<string> RenderAsync(string viewName, object viewModel)
+        public Task<string> RenderAsync(string viewName, object viewModel)
         {
             var httpContext = new DefaultHttpContext { RequestServices = _serviceProvider };
             var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
+            return RenderAsync(viewName, viewModel, httpContext, actionContext);
+        }
 
+        public Task<string> RenderAsync(string controllerName, string viewName, object viewModel)
+        {
+            var httpContext = new DefaultHttpContext { RequestServices = _serviceProvider };
+            var routeData = new RouteData();
+            routeData.Values.Add("controller", controllerName);
+            var actionDescriptor = new ActionDescriptor();
+            actionDescriptor.RouteValues.Add("controller", controllerName);
+            var actionContext = new ActionContext(
+                httpContext,
+                routeData,
+                actionDescriptor
+            );
+            return RenderAsync(viewName, viewModel, httpContext, actionContext);
+        }
+
+        public async Task<string> RenderAsync(string viewName, object viewModel, HttpContext httpContext, ActionContext actionContext)
+        {
             using (var sw = new StringWriter())
             {
                 var viewResult = _razorViewEngine.FindView(actionContext, viewName, false);

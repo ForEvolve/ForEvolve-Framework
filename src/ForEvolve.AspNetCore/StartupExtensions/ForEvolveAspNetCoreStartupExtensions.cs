@@ -11,6 +11,7 @@ using ForEvolve.AspNetCore;
 using Microsoft.AspNetCore.Http;
 using ForEvolve.AspNetCore.Emails;
 using Microsoft.Extensions.Configuration;
+using ForEvolve.AspNetCore.Services;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -54,6 +55,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<IHttpRequestValueFinder, HttpRequestValueFinder>();
 
             // Emails
+            services.TryAddScoped<IViewRenderer, ViewRenderer>();
             services.TryAddSingleton<IEmailSender, DefaultEmailSender>();
             var emailOptions = new EmailOptions();
             settings.Configuration?.Bind(settings.EmailOptionsConfigurationKey, emailOptions);
