@@ -1,6 +1,9 @@
 ﻿using ForEvolve.Api.Contracts.Errors;
+using Microsoft.AspNetCore.Identity;
 using Moq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace ForEvolve.AspNetCore.OperationResults
@@ -55,7 +58,7 @@ namespace ForEvolve.AspNetCore.OperationResults
             {
                 // Arrange
                 var error = CreateAnError();
-                _resultUnderTest.AppendError(error);
+                _resultUnderTest.AddError(error);
 
                 // Act
                 var result = _resultUnderTest.Succeeded;
@@ -65,7 +68,7 @@ namespace ForEvolve.AspNetCore.OperationResults
             }
         }
 
-        public class AppendError : DefaultOperationResultTest
+        public class AddError : DefaultOperationResultTest
         {
             [Fact]
             public void Should_guard_against_null_error()
@@ -74,7 +77,7 @@ namespace ForEvolve.AspNetCore.OperationResults
                 Error error = null;
 
                 // Act & Assert
-                var argEx = Assert.Throws<ArgumentNullException>(() => _resultUnderTest.AppendError(error));
+                var argEx = Assert.Throws<ArgumentNullException>(() => _resultUnderTest.AddError(error));
                 Assert.Equal("error", argEx.ParamName);
             }
 
@@ -85,7 +88,7 @@ namespace ForEvolve.AspNetCore.OperationResults
                 var expectedError = CreateAnError();
 
                 // Act
-                _resultUnderTest.AppendError(expectedError);
+                _resultUnderTest.AddError(expectedError);
 
                 // Assert
                 Assert.Collection(_resultUnderTest.Errors,
@@ -94,7 +97,135 @@ namespace ForEvolve.AspNetCore.OperationResults
             }
         }
 
-        public class AppendException : DefaultOperationResultTest
+        public class AddErrors : DefaultOperationResultTest
+        {
+            [Fact]
+            public void Should_guard_against_null_error()
+            {
+                // Arrange
+                IEnumerable<Error> errors = null;
+
+                // Act & Assert
+                var argEx = Assert.Throws<ArgumentNullException>(() => _resultUnderTest.AddErrors(errors));
+                Assert.Equal("errors", argEx.ParamName);
+            }
+
+            [Fact]
+            public void Should_add_errors_to_its_Errors_collection()
+            {
+                // Arrange
+                var expectedErrors = new Error[] {
+                    CreateAnError(),
+                    CreateAnError(),
+                    CreateAnError()
+                };
+
+                // Act
+                _resultUnderTest.AddErrors(expectedErrors);
+
+                // Assert
+                Assert.Equal(_resultUnderTest.Errors, expectedErrors);
+            }
+        }
+
+        public class AddErrorsFrom_IdentityResult : DefaultOperationResultTest
+        {
+            [Fact]
+            public void Should_guard_against_null_result()
+            {
+                // Arrange
+                IdentityResult result = null;
+
+                // Act & Assert
+                var argEx = Assert.Throws<ArgumentNullException>(() => _resultUnderTest.AddErrorsFrom(result));
+                Assert.Equal("result", argEx.ParamName);
+            }
+
+            [Fact]
+            public void Should_delegate_the_creation_to_IErrorFactory_and_add_errors_to_its_Errors_collection()
+            {
+                // Arrange
+                var identityError = new IdentityError();
+                var expectedErrors = new IdentityError[] { identityError };
+                var result = IdentityResult.Failed(expectedErrors);
+                var expectedError = CreateAnError();
+
+                _errorFactoryMock
+                    .Setup(x => x.Create(identityError))
+                    .Returns(expectedError)
+                    .Verifiable();
+
+                // Act
+                _resultUnderTest.AddErrorsFrom(result);
+
+                // Assert
+                _errorFactoryMock
+                    .Verify(x => x.Create(identityError), Times.Once);
+                Assert.Collection(
+                    _resultUnderTest.Errors,
+                    err => Assert.Same(expectedError, err)
+                );
+            }
+        }
+
+        public class AddErrorsFrom_IOperationResult : DefaultOperationResultTest
+        {
+            [Fact]
+            public void Should_guard_against_null_result()
+            {
+                // Arrange
+                IOperationResult result = null;
+
+                // Act & Assert
+                var argEx = Assert.Throws<ArgumentNullException>(() => _resultUnderTest.AddErrorsFrom(result));
+                Assert.Equal("result", argEx.ParamName);
+            }
+
+            [Fact]
+            public void Should_add_errors_to_its_Errors_collection()
+            {
+                // Arrange
+                var resultMock = new Mock<IOperationResult>();
+                var expectedErrors = new Error[] {
+                    CreateAnError(),
+                    CreateAnError()
+                };
+                resultMock
+                    .Setup(x => x.Errors)
+                    .Returns(expectedErrors);
+
+                // Act
+                _resultUnderTest.AddErrorsFrom(resultMock.Object);
+
+                // Assert
+                Assert.Equal(_resultUnderTest.Errors, expectedErrors);
+            }
+
+            [Fact]
+            public void Should_add_exceptions_to_its_Errors_collection()
+            {
+                // Arrange
+                var resultMock = new Mock<IOperationResult>();
+                var expectedExceptions = new Exception[] {
+                    new Exception(),
+                    new Exception()
+                };
+                resultMock
+                    .Setup(x => x.Exceptions)
+                    .Returns(expectedExceptions);
+                resultMock
+                    .Setup(x => x.Errors)
+                    .Returns(Enumerable.Empty<Error>());
+
+                // Act
+                _resultUnderTest.AddErrorsFrom(resultMock.Object);
+
+                // Assert
+                Assert.Equal(_resultUnderTest.Exceptions, expectedExceptions);
+            }
+        }
+
+        public class AddException : DefaultOperationResultTest
         {
             [Fact]
             public void Should_guard_against_null_exception()
@@ -103,7 +234,7 @@ namespace ForEvolve.AspNetCore.OperationResults
                 Exception error = null;
 
                 // Act & Assert
-                var argEx = Assert.Throws<ArgumentNullException>(() => _resultUnderTest.AppendException(error));
+                var argEx = Assert.Throws<ArgumentNullException>(() => _resultUnderTest.AddException(error));
                 Assert.Equal("exception", argEx.ParamName);
             }
 
@@ -118,7 +249,7 @@ namespace ForEvolve.AspNetCore.OperationResults
                     .Returns(expectedError);
 
                 // Act
-                _resultUnderTest.AppendException(expectedException);
+                _resultUnderTest.AddException(expectedException);
 
                 // Assert
                 Assert.Collection(
@@ -137,7 +268,7 @@ namespace ForEvolve.AspNetCore.OperationResults
                     .Returns(CreateAnError);
 
                 // Act
-                _resultUnderTest.AppendException(expectedException);
+                _resultUnderTest.AddException(expectedException);
 
                 // Assert
                 Assert.True(_resultUnderTest.HasException());
@@ -159,7 +290,7 @@ namespace ForEvolve.AspNetCore.OperationResults
                     .Verifiable();
 
                 // Act
-                _resultUnderTest.AppendException(expectedException);
+                _resultUnderTest.AddException(expectedException);
 
                 // Assert
                 _errorFactoryMock

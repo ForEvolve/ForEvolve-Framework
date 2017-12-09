@@ -20,7 +20,7 @@ namespace ForEvolve.AspNetCore
         {
             return new DefaultOperationResultWithResult<TResult>(_errorFactory)
             {
-                Result = result
+                Value = result
             };
         }
 

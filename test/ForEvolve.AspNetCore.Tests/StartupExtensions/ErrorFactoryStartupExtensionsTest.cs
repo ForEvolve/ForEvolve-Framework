@@ -10,15 +10,16 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public class ErrorFactoryStartupExtensionsTest
     {
-        public class AddErrorFactory : BaseStartupExtensionsTest
+        public class AddForEvolveErrorFactory : BaseStartupExtensionsTest
         {
             public static readonly Type[] ExpectedSingletonServices = new Type[]
             {
-                    typeof(IErrorFromExceptionFactory),
-                    typeof(IErrorFromDictionaryFactory),
-                    typeof(IErrorFromKeyValuePairFactory),
-                    typeof(IErrorFromRawValuesFactory),
-                    typeof(IErrorFactory),
+                typeof(IErrorFromIdentityErrorFactory),
+                typeof(IErrorFromExceptionFactory),
+                typeof(IErrorFromDictionaryFactory),
+                typeof(IErrorFromKeyValuePairFactory),
+                typeof(IErrorFromRawValuesFactory),
+                typeof(IErrorFactory),
             };
 
             [Fact]
@@ -26,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 // Arange, Act & Assert
                 AssertThatAllServicesAreRegistered(
-                    services => services.AddErrorFactory(),
+                    services => services.AddForEvolveErrorFactory(),
                     expectedSingletonServices: ExpectedSingletonServices
                 );
             }

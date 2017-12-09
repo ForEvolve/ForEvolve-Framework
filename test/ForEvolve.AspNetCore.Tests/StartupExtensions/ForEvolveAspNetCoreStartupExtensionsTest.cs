@@ -16,7 +16,8 @@ namespace ForEvolve.AspNetCore.StartupExtensions
             public AddForEvolveAspNetCore()
             {
                 ExpectedSingletonServices =
-                    ErrorFactoryStartupExtensionsTest.AddErrorFactory.ExpectedSingletonServices
+                    ErrorFactoryStartupExtensionsTest.AddForEvolveErrorFactory.ExpectedSingletonServices
+                    .Concat(OperationResultsStartupExtensionsTest.AddForEvolveOperationResults.ExpectedSingletonServices)
                     .Concat(new Type[]
                     {
                         typeof(IHttpContextAccessor),

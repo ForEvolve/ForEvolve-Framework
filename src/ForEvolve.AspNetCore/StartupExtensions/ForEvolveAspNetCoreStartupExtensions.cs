@@ -16,7 +16,13 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddForEvolveAspNetCore(this IServiceCollection services)
         {
-            services.AddErrorFactory();
+            // Error and OperationResults
+            services
+                .AddForEvolveErrorFactory()
+                .AddForEvolveOperationResults()
+                ;
+
+            // Others
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.TryAddSingleton<IHttpRequestValueFinder, HttpRequestValueFinder>();
 

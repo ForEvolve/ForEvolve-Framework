@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ForEvolve.AspNetCore
 {
-    public interface IOperationResult<TResult> : IOperationResult
+    public interface IOperationResult<TValue> : IOperationResult
     {
-        TResult Result { get; set; }
+        TValue Value { get; set; }
         bool HasResult();
     }
 }

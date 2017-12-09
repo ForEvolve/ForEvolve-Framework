@@ -24,7 +24,7 @@ namespace ForEvolve.AspNetCore.OperationResults
             public void Should_return_true_if_Result_is_not_null()
             {
                 // Arrange
-                _resultUnderTest.Result = new object();
+                _resultUnderTest.Value = new object();
 
                 // Act
                 var result = _resultUnderTest.HasResult();
@@ -37,7 +37,7 @@ namespace ForEvolve.AspNetCore.OperationResults
             public void Should_return_false_if_Result_is_null()
             {
                 // Arrange
-                _resultUnderTest.Result = null;
+                _resultUnderTest.Value = null;
 
                 // Act
                 var result = _resultUnderTest.HasResult();
@@ -56,10 +56,10 @@ namespace ForEvolve.AspNetCore.OperationResults
                 var expectedObject = new object();
 
                 // Act
-                _resultUnderTest.Result = expectedObject;
+                _resultUnderTest.Value = expectedObject;
 
                 // Assert
-                Assert.Same(expectedObject, _resultUnderTest.Result);
+                Assert.Same(expectedObject, _resultUnderTest.Value);
             }
         }
     }
