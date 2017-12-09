@@ -10,7 +10,7 @@
     <PackageLicenseUrl>https://github.com/ForEvolve/ForEvolve-Framework/blob/master/LICENSE</PackageLicenseUrl>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.0-local-00027</Version>
+    <Version>1.0.0-local-00029</Version>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Copyright>Carl-Hugo Marcotte</Copyright>
     <IncludeSymbols>True</IncludeSymbols>
