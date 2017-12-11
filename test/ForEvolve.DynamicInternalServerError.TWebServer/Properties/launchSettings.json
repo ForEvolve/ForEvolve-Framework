@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ForEvolve.DynamicInternalServerError.TestWebServer": {
+    "ForEvolve.DynamicInternalServerError.TWebServer": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

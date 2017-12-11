@@ -9,7 +9,7 @@ using ForEvolve.DynamicInternalServerError.Swagger;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Builder;
 
-namespace ForEvolve.DynamicInternalServerError.Swagger.TestWebServer
+namespace ForEvolve.DynamicInternalServerError.Swagger.TWebServer
 {
     public class Program
     {

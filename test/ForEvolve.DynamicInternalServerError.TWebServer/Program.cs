@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ForEvolve.DynamicInternalServerError.TestWebServer
+namespace ForEvolve.DynamicInternalServerError.TWebServer
 {
     public class Program
     {

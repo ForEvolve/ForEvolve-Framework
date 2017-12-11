@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http;
 
-namespace ForEvolve.DynamicInternalServerError.TestWebServer
+namespace ForEvolve.DynamicInternalServerError.TWebServer
 {
     public class Startup
     {
