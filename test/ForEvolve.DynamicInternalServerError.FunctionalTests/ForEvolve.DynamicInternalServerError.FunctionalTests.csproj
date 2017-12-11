@@ -15,7 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\ForEvolve.AspNetCore\ForEvolve.AspNetCore.csproj" />
     <ProjectReference Include="..\..\src\ForEvolve.DynamicInternalServerError\ForEvolve.DynamicInternalServerError.csproj" />
-    <ProjectReference Include="..\ForEvolve.DynamicInternalServerError.TestWebServer\ForEvolve.DynamicInternalServerError.TestWebServer.csproj" />
+    <ProjectReference Include="..\ForEvolve.DynamicInternalServerError.TestWebServer\ForEvolve.DynamicInternalServerError.TWebServer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
