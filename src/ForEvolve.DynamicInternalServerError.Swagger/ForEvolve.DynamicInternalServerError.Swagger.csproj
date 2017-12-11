@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Carl-Hugo Marcotte</Authors>
+    <Company>ForEvolve</Company>
+    <Description>ASP.NET Core WebAPI dynamic internal server error filter.</Description>
+    <PackageProjectUrl>https://github.com/ForEvolve/DynamicInternalServerError</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ForEvolve/DynamicInternalServerError/blob/master/LICENSE</PackageLicenseUrl>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.0-upsilon-00000</Version>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Copyright>Carl-Hugo Marcotte</Copyright>
+    <IncludeSymbols>True</IncludeSymbols>
+    <IncludeSource>True</IncludeSource>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ForEvolve.DynamicInternalServerError\ForEvolve.DynamicInternalServerError.csproj" />
+  </ItemGroup>
+
+</Project>
