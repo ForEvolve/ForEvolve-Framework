@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ForEvolve.AspNetCore;
+using ForEvolve.AspNetCore.Emails;
+using ForEvolve.AspNetCore.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -8,13 +11,14 @@ using System.Linq;
 using System.Text;
 using Xunit;
 
-namespace ForEvolve.AspNetCore.StartupExtensions
+namespace Microsoft.Extensions.DependencyInjection
 {
     public class ForEvolveAspNetCoreStartupExtensionsTest
     {
         public class AddForEvolveAspNetCore : BaseStartupExtensionsTest
         {
             public readonly IEnumerable<Type> ExpectedSingletonServices;
+            public readonly IEnumerable<Type> ExpectedScopedServices;
             public AddForEvolveAspNetCore()
             {
                 ExpectedSingletonServices =
@@ -22,12 +26,19 @@ namespace ForEvolve.AspNetCore.StartupExtensions
                     .Concat(OperationResultsStartupExtensionsTest.AddForEvolveOperationResults.ExpectedSingletonServices)
                     .Concat(new Type[]
                     {
+                        typeof(ForEvolveAspNetCoreSettings),
                         typeof(IHttpContextAccessor),
                         typeof(IHttpRequestValueFinder),
+                        typeof(IEmailSender),
+                        typeof(EmailOptions),
                     });
+                ExpectedScopedServices = new Type[]
+                {
+                    typeof(IViewRenderer),
+                };
             }
 
-            [Fact(Skip = "Fix me")]
+            [Fact]
             public void Should_register_default_services_implementations()
             {
                 // Arrange
@@ -36,7 +47,8 @@ namespace ForEvolve.AspNetCore.StartupExtensions
                 // Act & Assert
                 AssertThatAllServicesAreRegistered(
                     services => services.AddForEvolveAspNetCore(nullConfigurationMock),
-                    expectedSingletonServices: ExpectedSingletonServices
+                    expectedSingletonServices: ExpectedSingletonServices,
+                    expectedScopedServices: ExpectedScopedServices
                 );
             }
         }

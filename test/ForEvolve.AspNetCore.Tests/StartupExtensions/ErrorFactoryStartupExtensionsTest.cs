@@ -14,7 +14,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             public static readonly Type[] ExpectedSingletonServices = new Type[]
             {
-                typeof(ForEvolveAspNetCoreSettings),
                 typeof(IErrorFromIdentityErrorFactory),
                 typeof(IErrorFromExceptionFactory),
                 typeof(IErrorFromDictionaryFactory),
@@ -23,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 typeof(IErrorFactory),
             };
 
-            [Fact(Skip = "Fix me")]
+            [Fact]
             public void Should_register_default_services_implementations()
             {
                 // Arange, Act & Assert

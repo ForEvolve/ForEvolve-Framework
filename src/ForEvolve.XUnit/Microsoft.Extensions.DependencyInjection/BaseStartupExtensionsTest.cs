@@ -10,22 +10,11 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public abstract class BaseStartupExtensionsTest
     {
-        private readonly Mock<IServiceCollection> _servicesMock;
-        private readonly List<ServiceDescriptor> _registeredDescriptors;
+        private readonly IServiceCollection _services;
 
         public BaseStartupExtensionsTest()
         {
-            _registeredDescriptors = new List<ServiceDescriptor>();
-            _servicesMock = new Mock<IServiceCollection>();
-            _servicesMock
-                .Setup(x => x.Add(It.IsAny<ServiceDescriptor>()))
-                .Callback((ServiceDescriptor d) => _registeredDescriptors.Add(d))
-                .Verifiable();
-
-            // Mock used by TryAdd methods
-            _servicesMock
-                .Setup(x => x.GetEnumerator())
-                .Returns(() => new ReadOnlyCollection<ServiceDescriptor>(_registeredDescriptors).GetEnumerator());
+            _services = new ServiceCollection();
         }
 
         protected void AssertThatAllServicesAreRegistered(
@@ -38,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
         )
         {
             // Act
-            act(_servicesMock.Object);
+            act(_services);
 
             // Assert
             var hasSingletonServices = expectedSingletonServices != null;
@@ -47,7 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var hasNoService = !hasSingletonServices && !hasScopedServices && !hasTransientServices;
             if (hasNoService)
             {
-                Assert.Empty(_registeredDescriptors);
+                Assert.Empty(_services);
             }
             else
             {
@@ -77,10 +66,16 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private void AssertServicesAreRegisteredInScope(IEnumerable<Type> expectedServices, ServiceLifetime lifetime)
         {
-            var registeredServiceType = _registeredDescriptors
+            var registeredServiceType = _services
                 .Where(x => x.Lifetime == lifetime)
                 .Select(x => x.ServiceType);
-            Assert.Equal(expectedServices, registeredServiceType);
+            Assert.Equal(expectedServices.Count(), registeredServiceType.Count());
+            foreach (var expectedService in expectedServices)
+            {
+                var service = registeredServiceType
+                    .FirstOrDefault(x => x.FullName == expectedService.FullName);
+                Assert.Equal(expectedService, service);
+            }
         }
     }
 }
