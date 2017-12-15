@@ -1,5 +1,5 @@
 using ForEvolve.Api.Contracts.Errors;
-using ForEvolve.DynamicInternalServerError.TestWebServer;
+using ForEvolve.DynamicInternalServerError.TWebServer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;

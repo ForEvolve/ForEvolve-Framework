@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ForEvolve.DynamicInternalServerError.TestWebServer
+namespace ForEvolve.DynamicInternalServerError.TWebServer
 {
     [Route("api/validate/oneproperty")]
     public class SomeModelWithOnePropertyController : Controller
