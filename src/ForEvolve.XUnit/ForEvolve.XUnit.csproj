@@ -33,4 +33,8 @@
     <Folder Include="Identity\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ForEvolve.AspNetCore\ForEvolve.AspNetCore.csproj" />
+  </ItemGroup>
+
 </Project>
