@@ -26,7 +26,7 @@ namespace ForEvolve.AspNetCore.Middleware
                 if (!HasUserIdHeader(context))
                 {
                     string userId = _userIdAccessor.FindUserId();
-                    context.Request.Headers.TryAdd(_userIdFinderSettings.HeaderName, userId);
+                    context.Request.Headers.Add(_userIdFinderSettings.HeaderName, userId);
                 }
             }
             return Task.CompletedTask;
