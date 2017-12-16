@@ -13,13 +13,13 @@ using Xunit;
 
 namespace ForEvolve.XUnit.HttpTests
 {
-    public class BaseHttpTestTest : BaseHttpTest<Startup>
+    public class BaseHttpTestTest : BaseHttpTest<TestServerStartup>
     {
         [Fact]
         public async Task Should_setup_the_client_and_the_server()
         {
             // Arrange
-            var expectedStatusCode = Startup.DefaultStatusCode;
+            var expectedStatusCode = StatusCodes.Status200OK;
 
             // Act
             var result = await Client.GetAsync("/");
@@ -28,9 +28,15 @@ namespace ForEvolve.XUnit.HttpTests
             Assert.Equal(expectedStatusCode, (int)result.StatusCode);
         }
 
-        public class ConfigureServicesTest : BaseHttpTest<Startup>
+        public class ConfigureServicesTest : BaseHttpTest<TestServerStartup>
         {
-            private const int ExpectedStatusCode = StatusCodes.Status202Accepted;
+            private const int ExpectedStatusCode = StatusCodes.Status201Created;
+
+            protected override void ConfigureServices(IServiceCollection services)
+            {
+                // Arrange
+                services.TryAddSingleton<IStatusCodeProvider, CreatedStatusCodeProvider>();
+            }
 
             [Fact]
             public async Task Should_setup_the_client_and_the_server()
@@ -44,48 +50,7 @@ namespace ForEvolve.XUnit.HttpTests
                 // Assert
                 Assert.Equal(expectedStatusCode, (int)result.StatusCode);
             }
-
-            protected override void ConfigureServices(IServiceCollection services)
-            {
-                services.TryAddSingleton<IStatusCodeProvider>(new StatusCodeProvider(ExpectedStatusCode));
-            }
         }
 
     }
-
-    public class Startup
-    {
-        public const int DefaultStatusCode = StatusCodes.Status200OK;
-
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.TryAddSingleton<IStatusCodeProvider>(new StatusCodeProvider(DefaultStatusCode));
-        }
-
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            app.Run(context =>
-            {
-                var statusCodeProvider = app.ApplicationServices
-                    .GetRequiredService<IStatusCodeProvider>();
-                context.Response.StatusCode = statusCodeProvider.StatusCode;
-                return context.Response.WriteAsync(context.Request.Path);
-            });
-        }
-    }
-
-    public interface IStatusCodeProvider
-    {
-        int StatusCode { get; }
-    }
-
-    public class StatusCodeProvider : IStatusCodeProvider
-    {
-        public StatusCodeProvider(int statusCode)
-        {
-            StatusCode = statusCode;
-        }
-        public int StatusCode { get; }
-    }
-
 }
