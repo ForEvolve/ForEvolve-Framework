@@ -4,6 +4,8 @@ namespace ForEvolve.XUnit.HttpTests
 {
     public sealed class UnauthorizedStatusCodeProvider : StatusCodeProvider
     {
-        public UnauthorizedStatusCodeProvider() : base(StatusCodes.Status401Unauthorized) { }
+        public const int ExpectedStatusCode = StatusCodes.Status401Unauthorized;
+
+        public UnauthorizedStatusCodeProvider() : base(ExpectedStatusCode) { }
     }
 }

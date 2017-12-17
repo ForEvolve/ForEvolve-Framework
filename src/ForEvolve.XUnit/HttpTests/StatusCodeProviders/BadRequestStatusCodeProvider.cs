@@ -4,6 +4,7 @@ namespace ForEvolve.XUnit.HttpTests
 {
     public sealed class BadRequestStatusCodeProvider : StatusCodeProvider
     {
-        public BadRequestStatusCodeProvider() : base(StatusCodes.Status400BadRequest) { }
+        public const int ExpectedStatusCode = StatusCodes.Status400BadRequest;
+        public BadRequestStatusCodeProvider() : base(ExpectedStatusCode) { }
     }
 }

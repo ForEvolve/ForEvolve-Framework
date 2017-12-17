@@ -4,6 +4,8 @@ namespace ForEvolve.XUnit.HttpTests
 {
     public sealed class CreatedStatusCodeProvider : StatusCodeProvider
     {
-        public CreatedStatusCodeProvider() : base(StatusCodes.Status201Created) { }
+        public const int ExpectedStatusCode = StatusCodes.Status201Created;
+
+        public CreatedStatusCodeProvider() : base(ExpectedStatusCode) { }
     }
 }

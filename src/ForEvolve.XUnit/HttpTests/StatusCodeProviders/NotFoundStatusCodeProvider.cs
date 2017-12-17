@@ -4,6 +4,8 @@ namespace ForEvolve.XUnit.HttpTests
 {
     public sealed class NotFoundStatusCodeProvider : StatusCodeProvider
     {
-        public NotFoundStatusCodeProvider() : base(StatusCodes.Status404NotFound) { }
+        public const int ExpectedStatusCode = StatusCodes.Status404NotFound;
+
+        public NotFoundStatusCodeProvider() : base(ExpectedStatusCode) { }
     }
 }

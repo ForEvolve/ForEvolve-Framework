@@ -4,6 +4,8 @@ namespace ForEvolve.XUnit.HttpTests
 {
     public sealed class OkStatusCodeProvider : StatusCodeProvider
     {
-        public OkStatusCodeProvider() : base(StatusCodes.Status200OK) { }
+        public const int ExpectedStatusCode = StatusCodes.Status200OK;
+
+        public OkStatusCodeProvider() : base(ExpectedStatusCode) { }
     }
 }

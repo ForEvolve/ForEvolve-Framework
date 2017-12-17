@@ -4,6 +4,8 @@ namespace ForEvolve.XUnit.HttpTests
 {
     public sealed class InternalServerErrorStatusCodeProvider : StatusCodeProvider
     {
-        public InternalServerErrorStatusCodeProvider() : base(StatusCodes.Status500InternalServerError) { }
+        public const int ExpectedStatusCode = StatusCodes.Status500InternalServerError;
+
+        public InternalServerErrorStatusCodeProvider() : base(ExpectedStatusCode) { }
     }
 }

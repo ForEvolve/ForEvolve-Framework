@@ -4,6 +4,8 @@ namespace ForEvolve.XUnit.HttpTests
 {
     public sealed class ForbiddenStatusCodeProvider : StatusCodeProvider
     {
-        public ForbiddenStatusCodeProvider() : base(StatusCodes.Status403Forbidden) { }
+        public const int ExpectedStatusCode = StatusCodes.Status403Forbidden;
+
+        public ForbiddenStatusCodeProvider() : base(ExpectedStatusCode) { }
     }
 }
