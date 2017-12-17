@@ -1,9 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace ForEvolve.XUnit.HttpTests
 {
     public class TestServerStartupHttpTestServerBuilder : HttpTestServerBuilder<TestServerStartup>, ITestServerStartupHttpTestServerBuilder
     {
+        private readonly Action<IServiceCollection> _configureServices;
+
+        public TestServerStartupHttpTestServerBuilder(Action<IServiceCollection> configureServices = null)
+        {
+            _configureServices = configureServices;
+        }
+
         public IHttpTestServer Arrange<TStatusCodeProvider>()
             where TStatusCodeProvider : class, IStatusCodeProvider
         {
@@ -12,6 +20,7 @@ namespace ForEvolve.XUnit.HttpTests
                 hostBuilder.ConfigureServices(services =>
                 {
                     services.AddTransient<IStatusCodeProvider, TStatusCodeProvider>();
+                    _configureServices?.Invoke(services);
                 });
             });
         }
@@ -26,6 +35,7 @@ namespace ForEvolve.XUnit.HttpTests
                 {
                     services.AddTransient<IStatusCodeProvider, TStatusCodeProvider>();
                     services.AddTransient<IResponseProvider, TResponseProvider>();
+                    _configureServices?.Invoke(services);
                 });
             });
         }
@@ -37,6 +47,7 @@ namespace ForEvolve.XUnit.HttpTests
                 hostBuilder.ConfigureServices(services =>
                 {
                     services.AddTransient(x => statusCodeProvider);
+                    _configureServices?.Invoke(services);
                 });
             });
         }
@@ -48,6 +59,7 @@ namespace ForEvolve.XUnit.HttpTests
                 hostBuilder.ConfigureServices(services =>
                 {
                     services.AddTransient(x => responseProvider);
+                    _configureServices?.Invoke(services);
                 });
             });
         }
@@ -60,6 +72,7 @@ namespace ForEvolve.XUnit.HttpTests
                 {
                     services.AddTransient(x => statusCodeProvider);
                     services.AddTransient(x => responseProvider);
+                    _configureServices?.Invoke(services);
                 });
             });
         }
@@ -73,6 +86,7 @@ namespace ForEvolve.XUnit.HttpTests
                 {
                     services.AddTransient<IStatusCodeProvider, TStatusCodeProvider>();
                     services.AddTransient(x => responseProvider);
+                    _configureServices?.Invoke(services);
                 });
             });
         }
@@ -86,6 +100,7 @@ namespace ForEvolve.XUnit.HttpTests
                 {
                     services.AddTransient(x => statusCodeProvider);
                     services.AddTransient<IResponseProvider, TResponseProvider>();
+                    _configureServices?.Invoke(services);
                 });
             });
         }
