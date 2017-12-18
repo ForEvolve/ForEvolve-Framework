@@ -110,7 +110,7 @@ namespace ForEvolve.XUnit.HttpTests
                 }
 
                 [Fact]
-                public async Task With_ResponseProvider_and_StatusCodeProvider()
+                public async Task With_StatusCodeProvider_and_ResponseProvider()
                 {
                     // Arrange
                     using (var testServer = _httpTestServerBuilder.Create<CreatedStatusCodeProvider, CustomTestResponseProvider>())
@@ -144,7 +144,7 @@ namespace ForEvolve.XUnit.HttpTests
                 }
 
                 [Fact]
-                public async Task With_ResponseProvider_and_StatusCodeProvider()
+                public async Task With_StatusCodeProvider_and_ResponseProvider()
                 {
                     // Arrange
                     var statusCodeProvider = new CreatedStatusCodeProvider();
@@ -181,7 +181,7 @@ namespace ForEvolve.XUnit.HttpTests
                 }
 
                 [Fact]
-                public async Task With_ResponseProvider_implementation_and_StatusCodeProvider_type()
+                public async Task With_StatusCodeProvider_type_and_ResponseProvider_implementation()
                 {
                     // Arrange
                     using (var testServer = _httpTestServerBuilder.Create<CreatedStatusCodeProvider>(new CustomTestResponseProvider()))
