@@ -16,7 +16,7 @@ namespace ForEvolve.XUnit.HttpTests
             _expectedPath = expectedPath ?? throw new ArgumentNullException(nameof(expectedPath));
             _expectedMethod = expectedMethod ?? throw new ArgumentNullException(nameof(expectedMethod));
             _successObject = successObject ?? throw new ArgumentNullException(nameof(successObject));
-            _failureObject = failureObject ?? throw new ArgumentNullException(nameof(failureObject));
+            _failureObject = failureObject;
         }
 
         public string ResponseText(HttpContext context)
@@ -28,7 +28,7 @@ namespace ForEvolve.XUnit.HttpTests
                     return JsonConvert.SerializeObject(_successObject);
                 }
             }
-            return JsonConvert.SerializeObject(_failureObject);
+            return _failureObject == null ? "" : JsonConvert.SerializeObject(_failureObject);
         }
     }
 }
