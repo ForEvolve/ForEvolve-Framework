@@ -6,13 +6,19 @@ namespace ForEvolve.XUnit.HttpTests
     public class TestServerStartupHttpTestServerBuilder : HttpTestServerBuilder<TestServerStartup>, ITestServerStartupHttpTestServerBuilder
     {
         private readonly Action<IServiceCollection> _configureServices;
+        public const string ArrangeNotSupportedExceptionMessage = "You must register an IStatusCodeProvider for the TestServerStartup class to return an HTTP status code. Impossible to use this method, use another Arange method instead.";
 
         public TestServerStartupHttpTestServerBuilder(Action<IServiceCollection> configureServices = null)
         {
             _configureServices = configureServices;
         }
 
-        public IHttpTestServer Arrange<TStatusCodeProvider>()
+        public override IHttpTestServer Arrange()
+        {
+            throw new NotSupportedException(ArrangeNotSupportedExceptionMessage);
+        }
+
+        public virtual IHttpTestServer Arrange<TStatusCodeProvider>()
             where TStatusCodeProvider : class, IStatusCodeProvider
         {
             return Arrange(hostBuilder =>
@@ -25,7 +31,7 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public IHttpTestServer Arrange<TStatusCodeProvider, TResponseProvider>()
+        public virtual IHttpTestServer Arrange<TStatusCodeProvider, TResponseProvider>()
             where TStatusCodeProvider : class, IStatusCodeProvider
             where TResponseProvider : class, IResponseProvider
         {
@@ -40,7 +46,7 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public IHttpTestServer Arrange(IStatusCodeProvider statusCodeProvider)
+        public virtual IHttpTestServer Arrange(IStatusCodeProvider statusCodeProvider)
         {
             return Arrange(hostBuilder =>
             {
@@ -52,7 +58,7 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public IHttpTestServer Arrange(IResponseProvider responseProvider)
+        public virtual IHttpTestServer Arrange(IResponseProvider responseProvider)
         {
             return Arrange(hostBuilder =>
             {
@@ -64,7 +70,7 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public IHttpTestServer Arrange(IStatusCodeProvider statusCodeProvider, IResponseProvider responseProvider)
+        public virtual IHttpTestServer Arrange(IStatusCodeProvider statusCodeProvider, IResponseProvider responseProvider)
         {
             return Arrange(hostBuilder =>
             {
@@ -77,7 +83,7 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public IHttpTestServer Arrange<TStatusCodeProvider>(IResponseProvider responseProvider)
+        public virtual IHttpTestServer Arrange<TStatusCodeProvider>(IResponseProvider responseProvider)
             where TStatusCodeProvider : class, IStatusCodeProvider
         {
             return Arrange(hostBuilder =>
@@ -91,7 +97,7 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public IHttpTestServer Arrange<TResponseProvider>(IStatusCodeProvider statusCodeProvider)
+        public virtual IHttpTestServer Arrange<TResponseProvider>(IStatusCodeProvider statusCodeProvider)
             where TResponseProvider : class, IResponseProvider
         {
             return Arrange(hostBuilder =>

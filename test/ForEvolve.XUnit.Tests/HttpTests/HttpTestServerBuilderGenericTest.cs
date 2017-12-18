@@ -77,6 +77,22 @@ namespace ForEvolve.XUnit.HttpTests
                 _httpTestServerBuilder = new TestServerStartupHttpTestServerBuilder();
             }
 
+            public class RemovedFeature : TestServerStartupBuilder
+            {
+                [Fact]
+                public void Arrange_with_no_argument_should_not_be_supported_with_TestServerStartup()
+                {
+                    // Arrange, Act & Assert
+                    var result = Assert.Throws<NotSupportedException>(
+                        () => _httpTestServerBuilder.Arrange()
+                    );
+                    Assert.Equal(
+                        TestServerStartupHttpTestServerBuilder.ArrangeNotSupportedExceptionMessage,
+                        result.Message
+                    );
+                }
+            }
+
             public class Type : TestServerStartupBuilder
             {
                 [Fact]
