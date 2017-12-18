@@ -19,7 +19,7 @@ namespace ForEvolve.XUnit.HttpTests
             IHttpTestServerBuilder _httpTestServerBuilder = new HttpTestServerBuilder();
 
             // Arrange
-            using (var testServer = _httpTestServerBuilder.Arrange(() => WebHost.CreateDefaultBuilder().Configure(appBuilder =>
+            using (var testServer = _httpTestServerBuilder.Create(() => WebHost.CreateDefaultBuilder().Configure(appBuilder =>
             {
                 appBuilder.Run(context =>
                 {

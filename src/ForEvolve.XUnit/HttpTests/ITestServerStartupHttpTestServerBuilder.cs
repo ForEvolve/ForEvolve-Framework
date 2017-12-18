@@ -2,19 +2,19 @@
 {
     public interface ITestServerStartupHttpTestServerBuilder : IHttpTestServerBuilder<TestServerStartup>
     {
-        IHttpTestServer Arrange<TStatusCodeProvider>()
+        IHttpTestServer Create<TStatusCodeProvider>()
             where TStatusCodeProvider : class, IStatusCodeProvider;
 
-        IHttpTestServer Arrange<TStatusCodeProvider, TResponseProvider>()
+        IHttpTestServer Create<TStatusCodeProvider, TResponseProvider>()
             where TStatusCodeProvider : class, IStatusCodeProvider
             where TResponseProvider : class, IResponseProvider;
 
-        IHttpTestServer Arrange(IStatusCodeProvider statusCodeProvider);
-        IHttpTestServer Arrange(IStatusCodeProvider statusCodeProvider, IResponseProvider responseProvider);
+        IHttpTestServer Create(IStatusCodeProvider statusCodeProvider);
+        IHttpTestServer Create(IStatusCodeProvider statusCodeProvider, IResponseProvider responseProvider);
 
-        IHttpTestServer Arrange<TStatusCodeProvider>(IResponseProvider responseProvider)
+        IHttpTestServer Create<TStatusCodeProvider>(IResponseProvider responseProvider)
             where TStatusCodeProvider : class, IStatusCodeProvider;
-        IHttpTestServer Arrange<TResponseProvider>(IStatusCodeProvider statusCodeProvider)
+        IHttpTestServer Create<TResponseProvider>(IStatusCodeProvider statusCodeProvider)
             where TResponseProvider : class, IResponseProvider;
     }
 }

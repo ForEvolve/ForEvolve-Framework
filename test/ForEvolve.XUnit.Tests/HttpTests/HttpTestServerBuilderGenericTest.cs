@@ -18,7 +18,7 @@ namespace ForEvolve.XUnit.HttpTests
                 IHttpTestServerBuilder<BasicUseCaseStartup> _httpTestServerBuilder = new HttpTestServerBuilder<BasicUseCaseStartup>();
 
                 // Arrange
-                using (var testServer = _httpTestServerBuilder.Arrange())
+                using (var testServer = _httpTestServerBuilder.Create())
                 {
                     // Act
                     var result = await testServer.Client.GetAsync("/whatever");
@@ -35,7 +35,7 @@ namespace ForEvolve.XUnit.HttpTests
                 IHttpTestServerBuilder<BasicUseCaseStartup> _httpTestServerBuilder = new HttpTestServerBuilder<BasicUseCaseStartup>();
 
                 // Arrange
-                using (var testServer = _httpTestServerBuilder.Arrange(hostBuilder =>
+                using (var testServer = _httpTestServerBuilder.Create(hostBuilder =>
                 {
                     // Override the BasicUseCaseStartup.Configure method
                     hostBuilder.Configure(app =>
@@ -84,7 +84,7 @@ namespace ForEvolve.XUnit.HttpTests
                 {
                     // Arrange, Act & Assert
                     var result = Assert.Throws<NotSupportedException>(
-                        () => _httpTestServerBuilder.Arrange()
+                        () => _httpTestServerBuilder.Create()
                     );
                     Assert.Equal(
                         TestServerStartupHttpTestServerBuilder.ArrangeNotSupportedExceptionMessage,
@@ -99,7 +99,7 @@ namespace ForEvolve.XUnit.HttpTests
                 public async Task With_StatusCodeProvider()
                 {
                     // Arrange
-                    using (var testServer = _httpTestServerBuilder.Arrange<ForbiddenStatusCodeProvider>())
+                    using (var testServer = _httpTestServerBuilder.Create<ForbiddenStatusCodeProvider>())
                     {
                         // Act
                         var result = await testServer.Client.GetAsync("/whatever");
@@ -113,7 +113,7 @@ namespace ForEvolve.XUnit.HttpTests
                 public async Task With_ResponseProvider_and_StatusCodeProvider()
                 {
                     // Arrange
-                    using (var testServer = _httpTestServerBuilder.Arrange<CreatedStatusCodeProvider, CustomTestResponseProvider>())
+                    using (var testServer = _httpTestServerBuilder.Create<CreatedStatusCodeProvider, CustomTestResponseProvider>())
                     {
                         // Act
                         var result = await testServer.Client.GetAsync("/whatever");
@@ -133,7 +133,7 @@ namespace ForEvolve.XUnit.HttpTests
                 {
                     // Arrange
                     var statusCodeProvider = new CreatedStatusCodeProvider();
-                    using (var testServer = _httpTestServerBuilder.Arrange(statusCodeProvider))
+                    using (var testServer = _httpTestServerBuilder.Create(statusCodeProvider))
                     {
                         // Act
                         var result = await testServer.Client.GetAsync("/whatever");
@@ -148,7 +148,7 @@ namespace ForEvolve.XUnit.HttpTests
                 {
                     // Arrange
                     var statusCodeProvider = new CreatedStatusCodeProvider();
-                    using (var testServer = _httpTestServerBuilder.Arrange(statusCodeProvider, new CustomTestResponseProvider()))
+                    using (var testServer = _httpTestServerBuilder.Create(statusCodeProvider, new CustomTestResponseProvider()))
                     {
                         // Act
                         var result = await testServer.Client.GetAsync("/whatever");
@@ -168,7 +168,7 @@ namespace ForEvolve.XUnit.HttpTests
                 {
                     // Arrange
                     var statusCodeProvider = new CreatedStatusCodeProvider();
-                    using (var testServer = _httpTestServerBuilder.Arrange<CustomTestResponseProvider>(statusCodeProvider))
+                    using (var testServer = _httpTestServerBuilder.Create<CustomTestResponseProvider>(statusCodeProvider))
                     {
                         // Act
                         var result = await testServer.Client.GetAsync("/whatever");
@@ -184,7 +184,7 @@ namespace ForEvolve.XUnit.HttpTests
                 public async Task With_ResponseProvider_implementation_and_StatusCodeProvider_type()
                 {
                     // Arrange
-                    using (var testServer = _httpTestServerBuilder.Arrange<CreatedStatusCodeProvider>(new CustomTestResponseProvider()))
+                    using (var testServer = _httpTestServerBuilder.Create<CreatedStatusCodeProvider>(new CustomTestResponseProvider()))
                     {
                         // Act
                         var result = await testServer.Client.GetAsync("/whatever");

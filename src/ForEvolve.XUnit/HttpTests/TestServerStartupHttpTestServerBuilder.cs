@@ -13,15 +13,15 @@ namespace ForEvolve.XUnit.HttpTests
             _configureServices = configureServices;
         }
 
-        public override IHttpTestServer Arrange()
+        public override IHttpTestServer Create()
         {
             throw new NotSupportedException(ArrangeNotSupportedExceptionMessage);
         }
 
-        public virtual IHttpTestServer Arrange<TStatusCodeProvider>()
+        public virtual IHttpTestServer Create<TStatusCodeProvider>()
             where TStatusCodeProvider : class, IStatusCodeProvider
         {
-            return Arrange(hostBuilder =>
+            return Create(hostBuilder =>
             {
                 hostBuilder.ConfigureServices(services =>
                 {
@@ -31,11 +31,11 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public virtual IHttpTestServer Arrange<TStatusCodeProvider, TResponseProvider>()
+        public virtual IHttpTestServer Create<TStatusCodeProvider, TResponseProvider>()
             where TStatusCodeProvider : class, IStatusCodeProvider
             where TResponseProvider : class, IResponseProvider
         {
-            return Arrange(hostBuilder =>
+            return Create(hostBuilder =>
             {
                 hostBuilder.ConfigureServices(services =>
                 {
@@ -46,9 +46,9 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public virtual IHttpTestServer Arrange(IStatusCodeProvider statusCodeProvider)
+        public virtual IHttpTestServer Create(IStatusCodeProvider statusCodeProvider)
         {
-            return Arrange(hostBuilder =>
+            return Create(hostBuilder =>
             {
                 hostBuilder.ConfigureServices(services =>
                 {
@@ -60,7 +60,7 @@ namespace ForEvolve.XUnit.HttpTests
 
         public virtual IHttpTestServer Arrange(IResponseProvider responseProvider)
         {
-            return Arrange(hostBuilder =>
+            return Create(hostBuilder =>
             {
                 hostBuilder.ConfigureServices(services =>
                 {
@@ -70,9 +70,9 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public virtual IHttpTestServer Arrange(IStatusCodeProvider statusCodeProvider, IResponseProvider responseProvider)
+        public virtual IHttpTestServer Create(IStatusCodeProvider statusCodeProvider, IResponseProvider responseProvider)
         {
-            return Arrange(hostBuilder =>
+            return Create(hostBuilder =>
             {
                 hostBuilder.ConfigureServices(services =>
                 {
@@ -83,10 +83,10 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public virtual IHttpTestServer Arrange<TStatusCodeProvider>(IResponseProvider responseProvider)
+        public virtual IHttpTestServer Create<TStatusCodeProvider>(IResponseProvider responseProvider)
             where TStatusCodeProvider : class, IStatusCodeProvider
         {
-            return Arrange(hostBuilder =>
+            return Create(hostBuilder =>
             {
                 hostBuilder.ConfigureServices(services =>
                 {
@@ -97,10 +97,10 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public virtual IHttpTestServer Arrange<TResponseProvider>(IStatusCodeProvider statusCodeProvider)
+        public virtual IHttpTestServer Create<TResponseProvider>(IStatusCodeProvider statusCodeProvider)
             where TResponseProvider : class, IResponseProvider
         {
-            return Arrange(hostBuilder =>
+            return Create(hostBuilder =>
             {
                 hostBuilder.ConfigureServices(services =>
                 {
