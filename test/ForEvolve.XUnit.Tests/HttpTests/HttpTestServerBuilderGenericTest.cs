@@ -11,12 +11,15 @@ namespace ForEvolve.XUnit.HttpTests
     {
         public class SimpleStartup
         {
+            private readonly IHttpTestServerBuilder<BasicUseCaseStartup> _httpTestServerBuilder;
+            public SimpleStartup()
+            {
+                _httpTestServerBuilder = new HttpTestServerBuilder<BasicUseCaseStartup>();
+            }
+
             [Fact]
             public async Task Basic()
             {
-                // This should be a class member and could be used in multiple tests
-                IHttpTestServerBuilder<BasicUseCaseStartup> _httpTestServerBuilder = new HttpTestServerBuilder<BasicUseCaseStartup>();
-
                 // Arrange
                 using (var testServer = _httpTestServerBuilder.Create())
                 {
@@ -31,9 +34,6 @@ namespace ForEvolve.XUnit.HttpTests
             [Fact]
             public async Task WithSomeCustomization()
             {
-                // This should be a class member and could be used in multiple tests
-                IHttpTestServerBuilder<BasicUseCaseStartup> _httpTestServerBuilder = new HttpTestServerBuilder<BasicUseCaseStartup>();
-
                 // Arrange
                 using (var testServer = _httpTestServerBuilder.Create(hostBuilder =>
                 {
