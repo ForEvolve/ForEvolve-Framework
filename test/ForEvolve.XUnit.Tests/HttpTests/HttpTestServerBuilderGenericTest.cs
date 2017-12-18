@@ -69,26 +69,6 @@ namespace ForEvolve.XUnit.HttpTests
             }
         }
 
-        public class TestServerStartupManual
-        {
-            [Fact]
-            public async Task Basic()
-            {
-                // This should be a class member and could be used in multiple tests
-                IHttpTestServerBuilder<TestServerStartup> _httpTestServerBuilder = new HttpTestServerBuilder<TestServerStartup>();
-
-                // Arrange
-                using (var testServer = _httpTestServerBuilder.Arrange())
-                {
-                    // Act
-                    var result = await testServer.Client.GetAsync("/whatever");
-
-                    // Assert
-                    Assert.Equal(StatusCodes.Status200OK, (int)result.StatusCode);
-                }
-            }
-        }
-
         public class TestServerStartupBuilder
         {
             private readonly ITestServerStartupHttpTestServerBuilder _httpTestServerBuilder;
@@ -144,22 +124,6 @@ namespace ForEvolve.XUnit.HttpTests
 
                         // Assert
                         Assert.Equal(statusCodeProvider.StatusCode, (int)result.StatusCode);
-                    }
-                }
-
-                [Fact]
-                public async Task With_ResponseProvider()
-                {
-                    // Arrange
-                    using (var testServer = _httpTestServerBuilder.Arrange(new CustomTestResponseProvider()))
-                    {
-                        // Act
-                        var result = await testServer.Client.GetAsync("/whatever");
-
-                        // Assert
-                        Assert.Equal(StatusCodes.Status200OK, (int)result.StatusCode);
-                        var responseContent = await result.Content.ReadAsStringAsync();
-                        Assert.Equal("This is a response", responseContent);
                     }
                 }
 

@@ -10,7 +10,6 @@
             where TResponseProvider : class, IResponseProvider;
 
         IHttpTestServer Arrange(IStatusCodeProvider statusCodeProvider);
-        IHttpTestServer Arrange(IResponseProvider responseProvider);
         IHttpTestServer Arrange(IStatusCodeProvider statusCodeProvider, IResponseProvider responseProvider);
 
         IHttpTestServer Arrange<TStatusCodeProvider>(IResponseProvider responseProvider)

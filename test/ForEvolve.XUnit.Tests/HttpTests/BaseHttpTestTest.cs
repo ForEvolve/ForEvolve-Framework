@@ -35,7 +35,7 @@ namespace ForEvolve.XUnit.HttpTests
             protected override void ConfigureServices(IServiceCollection services)
             {
                 // Arrange
-                services.TryAddSingleton<IStatusCodeProvider, CreatedStatusCodeProvider>();
+                services.AddSingleton<IStatusCodeProvider, CreatedStatusCodeProvider>();
             }
 
             [Fact]

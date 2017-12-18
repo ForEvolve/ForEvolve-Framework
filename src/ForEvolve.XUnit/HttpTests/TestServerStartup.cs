@@ -15,8 +15,7 @@ namespace ForEvolve.XUnit.HttpTests
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.TryAddSingleton<IStatusCodeProvider, OkStatusCodeProvider>();
-            services.TryAddSingleton<IResponseProvider, EchoResponseProvider>();
+            services.TryAddSingleton<IResponseProvider, EmptyResponseProvider>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
