@@ -58,7 +58,7 @@ namespace ForEvolve.XUnit.HttpTests
             });
         }
 
-        public virtual IHttpTestServer Arrange(IResponseProvider responseProvider)
+        public virtual IHttpTestServer Create(IResponseProvider responseProvider)
         {
             return Create(hostBuilder =>
             {
