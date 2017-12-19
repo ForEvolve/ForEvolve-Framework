@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace ForEvolve.XUnit.HttpTests
@@ -16,13 +18,23 @@ namespace ForEvolve.XUnit.HttpTests
 
         public string ResponseText(HttpContext context)
         {
-            if (context.Request.Path.Value == _expectedPath)
+            var samePath = context.Request.Path.Value == _expectedPath;
+            var sameMethod = context.Request.Method == _expectedMethod;
+            if (samePath && sameMethod)
             {
-                if (context.Request.Method == _expectedMethod)
+                return "";
+            }
+#if DEBUG
+            else
+            {
+                var logger = context.RequestServices?.GetService<ILogger<EmptyResponseForPathProvider>>();
+                if (logger != null)
                 {
-                    return "";
+                    logger.LogDebug($"samePath: {samePath} | expected: {_expectedPath} | actual: {context.Request.Path.Value}");
+                    logger.LogDebug($"sameMethod: {sameMethod} | expected: {_expectedMethod} | actual: {context.Request.Method}");
                 }
             }
+#endif
             throw new NotSupportedException($"Only support: {_expectedMethod} {_expectedPath}");
         }
     }
