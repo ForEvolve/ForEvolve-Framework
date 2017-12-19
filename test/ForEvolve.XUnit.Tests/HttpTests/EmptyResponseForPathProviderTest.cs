@@ -1,5 +1,4 @@
 ﻿using ForEvolve.XUnit.Http;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,38 +8,28 @@ using Xunit;
 
 namespace ForEvolve.XUnit.HttpTests
 {
-    public class JsonPathResponseProviderTest
+    public class EmptyResponseForPathProviderTest
     {
-        private readonly JsonPathResponseProvider _providerUnderTest;
+        private readonly EmptyResponseForPathProvider _providerUnderTest;
 
-        private readonly string _expectedMethod;
         private readonly string _expectedPath;
-        private readonly JsonPathResponseObject _successObject;
-
-        private readonly string _expectedSuccessResponseText;
+        private readonly string _expectedMethod;
 
         private readonly HttpContextHelper _httpContextHelper;
 
-        public JsonPathResponseProviderTest()
+        public EmptyResponseForPathProviderTest()
         {
             _httpContextHelper = new HttpContextHelper();
 
             _expectedMethod = "POST";
             _expectedPath = "/whatever";
-            _successObject = new JsonPathResponseObject();
 
-            _expectedSuccessResponseText = JsonConvert.SerializeObject(_successObject);
-
-            _providerUnderTest = new JsonPathResponseProvider(
+            _providerUnderTest = new EmptyResponseForPathProvider(
                 _expectedMethod,
-                _expectedPath,
-                _successObject
+                _expectedPath
             );
         }
-
-        public class JsonPathResponseObject { }
-
-        public class ResponseText : JsonPathResponseProviderTest
+        public class ResponseText : EmptyResponseForPathProviderTest
         {
             [Fact]
             public void Should_throw_WrongEndpointException_when_Method_is_incorrect()
@@ -77,7 +66,7 @@ namespace ForEvolve.XUnit.HttpTests
             }
 
             [Fact]
-            public void Should_return_success_when_Path_and_Method_are_correct()
+            public void Should_return_an_empty_response_when_Path_and_Method_are_correct()
             {
                 // Arrange
                 _httpContextHelper.HttpRequest.Method = _expectedMethod;
@@ -87,7 +76,7 @@ namespace ForEvolve.XUnit.HttpTests
                 var result = _providerUnderTest.ResponseText(_httpContextHelper.HttpContextMock.Object);
 
                 // Assert
-                Assert.Equal(_expectedSuccessResponseText, result);
+                Assert.Empty(result);
             }
         }
     }

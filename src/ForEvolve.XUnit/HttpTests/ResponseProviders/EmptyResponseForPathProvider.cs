@@ -10,7 +10,7 @@ namespace ForEvolve.XUnit.HttpTests
         private readonly string _expectedPath;
         private readonly string _expectedMethod;
 
-        public EmptyResponseForPathProvider(string expectedPath, string expectedMethod)
+        public EmptyResponseForPathProvider(string expectedMethod, string expectedPath)
         {
             _expectedPath = expectedPath ?? throw new ArgumentNullException(nameof(expectedPath));
             _expectedMethod = expectedMethod ?? throw new ArgumentNullException(nameof(expectedMethod));
@@ -24,7 +24,10 @@ namespace ForEvolve.XUnit.HttpTests
             {
                 return "";
             }
-            throw new NotSupportedException($"Expected: {_expectedMethod} {_expectedPath} | Actual: {context.Request.Method} {context.Request.Path.Value}");
+            throw new WrongEndpointException(
+                _expectedMethod, _expectedPath,
+                context.Request.Method, context.Request.Path.Value
+            );
         }
     }
 }
