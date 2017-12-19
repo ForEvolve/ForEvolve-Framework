@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 
@@ -21,13 +23,23 @@ namespace ForEvolve.XUnit.HttpTests
 
         public string ResponseText(HttpContext context)
         {
-            if (context.Request.Path.Value == _expectedPath)
+            var samePath = context.Request.Path.Value == _expectedPath;
+            var sameMethod = context.Request.Method == _expectedMethod;
+            if (samePath && sameMethod)
             {
-                if (context.Request.Method == _expectedMethod)
+                return JsonConvert.SerializeObject(_successObject);
+            }
+#if DEBUG
+            else
+            {
+                var logger = context.RequestServices?.GetService<ILogger<JsonPathResponseProvider>>();
+                if(logger != null)
                 {
-                    return JsonConvert.SerializeObject(_successObject);
+                    logger.LogDebug($"samePath: {samePath} | expected: {_expectedPath} | actual: {context.Request.Path.Value}");
+                    logger.LogDebug($"sameMethod: {sameMethod} | expected: {_expectedMethod} | actual: {context.Request.Method}");
                 }
             }
+#endif
             return _failureObject == null ? "" : JsonConvert.SerializeObject(_failureObject);
         }
     }
