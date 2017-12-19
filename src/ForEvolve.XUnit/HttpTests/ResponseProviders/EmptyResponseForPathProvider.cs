@@ -24,18 +24,7 @@ namespace ForEvolve.XUnit.HttpTests
             {
                 return "";
             }
-#if DEBUG
-            else
-            {
-                var logger = context.RequestServices?.GetService<ILogger<EmptyResponseForPathProvider>>();
-                if (logger != null)
-                {
-                    logger.LogDebug($"samePath: {samePath} | expected: {_expectedPath} | actual: {context.Request.Path.Value}");
-                    logger.LogDebug($"sameMethod: {sameMethod} | expected: {_expectedMethod} | actual: {context.Request.Method}");
-                }
-            }
-#endif
-            throw new NotSupportedException($"Only support: {_expectedMethod} {_expectedPath}");
+            throw new NotSupportedException($"Expected: {_expectedMethod} {_expectedPath} | Actual: {context.Request.Method} {context.Request.Path.Value}");
         }
     }
 }
