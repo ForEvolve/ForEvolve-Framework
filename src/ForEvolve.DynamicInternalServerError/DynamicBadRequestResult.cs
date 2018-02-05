@@ -1,19 +1,15 @@
 ﻿using ForEvolve.Api.Contracts.Errors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
 
 namespace ForEvolve.DynamicInternalServerError
 {
-    public class DynamicExceptionResult : ObjectResult, IDynamicResult
+    public class DynamicBadRequestResult : ObjectResult, IDynamicResult
     {
-        public DynamicExceptionResult(Error error)
+        public DynamicBadRequestResult(Error error)
             : base(new ErrorResponse(error))
         {
-            StatusCode = StatusCodes.Status500InternalServerError;
+            StatusCode = StatusCodes.Status400BadRequest;
             Error = error;
         }
 
