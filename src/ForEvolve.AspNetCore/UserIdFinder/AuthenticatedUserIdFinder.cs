@@ -10,9 +10,9 @@ namespace ForEvolve.AspNetCore.UserIdFinder
     public class AuthenticatedUserIdFinder : IUserIdFinder
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly AuthenticatedUserIdFinderOptions _options;
+        private readonly AuthenticatedUserIdFinderSettings _options;
 
-        public AuthenticatedUserIdFinder(IHttpContextAccessor httpContextAccessor, AuthenticatedUserIdFinderOptions options)
+        public AuthenticatedUserIdFinder(IHttpContextAccessor httpContextAccessor, AuthenticatedUserIdFinderSettings options)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _options = options ?? throw new ArgumentNullException(nameof(options));

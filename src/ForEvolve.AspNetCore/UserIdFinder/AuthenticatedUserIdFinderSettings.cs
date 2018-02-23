@@ -1,6 +1,6 @@
 ﻿namespace ForEvolve.AspNetCore.UserIdFinder
 {
-    public class AuthenticatedUserIdFinderOptions
+    public class AuthenticatedUserIdFinderSettings
     {
         public const string DefaultUserIdClaimType = "sub";
 

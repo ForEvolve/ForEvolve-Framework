@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ForEvolve.AspNetCore
+namespace ForEvolve.AspNetCore.UserIdFinder
 {
-    public class UserIdFinder : IUserIdFinder
+    public class HttpHeaderUserIdFinder : IUserIdFinder
     {
         private readonly IHttpRequestValueFinder _httpRequestValueFinder;
-        private readonly UserIdFinderSettings _userIdFinderSettings;
+        private readonly HttpHeaderUserIdFinderSettings _userIdFinderSettings;
 
-        public UserIdFinder(UserIdFinderSettings userIdFinderSettings, IHttpRequestValueFinder httpRequestValueFinder)
+        public HttpHeaderUserIdFinder(HttpHeaderUserIdFinderSettings userIdFinderSettings, IHttpRequestValueFinder httpRequestValueFinder)
         {
             _userIdFinderSettings = userIdFinderSettings ?? throw new ArgumentNullException(nameof(userIdFinderSettings));
             _httpRequestValueFinder = httpRequestValueFinder ?? throw new ArgumentNullException(nameof(httpRequestValueFinder));
