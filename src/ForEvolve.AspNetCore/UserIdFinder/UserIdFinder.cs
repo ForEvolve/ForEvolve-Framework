@@ -26,17 +26,4 @@ namespace ForEvolve.AspNetCore
             return !string.IsNullOrWhiteSpace(id);
         }
     }
-
-    public interface IUserIdFinder
-    {
-        string GetUserId();
-        bool HasUserId();
-    }
-
-    public class UserIdFinderSettings
-    {
-        public const string DefaultHeaderName = "X-ForEvolve-UserId";
-
-        public string HeaderName { get; set; } = DefaultHeaderName;
-    }
 }
