@@ -10,12 +10,12 @@ namespace ForEvolve.DynamicInternalServerError
 {
     public static class ControllerExtensions
     {
-        public static IDynamicResult InternalServerError(this Controller controller, Error error)
+        public static IDynamicActionResult InternalServerError(this Controller controller, Error error)
         {
             return new DynamicExceptionResult(error);
         }
 
-        public static IDynamicResult InternalServerError(this Controller controller, IOperationResult operationResult)
+        public static IDynamicActionResult InternalServerError(this Controller controller, IOperationResult operationResult)
         {
             if (operationResult.Errors.Count() == 1)
             {
@@ -30,7 +30,7 @@ namespace ForEvolve.DynamicInternalServerError
             }
         }
 
-        public static IDynamicResult InternalServerError(this Controller controller, string code, string message, IEnumerable<Error> details)
+        public static IDynamicActionResult InternalServerError(this Controller controller, string code, string message, IEnumerable<Error> details)
         {
             return new DynamicExceptionResult(new Error
             {
