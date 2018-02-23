@@ -11,6 +11,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddForEvolveErrorFactory(this IServiceCollection services)
         {
+            //IErrorFromSerializableErrorFactory
+            services.TryAddSingleton<IErrorFromSerializableErrorFactory, DefaultErrorFromSerializableErrorFactory>();
             services.TryAddSingleton<IErrorFromIdentityErrorFactory, DefaultErrorFromIdentityErrorFactory>();
             services.TryAddSingleton<IErrorFromExceptionFactory, DefaultErrorFromExceptionFactory>();
             services.TryAddSingleton<IErrorFromDictionaryFactory, DefaultErrorFromDictionaryFactory>();

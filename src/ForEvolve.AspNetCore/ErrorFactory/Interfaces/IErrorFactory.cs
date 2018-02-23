@@ -26,7 +26,8 @@ namespace ForEvolve.AspNetCore
         IErrorFromDictionaryFactory, 
         IErrorFromKeyValuePairFactory, 
         IErrorFromRawValuesFactory, 
-        IErrorFromIdentityErrorFactory
+        IErrorFromIdentityErrorFactory,
+        IErrorFromSerializableErrorFactory
     {
         
     }

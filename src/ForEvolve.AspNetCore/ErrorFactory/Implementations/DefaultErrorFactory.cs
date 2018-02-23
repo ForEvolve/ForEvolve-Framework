@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ForEvolve.Api.Contracts.Errors;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
 {
@@ -13,13 +14,15 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
         private readonly IErrorFromKeyValuePairFactory _errorFromKeyValuePairFactory;
         private readonly IErrorFromRawValuesFactory _errorFromRawValuesFactory;
         private readonly IErrorFromIdentityErrorFactory _errorFromIdentityErrorFactory;
+        private readonly IErrorFromSerializableErrorFactory _errorFromSerializableErrorFactory;
 
         public DefaultErrorFactory(
             IErrorFromExceptionFactory errorFromExceptionFactory,
             IErrorFromDictionaryFactory errorFromDictionaryFactory,
             IErrorFromKeyValuePairFactory errorFromKeyValuePairFactory,
             IErrorFromRawValuesFactory errorFromRawValuesFactory,
-            IErrorFromIdentityErrorFactory errorFromIdentityErrorFactory
+            IErrorFromIdentityErrorFactory errorFromIdentityErrorFactory,
+            IErrorFromSerializableErrorFactory errorFromSerializableErrorFactory
         )
         {
             _errorFromExceptionFactory = errorFromExceptionFactory ?? throw new ArgumentNullException(nameof(errorFromExceptionFactory));
@@ -27,6 +30,7 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
             _errorFromKeyValuePairFactory = errorFromKeyValuePairFactory ?? throw new ArgumentNullException(nameof(errorFromKeyValuePairFactory));
             _errorFromRawValuesFactory = errorFromRawValuesFactory ?? throw new ArgumentNullException(nameof(errorFromRawValuesFactory));
             _errorFromIdentityErrorFactory = errorFromIdentityErrorFactory ?? throw new ArgumentNullException(nameof(errorFromIdentityErrorFactory));
+            _errorFromSerializableErrorFactory = errorFromSerializableErrorFactory ?? throw new ArgumentNullException(nameof(errorFromSerializableErrorFactory));
         }
 
         public Error Create<TException>(TException exception) where TException : Exception
@@ -52,6 +56,11 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
         public Error Create(IdentityError identityError)
         {
             return _errorFromIdentityErrorFactory.Create(identityError);
+        }
+
+        public Error Create(SerializableError serializableError)
+        {
+            return _errorFromSerializableErrorFactory.Create(serializableError);
         }
     }
 }
