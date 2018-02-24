@@ -9,12 +9,15 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
 {
     public class DefaultErrorFactory : IErrorFactory
     {
+        public static IErrorFactory Current { get; internal set; }
+
         private readonly IErrorFromExceptionFactory _errorFromExceptionFactory;
         private readonly IErrorFromDictionaryFactory _errorFromDictionaryFactory;
         private readonly IErrorFromKeyValuePairFactory _errorFromKeyValuePairFactory;
         private readonly IErrorFromRawValuesFactory _errorFromRawValuesFactory;
         private readonly IErrorFromIdentityErrorFactory _errorFromIdentityErrorFactory;
         private readonly IErrorFromSerializableErrorFactory _errorFromSerializableErrorFactory;
+        private readonly IErrorFromOperationResultFactory _errorFromOperationResultFactory;
 
         public DefaultErrorFactory(
             IErrorFromExceptionFactory errorFromExceptionFactory,
@@ -22,7 +25,8 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
             IErrorFromKeyValuePairFactory errorFromKeyValuePairFactory,
             IErrorFromRawValuesFactory errorFromRawValuesFactory,
             IErrorFromIdentityErrorFactory errorFromIdentityErrorFactory,
-            IErrorFromSerializableErrorFactory errorFromSerializableErrorFactory
+            IErrorFromSerializableErrorFactory errorFromSerializableErrorFactory,
+            IErrorFromOperationResultFactory errorFromOperationResultFactory
         )
         {
             _errorFromExceptionFactory = errorFromExceptionFactory ?? throw new ArgumentNullException(nameof(errorFromExceptionFactory));
@@ -31,11 +35,7 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
             _errorFromRawValuesFactory = errorFromRawValuesFactory ?? throw new ArgumentNullException(nameof(errorFromRawValuesFactory));
             _errorFromIdentityErrorFactory = errorFromIdentityErrorFactory ?? throw new ArgumentNullException(nameof(errorFromIdentityErrorFactory));
             _errorFromSerializableErrorFactory = errorFromSerializableErrorFactory ?? throw new ArgumentNullException(nameof(errorFromSerializableErrorFactory));
-        }
-
-        public Error Create<TException>(TException exception) where TException : Exception
-        {
-            return _errorFromExceptionFactory.Create(exception);
+            _errorFromOperationResultFactory = errorFromOperationResultFactory ?? throw new ArgumentNullException(nameof(errorFromOperationResultFactory));
         }
 
         public IEnumerable<Error> Create(string errorCode, Dictionary<string, object> details)
@@ -61,6 +61,16 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
         public Error Create(SerializableError serializableError)
         {
             return _errorFromSerializableErrorFactory.Create(serializableError);
+        }
+
+        public Error CreateFrom<TException>(TException exception) where TException : Exception
+        {
+            return _errorFromExceptionFactory.CreateFrom(exception);
+        }
+
+        public Error Create(IOperationResult operationResult)
+        {
+            return _errorFromOperationResultFactory.Create(operationResult);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Microsoft.AspNetCore.Hosting;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -63,6 +64,16 @@ namespace Microsoft.Extensions.DependencyInjection
                 }
             }
         }
+
+        protected virtual IServiceCollection AddSingletonMock<TService>(Action registerServiceAction)
+            where TService : class
+        {
+            var serviceMock = new Mock<TService>();
+            _services.AddSingleton(serviceMock.Object);
+            registerServiceAction();
+            return _services;
+        }
+
 
         private void AssertServicesAreRegisteredInScope(IEnumerable<Type> expectedServices, ServiceLifetime lifetime)
         {

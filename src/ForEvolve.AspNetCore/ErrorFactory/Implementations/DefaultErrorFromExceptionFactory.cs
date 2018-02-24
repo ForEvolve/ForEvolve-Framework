@@ -17,7 +17,7 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
             _errorFromRawValuesFactory = errorFromRawValuesFactory ?? throw new ArgumentNullException(nameof(errorFromRawValuesFactory));
         }
 
-        public Error Create<TException>(TException exception) where TException : Exception
+        public Error CreateFrom<TException>(TException exception) where TException : Exception
         {
             var error = new Error
             {
@@ -52,7 +52,7 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
             if(exception.InnerException != null)
             {
                 EnforceDetails(error);
-                var subError = Create(exception.InnerException);
+                var subError = CreateFrom(exception.InnerException);
                 error.Details.Add(subError);
             }
             return error;

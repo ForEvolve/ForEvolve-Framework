@@ -1,4 +1,5 @@
 using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.AspNetCore;
 using ForEvolve.DynamicInternalServerError.TWebServer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -55,8 +56,8 @@ namespace ForEvolve.DynamicInternalServerError
             public async Task WebApi_should_return_an_ErrorResponse()
             {
                 // Arrange
-                var errorBuilder = new ErrorFactory();
-                var expectedError = errorBuilder.CreateErrorFor(_expectedException);
+                var errorBuilder = _server.Host.Services.GetService<IErrorFactory>();
+                var expectedError = errorBuilder.CreateFrom(_expectedException);
 
                 // Act
                 var response = await _client.GetAsync("/api/throw/exception");

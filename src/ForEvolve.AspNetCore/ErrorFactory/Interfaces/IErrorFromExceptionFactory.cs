@@ -27,7 +27,7 @@ namespace ForEvolve.AspNetCore
         /// <typeparam name="TException">The type of the Exception.</typeparam>
         /// <param name="exception">The exception to use to create the Error.</param>
         /// <returns>The Error.</returns>
-        Error Create<TException>(TException exception)
+        Error CreateFrom<TException>(TException exception)
             where TException : Exception;
     }
 }

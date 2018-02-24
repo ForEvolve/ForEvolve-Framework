@@ -42,7 +42,7 @@ namespace ForEvolve.DynamicInternalServerError
 
         protected virtual IActionResult CreateActionResult(ExceptionContext context)
         {
-            var error = ErrorFactory.Create(context.Exception);
+            var error = ErrorFactory.CreateFrom(context.Exception);
             foreach (var filter in Filters)
             {
                 filter.Apply(context, error);

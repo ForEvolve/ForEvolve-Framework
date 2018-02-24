@@ -1,4 +1,5 @@
 ﻿using ForEvolve.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Moq;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 typeof(IErrorFromDictionaryFactory),
                 typeof(IErrorFromKeyValuePairFactory),
                 typeof(IErrorFromRawValuesFactory),
+                typeof(IErrorFromKeyValuePairFactory),
+                typeof(IErrorFromRawValuesFactory),
                 typeof(IErrorFactory),
+                // Prerequisite
+                typeof(IHostingEnvironment),
             };
 
             [Fact]
@@ -27,7 +32,9 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 // Arange, Act & Assert
                 AssertThatAllServicesAreRegistered(
-                    services => services.AddForEvolveErrorFactory(),
+                    services => AddSingletonMock<IHostingEnvironment>(
+                        () => services.AddForEvolveErrorFactory()
+                    ),
                     expectedSingletonServices: ExpectedSingletonServices
                 );
             }

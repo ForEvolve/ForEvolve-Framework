@@ -32,7 +32,7 @@ namespace ForEvolve.DynamicInternalServerError
                 if (objContext.Value is SerializableError serializableError)
                 {
                     Logger.LogInformation($"Converting SerializableError to ErrorResponse.");
-                    var error = ErrorFactory.Create<SerializableError>(serializableError);
+                    var error = ErrorFactory.Create(serializableError);
                     context.Result = new BadRequestObjectResult(new ErrorResponse(error));
                 }
             }       

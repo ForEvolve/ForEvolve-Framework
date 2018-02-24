@@ -245,7 +245,7 @@ namespace ForEvolve.AspNetCore.OperationResults
                 var expectedException = new Exception();
                 var expectedError = CreateAnError();
                 _errorFactoryMock
-                    .Setup(x => x.Create(expectedException))
+                    .Setup(x => x.CreateFrom(expectedException))
                     .Returns(expectedError);
 
                 // Act
@@ -264,7 +264,7 @@ namespace ForEvolve.AspNetCore.OperationResults
                 // Arrange
                 var expectedException = new Exception();
                 _errorFactoryMock
-                    .Setup(x => x.Create(expectedException))
+                    .Setup(x => x.CreateFrom(expectedException))
                     .Returns(CreateAnError);
 
                 // Act
@@ -285,7 +285,7 @@ namespace ForEvolve.AspNetCore.OperationResults
                 var expectedException = new Exception();
                 var expectedError = CreateAnError();
                 _errorFactoryMock
-                    .Setup(x => x.Create(expectedException))
+                    .Setup(x => x.CreateFrom(expectedException))
                     .Returns(expectedError)
                     .Verifiable();
 
@@ -294,7 +294,7 @@ namespace ForEvolve.AspNetCore.OperationResults
 
                 // Assert
                 _errorFactoryMock
-                    .Verify(x => x.Create(expectedException), Times.Once);
+                    .Verify(x => x.CreateFrom(expectedException), Times.Once);
             }
         }
     }

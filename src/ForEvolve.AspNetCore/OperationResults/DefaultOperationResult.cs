@@ -61,7 +61,7 @@ namespace ForEvolve.AspNetCore
         {
             if (exception == null) { throw new ArgumentNullException(nameof(exception)); }
             _exceptions.Add(exception);
-            var error = _errorFactory.Create(exception);
+            var error = _errorFactory.CreateFrom(exception);
             AddError(error);
         }
 

@@ -1,6 +1,7 @@
 ﻿using ForEvolve.AspNetCore;
 using ForEvolve.AspNetCore.Emails;
 using ForEvolve.AspNetCore.Services;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -46,7 +47,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 // Act & Assert
                 AssertThatAllServicesAreRegistered(
-                    services => services.AddForEvolveAspNetCore(nullConfigurationMock),
+                    services => AddSingletonMock<IHostingEnvironment>(
+                        () => services.AddForEvolveAspNetCore(nullConfigurationMock)
+                    ),
                     expectedSingletonServices: ExpectedSingletonServices,
                     expectedScopedServices: ExpectedScopedServices
                 );
