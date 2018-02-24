@@ -23,12 +23,6 @@ namespace ForEvolve.DynamicInternalServerError
             return new DynamicExceptionResult(error);
         }
 
-        public static IDynamicActionResult InternalServerError(this Controller controller, ModelStateDictionary modelStateDictionary)
-        {
-            var error = DefaultErrorFactory.Current.Create(new SerializableError(modelStateDictionary));
-            return new DynamicExceptionResult(error);
-        }
-
         //
         //public static IDynamicActionResult InternalServerError(this Controller controller, string code, string message, IEnumerable<Error> details)
         //{
