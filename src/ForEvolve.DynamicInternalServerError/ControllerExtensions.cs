@@ -2,6 +2,7 @@
 using ForEvolve.AspNetCore;
 using ForEvolve.AspNetCore.ErrorFactory.Implementations;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,13 @@ namespace ForEvolve.DynamicInternalServerError
             return new DynamicExceptionResult(error);
         }
 
+        public static IDynamicActionResult InternalServerError(this Controller controller, ModelStateDictionary modelStateDictionary)
+        {
+            var error = DefaultErrorFactory.Current.Create(new SerializableError(modelStateDictionary));
+            return new DynamicExceptionResult(error);
+        }
+
+        //
         //public static IDynamicActionResult InternalServerError(this Controller controller, string code, string message, IEnumerable<Error> details)
         //{
         //    return new DynamicExceptionResult(new Error
