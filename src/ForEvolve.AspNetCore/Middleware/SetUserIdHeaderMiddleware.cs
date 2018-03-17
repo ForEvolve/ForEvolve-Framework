@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ForEvolve.AspNetCore.UserIdFinder;
 using Microsoft.AspNetCore.Http;
 
 namespace ForEvolve.AspNetCore.Middleware
@@ -10,9 +11,9 @@ namespace ForEvolve.AspNetCore.Middleware
     public class SetUserIdHeaderMiddleware : BaseMiddleware
     {
         private readonly IUserIdAccessor _userIdAccessor;
-        private readonly UserIdFinderSettings _userIdFinderSettings;
+        private readonly HttpHeaderUserIdFinderSettings _userIdFinderSettings;
 
-        public SetUserIdHeaderMiddleware(RequestDelegate next, IUserIdAccessor userIdAccessor, UserIdFinderSettings userIdFinderSettings)
+        public SetUserIdHeaderMiddleware(RequestDelegate next, IUserIdAccessor userIdAccessor, HttpHeaderUserIdFinderSettings userIdFinderSettings)
             : base(next)
         {
             _userIdAccessor = userIdAccessor ?? throw new ArgumentNullException(nameof(userIdAccessor));

@@ -1,5 +1,6 @@
 ﻿using ForEvolve.AspNetCore;
 using ForEvolve.AspNetCore.Middleware;
+using ForEvolve.AspNetCore.UserIdFinder;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,22 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class UserIdFinderExtensions
     {
-        public static IServiceCollection AddUserIdFinder(this IServiceCollection services, Action<UserIdFinderSettings> setupAction = null)
+        public static IServiceCollection AddHttpHeaderUserIdFinder(this IServiceCollection services, Action<HttpHeaderUserIdFinderSettings> setupAction = null)
         {
-            var userIdFinderSettings = new UserIdFinderSettings();
+            var userIdFinderSettings = new HttpHeaderUserIdFinderSettings();
             setupAction?.Invoke(userIdFinderSettings);
 
-            services.TryAddSingleton<IUserIdFinder, UserIdFinder>();
+            services.TryAddSingleton<IUserIdFinder, HttpHeaderUserIdFinder>();
+            services.TryAddSingleton(userIdFinderSettings);
+            return services;
+        }
+
+        public static IServiceCollection AddAuthenticatedUserIdFinder(this IServiceCollection services, Action<AuthenticatedUserIdFinderSettings> setupAction = null)
+        {
+            var userIdFinderSettings = new AuthenticatedUserIdFinderSettings();
+            setupAction?.Invoke(userIdFinderSettings);
+
+            services.TryAddSingleton<IUserIdFinder, AuthenticatedUserIdFinder>();
             services.TryAddSingleton(userIdFinderSettings);
             return services;
         }
@@ -24,15 +35,15 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddUserIdSetter<TUserIdAccessor>(this IServiceCollection services)
             where TUserIdAccessor : class, IUserIdAccessor
         {
-            services.TryAddSingleton<UserIdFinderSettings>();
+            services.TryAddSingleton<HttpHeaderUserIdFinderSettings>();
             services.TryAddSingleton<IUserIdAccessor, TUserIdAccessor>();
             return services;
         }
 
-        public static IServiceCollection AddUserIdSetter<TUserIdAccessor>(this IServiceCollection services, Action<UserIdFinderSettings> setupAction = null)
+        public static IServiceCollection AddUserIdSetter<TUserIdAccessor>(this IServiceCollection services, Action<HttpHeaderUserIdFinderSettings> setupAction = null)
             where TUserIdAccessor : class, IUserIdAccessor
         {
-            var userIdFinderSettings = new UserIdFinderSettings();
+            var userIdFinderSettings = new HttpHeaderUserIdFinderSettings();
             setupAction?.Invoke(userIdFinderSettings);
 
             services.TryAddSingleton(userIdFinderSettings);
@@ -40,9 +51,9 @@ namespace Microsoft.Extensions.DependencyInjection
             return services;
         }
 
-        public static IServiceCollection AddUserIdSetter(this IServiceCollection services, IUserIdAccessor userIdAccessor, Action<UserIdFinderSettings> setupAction = null)
+        public static IServiceCollection AddUserIdSetter(this IServiceCollection services, IUserIdAccessor userIdAccessor, Action<HttpHeaderUserIdFinderSettings> setupAction = null)
         {
-            var userIdFinderSettings = new UserIdFinderSettings();
+            var userIdFinderSettings = new HttpHeaderUserIdFinderSettings();
             setupAction?.Invoke(userIdFinderSettings);
 
             services.TryAddSingleton(userIdFinderSettings);
@@ -52,7 +63,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddUserIdSetter(this IServiceCollection services, IUserIdAccessor userIdAccessor)
         {
-            services.TryAddSingleton<UserIdFinderSettings>();
+            services.TryAddSingleton<HttpHeaderUserIdFinderSettings>();
             services.TryAddSingleton(userIdAccessor);
             return services;
         }
