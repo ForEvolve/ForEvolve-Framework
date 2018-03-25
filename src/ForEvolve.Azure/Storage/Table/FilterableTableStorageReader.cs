@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.Azure.Storage.Table
 {
-    public class FilterableTableStorageRepository<TModel> : TableStorageRepository<TModel>, IFilterableTableStorageRepository<TModel>
+    public class FilterableTableStorageReader<TModel> : TableStorageRepository<TModel>, IFilterableTableStorageReader<TModel>
         where TModel : class, ITableEntity, new()
     {
-        public FilterableTableStorageRepository(ITableStorageSettings storageSettings)
+        public FilterableTableStorageReader(ITableStorageSettings storageSettings)
             : base(storageSettings)
         {
         }
 
-        public FilterableTableStorageRepository(CloudTable table)
+        public FilterableTableStorageReader(CloudTable table)
             : base(table)
         {
         }
