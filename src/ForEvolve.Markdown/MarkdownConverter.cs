@@ -3,11 +3,6 @@ using System;
 
 namespace ForEvolve.Markdown
 {
-    public interface IMarkdownConverter
-    {
-        string ConvertToHtml(string markdown);
-    }
-
     public class MarkdownConverter : IMarkdownConverter
     {
         private readonly MarkdownPipeline _pipeline;
