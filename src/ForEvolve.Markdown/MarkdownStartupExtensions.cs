@@ -11,13 +11,26 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class MarkdownStartupExtensions
     {
-        public static IServiceCollection AddMarkdown(this IServiceCollection services, Action<MarkdownPipelineBuilder> configure = null)
+        public static IServiceCollection AddMarkdown(
+            this IServiceCollection services,
+            Action<MarkdownOptions> optionsAction = null
+            )
         {
+            // Setup options
+            var options = new MarkdownOptions();
+            optionsAction?.Invoke(options);
+
+            // Register services
             services.TryAddSingleton<IMarkdownConverter, MarkdownConverter>();
             services.AddSingleton(provider => {
-                var pipeline = new MarkdownPipelineBuilder();
-                configure?.Invoke(pipeline);
-                return pipeline.Build();
+                // Customize the pipeline
+                var builder = new MarkdownPipelineBuilder();
+                if(options.DisableHtml)
+                {
+                    builder.DisableHtml();
+                }
+                options.Configure?.Invoke(builder);
+                return builder.Build();
             });
             return services;
         }
