@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static class MarkdownStartupExtensions
+    public static class MarkdigStartupExtensions
     {
-        public static IServiceCollection AddMarkdown(
+        public static IServiceCollection AddMarkdig(
             this IServiceCollection services,
-            Action<MarkdownOptions> optionsAction = null
+            Action<MarkdigOptions> optionsAction = null
             )
         {
             // Setup options
-            var options = new MarkdownOptions();
+            var options = new MarkdigOptions();
             optionsAction?.Invoke(options);
 
             // Register services

@@ -8,12 +8,16 @@
     <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve-Framework</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/ForEvolve/ForEvolve-Framework/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl></RepositoryUrl>
-    <PackageTags>asp.net core,markdown</PackageTags>
+    <PackageTags>asp.net core,markdown,markdig</PackageTags>
   </PropertyGroup>
   
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.14.9" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\ForEvolve.Markdown.Abstractions\ForEvolve.Markdown.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

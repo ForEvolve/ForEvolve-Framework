@@ -1,9 +1,6 @@
 ﻿# Markdown File
-This library is a wrapper around `lunet-io/markdig`, allowing to easily convert a string to Markdown.
-
-
-## The core concept
-The most important part of this library is the `IMarkdownConverter` interace.
+This library is an abstraction allowing consumers to easily convert strings to Markdown.
+The center piece is the `IMarkdownConverter` interface.
 
 ``` csharp
 public interface IMarkdownConverter
@@ -12,16 +9,16 @@ public interface IMarkdownConverter
 }
 ```
 
-> The library curently depend on `lunet-io/markdig`, but this could be swaped away in the future or use multiple implementations.
+> The library is curently a wrapper around `lunet-io/markdig`, however, in the future, multiple implementations could be used.
 
 ## How to use
-Register the services in the `ConfigureServices` method by calling the `AddMarkdown()` extension method. 
+Register the services in the `ConfigureServices` method by calling the `AddMarkdig()` extension method. 
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)
 {
     //...
-    services.AddMarkdown();
+    services.AddMarkdig();
     //...
 }
 ```
@@ -29,18 +26,18 @@ public void ConfigureServices(IServiceCollection services)
 That's it! Now you can inject an `IMarkdownConverter` service in your classes.
 
 ### Configuring the pipeline
-If you want more control over your markdown covnertion, you can configure the pipeline when calling the `AddMarkdown()` extension method.
+If you want more control over your markdown covnertion, you can configure the pipeline when calling the `AddMarkdig()` extension method.
 
 #### To allow HTML
 
 ``` csharp
-services.AddMarkdown(options => options.DisableHtml = false);
+services.AddMarkdig(options => options.DisableHtml = false);
 ```
 
 #### To add Extensions
  
 ``` csharp
-services.AddMarkdown(options =>
+services.AddMarkdig(options =>
 {
     options.Configure = builder =>
     {

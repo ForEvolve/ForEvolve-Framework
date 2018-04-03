@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = new ServiceCollection();
 
             // Act
-            services.AddMarkdown();
+            services.AddMarkdig();
 
             // Assert
             AssertMarkdownConverter(services);
@@ -33,7 +33,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = new ServiceCollection();
 
             // Act & Assert
-            services.AddMarkdown(options =>
+            services.AddMarkdig(options =>
             {
                 options.Configure = builder =>
                 {
@@ -54,7 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = new ServiceCollection();
 
             // Act & Assert
-            services.AddMarkdown(options =>
+            services.AddMarkdig(options =>
             {
                 options.DisableHtml = false;
                 options.Configure = builder =>
@@ -77,7 +77,7 @@ namespace Microsoft.Extensions.DependencyInjection
             bool called = false;
 
             // Act
-            services.AddMarkdown(options => options.Configure = builder => called = true);
+            services.AddMarkdig(options => options.Configure = builder => called = true);
 
             // Assert
             AssertMarkdownConverter(services);

@@ -3,10 +3,9 @@ using System;
 
 namespace ForEvolve.Markdown
 {
-    public class MarkdownOptions
+    public class MarkdigOptions
     {
         public bool DisableHtml { get; set; } = true;
-
         public Action<MarkdownPipelineBuilder> Configure { get; set; }
     }
 }
