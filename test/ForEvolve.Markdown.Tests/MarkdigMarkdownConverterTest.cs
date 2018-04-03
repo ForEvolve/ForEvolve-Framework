@@ -4,9 +4,9 @@ using Xunit;
 
 namespace ForEvolve.Markdown
 {
-    public class MarkdownConverterTest
+    public class MarkdigMarkdownConverterTest
     {
-        public class ConvertToHtml : MarkdownConverterTest
+        public class ConvertToHtml : MarkdigMarkdownConverterTest
         {
             [Theory]
             [InlineData("", "")]
@@ -18,7 +18,7 @@ namespace ForEvolve.Markdown
             {
                 // Arrange
                 var pipeline = new MarkdownPipelineBuilder().Build();
-                var sut = new MarkdownConverter(pipeline);
+                var sut = new MarkdigMarkdownConverter(pipeline);
 
                 // Act
                 var result = sut.ConvertToHtml(input);

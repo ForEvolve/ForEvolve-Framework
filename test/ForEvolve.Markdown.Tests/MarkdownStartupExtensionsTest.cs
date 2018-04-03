@@ -88,7 +88,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var serviceProvider = services.BuildServiceProvider();
             var markdownConverter = serviceProvider.GetService<IMarkdownConverter>();
-            Assert.IsType<MarkdownConverter>(markdownConverter);
+            Assert.IsType<MarkdigMarkdownConverter>(markdownConverter);
         }
     }
 }

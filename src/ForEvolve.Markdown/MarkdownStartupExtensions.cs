@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.DependencyInjection
             optionsAction?.Invoke(options);
 
             // Register services
-            services.TryAddSingleton<IMarkdownConverter, MarkdownConverter>();
+            services.TryAddSingleton<IMarkdownConverter, MarkdigMarkdownConverter>();
             services.AddSingleton(provider => {
                 // Customize the pipeline
                 var builder = new MarkdownPipelineBuilder();

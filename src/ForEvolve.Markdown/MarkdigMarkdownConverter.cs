@@ -3,11 +3,11 @@ using System;
 
 namespace ForEvolve.Markdown
 {
-    public class MarkdownConverter : IMarkdownConverter
+    public class MarkdigMarkdownConverter : IMarkdownConverter
     {
         private readonly MarkdownPipeline _pipeline;
 
-        public MarkdownConverter(MarkdownPipeline pipeline)
+        public MarkdigMarkdownConverter(MarkdownPipeline pipeline)
         {
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
         }
