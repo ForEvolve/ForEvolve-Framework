@@ -1,6 +1,9 @@
 ﻿# ForEvolve.Markdown
-This library contains implementations of the `ForEvolve.Markdown.Abstractions` library.
-It allows consumers to easily convert strings to Markdown.
+Allows consumers to easily convert strings to Markdown using the `IMarkdownConverter` interface.
+
+---
+
+> This library contains implementations of `ForEvolve.Markdown.Abstractions`.
 
 The center piece is the `IMarkdownConverter` interface.
 
@@ -11,12 +14,20 @@ public interface IMarkdownConverter
 }
 ```
 
-> **Note**
->
-> Right now, the library contains only a wrapper around `lunet-io/markdig`, however, in the future, multiple implementations could be used.
+## Implementations
+Right now, the project contains only a wrapper around `lunet-io/markdig`, however, in the future, multiple implementations could be created.
+
+## Why this?
+Why use this instead of `Markdig` and why did I created this?
+
+Simple! It creates an abstraction between my code (consumer) and `Markdig` (the library doing the actual convertion to markdown).
+This way, if I want to use another library later, the only place that needs to be updated is the composition root of the project.
+
+> [...] and of course a new implementation of the `IMarkdownConverter` interface must be created by someone.
 
 ## NuGet feed
-You can load this package directly or the ForEvolve metapackage.
+You can load this package directly or use the ForEvolve metapackage.
+As of now, they are only available on the ForEvove MyGet feed.
 
 ForEvolve [NuGet V3 feed URL](https://www.myget.org/F/forevolve/api/v3/index.json) packages source. See the [Table of content](https://github.com/ForEvolve/Toc) project for more info.
 
