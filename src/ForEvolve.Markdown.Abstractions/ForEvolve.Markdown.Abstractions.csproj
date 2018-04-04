@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>ForEvolve.Markdown</RootNamespace>
     <Authors>Carl-Hugo Marcotte</Authors>
     <Company>ForEvolve</Company>
-    <Description>Abstractions of a simple markdown converter: IMarkdownConverter.</Description>
+    <Description>Abstractions of a simple markdown converter: IMarkdownConverter. See ForEvolve.Markdown for implementations.</Description>
     <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve-Framework</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/ForEvolve/ForEvolve-Framework/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl></RepositoryUrl>

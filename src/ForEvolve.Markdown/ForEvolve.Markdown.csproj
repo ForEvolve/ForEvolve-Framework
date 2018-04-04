@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Authors>Carl-Hugo Marcotte</Authors>
     <Company>ForEvolve</Company>
-    <Description>Markdown wrapper around `lunet-io/markdig`. Allow injection of an IMarkdownConverter service. Include and .NET Core configuration extension to configure the MarkdownPipeline. By default, the Html parsing is disabled.</Description>
+    <Description>Allows consumers to easily convert strings to Markdown using the `IMarkdownConverter` interface. Contains a markdown wrapper around `lunet-io/markdig`.</Description>
     <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve-Framework</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/ForEvolve/ForEvolve-Framework/blob/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl></RepositoryUrl>
@@ -13,7 +13,7 @@
   
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.14.9" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
   </ItemGroup>
   
   <ItemGroup>
