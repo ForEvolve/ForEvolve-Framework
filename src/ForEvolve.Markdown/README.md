@@ -1,6 +1,7 @@
 ﻿# ForEvolve.Markdown
 This library contains implementations of the `ForEvolve.Markdown.Abstractions` library.
 It allows consumers to easily convert strings to Markdown.
+
 The center piece is the `IMarkdownConverter` interface.
 
 ``` csharp
@@ -15,6 +16,8 @@ public interface IMarkdownConverter
 > Right now, the library contains only a wrapper around `lunet-io/markdig`, however, in the future, multiple implementations could be used.
 
 ## NuGet feed
+You can load this package directly or the ForEvolve metapackage.
+
 ForEvolve [NuGet V3 feed URL](https://www.myget.org/F/forevolve/api/v3/index.json) packages source. See the [Table of content](https://github.com/ForEvolve/Toc) project for more info.
 
 ## How to use (Markdig)
