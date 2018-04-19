@@ -15,6 +15,20 @@ namespace ForEvolve.XUnit.HttpTests
 {
     public class BaseHttpTestTest : BaseHttpTest<TestServerStartup>
     {
+        private bool _configureWebHostBuilderHasBeenCalled = false;
+
+        protected override IWebHostBuilder ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder)
+        {
+            _configureWebHostBuilderHasBeenCalled = true;
+            return base.ConfigureWebHostBuilder(webHostBuilder);
+        }
+
+        [Fact]
+        public void Should_call_ConfigureWebHostBuilder()
+        {
+            Assert.True(_configureWebHostBuilderHasBeenCalled);
+        }
+
         [Fact]
         public async Task Should_setup_the_client_and_the_server()
         {
