@@ -2,14 +2,39 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using Microsoft.AspNetCore.Builder;
+using System.IO;
+using System.Reflection;
 
 namespace ForEvolve.XUnit.HttpTests
 {
+    public abstract class BaseHttpTestWithMvcViews<TStartup> : BaseHttpTest<TStartup>
+        where TStartup : class
+    {
+        protected override IWebHostBuilder ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder)
+        {
+            var contentRoot = GetContentRoot();
+            return base.ConfigureWebHostBuilder(webHostBuilder
+                .UseContentRoot(contentRoot)
+            );
+        }
+
+        protected virtual string GetContentRoot()
+        {
+            var startupAssembly = typeof(TStartup).GetTypeInfo().Assembly;
+            var startupAssemblyName = startupAssembly.GetName().Name;
+            var contentRoot = Path.GetFullPath($"{SrcRoot}/{startupAssemblyName}");
+            return contentRoot;
+        }
+
+        protected virtual string SrcRoot => "../../../../../src";
+    }
+
     public abstract class BaseHttpTest<TStartup> : BaseHttpTest
          where TStartup : class
     {
@@ -21,11 +46,14 @@ namespace ForEvolve.XUnit.HttpTests
 
     public abstract class BaseHttpTest : IDisposable
     {
-        protected TestServer Server { get; }
-        protected HttpClient Client { get; }
+        protected TestServer Server => _httpTestServer.Server;
+        protected HttpClient Client => _httpTestServer.Client;
 
-        protected virtual Uri BaseAddress => new Uri("http://localhost");
         protected virtual string Environment => "Development";
+
+        private readonly IHttpTestServer _httpTestServer;
+
+        protected IServiceProvider Services => Server.Host.Services;
 
         public BaseHttpTest()
             : this(WebHost.CreateDefaultBuilder())
@@ -38,15 +66,20 @@ namespace ForEvolve.XUnit.HttpTests
 
             var builder = webHostBuilder
                 .UseEnvironment(Environment)
-                .ConfigureServices(ConfigureServices);
-
-            Server = new TestServer(builder);
-            Client = Server.CreateClient();
-            Client.BaseAddress = BaseAddress;
+                .ConfigureServices(ConfigureServices)
+                .ConfigureServices(services => services.TryAddTransient<IStatusCodeProvider, OkStatusCodeProvider>())
+                ;
+            builder = ConfigureWebHostBuilder(builder);
+            _httpTestServer = new HttpTestServerBuilder().Create(() => builder);
         }
 
         protected virtual void ConfigureServices(IServiceCollection services)
         {
+        }
+
+        protected virtual IWebHostBuilder ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder)
+        {
+            return webHostBuilder;
         }
 
         #region IDisposable Support
@@ -59,8 +92,7 @@ namespace ForEvolve.XUnit.HttpTests
             {
                 if (disposing)
                 {
-                    Client.Dispose();
-                    Server.Dispose();
+                    _httpTestServer.Dispose();
                 }
                 _isDisposed = true;
             }

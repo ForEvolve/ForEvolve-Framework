@@ -68,8 +68,9 @@ namespace ForEvolve.DynamicInternalServerError
                 Assert.NotNull(errorResponse);
                 Assert.NotNull(errorResponse.Error);
                 Assert.Null(errorResponse.Error.Details);
-                Assert.Null(errorResponse.Error.InnerError);
-                Assert.Null(errorResponse.Error.Target);
+                Assert.NotNull(errorResponse.Error.InnerError);
+                Assert.NotNull(errorResponse.Error.InnerError.HResult);
+                Assert.NotNull(errorResponse.Error.Target);
                 Assert.Equal(expectedError.Code, errorResponse.Error.Code);
                 Assert.Equal(expectedError.Message, errorResponse.Error.Message);
             }
@@ -94,18 +95,22 @@ namespace ForEvolve.DynamicInternalServerError
                 Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
                 Assert.NotNull(errorResponse);
                 Assert.NotNull(errorResponse.Error);
-                Assert.Null(errorResponse.Error.InnerError);
-                Assert.Null(errorResponse.Error.Target);
+                Assert.NotNull(errorResponse.Error.InnerError);
+                Assert.NotNull(errorResponse.Error.InnerError.HResult);
+                Assert.NotNull(errorResponse.Error.Target);
                 Assert.Equal("Exception", errorResponse.Error.Code);
                 Assert.Equal("PipelineTest Exception", errorResponse.Error.Message);
 
                 // InnerException
                 Assert.NotNull(errorResponse.Error.Details);
-                Assert.Equal(1, errorResponse.Error.Details.Count);
-                Assert.Equal("Exception", errorResponse.Error.Details[0].Code);
-                Assert.Equal("Inner exception message.", errorResponse.Error.Details[0].Message);
-                Assert.Null(errorResponse.Error.Details[0].InnerError);
-                Assert.Null(errorResponse.Error.Details[0].Target);
+                Assert.Collection(errorResponse.Error.Details,
+                    d =>
+                    {
+                        Assert.Equal("Exception", d.Code);
+                        Assert.Equal("Inner exception message.", d.Message);
+                        Assert.Null(d.Target);
+                    }
+                );
             }
         }
     }
