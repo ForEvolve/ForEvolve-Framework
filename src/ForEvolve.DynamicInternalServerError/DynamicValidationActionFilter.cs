@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using System.Text;
 using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.AspNetCore;
 
 namespace ForEvolve.DynamicInternalServerError
 {
@@ -31,7 +32,7 @@ namespace ForEvolve.DynamicInternalServerError
                 if (objContext.Value is SerializableError serializableError)
                 {
                     Logger.LogInformation($"Converting SerializableError to ErrorResponse.");
-                    var error = ErrorFactory.CreateErrorFor(serializableError);
+                    var error = ErrorFactory.Create(serializableError);
                     context.Result = new BadRequestObjectResult(new ErrorResponse(error));
                 }
             }       

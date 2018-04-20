@@ -227,7 +227,7 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                     .Verifiable();
 
                 // Act
-                var result = _factoryUnderTest.Create(exception);
+                var result = _factoryUnderTest.CreateFrom(exception);
 
                 // Assert
                 if (isDevEnv)
@@ -274,7 +274,7 @@ namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
                 var exception = new Exception("Error!", innerException);
 
                 // Act
-                var result = _factoryUnderTest.Create(exception);
+                var result = _factoryUnderTest.CreateFrom(exception);
 
                 // Assert
                 Assert.Collection(result.Details,

@@ -18,7 +18,7 @@ namespace System
         {
             // Register services with container
             services.TryAddSingleton(filters ?? Enumerable.Empty<IDynamicExceptionResultFilter>());
-            services.TryAddSingleton<IErrorFactory, ErrorFactory>();
+            services.AddForEvolveErrorFactory();
             return services;
         }
 

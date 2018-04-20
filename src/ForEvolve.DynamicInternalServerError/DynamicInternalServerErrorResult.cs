@@ -8,7 +8,7 @@ using System.Text;
 
 namespace ForEvolve.DynamicInternalServerError
 {
-    public class DynamicExceptionResult : ObjectResult, IDynamicResult
+    public class DynamicExceptionResult : ObjectResult, IDynamicActionResult
     {
         public DynamicExceptionResult(Error error)
             : base(new ErrorResponse(error))

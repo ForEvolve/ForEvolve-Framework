@@ -22,12 +22,14 @@ namespace ForEvolve.AspNetCore
     /// <seealso cref="ForEvolve.AspNetCore.IErrorFromRawValuesFactory" />
     /// <seealso cref="ForEvolve.AspNetCore.IErrorFromIdentityErrorFactory" />
     public interface IErrorFactory : 
-        IErrorFromExceptionFactory, 
+        IErrorFromExceptionFactory,
         IErrorFromDictionaryFactory, 
         IErrorFromKeyValuePairFactory, 
         IErrorFromRawValuesFactory, 
-        IErrorFromIdentityErrorFactory
+        IErrorFromIdentityErrorFactory,
+        IErrorFromSerializableErrorFactory,
+        IErrorFromOperationResultFactory
     {
-        
+
     }
 }

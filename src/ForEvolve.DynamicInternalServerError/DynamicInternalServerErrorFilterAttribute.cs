@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ForEvolve.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using System;
@@ -41,7 +42,7 @@ namespace ForEvolve.DynamicInternalServerError
 
         protected virtual IActionResult CreateActionResult(ExceptionContext context)
         {
-            var error = ErrorFactory.CreateErrorFor(context.Exception);
+            var error = ErrorFactory.CreateFrom(context.Exception);
             foreach (var filter in Filters)
             {
                 filter.Apply(context, error);
