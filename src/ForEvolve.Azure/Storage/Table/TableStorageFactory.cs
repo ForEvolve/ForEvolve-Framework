@@ -4,12 +4,12 @@ using System;
 
 namespace ForEvolve.Azure.Storage.Table
 {
-    public class TableStorageRepositoryFactory : ITableStorageRepositoryFactory
+    public class TableStorageFactory : ITableStorageFactory
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly TableStorageRepositoryFactorySettings _settings;
 
-        public TableStorageRepositoryFactory(TableStorageRepositoryFactorySettings settings, IServiceProvider serviceProvider)
+        public TableStorageFactory(TableStorageRepositoryFactorySettings settings, IServiceProvider serviceProvider)
         {
             _settings = settings ?? throw new ArgumentNullException(nameof(settings));
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));

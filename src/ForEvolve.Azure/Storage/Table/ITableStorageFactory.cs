@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.Azure.Storage.Table
 {
-    public interface ITableStorageRepositoryFactory
+    public interface ITableStorageFactory
     {
         ITableStorageRepository<TModel> CreateRepository<TModel>() where TModel : class, ITableEntity, new();
         IFilterableTableStorageReader<TModel> CreateReader<TModel>() where TModel : class, ITableEntity, new();

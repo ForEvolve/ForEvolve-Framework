@@ -12,7 +12,7 @@ namespace System
     {
         public static void AddTableStorage(this IServiceCollection services, TableStorageRepositoryFactorySettings factorySettings = null)
         {
-            services.TryAddSingleton<ITableStorageRepositoryFactory, TableStorageRepositoryFactory>();
+            services.TryAddSingleton<ITableStorageFactory, TableStorageFactory>();
             services.TryAddSingleton(factorySettings ?? new TableStorageRepositoryFactorySettings
             {
                 AutoCreateMissingBindings = true

@@ -13,9 +13,9 @@ using Xunit;
 
 namespace ForEvolve.Azure.Storage.Table
 {
-    public class TableStorageRepositoryFactoryTest : BaseHttpTest
+    public class TableStorageFactoryTest : BaseHttpTest
     {
-        private ITableStorageRepositoryFactory FactoryUnderTest => Server.Host.Services.GetService<ITableStorageRepositoryFactory>();
+        private ITableStorageFactory FactoryUnderTest => Server.Host.Services.GetService<ITableStorageFactory>();
 
         protected override void ConfigureServices(IServiceCollection services)
         {
@@ -32,7 +32,7 @@ namespace ForEvolve.Azure.Storage.Table
             return webHostBuilder.Configure(app => { });
         }
 
-        public class CreateRepository : TableStorageRepositoryFactoryTest
+        public class CreateRepository : TableStorageFactoryTest
         {
             protected override void ConfigureServices(IServiceCollection services)
             {
@@ -86,7 +86,7 @@ namespace ForEvolve.Azure.Storage.Table
             }
         }
 
-        public class CreateReader : TableStorageRepositoryFactoryTest
+        public class CreateReader : TableStorageFactoryTest
         {
             protected override void ConfigureServices(IServiceCollection services)
             {
