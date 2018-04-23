@@ -36,9 +36,11 @@ namespace ForEvolve.XUnit.HttpTests
         {
             if (webHostBuilder == null) { throw new ArgumentNullException(nameof(webHostBuilder)); }
 
-            var builder = webHostBuilder
-                .UseEnvironment(Environment)
-                .ConfigureServices(ConfigureServices);
+            var builder = SetupWebHostBuilder(
+                webHostBuilder
+                    .UseEnvironment(Environment)
+                    .ConfigureServices(ConfigureServices)
+            );
 
             Server = new TestServer(builder);
             Client = Server.CreateClient();
@@ -47,6 +49,11 @@ namespace ForEvolve.XUnit.HttpTests
 
         protected virtual void ConfigureServices(IServiceCollection services)
         {
+        }
+
+        protected virtual IWebHostBuilder SetupWebHostBuilder(IWebHostBuilder webHostBuilder)
+        {
+            return webHostBuilder;
         }
 
         #region IDisposable Support
