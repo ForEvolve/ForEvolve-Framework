@@ -38,6 +38,27 @@ namespace ForEvolve.Azure.Storage.Table
             }
             return reader;
         }
+
+        public ITableStorageRepository<TModel> CreateRepository<TModel>(ITableStorageSettings tableStorageSettings)
+            where TModel : class, ITableEntity, new()
+        {
+            if (!_settings.AutoCreateMissingBindings)
+            {
+                throw new NotSupportedException("AutoCreateMissingBindings should be set to true.");
+            }
+            return new TableStorageRepository<TModel>(tableStorageSettings);
+        }
+
+        public IFilterableTableStorageReader<TModel> CreateReader<TModel>(ITableStorageSettings tableStorageSettings)
+            where TModel : class, ITableEntity, new()
+        {
+            if (!_settings.AutoCreateMissingBindings)
+            {
+                throw new NotSupportedException("AutoCreateMissingBindings should be set to true.");
+            }
+
+            return new FilterableTableStorageReader<TModel>(tableStorageSettings);
+        }
     }
 
     public class TableStorageRepositoryFactorySettings

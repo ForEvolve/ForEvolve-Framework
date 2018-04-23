@@ -17,6 +17,7 @@ namespace System
             {
                 AutoCreateMissingBindings = true
             });
+            services.TryAddSingleton<ITableStorageReader, TableStorageReader>();
         }
 
         public static void AddTableMessageQueueStorage(this IServiceCollection services, QueueStorageSettings queueStorageSettings)

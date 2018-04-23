@@ -10,5 +10,7 @@ namespace ForEvolve.Azure.Storage.Table
     {
         ITableStorageRepository<TModel> CreateRepository<TModel>() where TModel : class, ITableEntity, new();
         IFilterableTableStorageReader<TModel> CreateReader<TModel>() where TModel : class, ITableEntity, new();
+        ITableStorageRepository<TModel> CreateRepository<TModel>(ITableStorageSettings tableStorageSettings) where TModel : class, ITableEntity, new();
+        IFilterableTableStorageReader<TModel> CreateReader<TModel>(ITableStorageSettings tableStorageSettings) where TModel : class, ITableEntity, new();
     }
 }

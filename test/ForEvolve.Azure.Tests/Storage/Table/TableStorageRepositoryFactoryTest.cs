@@ -140,6 +140,96 @@ namespace ForEvolve.Azure.Storage.Table
             }
         }
 
+        public class CreateRepository_with_ITableStorageSettings : TableStorageFactoryTest
+        {
+            private readonly DevelopmentTableStorageSettings argSettings = new DevelopmentTableStorageSettings
+            {
+                TableName = "TableStorageRepositoryFactoryTestCreateReaderWithITableStorageSettings"
+            };
+
+            public class When_AutoCreateMissingBindings_is_set_to_true : CreateRepository_with_ITableStorageSettings
+            {
+                protected override void ConfigureServices(IServiceCollection services)
+                {
+                    services.AddSingleton(new TableStorageRepositoryFactorySettings
+                    {
+                        AutoCreateMissingBindings = true
+                    });
+                    base.ConfigureServices(services);
+                }
+
+                [Fact]
+                public void Should_return_a_TableStorageRepository()
+                {
+                    var result = FactoryUnderTest.CreateRepository<MyUnboundEntity>(argSettings);
+                    Assert.IsType<TableStorageRepository<MyUnboundEntity>>(result);
+                }
+            }
+
+            public class When_AutoCreateMissingBindings_is_set_to_false : CreateRepository_with_ITableStorageSettings
+            {
+                protected override void ConfigureServices(IServiceCollection services)
+                {
+                    services.AddSingleton(new TableStorageRepositoryFactorySettings
+                    {
+                        AutoCreateMissingBindings = false
+                    });
+                    base.ConfigureServices(services);
+                }
+
+                [Fact]
+                public void Should_throw_a_NotSupportedException()
+                {
+                    Assert.Throws<NotSupportedException>(() => FactoryUnderTest.CreateRepository<MyUnboundEntity>(argSettings));
+                }
+            }
+        }
+
+        public class CreateReader_with_ITableStorageSettings : TableStorageFactoryTest
+        {
+            private readonly DevelopmentTableStorageSettings argSettings = new DevelopmentTableStorageSettings
+            {
+                TableName = "TableStorageRepositoryFactoryTestCreateReaderWithITableStorageSettings"
+            };
+
+            public class When_AutoCreateMissingBindings_is_set_to_true : CreateReader_with_ITableStorageSettings
+            {
+                protected override void ConfigureServices(IServiceCollection services)
+                {
+                    services.AddSingleton(new TableStorageRepositoryFactorySettings
+                    {
+                        AutoCreateMissingBindings = true
+                    });
+                    base.ConfigureServices(services);
+                }
+
+                [Fact]
+                public void Should_return_a_FilterableTableStorageReader()
+                {
+                    var result = FactoryUnderTest.CreateReader<MyUnboundEntity>(argSettings);
+                    Assert.IsType<FilterableTableStorageReader<MyUnboundEntity>>(result);
+                }
+            }
+
+            public class When_AutoCreateMissingBindings_is_set_to_false : CreateReader_with_ITableStorageSettings
+            {
+                protected override void ConfigureServices(IServiceCollection services)
+                {
+                    services.AddSingleton(new TableStorageRepositoryFactorySettings
+                    {
+                        AutoCreateMissingBindings = false
+                    });
+                    base.ConfigureServices(services);
+                }
+
+                [Fact]
+                public void Should_throw_a_NotSupportedException()
+                {
+                    Assert.Throws<NotSupportedException>(() => FactoryUnderTest.CreateReader<MyUnboundEntity>(argSettings));
+                }
+            }
+        }
+
         private class MyEntity : TableEntity
         {
         }
