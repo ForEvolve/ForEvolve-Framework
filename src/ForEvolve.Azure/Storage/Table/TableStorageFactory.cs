@@ -56,7 +56,6 @@ namespace ForEvolve.Azure.Storage.Table
             {
                 throw new NotSupportedException("AutoCreateMissingBindings should be set to true.");
             }
-
             return new FilterableTableStorageReader<TModel>(tableStorageSettings);
         }
     }
