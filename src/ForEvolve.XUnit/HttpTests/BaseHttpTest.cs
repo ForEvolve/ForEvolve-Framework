@@ -53,7 +53,8 @@ namespace ForEvolve.XUnit.HttpTests
 
         private readonly IHttpTestServer _httpTestServer;
 
-        protected IServiceProvider Services => Server.Host.Services;
+        public IServiceProvider Services => RequestScope.ServiceProvider;
+        protected IServiceScope RequestScope { get; }
 
         public BaseHttpTest()
             : this(WebHost.CreateDefaultBuilder())
@@ -71,6 +72,9 @@ namespace ForEvolve.XUnit.HttpTests
                 ;
             builder = ConfigureWebHostBuilder(builder);
             _httpTestServer = new HttpTestServerBuilder().Create(() => builder);
+
+            // Create a request scope
+            RequestScope = Server.Host.Services.CreateScope();
         }
 
         protected virtual void ConfigureServices(IServiceCollection services)
@@ -92,6 +96,7 @@ namespace ForEvolve.XUnit.HttpTests
             {
                 if (disposing)
                 {
+                    RequestScope.Dispose();
                     _httpTestServer.Dispose();
                 }
                 _isDisposed = true;
