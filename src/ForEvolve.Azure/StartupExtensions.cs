@@ -10,7 +10,7 @@ namespace System
 {
     public static class ForEvolveAzureStartupExtensions
     {
-        public static void AddTableStorage(this IServiceCollection services, TableStorageRepositoryFactorySettings factorySettings = null)
+        public static IServiceCollection AddTableStorage(this IServiceCollection services, TableStorageRepositoryFactorySettings factorySettings = null)
         {
             services.TryAddSingleton<ITableStorageFactory, TableStorageFactory>();
             services.TryAddSingleton(factorySettings ?? new TableStorageRepositoryFactorySettings
@@ -18,17 +18,20 @@ namespace System
                 AutoCreateMissingBindings = true
             });
             services.TryAddSingleton<ITableStorageReader, TableStorageReader>();
+            return services;
         }
 
-        public static void AddTableMessageQueueStorage(this IServiceCollection services, QueueStorageSettings queueStorageSettings)
+        public static IServiceCollection AddTableMessageQueueStorage(this IServiceCollection services, QueueStorageSettings queueStorageSettings)
         {
             services.TryAddSingleton<IQueueStorageRepository>(new QueueStorageRepository(queueStorageSettings));
             services.TryAddSingleton<ITableMessageQueueStorageRepository, TableMessageQueueStorageRepository>();
+            return services;
         }
 
-        public static void AddTableMessageQueueStorage(this IServiceCollection services)
+        public static IServiceCollection AddTableMessageQueueStorage(this IServiceCollection services)
         {
             services.TryAddSingleton<ITableMessageQueueStorageRepository, TableMessageQueueStorageRepository>();
+            return services;
         }
     }
 }
