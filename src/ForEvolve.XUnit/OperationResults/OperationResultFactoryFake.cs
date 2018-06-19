@@ -10,34 +10,33 @@ namespace ForEvolve.XUnit.OperationResults
 {
     public class OperationResultFactoryFake : IOperationResultFactory
     {
-        private readonly IOperationResultFactory _instance;
+        public IOperationResultFactory Instance { get; }
 
         public OperationResultFactoryFake()
         {
             var services = new ServiceCollection();
             services
                 .AddSingleton<IHostingEnvironment, HostingEnvironment>()
-                .AddForEvolveOperationResults()
-                .AddForEvolveErrorFactory(); // TODO: delete this line after update
+                .AddForEvolveOperationResults();
 
-            _instance = services
+            Instance = services
                 .BuildServiceProvider()
                 .GetService<IOperationResultFactory>();
         }
 
         public IOperationResult Create()
         {
-            return _instance.Create();
+            return Instance.Create();
         }
 
         public IOperationResult<TResult> Create<TResult>()
         {
-            return _instance.Create<TResult>();
+            return Instance.Create<TResult>();
         }
 
         public IOperationResult<TResult> Create<TResult>(TResult result)
         {
-            return _instance.Create(result);
+            return Instance.Create(result);
         }
     }
 }
