@@ -11,6 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddForEvolveOperationResults(this IServiceCollection services)
         {
             services.TryAddSingleton<IOperationResultFactory, DefaultOperationResultFactory>();
+            services.AddForEvolveErrorFactory();
             return services;
         }
     }

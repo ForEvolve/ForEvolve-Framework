@@ -9,8 +9,6 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ErrorFactoryStartupExtensions
     {
-        public static IErrorFactory CurrentErrorFactory { get; private set; }
-
         public static IServiceCollection AddForEvolveErrorFactory(this IServiceCollection services)
         {
             services.TryAddSingleton<IErrorFromOperationResultFactory, DefaultErrorFromOperationResultFactory>();
