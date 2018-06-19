@@ -32,7 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection
                         typeof(IHttpRequestValueFinder),
                         typeof(IEmailSender),
                         typeof(EmailOptions),
-                    });
+                    })
+                    .Distinct();
                 ExpectedScopedServices = new Type[]
                 {
                     typeof(IViewRenderer),
@@ -47,9 +48,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 // Act & Assert
                 AssertThatAllServicesAreRegistered(
-                    services => AddSingletonMock<IHostingEnvironment>(
-                        () => services.AddForEvolveAspNetCore(nullConfigurationMock)
-                    ),
+                    services => services
+                        .AddSingletonMock<IHostingEnvironment>()
+                        .AddForEvolveAspNetCore(nullConfigurationMock),
                     expectedSingletonServices: ExpectedSingletonServices,
                     expectedScopedServices: ExpectedScopedServices
                 );
