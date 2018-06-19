@@ -22,6 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 typeof(IErrorFromRawValuesFactory),
                 typeof(IErrorFromKeyValuePairFactory),
                 typeof(IErrorFromRawValuesFactory),
+                typeof(IErrorFromOperationResultFactory),
+                typeof(IErrorFromSerializableErrorFactory),
                 typeof(IErrorFactory),
                 // Prerequisite
                 typeof(IHostingEnvironment),
@@ -32,9 +34,9 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 // Arange, Act & Assert
                 AssertThatAllServicesAreRegistered(
-                    services => AddSingletonMock<IHostingEnvironment>(
-                        () => services.AddForEvolveErrorFactory()
-                    ),
+                    services => services
+                        .AddSingletonMock<IHostingEnvironment>()
+                        .AddForEvolveErrorFactory(),
                     expectedSingletonServices: ExpectedSingletonServices
                 );
             }
