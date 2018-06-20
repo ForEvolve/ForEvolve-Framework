@@ -25,10 +25,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton(provider => {
                 // Customize the pipeline
                 var builder = new MarkdownPipelineBuilder();
-                if(options.DisableHtml)
-                {
-                    builder.DisableHtml();
-                }
                 options.Configure?.Invoke(builder);
                 return builder.Build();
             });
