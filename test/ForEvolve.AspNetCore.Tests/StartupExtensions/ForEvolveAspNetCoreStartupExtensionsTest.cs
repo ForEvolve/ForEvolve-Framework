@@ -16,7 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public class ForEvolveAspNetCoreStartupExtensionsTest
     {
-        public class AddForEvolveAspNetCore : BaseStartupExtensionsTest
+        public class AddForEvolveAspNetCore
         {
             public readonly IEnumerable<Type> ExpectedSingletonServices;
             public readonly IEnumerable<Type> ExpectedScopedServices;
@@ -44,16 +44,17 @@ namespace Microsoft.Extensions.DependencyInjection
             public void Should_register_default_services_implementations()
             {
                 // Arrange
-                IConfiguration nullConfigurationMock = null;
+                var services = new ServiceCollection();
+                services
+                    .AddSingletonMock<IHostingEnvironment>()
 
-                // Act & Assert
-                AssertThatAllServicesAreRegistered(
-                    services => services
-                        .AddSingletonMock<IHostingEnvironment>()
-                        .AddForEvolveAspNetCore(nullConfigurationMock),
-                    expectedSingletonServices: ExpectedSingletonServices,
-                    expectedScopedServices: ExpectedScopedServices
-                );
+                    // Act
+                    .AddForEvolveAspNetCore(default(IConfiguration))
+
+                    // Assert
+                    .AssertScopedServices(ExpectedScopedServices)
+                    .AssertSingletonServices(ExpectedSingletonServices)
+                    ;
             }
         }
     }

@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public class OperationResultsStartupExtensionsTest
     {
-        public class AddForEvolveOperationResults : BaseStartupExtensionsTest
+        public class AddForEvolveOperationResults
         {
             public static readonly IEnumerable<Type> ExpectedSingletonServices = ErrorFactoryStartupExtensionsTest.AddForEvolveErrorFactory
                 .ExpectedSingletonServices.Concat(new Type[]
@@ -21,13 +21,16 @@ namespace Microsoft.Extensions.DependencyInjection
             [Fact]
             public void Should_register_default_services_implementations()
             {
-                // Arange, Act & Assert
-                AssertThatAllServicesAreRegistered(
-                    services => services
-                        .AddSingletonMock<IHostingEnvironment>()
-                        .AddForEvolveOperationResults(),
-                    expectedSingletonServices: ExpectedSingletonServices
-                );
+                // Arrange
+                var services = new ServiceCollection();
+                services
+                    .AddSingletonMock<IHostingEnvironment>()
+
+                    // Act
+                    .AddForEvolveOperationResults()
+
+                    // Assert
+                    .AssertSingletonServices(ExpectedSingletonServices);
             }
         }
     }
