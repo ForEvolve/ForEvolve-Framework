@@ -1,7 +1,7 @@
 # ForEvolve .Net Core Framework
 This project contains some utilities that I was tired of copying from project to project or that I decided to add to facilitate my life (like Azure table repository, this is a great time saver and Dynamic InternalServerError, that handle Exceptions in web APIs for me).
 
-- `master` build: ![MyGet master build](https://www.myget.org/BuildSource/Badge/forevolve?identifier=fbfabe8c-a7d7-4e60-9fbb-8d7627bc53d0)
+- `master` build: ![VSTS master build](https://forevolve.visualstudio.com/_apis/public/build/definitions/fdc5922a-3dc1-4827-97a6-0f622b2fd497/26/badge)
 - `dev` build: ![VSTS dev build](https://forevolve.visualstudio.com/_apis/public/build/definitions/fdc5922a-3dc1-4827-97a6-0f622b2fd497/25/badge)
 
 ## Work in progress
