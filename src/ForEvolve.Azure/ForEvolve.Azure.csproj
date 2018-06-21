@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Some .NET Core Azure utilities</Description>
+    <Description>Microsoft Azure utilities, including table storage and blob object repositories, easy file upload to block blob and easy access to KeyVault.</Description>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;net461;net46</PackageTargetFallback>
   </PropertyGroup>
   <ItemGroup>

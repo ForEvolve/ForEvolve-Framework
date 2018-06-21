@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>ASP.NET Core WebAPI dynamic internal server error filter.</Description>
+    <Description>Add swagger support to ForEvolve.DynamicInternalServerError.</Description>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />

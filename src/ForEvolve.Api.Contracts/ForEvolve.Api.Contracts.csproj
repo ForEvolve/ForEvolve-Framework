@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Shared Web API contracts (models).</Description>
+    <Description>Shared contracts (models).</Description>
   </PropertyGroup>
 
 </Project>

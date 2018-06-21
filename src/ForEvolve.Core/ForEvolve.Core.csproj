@@ -2,6 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Some .NET Core base classes</Description>
+    <Description>ForEvolve Framework core classes.</Description>
   </PropertyGroup>
 </Project>

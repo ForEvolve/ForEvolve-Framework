@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Many ASP.NET Core utilities.</Description>
+    <Description>Multiple ASP.NET Core utilities, including email, configuration, access to HTTP headers, etc.</Description>
   </PropertyGroup>
   
   <ItemGroup>

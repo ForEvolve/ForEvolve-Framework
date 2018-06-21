@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>This package contains XUnit test helpers.</Description>
+    <Description>Unit test, integration test and functional test helpers. Includes mocked HttpContext, ActionContext, UserManager and SignInManager. Also includes startup extensions to assert that services has been registered and some extension methods to modify security policies (like bypass a policy).</Description>
   </PropertyGroup>
 
   <ItemGroup>
