@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Xunit;
 using Microsoft.WindowsAzure.Storage.Table;
+using ForEvolve.XUnit;
 
 namespace ForEvolve.Azure.Storage.Table
 {
+    [Trait(DependencyTrait.Name, DependencyTrait.Values.AzureStorageTable)]
     public class TableStorageReaderTest : BaseHttpTest
     {
         private ITableStorageReader SubjectUnderTest => Server.Host.Services.GetService<ITableStorageReader>();
@@ -67,6 +69,7 @@ namespace ForEvolve.Azure.Storage.Table
             });
         }
 
+        [Trait(DependencyTrait.Name, DependencyTrait.Values.AzureStorageTable)]
         public class ReadAsync : TableStorageReaderTest
         {
             [Fact]
@@ -87,6 +90,7 @@ namespace ForEvolve.Azure.Storage.Table
             }
         }
 
+        [Trait(DependencyTrait.Name, DependencyTrait.Values.AzureStorageTable)]
         public class ReadAsync_with_ITableStorageSettings : TableStorageReaderTest
         {
             [Fact]
