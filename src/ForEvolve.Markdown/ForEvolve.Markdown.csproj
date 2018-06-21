@@ -1,20 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.1;netstandard2.0</TargetFrameworks>
-    <Authors>Carl-Hugo Marcotte</Authors>
-    <Company>ForEvolve</Company>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Allows consumers to easily convert strings to Markdown using the `IMarkdownConverter` interface. Contains a markdown wrapper around `lunet-io/markdig`.</Description>
-    <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve-Framework</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/ForEvolve/ForEvolve-Framework/blob/master/LICENSE</PackageLicenseUrl>
-    <RepositoryUrl></RepositoryUrl>
     <PackageTags>asp.net core,markdown,markdig</PackageTags>
-    <Copyright>Carl-Hugo Marcotte</Copyright>
-
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <IncludeSymbols>True</IncludeSymbols>
-    <IncludeSource>True</IncludeSource>
   </PropertyGroup>
   
   <ItemGroup>

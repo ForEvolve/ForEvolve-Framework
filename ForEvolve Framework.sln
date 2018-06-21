@@ -30,13 +30,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.DynamicInternalSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.DynamicInternalServerError.Swagger", "src\ForEvolve.DynamicInternalServerError.Swagger\ForEvolve.DynamicInternalServerError.Swagger.csproj", "{45B448B4-F28B-4BD1-A2E3-49E7EA4992CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.DynamicInternalServerError.Tests", "test\ForEvolve.DynamicInternalServerError\ForEvolve.DynamicInternalServerError.Tests.csproj", "{FDE000E6-DF60-45EE-8134-AFAA346A1243}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.DynamicInternalServerError.Tests", "test\ForEvolve.DynamicInternalServerError.Tests\ForEvolve.DynamicInternalServerError.Tests.csproj", "{FDE000E6-DF60-45EE-8134-AFAA346A1243}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.DynamicInternalServerError.TWebServer", "test\ForEvolve.DynamicInternalServerError.TWebServer\ForEvolve.DynamicInternalServerError.TWebServer.csproj", "{A1F374CB-133A-4F94-AC8F-A90C9A503344}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.DynamicInternalServerError.Swagger.TWebServer", "test\ForEvolve.DynamicInternalServerError.Swagger.TWebServer\ForEvolve.DynamicInternalServerError.Swagger.TWebServer.csproj", "{E7C36B89-A861-49A3-95AA-7A1958641C17}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.DynamicInternalServerError.Swagger.Tests", "test\ForEvolve.DynamicInternalServerError.Swagger\ForEvolve.DynamicInternalServerError.Swagger.Tests.csproj", "{888A548E-CA7B-47DC-B6F0-96F3950FBBC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.DynamicInternalServerError.Swagger.Tests", "test\ForEvolve.DynamicInternalServerError.Swagger.Tests\ForEvolve.DynamicInternalServerError.Swagger.Tests.csproj", "{888A548E-CA7B-47DC-B6F0-96F3950FBBC9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.DynamicInternalServerError.FunctionalTests", "test\ForEvolve.DynamicInternalServerError.FunctionalTests\ForEvolve.DynamicInternalServerError.FunctionalTests.csproj", "{7C6F8C38-464E-421E-A2E9-817EF2AF56E9}"
 EndProject
