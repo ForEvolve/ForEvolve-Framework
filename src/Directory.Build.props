@@ -3,7 +3,7 @@
   <Import Project="..\Directory.Build.props" />
   <PropertyGroup>
     <IsPackable>True</IsPackable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <Authors>Carl-Hugo Marcotte</Authors>
     <Company>ForEvolve</Company>
     <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve-Framework</PackageProjectUrl>

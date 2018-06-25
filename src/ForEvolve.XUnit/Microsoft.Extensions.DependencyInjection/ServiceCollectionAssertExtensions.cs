@@ -24,8 +24,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var hasNoService = !hasSingletonServices && !hasScopedServices && !hasTransientServices;
             if (hasNoService)
             {
-                Assert.Empty(services);
-                return services;
+                throw new EmptyException(services);
             }
 
             // Validate services by scope
@@ -139,7 +138,10 @@ namespace Microsoft.Extensions.DependencyInjection
             var result = services
                 .Where(x => x.Lifetime == lifetime && x.ServiceType == typeof(TService))
                 .Any();
-            Assert.True(result);
+            if (!result)
+            {
+                throw new TrueException($"No service of type {typeof(TService)} was found with a lifetime of {lifetime}.", result);
+            }
             return services;
         }
 
@@ -153,7 +155,10 @@ namespace Microsoft.Extensions.DependencyInjection
                     x.ImplementationType == typeof(TImplementation)
                 )
                 .Any();
-            Assert.True(result);
+            if (!result)
+            {
+                throw new TrueException($"No implementation of type {typeof(TImplementation)} was found for service type {typeof(TService)} with a lifetime of {lifetime}.", result);
+            }
             return services;
         }
     }

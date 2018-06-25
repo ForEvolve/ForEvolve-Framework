@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using Xunit.Sdk;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -18,7 +19,14 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceProvider AssertServiceImplementationExists<TInterface, TImplementation>(this IServiceProvider serviceProvider)
         {
             var service = serviceProvider.GetRequiredService<TInterface>();
-            Assert.IsType<TImplementation>(service);
+            try
+            {
+                Assert.IsType<TImplementation>(service);
+            }
+            catch (IsTypeException)
+            {
+                throw new IsTypeException(typeof(TImplementation).Name, service.GetType().Name);
+            }
             return serviceProvider;
         }
 
@@ -26,7 +34,10 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var services = serviceProvider.GetServices<TInterface>();
             var exists = services.Any(x => x.GetType() == typeof(TImplementation));
-            Assert.True(exists);
+            if (!exists)
+            {
+                throw new TrueException($"No implementation of type {typeof(TImplementation)} was found for service type {typeof(TInterface)}.", exists);
+            }
             return serviceProvider;
         }
     }
