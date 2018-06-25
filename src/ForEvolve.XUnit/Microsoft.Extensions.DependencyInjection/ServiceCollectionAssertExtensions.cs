@@ -148,6 +148,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AssertServiceImplementationExistsInScope<TService, TImplementation>(
             this IServiceCollection services, ServiceLifetime lifetime)
         {
+            // Try to find AddX<TService, TImplementation>()
             var result = services
                 .Where(
                     x => x.Lifetime == lifetime &&
@@ -155,6 +156,28 @@ namespace Microsoft.Extensions.DependencyInjection
                     x.ImplementationType == typeof(TImplementation)
                 )
                 .Any();
+            if (!result)
+            {
+                // Try to find AddX<TService>(s => Some factory/provider)
+                var factoryResult = services
+                    .Where(
+                        x => x.Lifetime == lifetime &&
+                        x.ServiceType == typeof(TService) &&
+                        x.ImplementationFactory != null
+                    )
+                    .Any();
+                if (factoryResult)
+                {
+                    // When an ImplementationFactory exists, get the 
+                    // service implementation and make sure it is of 
+                    // the expected type.
+                    var service = services.BuildServiceProvider().GetService<TService>();
+                    if (service.GetType() == typeof(TImplementation))
+                    {
+                        result = true;
+                    }
+                }
+            }
             if (!result)
             {
                 throw new TrueException($"No implementation of type {typeof(TImplementation)} was found for service type {typeof(TService)} with a lifetime of {lifetime}.", result);
