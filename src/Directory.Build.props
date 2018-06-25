@@ -2,6 +2,7 @@
   <!-- <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" /> -->
   <Import Project="..\Directory.Build.props" />
   <PropertyGroup>
+    <IsPackable>True</IsPackable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Authors>Carl-Hugo Marcotte</Authors>
     <Company>ForEvolve</Company>
