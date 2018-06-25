@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     .AddForEvolveOperationResults()
 
                     // Assert
-                    .AssertSingletonServices(ExpectedSingletonServices);
+                    .AssertSingletonServicesExist(ExpectedSingletonServices);
             }
         }
     }

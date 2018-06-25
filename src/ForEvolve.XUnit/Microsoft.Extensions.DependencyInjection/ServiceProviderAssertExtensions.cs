@@ -9,23 +9,24 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceProviderAssertExtensions
     {
-        public static IServiceProvider AssertService<TInterface>(this IServiceProvider serviceProvider)
+        public static IServiceProvider AssertServiceExists<TInterface>(this IServiceProvider serviceProvider)
         {
             var service = serviceProvider.GetRequiredService<TInterface>();
             return serviceProvider;
         }
 
-        public static IServiceProvider AssertService<TInterface, TImplementation>(this IServiceProvider serviceProvider)
+        public static IServiceProvider AssertServiceImplementationExists<TInterface, TImplementation>(this IServiceProvider serviceProvider)
         {
             var service = serviceProvider.GetRequiredService<TInterface>();
             Assert.IsType<TImplementation>(service);
             return serviceProvider;
         }
 
-        public static IServiceProvider AssertServices<TInterface, TImplementation>(this IServiceProvider serviceProvider)
+        public static IServiceProvider AssertServicesImplementationExists<TInterface, TImplementation>(this IServiceProvider serviceProvider)
         {
             var services = serviceProvider.GetServices<TInterface>();
-            services.First(x => x.GetType() == typeof(TImplementation));
+            var exists = services.Any(x => x.GetType() == typeof(TImplementation));
+            Assert.True(exists);
             return serviceProvider;
         }
     }

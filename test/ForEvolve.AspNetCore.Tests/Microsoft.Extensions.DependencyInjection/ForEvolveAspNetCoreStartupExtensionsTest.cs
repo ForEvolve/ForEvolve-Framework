@@ -52,8 +52,8 @@ namespace Microsoft.Extensions.DependencyInjection
                     .AddForEvolveAspNetCore(default(IConfiguration))
 
                     // Assert
-                    .AssertScopedServices(ExpectedScopedServices)
-                    .AssertSingletonServices(ExpectedSingletonServices)
+                    .AssertScopedServicesExist(ExpectedScopedServices)
+                    .AssertSingletonServicesExist(ExpectedSingletonServices)
                     ;
             }
         }

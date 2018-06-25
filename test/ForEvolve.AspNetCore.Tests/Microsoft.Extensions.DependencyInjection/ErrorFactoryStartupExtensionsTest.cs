@@ -41,7 +41,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     .AddForEvolveErrorFactory()
                     
                     // Assert
-                    .AssertSingletonServices(ExpectedSingletonServices);
+                    .AssertSingletonServicesExist(ExpectedSingletonServices);
             }
         }
     }
