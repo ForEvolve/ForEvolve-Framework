@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace ForEvolve.Pdf.PhantomJs.Tests
+namespace ForEvolve.Pdf.Tests
 {
     public class UnitTest1
     {
