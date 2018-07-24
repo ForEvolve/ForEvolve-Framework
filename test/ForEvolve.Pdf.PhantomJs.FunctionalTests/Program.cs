@@ -1,6 +1,7 @@
 ﻿using ForEvolve.Pdf.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace ForEvolve.Pdf.PhantomJs.FunctionalTests
@@ -23,10 +24,31 @@ namespace ForEvolve.Pdf.PhantomJs.FunctionalTests
 
         public static void Main(string[] args)
         {
-            BasicHtmlTest();
-            WithInlineStyles();
-            WithRelativeStyleSheet();
+            RunTestCases();
             Console.ReadLine();
+        }
+
+        public static IEnumerable<TestCaseResult> RunTestCases()
+        {
+            yield return Run(() => BasicHtmlTest());
+            yield return Run(() => WithInlineStyles());
+            yield return Run(() => WithRelativeStyleSheet());
+        }
+
+        private static TestCaseResult Run(Func<string> testCase)
+        {
+            var result = new TestCaseResult();
+            try
+            {
+                result.GeneratedFilePath = testCase();
+                result.Suceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Suceeded = false;
+                result.Error = ex.Message;
+            }
+            return result;
         }
 
         private static IHtmlToPdfConverter CreateHtmlToPdfConverter()
@@ -37,7 +59,7 @@ namespace ForEvolve.Pdf.PhantomJs.FunctionalTests
             return serviceProvider.GetService<IHtmlToPdfConverter>();
         }
 
-        private static void WithRelativeStyleSheet()
+        private static string WithRelativeStyleSheet()
         {
             var htmlToConvert =
 @"
@@ -57,10 +79,10 @@ namespace ForEvolve.Pdf.PhantomJs.FunctionalTests
 </body>
 </html>
 ";
-            ConvertHtml(htmlToConvert);
+            return ConvertHtml(htmlToConvert);
         }
 
-        private static void WithInlineStyles()
+        private static string WithInlineStyles()
         {
             var htmlToConvert =
 @"
@@ -88,10 +110,10 @@ namespace ForEvolve.Pdf.PhantomJs.FunctionalTests
 </body>
 </html>
 ";
-            ConvertHtml(htmlToConvert);
+            return ConvertHtml(htmlToConvert);
         }
 
-        private static void BasicHtmlTest()
+        private static string BasicHtmlTest()
         {
             var htmlToConvert =
 @"
@@ -107,13 +129,21 @@ namespace ForEvolve.Pdf.PhantomJs.FunctionalTests
 </html>
 ";
             // Generate pdf from html and place in the current folder.
-            ConvertHtml(htmlToConvert);
+            return ConvertHtml(htmlToConvert);
         }
 
-        private static void ConvertHtml(string htmlToConvert)
+        private static string ConvertHtml(string htmlToConvert)
         {
             var pathOftheGeneratedPdf = HtmlToPdfConverter.Convert(htmlToConvert, _targetDirectory);
             Console.WriteLine($"Pdf generated at: {pathOftheGeneratedPdf}");
+            return pathOftheGeneratedPdf;
         }
+    }
+
+    public class TestCaseResult
+    {
+        public bool Suceeded { get; set; }
+        public string GeneratedFilePath { get; set; }
+        public string Error { get; set; }
     }
 }
