@@ -11,19 +11,19 @@ namespace ForEvolve.Pdf.PhantomJs
     {
         public string Serialize(HtmlToPdfConverterOptions options)
         {
-            var properties = new Dictionary<string, object>();
-            var paperSize = new { paperSize = properties };
-            options.PaperSize.SerializeTo(properties);
-            properties.Add("orientation", options.Orientation.ToString().ToLowerInvariant());
-            properties.Add("margin", new
+            var settings = new Dictionary<string, object>
             {
-                top = options.Margins.Top.ToString(),
-                right = options.Margins.Right.ToString(),
-                bottom = options.Margins.Bottom.ToString(),
-                left = options.Margins.Left.ToString()
-            });
+                { "paperSize", options.PaperSize.SerializeTo(new Dictionary<string, object>()) },
+                { "viewportSize", options.ViewportSize.SerializeTo(new Dictionary<string, object>()) },
+                { "zoomFactor", options.ZoomFactor }
+            };
 
-            return JsonConvert.SerializeObject(paperSize);
+            if(!options.ClipRectangle.Equals(ClipRectangle.Null))
+            {
+                settings.Add("clipRect", options.ClipRectangle.SerializeTo(new Dictionary<string, object>()));
+            }
+
+            return JsonConvert.SerializeObject(settings);
         }
     }
 }

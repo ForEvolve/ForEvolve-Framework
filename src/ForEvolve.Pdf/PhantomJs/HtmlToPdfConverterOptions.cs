@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -46,14 +45,20 @@ namespace ForEvolve.Pdf.PhantomJs
         public PaperSize PaperSize { get; set; } = PaperSizeFormat.Letter;
 
         /// <summary>
-        /// Gets or sets the page orientation.
+        /// Gets or sets the viewport size.
         /// </summary>
-        public Orientation Orientation { get; set; } = Orientation.Portrait;
+        public ViewportSize ViewportSize { get; set; } = ViewportSize.Default;
 
         /// <summary>
-        /// Gets or sets the page margins.
+        /// Gets or sets the zoom factor.
+        /// The default is 1, i.e. 100% zoom.
         /// </summary>
-        public Margins Margins { get; set; } = Margins.Normal;
+        public float ZoomFactor { get; set; } = 1;
+
+        /// <summary>
+        /// Gets or sets the clip rectangle
+        /// </summary>
+        public ClipRectangle ClipRectangle { get; set; } = ClipRectangle.Null;
 
         private static string GetDefaultPhantomRootDirectory()
         {

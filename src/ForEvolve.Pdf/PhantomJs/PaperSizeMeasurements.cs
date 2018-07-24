@@ -29,7 +29,7 @@ namespace ForEvolve.Pdf.PhantomJs
         /// </summary>
         public Size Height { get; }
 
-        public override void SerializeTo(IDictionary<string, object> properties)
+        protected override void ChildSerializeTo(IDictionary<string, object> properties)
         {
             properties.Add("width", Width.ToString());
             properties.Add("height", Height.ToString());

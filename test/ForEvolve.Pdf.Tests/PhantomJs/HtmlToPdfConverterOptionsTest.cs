@@ -77,9 +77,11 @@ namespace ForEvolve.Pdf.PhantomJs
         {
             var paperSizeFormat = Assert.IsType<PaperSizeFormat>(sut.PaperSize);
             Assert.Equal(PaperSizeFormat.Letter.Format, paperSizeFormat.Format);
-
-            Assert.Equal(Orientation.Portrait, sut.Orientation);
-            Assert.Equal(Margins.Normal, sut.Margins);
+            Assert.Equal(Orientation.Portrait, sut.PaperSize.Orientation);
+            Assert.Equal(Margins.Normal, sut.PaperSize.Margins);
+            Assert.Equal(ViewportSize.Default, sut.ViewportSize);
+            Assert.Equal(1, sut.ZoomFactor);
+            Assert.Equal(ClipRectangle.Null, sut.ClipRectangle);
         }
     }
 }
