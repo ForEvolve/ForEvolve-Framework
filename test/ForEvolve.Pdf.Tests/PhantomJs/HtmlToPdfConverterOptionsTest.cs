@@ -69,7 +69,7 @@ namespace ForEvolve.Pdf.PhantomJs
 
                 // Act & Assert
                 var ex = Assert.Throws<ArgumentException>("phantomRootDirectory", () => new HtmlToPdfConverterOptions(phantomRootDirectory));
-                Assert.Equal(PhantomJsConstants.DirectoryDoesNotExist, ex.Message);
+                Assert.StartsWith(PhantomJsConstants.DirectoryDoesNotExist, ex.Message);
             }
         }
 

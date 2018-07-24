@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ForEvolve.Pdf.PhantomJs
 {
@@ -27,5 +28,11 @@ namespace ForEvolve.Pdf.PhantomJs
         /// Gets or sets the height of the page.
         /// </summary>
         public Size Height { get; }
+
+        public override void SerializeTo(IDictionary<string, object> properties)
+        {
+            properties.Add("width", Width.ToString());
+            properties.Add("height", Height.ToString());
+        }
     }
 }

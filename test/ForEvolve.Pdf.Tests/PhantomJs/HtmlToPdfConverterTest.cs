@@ -76,7 +76,6 @@ namespace ForEvolve.Pdf.PhantomJs
                     nullHtmlToPdfConverterOptionsSerializer
                 ));
             }
-
         }
 
         public class Convert : HtmlToPdfConverterTest

@@ -1,4 +1,6 @@
-﻿namespace ForEvolve.Pdf.PhantomJs
+﻿using System.Collections.Generic;
+
+namespace ForEvolve.Pdf.PhantomJs
 {
     /// <summary>
     /// Represent default paper size format.
@@ -21,5 +23,10 @@
         /// Gets or sets the page size format.
         /// </summary>
         public string Format { get; }
+
+        public override void SerializeTo(IDictionary<string, object> properties)
+        {
+            properties.Add("format", Format);
+        }
     }
 }
