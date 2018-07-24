@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -41,17 +42,17 @@ namespace ForEvolve.Pdf.PhantomJs
         /// Gets or sets the paper size. 
         /// You can use PaperSizeFormat or define custom size like 10cm*20cm.
         /// </summary>
-        public PaperSize PaperSize { get; set; } = PaperSizeFormat.Letter;
+        public PaperSize PaperSize { get; [ExcludeFromCodeCoverage]set; } = PaperSizeFormat.Letter;
 
         /// <summary>
         /// Gets or sets the page orientation.
         /// </summary>
-        public Orientation Orientation { get; set; } = Orientation.Portrait;
+        public Orientation Orientation { get; [ExcludeFromCodeCoverage]set; } = Orientation.Portrait;
 
         /// <summary>
         /// Gets or sets the page margins.
         /// </summary>
-        public Margins Margins { get; set; } = Margins.Normal;
+        public Margins Margins { get; [ExcludeFromCodeCoverage]set; } = Margins.Normal;
 
         private static string GetDefaultPhantomRootFolder()
         {

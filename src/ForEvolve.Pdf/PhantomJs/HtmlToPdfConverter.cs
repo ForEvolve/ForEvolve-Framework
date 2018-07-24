@@ -10,8 +10,12 @@ namespace ForEvolve.Pdf.PhantomJs
     public class HtmlToPdfConverter : IHtmlToPdfConverter
     {
         //private readonly OS _platform;
-        //private readonly HtmlToPdfConverterOptions _options;
+        private readonly HtmlToPdfConverterOptions _options;
 
+        public HtmlToPdfConverter(HtmlToPdfConverterOptions options)
+        {
+            _options = options ?? throw new ArgumentNullException(nameof(options));
+        }
 
         public string Convert(string html, string outputFolder)
         {
