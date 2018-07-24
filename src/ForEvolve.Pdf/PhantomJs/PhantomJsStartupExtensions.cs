@@ -1,6 +1,7 @@
 ﻿using ForEvolve.Pdf.Abstractions;
 using ForEvolve.Pdf.PhantomJs;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,9 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var options = new HtmlToPdfConverterOptions();
             optionsAction?.Invoke(options);
-            services.AddSingleton(options);
-            services.AddSingleton<IHtmlToPdfConverter, HtmlToPdfConverter>();
+            services.TryAddSingleton(options);
+            services.TryAddSingleton<IHtmlToPdfConverter, HtmlToPdfConverter>();
+            services.TryAddSingleton<IOperatingSystemFinder, OperatingSystemFinder>();
             return services;
         }
     }

@@ -1,4 +1,5 @@
 ﻿using ForEvolve.Pdf.Abstractions;
+using ForEvolve.Pdf.PhantomJs;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,19 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Assert
             services.AssertSingletonServiceImplementationExists<IHtmlToPdfConverter, HtmlToPdfConverter>();
+        }
+
+        [Fact]
+        public void Should_bind_OperatingSystemFinder_to_IOperatingSystemFinder()
+        {
+            // Arrange
+            var services = new ServiceCollection();
+
+            // Act
+            services.AddPhantomJsHtmlToPdfConverter();
+
+            // Assert
+            services.AssertSingletonServiceImplementationExists<IOperatingSystemFinder, OperatingSystemFinder>();
         }
 
         [Fact]

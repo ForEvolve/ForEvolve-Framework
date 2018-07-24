@@ -53,6 +53,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.Pdf", "src\ForEvo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.Pdf.Tests", "test\ForEvolve.Pdf.Tests\ForEvolve.Pdf.Tests.csproj", "{FAA82F34-6F6B-4A0E-BC72-E3311307E3C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArgsLoggerConsole", "test\ArgsLoggerConsole\ArgsLoggerConsole.csproj", "{E5529812-0C30-45AF-AFCE-BA4DD0F39245}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -339,6 +341,18 @@ Global
 		{FAA82F34-6F6B-4A0E-BC72-E3311307E3C1}.Release|x64.Build.0 = Release|Any CPU
 		{FAA82F34-6F6B-4A0E-BC72-E3311307E3C1}.Release|x86.ActiveCfg = Release|Any CPU
 		{FAA82F34-6F6B-4A0E-BC72-E3311307E3C1}.Release|x86.Build.0 = Release|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Debug|x64.Build.0 = Debug|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Debug|x86.Build.0 = Debug|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Release|x64.ActiveCfg = Release|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Release|x64.Build.0 = Release|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Release|x86.ActiveCfg = Release|Any CPU
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -367,6 +381,7 @@ Global
 		{E9BD08E0-893B-4321-8A11-BDF47403858D} = {058CB79A-1B3F-4FF1-A281-0B4E6DF6DB92}
 		{0E29C193-1568-4FC5-81AA-32F1924CF902} = {058CB79A-1B3F-4FF1-A281-0B4E6DF6DB92}
 		{FAA82F34-6F6B-4A0E-BC72-E3311307E3C1} = {64EABBA2-1A28-494B-8D8E-A0F84D7322E4}
+		{E5529812-0C30-45AF-AFCE-BA4DD0F39245} = {64EABBA2-1A28-494B-8D8E-A0F84D7322E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {806775E5-2CAA-4D17-A625-09AB1E764769}
