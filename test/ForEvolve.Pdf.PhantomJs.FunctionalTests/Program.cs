@@ -30,9 +30,12 @@ namespace ForEvolve.Pdf.PhantomJs.FunctionalTests
 
         public static IEnumerable<TestCaseResult> RunTestCases()
         {
-            yield return Run(() => BasicHtmlTest());
-            yield return Run(() => WithInlineStyles());
-            yield return Run(() => WithRelativeStyleSheet());
+            return new List<TestCaseResult>
+            {
+                Run(() => BasicHtmlTest()),
+                Run(() => WithInlineStyles()),
+                Run(() => WithRelativeStyleSheet())
+            };
         }
 
         private static TestCaseResult Run(Func<string> testCase)
