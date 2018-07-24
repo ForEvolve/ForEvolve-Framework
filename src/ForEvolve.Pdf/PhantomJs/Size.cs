@@ -1,9 +1,11 @@
-﻿namespace ForEvolve.Pdf.PhantomJs
+﻿using System;
+
+namespace ForEvolve.Pdf.PhantomJs
 {
     /// <summary>
     /// Represent a size.
     /// </summary>
-    public sealed class Size
+    public sealed class Size : IEquatable<Size>
     {
         /// <summary>
         /// Initializes a new instance of the ForEvolve.Pdf.PhantomJs.Size class.
@@ -34,6 +36,19 @@
         /// Default: <c>Unit.Inch</c>. 
         /// </summary>
         public Unit Unit { get; set; } = Unit.Inch;
+
+        public bool Equals(Size other)
+        {
+            if (Value != other.Value)
+            {
+                return false;
+            }
+            if (Unit != other.Unit)
+            {
+                return false;
+            }
+            return true;
+        }
 
         public override string ToString()
         {

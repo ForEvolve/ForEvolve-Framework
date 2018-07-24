@@ -5,7 +5,7 @@ namespace ForEvolve.Pdf.PhantomJs
     /// <summary>
     /// Represent page margins.
     /// </summary>
-    public sealed class Margins
+    public sealed class Margins : IEquatable<Margins>
     {
         /// <summary>
         /// Initializes a new instance of the ForEvolve.Pdf.PhantomJs.Margins class.
@@ -107,5 +107,26 @@ namespace ForEvolve.Pdf.PhantomJs
         /// </summary>
         public static Margins Wide => 
             new Margins(new Size(1F, Unit.Inch), new Size(2F, Unit.Inch));
+
+        public bool Equals(Margins other)
+        {
+            if (!Top.Equals(other.Top))
+            {
+                return false;
+            }
+            if (!Right.Equals(other.Right))
+            {
+                return false;
+            }
+            if (!Bottom.Equals(other.Bottom))
+            {
+                return false;
+            }
+            if (!Left.Equals(other.Left))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }

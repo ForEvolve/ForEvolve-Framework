@@ -28,7 +28,7 @@ namespace ForEvolve.Pdf.PhantomJs
         public HtmlToPdfConverterOptions(string phantomRootDirectory)
         {
             if (string.IsNullOrWhiteSpace(phantomRootDirectory)) { throw new ArgumentNullException(nameof(phantomRootDirectory)); }
-            if (!Directory.Exists(phantomRootDirectory)) { throw new ArgumentException($"Invalid Path: No such folder exists: {phantomRootDirectory}"); }
+            if (!Directory.Exists(phantomRootDirectory)) { throw new ArgumentException("The specified directory does not exists.", nameof(phantomRootDirectory)); }
             PhantomRootDirectory = phantomRootDirectory;
         }
 
