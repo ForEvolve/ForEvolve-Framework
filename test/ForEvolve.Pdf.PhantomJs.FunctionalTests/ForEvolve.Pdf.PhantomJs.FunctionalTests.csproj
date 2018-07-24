@@ -11,7 +11,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ForEvolve.Pdf\ForEvolve.Pdf.csproj" />
+    <ProjectReference Include="..\..\src\ForEvolve.Pdf.PhantomJs.Dependencies\ForEvolve.Pdf.PhantomJs.Dependencies.csproj" />
   </ItemGroup>
   
   <ItemGroup>
