@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ForEvolve.Pdf.PhantomJs
+namespace Microsoft.Extensions.DependencyInjection
 {
     public class PhantomJsStartupExtensionsTest
     {
