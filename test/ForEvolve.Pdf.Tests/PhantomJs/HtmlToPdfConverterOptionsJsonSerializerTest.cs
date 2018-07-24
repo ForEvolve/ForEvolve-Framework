@@ -27,7 +27,7 @@ namespace ForEvolve.Pdf.PhantomJs
                 var data1 = new HtmlToPdfConverterOptions();
                 data1.PaperSize.Margins = Margins.Normal;
                 data1.PaperSize.Orientation = Orientation.Portrait;
-                Data.Add(data1, "{\"paperSize\":{\"format\":\"Letter\",\"orientation\":\"portrait\",\"margin\":{\"top\":\"1in\",\"right\":\"1in\",\"bottom\":\"1in\",\"left\":\"1in\"}},\"viewportSize\":{\"width\":600,\"height\":600},\"zoomFactor\":1.0}");
+                Data.Add(data1, "{\\\"paperSize\\\":{\\\"format\\\":\\\"Letter\\\",\\\"orientation\\\":\\\"portrait\\\",\\\"margin\\\":{\\\"top\\\":\\\"1in\\\",\\\"right\\\":\\\"1in\\\",\\\"bottom\\\":\\\"1in\\\",\\\"left\\\":\\\"1in\\\"}},\\\"viewportSize\\\":{\\\"width\\\":600,\\\"height\\\":600},\\\"zoomFactor\\\":1.0}");
 
                 var data2 = new HtmlToPdfConverterOptions
                 {
@@ -38,7 +38,7 @@ namespace ForEvolve.Pdf.PhantomJs
                 };
                 data2.PaperSize.Margins = new Margins(new Size(1, Unit.Inch), new Size(2, Unit.Inch), new Size(3, Unit.Inch), new Size(4, Unit.Inch));
                 data2.PaperSize.Orientation = Orientation.Landscape;
-                Data.Add(data2, "{\"paperSize\":{\"width\":\"10cm\",\"height\":\"11cm\",\"orientation\":\"landscape\",\"margin\":{\"top\":\"1in\",\"right\":\"2in\",\"bottom\":\"3in\",\"left\":\"4in\"}},\"viewportSize\":{\"width\":1,\"height\":2},\"zoomFactor\":2.0,\"clipRect\":{\"top\":1,\"left\":2,\"width\":3,\"height\":4}}");
+                Data.Add(data2, "{\\\"paperSize\\\":{\\\"width\\\":\\\"10cm\\\",\\\"height\\\":\\\"11cm\\\",\\\"orientation\\\":\\\"landscape\\\",\\\"margin\\\":{\\\"top\\\":\\\"1in\\\",\\\"right\\\":\\\"2in\\\",\\\"bottom\\\":\\\"3in\\\",\\\"left\\\":\\\"4in\\\"}},\\\"viewportSize\\\":{\\\"width\\\":1,\\\"height\\\":2},\\\"zoomFactor\\\":2.0,\\\"clipRect\\\":{\\\"top\\\":1,\\\"left\\\":2,\\\"width\\\":3,\\\"height\\\":4}}");
             }
 
             [Theory]

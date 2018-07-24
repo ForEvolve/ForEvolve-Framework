@@ -23,7 +23,8 @@ namespace ForEvolve.Pdf.PhantomJs
 
         private readonly string _currentDirectory;
         private readonly string _targetDirectory;
-        private const string SerializedOptions = "{serialized!}";
+        private const string SerializedOptions = "{\\\"prop\\\":\\\"serialized!\\\"}";
+        private const string ExpectedSerializedOptions = "{\"prop\":\"serialized!\"}";
 
         public HtmlToPdfConverterTest()
         {
@@ -100,7 +101,7 @@ namespace ForEvolve.Pdf.PhantomJs
                     line => Assert.Equal("rasterize.js", line),
                     line => Assert.Equal(expectedFileName, line),
                     line => Assert.Equal(expectedOutputFilePath, line),
-                    line => Assert.Equal(SerializedOptions, line)
+                    line => Assert.Equal(ExpectedSerializedOptions, line)
                 );
             }
 

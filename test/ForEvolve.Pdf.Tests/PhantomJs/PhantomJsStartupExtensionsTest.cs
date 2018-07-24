@@ -45,6 +45,14 @@ namespace Microsoft.Extensions.DependencyInjection
                 // Assert
                 _services.AssertSingletonServiceImplementationExists<IHtmlToPdfConverterOptionsSerializer, HtmlToPdfConverterOptionsJsonSerializer>();
             }
+
+            [Fact]
+            public void ExecutableNameFinder_to_IExecutableNameFinder()
+            {
+                // Assert
+                _services.AssertSingletonServiceImplementationExists<IExecutableNameFinder, ExecutableNameFinder>();
+            }
+
         }
 
         [Fact]

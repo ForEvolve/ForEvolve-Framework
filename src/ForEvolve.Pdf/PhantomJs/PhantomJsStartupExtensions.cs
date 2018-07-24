@@ -23,6 +23,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<IHtmlToPdfConverter, HtmlToPdfConverter>();
             services.TryAddSingleton<IOperatingSystemFinder, OperatingSystemFinder>();
             services.TryAddSingleton<IHtmlToPdfConverterOptionsSerializer, HtmlToPdfConverterOptionsJsonSerializer>();
+            services.TryAddSingleton<IExecutableNameFinder, ExecutableNameFinder>();
             return services;
         }
     }

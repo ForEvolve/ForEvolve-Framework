@@ -23,7 +23,8 @@ namespace ForEvolve.Pdf.PhantomJs
                 settings.Add("clipRect", options.ClipRectangle.SerializeTo(new Dictionary<string, object>()));
             }
 
-            return JsonConvert.SerializeObject(settings);
+            var json = JsonConvert.SerializeObject(settings);
+            return json.Replace("\"", "\\\"");
         }
     }
 }
