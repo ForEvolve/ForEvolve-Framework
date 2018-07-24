@@ -68,7 +68,8 @@ namespace ForEvolve.Pdf.PhantomJs
                 var phantomRootDirectory = "z:\\some-unexisting-directory\\phantom-js\\root\\";
 
                 // Act & Assert
-                Assert.Throws<ArgumentException>("phantomRootDirectory", () => new HtmlToPdfConverterOptions(phantomRootDirectory));
+                var ex = Assert.Throws<ArgumentException>("phantomRootDirectory", () => new HtmlToPdfConverterOptions(phantomRootDirectory));
+                Assert.Equal(PhantomJsConstants.DirectoryDoesNotExist, ex.Message);
             }
         }
 

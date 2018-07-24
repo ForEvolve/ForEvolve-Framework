@@ -12,30 +12,39 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public class PhantomJsStartupExtensionsTest
     {
-        [Fact]
-        public void Should_bind_HtmlToPdfConverter_to_IHtmlToPdfConverter()
+        public class Should_bind : PhantomJsStartupExtensionsTest
         {
-            // Arrange
-            var services = new ServiceCollection();
+            private readonly ServiceCollection _services;
 
-            // Act
-            services.AddPhantomJsHtmlToPdfConverter();
+            public Should_bind()
+            {
+                // Arrange
+                _services = new ServiceCollection();
 
-            // Assert
-            services.AssertSingletonServiceImplementationExists<IHtmlToPdfConverter, HtmlToPdfConverter>();
-        }
+                // Act
+                _services.AddPhantomJsHtmlToPdfConverter();
+            }
 
-        [Fact]
-        public void Should_bind_OperatingSystemFinder_to_IOperatingSystemFinder()
-        {
-            // Arrange
-            var services = new ServiceCollection();
+            [Fact]
+            public void HtmlToPdfConverter_to_IHtmlToPdfConverter()
+            {
+                // Assert
+                _services.AssertSingletonServiceImplementationExists<IHtmlToPdfConverter, HtmlToPdfConverter>();
+            }
 
-            // Act
-            services.AddPhantomJsHtmlToPdfConverter();
+            [Fact]
+            public void OperatingSystemFinder_to_IOperatingSystemFinder()
+            {
+                // Assert
+                _services.AssertSingletonServiceImplementationExists<IOperatingSystemFinder, OperatingSystemFinder>();
+            }
 
-            // Assert
-            services.AssertSingletonServiceImplementationExists<IOperatingSystemFinder, OperatingSystemFinder>();
+            [Fact]
+            public void HtmlToPdfConverterOptionsJsonSerializer_to_IHtmlToPdfConverterOptionsSerializer()
+            {
+                // Assert
+                _services.AssertSingletonServiceImplementationExists<IHtmlToPdfConverterOptionsSerializer, HtmlToPdfConverterOptionsJsonSerializer>();
+            }
         }
 
         [Fact]

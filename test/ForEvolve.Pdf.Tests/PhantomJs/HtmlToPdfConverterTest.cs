@@ -1,6 +1,7 @@
 ﻿using ForEvolve.Pdf.Abstractions;
 using ForEvolve.Pdf.PhantomJs;
 using Moq;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,20 +19,64 @@ namespace ForEvolve.Pdf.PhantomJs
         private readonly HtmlToPdfConverter sut;
         private readonly HtmlToPdfConverterOptions _options;
         private readonly Mock<IExecutableNameFinder> _executableNameFinderMock;
+        private readonly Mock<IHtmlToPdfConverterOptionsSerializer> _optionsSerializerMock;
+
         private readonly string _currentDirectory;
         private readonly string _targetDirectory;
+        private const string SerializedOptions = "{serialized!}";
 
         public HtmlToPdfConverterTest()
         {
             _options = new HtmlToPdfConverterOptions();
+
             _executableNameFinderMock = new Mock<IExecutableNameFinder>();
             _executableNameFinderMock
                 .Setup(x => x.Find())
                 .Returns("ArgsLoggerConsole.exe");
-            sut = new HtmlToPdfConverter(_options, _executableNameFinderMock.Object);
+
+            _optionsSerializerMock = new Mock<IHtmlToPdfConverterOptionsSerializer>();
+            _optionsSerializerMock
+                .Setup(x => x.Serialize(It.IsAny<HtmlToPdfConverterOptions>()))
+                .Returns(SerializedOptions);
+
+            sut = new HtmlToPdfConverter(
+                _options, 
+                _executableNameFinderMock.Object, 
+                _optionsSerializerMock.Object
+            );
 
             _currentDirectory = Directory.GetCurrentDirectory();
             _targetDirectory = Path.Combine(_currentDirectory, "PhantomJs", "Target");
+        }
+
+        public class Ctor : HtmlToPdfConverterTest
+        {
+            [Fact]
+            public void Should_guard_against_null()
+            {
+                // Arrange
+                var nullOptions = default(HtmlToPdfConverterOptions);
+                var nullExecutableNameFinder = default(IExecutableNameFinder);
+                var nullHtmlToPdfConverterOptionsSerializer = default(IHtmlToPdfConverterOptionsSerializer);
+
+                // Act & Assert
+                Assert.Throws<ArgumentNullException>("options", () => new HtmlToPdfConverter(
+                    nullOptions,
+                    _executableNameFinderMock.Object,
+                    _optionsSerializerMock.Object
+                ));
+                Assert.Throws<ArgumentNullException>("executableNameFinder", () => new HtmlToPdfConverter(
+                    _options,
+                    nullExecutableNameFinder,
+                    _optionsSerializerMock.Object
+                ));
+                Assert.Throws<ArgumentNullException>("optionsSerializer", () => new HtmlToPdfConverter(
+                    _options,
+                    _executableNameFinderMock.Object,
+                    nullHtmlToPdfConverterOptionsSerializer
+                ));
+            }
+
         }
 
         public class Convert : HtmlToPdfConverterTest
@@ -56,16 +101,19 @@ namespace ForEvolve.Pdf.PhantomJs
                     line => Assert.Equal("rasterize.js", line),
                     line => Assert.Equal(expectedFileName, line),
                     line => Assert.Equal(expectedOutputFilePath, line),
-                    // TODO: implement options instead of only PaperSize
-                    line => Assert.Equal(_options.PaperSize.ToString(), line)
+                    line => Assert.Equal(SerializedOptions, line)
                 );
-                throw new NotImplementedException();
             }
 
             [Fact]
-            public void Should_be_tested()
+            public void Should_throw_a_ArgumentException_when_the_specified_outputDirectory_does_not_exist()
             {
-                throw new NotImplementedException();
+                // Arrange
+                var html = GenerateHtml();
+
+                // Act & Assert
+                var ex = Assert.Throws<ArgumentException>("outputDirectory", () => sut.Convert(html, "z:\\some-unexisting-directory\\"));
+                Assert.StartsWith(PhantomJsConstants.OutputDirectoryDoesNotExist, ex.Message);
             }
         }
 

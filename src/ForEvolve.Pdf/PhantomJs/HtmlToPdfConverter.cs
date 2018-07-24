@@ -13,23 +13,25 @@ namespace ForEvolve.Pdf.PhantomJs
     {
         private readonly HtmlToPdfConverterOptions _options;
         private readonly IExecutableNameFinder _executableNameFinder;
+        private readonly IHtmlToPdfConverterOptionsSerializer _optionsSerializer;
 
-        public HtmlToPdfConverter(HtmlToPdfConverterOptions options, IExecutableNameFinder executableNameFinder)
+        public HtmlToPdfConverter(HtmlToPdfConverterOptions options, IExecutableNameFinder executableNameFinder, IHtmlToPdfConverterOptionsSerializer optionsSerializer)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
             _executableNameFinder = executableNameFinder ?? throw new ArgumentNullException(nameof(executableNameFinder));
+            _optionsSerializer = optionsSerializer ?? throw new ArgumentNullException(nameof(optionsSerializer));
         }
 
-        public string Convert(string html, string outputFolder)
+        public string Convert(string html, string outputDirectory)
         {
             var htmlFileName = WriteHtmlToTempFile(html);
             try
             {
-                if (!Directory.Exists(outputFolder))
+                if (!Directory.Exists(outputDirectory))
                 {
-                    throw new ArgumentException("The output folder is not a valid directory!");
+                    throw new ArgumentException(PhantomJsConstants.OutputDirectoryDoesNotExist, nameof(outputDirectory));
                 }
-                return ExecutePhantomJs(htmlFileName, outputFolder);
+                return ExecutePhantomJs(htmlFileName, outputDirectory);
             }
             finally
             {
@@ -45,18 +47,19 @@ namespace ForEvolve.Pdf.PhantomJs
             return filename;
         }
 
-        private string ExecutePhantomJs(string inputFileName, string outputFolder)
+        private string ExecutePhantomJs(string inputFileName, string outputDirectory)
         {
             var phantomJsExeName = _executableNameFinder.Find();
-            var outputFilePath = Path.Combine(outputFolder, $"{inputFileName}.pdf");
+            var outputFilePath = Path.Combine(outputDirectory, $"{inputFileName}.pdf");
             var phantomJsAbsolutePath = Path.Combine(_options.PhantomRootDirectory, phantomJsExeName);
+            var serializedOptions = _optionsSerializer.Serialize(_options);
 
             using (var proc = new Process()
             {
                 StartInfo = new ProcessStartInfo(phantomJsAbsolutePath)
                 {
                     WorkingDirectory = _options.PhantomRootDirectory,
-                    Arguments = $"rasterize.js \"{inputFileName}\" \"{outputFilePath}\" \"{_options.PaperSize}\"",
+                    Arguments = $"rasterize.js \"{inputFileName}\" \"{outputFilePath}\" \"{serializedOptions}\"",
                     UseShellExecute = false
                 }
             })

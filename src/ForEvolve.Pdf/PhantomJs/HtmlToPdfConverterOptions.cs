@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
@@ -18,7 +19,7 @@ namespace ForEvolve.Pdf.PhantomJs
         /// Initializes a new instance of the ForEvolve.Pdf.PhantomJs.PdfGeneratorOptions class.
         /// </summary>
         public HtmlToPdfConverterOptions()
-            : this(GetDefaultPhantomRootFolder())
+            : this(GetDefaultPhantomRootDirectory())
         {
         }
 
@@ -29,13 +30,14 @@ namespace ForEvolve.Pdf.PhantomJs
         public HtmlToPdfConverterOptions(string phantomRootDirectory)
         {
             if (string.IsNullOrWhiteSpace(phantomRootDirectory)) { throw new ArgumentNullException(nameof(phantomRootDirectory)); }
-            if (!Directory.Exists(phantomRootDirectory)) { throw new ArgumentException("The specified directory does not exists.", nameof(phantomRootDirectory)); }
+            if (!Directory.Exists(phantomRootDirectory)) { throw new ArgumentException(PhantomJsConstants.DirectoryDoesNotExist, nameof(phantomRootDirectory)); }
             PhantomRootDirectory = phantomRootDirectory;
         }
 
         /// <summary>
         /// The PhantomJS root directory.
         /// </summary>
+        [JsonIgnore]
         public string PhantomRootDirectory { get; }
 
         /// <summary>
@@ -54,7 +56,7 @@ namespace ForEvolve.Pdf.PhantomJs
         /// </summary>
         public Margins Margins { get; [ExcludeFromCodeCoverage]set; } = Margins.Normal;
 
-        private static string GetDefaultPhantomRootFolder()
+        private static string GetDefaultPhantomRootDirectory()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
             return Path.Combine(currentDirectory, "PhantomJs", "Root");
