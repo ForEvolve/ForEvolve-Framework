@@ -115,6 +115,23 @@ namespace ForEvolve.Pdf.PhantomJs
                 var ex = Assert.Throws<ArgumentException>("outputDirectory", () => sut.Convert(html, "z:\\some-unexisting-directory\\"));
                 Assert.StartsWith(PhantomJsConstants.OutputDirectoryDoesNotExist, ex.Message);
             }
+
+            [Fact]
+            public void Should_throw_a_EX_when_the_executable_does_not_exist()
+            {
+                // Arrange
+                var html = GenerateHtml();
+                var expectedErrorMessage = PhantomJsConstants.PhantomJSExeNotFound;
+                _executableNameFinderMock
+                    .Setup(x => x.Find())
+                    .Returns("Unexisting.exe");
+
+                // Act & Assert
+                var ex = Assert.Throws<FileNotFoundException>(() => sut.Convert(html, _targetDirectory));
+                Assert.Equal(expectedErrorMessage, ex.Message);
+                Assert.Equal("Unexisting.exe", ex.FileName);
+            }
+
         }
 
         private string GenerateHtml()

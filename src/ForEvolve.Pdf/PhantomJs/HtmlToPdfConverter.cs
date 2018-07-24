@@ -54,6 +54,11 @@ namespace ForEvolve.Pdf.PhantomJs
             var phantomJsAbsolutePath = Path.Combine(_options.PhantomRootDirectory, phantomJsExeName);
             var serializedOptions = _optionsSerializer.Serialize(_options);
 
+            if (!File.Exists(phantomJsAbsolutePath))
+            {
+                throw new FileNotFoundException(PhantomJsConstants.PhantomJSExeNotFound, phantomJsExeName);
+            }
+
             using (var proc = new Process()
             {
                 StartInfo = new ProcessStartInfo(phantomJsAbsolutePath)
