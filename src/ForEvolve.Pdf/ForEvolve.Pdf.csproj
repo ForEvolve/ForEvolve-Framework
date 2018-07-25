@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>Allows consumers to easily convert HTML strings to PDF using the `IHtmlToPdfConverter` interface. This package contains an implementation that use `PhantomJs`.</Description>
-    <PackageTags>asp.net core,pdf,html to pdf,PhantomJs</PackageTags>
+    <Description>Allows consumers to easily convert HTML strings to PDF using the `IHtmlToPdfConverter` interface. This package contains an implementation that use `PhantomJs`; you will also need the `ForEvolve.Pdf.PhantomJs.Dependencies` package to load the PhantomJs binaries.</Description>
+    <PackageTags>forevolve,pdf,html to pdf,Phantom,PhantomJs,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

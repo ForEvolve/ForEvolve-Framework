@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Add swagger support to ForEvolve.DynamicInternalServerError.</Description>
+    <PackageTags>forevolve,swagger,error,internalservererror,exception,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="1.0.0" />

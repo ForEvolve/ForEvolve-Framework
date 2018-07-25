@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Allows consumers to easily convert strings to Markdown using the `IMarkdownConverter` interface. Contains a markdown wrapper around `lunet-io/markdig`.</Description>
-    <PackageTags>asp.net core,markdown,markdig</PackageTags>
+    <PackageTags>forevolve,markdown,markdig,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
   
   <ItemGroup>

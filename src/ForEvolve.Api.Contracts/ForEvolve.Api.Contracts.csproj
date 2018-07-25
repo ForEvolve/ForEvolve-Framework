@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Description>Shared contracts (models).</Description>
+    <PackageTags>forevolve,api,contracts,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
 
 </Project>

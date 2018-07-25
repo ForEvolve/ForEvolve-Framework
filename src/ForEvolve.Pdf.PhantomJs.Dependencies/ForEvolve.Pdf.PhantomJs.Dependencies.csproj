@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>This package contains an `PhantomJs` executable files. See `ForEvolve.Pdf` for more information.</Description>
-    <PackageTags>asp.net core,pdf,html to pdf,PhantomJs</PackageTags>
+    <Description>This package contains an `PhantomJs` executable files. The `ForEvolve.Pdf` package is also required. See `ForEvolve.Pdf` for more information.</Description>
+    <PackageTags>forevolve,pdf,html to pdf,PhantomJs,dependencies,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,10 +25,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>true</Pack>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ForEvolve.Pdf\ForEvolve.Pdf.csproj" />
   </ItemGroup>
 
 </Project>
