@@ -7,8 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ForEvolve.Pdf.Abstractions\ForEvolve.Pdf.Abstractions.csproj" />
-    <ProjectReference Include="..\..\src\ForEvolve.Pdf\ForEvolve.Pdf.csproj" />
+    <ProjectReference Include="..\..\src\ForEvolve.Pdf.PhantomJs.Dependencies\ForEvolve.Pdf.PhantomJs.Dependencies.csproj" />
     <ProjectReference Include="..\..\src\ForEvolve.XUnit\ForEvolve.XUnit.csproj" />
   </ItemGroup>
 
