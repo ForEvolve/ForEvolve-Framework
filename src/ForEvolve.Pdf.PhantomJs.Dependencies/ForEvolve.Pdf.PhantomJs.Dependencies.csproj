@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>This package contains an `PhantomJs` executable files. See `ForEvolve.Pdf` for more information.</Description>
+    <PackageTags>asp.net core,pdf,html to pdf,PhantomJs</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
