@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -11,16 +12,21 @@ namespace ForEvolve.AspNetCore.Services
     {
         private readonly DefaultEmailSenderService _senderUnderTest;
         private readonly EmailOptions _emailOptions;
+        private readonly Mock<IHtmlToPlainTextEmailBodyConverter> _htmlToPlainTextEmailBodyConverterMock;
 
         public DefaultEmailSenderServiceTest()
         {
+            _htmlToPlainTextEmailBodyConverterMock = new Mock<IHtmlToPlainTextEmailBodyConverter>();
             _emailOptions = new EmailOptions
             {
                 EmailType = EmailType.PlainText,
                 SenderEmailAddress = "some-sender@email.com"
             };
 
-            _senderUnderTest = new DefaultEmailSenderService(_emailOptions);
+            _senderUnderTest = new DefaultEmailSenderService(
+                _htmlToPlainTextEmailBodyConverterMock.Object, 
+                _emailOptions
+            );
         }
 
         // Integration tests
@@ -31,7 +37,7 @@ namespace ForEvolve.AspNetCore.Services
             {
                 // Arrange
                 var pickupDirectoryLocation = Path.Combine(
-                    Path.GetDirectoryName(Assembly.GetEntryAssembly().Location),
+                    Directory.GetCurrentDirectory(),
                     nameof(Should_write_file_when_using_SpecifiedPickupDirectory)
                 );
                 CreateAndCleanDirectory(pickupDirectoryLocation);

@@ -1,5 +1,4 @@
 ﻿using ForEvolve.AspNetCore;
-using ForEvolve.AspNetCore.Emails;
 using ForEvolve.AspNetCore.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -32,6 +31,7 @@ namespace Microsoft.Extensions.DependencyInjection
                         typeof(IHttpHeaderValueAccessor),
                         typeof(IEmailSenderService),
                         typeof(EmailOptions),
+                        typeof(IHtmlToPlainTextEmailBodyConverter),
                     })
                     .Distinct();
                 ExpectedScopedServices = new Type[]

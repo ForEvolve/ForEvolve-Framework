@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Mail;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -11,8 +9,11 @@ namespace ForEvolve.AspNetCore.Services
     public class DefaultEmailSenderService : IEmailSenderService
     {
         private readonly EmailOptions _emailOptions;
-        public DefaultEmailSenderService(EmailOptions emailOptions)
+        private readonly IHtmlToPlainTextEmailBodyConverter _htmlToPlainTextEmailBodyConverter;
+
+        public DefaultEmailSenderService(IHtmlToPlainTextEmailBodyConverter htmlToPlainTextEmailBodyConverter, EmailOptions emailOptions)
         {
+            _htmlToPlainTextEmailBodyConverter = htmlToPlainTextEmailBodyConverter ?? throw new ArgumentNullException(nameof(htmlToPlainTextEmailBodyConverter));
             _emailOptions = emailOptions ?? throw new ArgumentNullException(nameof(emailOptions));
         }
 
@@ -28,7 +29,7 @@ namespace ForEvolve.AspNetCore.Services
                     switch (_emailOptions.EmailType)
                     {
                         case EmailType.Both:
-                            var convertedBody = ConvertToPlainText(message);
+                            var convertedBody = _htmlToPlainTextEmailBodyConverter.ConvertToPlainText(message);
                             if (!string.IsNullOrWhiteSpace(convertedBody))
                             {
                                 // HTML version
@@ -60,45 +61,6 @@ namespace ForEvolve.AspNetCore.Services
                     await smtp.SendMailAsync(msg);
                 }
             }
-        }
-
-        private string ConvertToPlainText(string body)
-        {
-            var regexOptions = RegexOptions.Multiline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace | RegexOptions.CultureInvariant;
-            var regexList = new[]
-            {
-                new { Expression = @"^[\s\S\n.]*\<body([^>]*)?>", ReplaceBy = "" }, // start to <body>
-                new { Expression = @"</body>[\s\S\n.]*$[\r\n]*", ReplaceBy ="" },   // </body> to end
-                new {                                                               // Replace A[HREF]
-                    Expression = @"[<a[^>]*[\s\S]?href=""(?<href>[^""]*)""(?:[^>]*)>(?<text>([\s\S](?!<\/a>))*[\s\S]?)<\/a>",
-                    ReplaceBy = "${text} [${href}]"
-                },
-                new { Expression = "<[^>]+>", ReplaceBy = "" },                     // all tags
-                new { Expression = @"^\s*$[\r\n]*", ReplaceBy = "" }                // trim empty lines
-            };
-            var bodyText = body;
-            foreach (var regex in regexList)
-            {
-                bodyText = Regex.Replace(bodyText, regex.Expression, regex.ReplaceBy, regexOptions);
-            }
-            return TrimLines(bodyText);
-        }
-
-        private string TrimLines(string input)
-        {
-            var sb = new StringBuilder();
-            var lines = input.Split(
-                new string[] { "\r\n", "\r", "\n" },
-                StringSplitOptions.RemoveEmptyEntries
-            );
-            foreach (var line in lines)
-            {
-                if (!string.IsNullOrWhiteSpace(line))
-                {
-                    sb.AppendLine(line.Trim(' ', '\t'));
-                }
-            }
-            return sb.ToString();
         }
     }
 }

@@ -2,8 +2,8 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using ForEvolve.AspNetCore;
-using ForEvolve.AspNetCore.Emails;
 using Microsoft.Extensions.Configuration;
+using ForEvolve.AspNetCore.Services;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -50,7 +50,8 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddForEvolveEmailSender(this IServiceCollection services, EmailOptions emailOptions)
         {
             services.AddSingleton(emailOptions);
-            services.TryAddSingleton<IEmailSender, DefaultEmailSender>();
+            services.TryAddSingleton<IEmailSenderService, DefaultEmailSenderService>();
+            services.TryAddSingleton<IHtmlToPlainTextEmailBodyConverter, DefaultHtmlToPlainTextEmailBodyConverter>();
             return services;
         }
     }

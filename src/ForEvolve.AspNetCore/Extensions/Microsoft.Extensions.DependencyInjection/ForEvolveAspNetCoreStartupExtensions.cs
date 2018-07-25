@@ -7,8 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ForEvolve.AspNetCore;
 using Microsoft.AspNetCore.Http;
-using ForEvolve.AspNetCore.Emails;
 using Microsoft.Extensions.Configuration;
+using ForEvolve.AspNetCore.Services;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
