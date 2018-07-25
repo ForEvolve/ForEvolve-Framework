@@ -1,6 +1,6 @@
 ﻿namespace ForEvolve.AspNetCore.UserIdFinder
 {
-    public class HttpHeaderUserIdFinderSettings
+    public class HttpHeaderUserIdAccessorSettings
     {
         public const string DefaultHeaderName = "X-ForEvolve-UserId";
 

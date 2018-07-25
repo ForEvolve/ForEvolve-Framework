@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.AspNetCore
 {
-    public interface IHttpHeaderValueFinder
+    public interface IHttpHeaderValueAccessor
     {
         string FindHeader(string key);
     }

@@ -8,11 +8,11 @@ using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public class OperationResultsStartupExtensionsTest
+    public class ForEvolveOperationResultsStartupExtensionsTest
     {
         public class AddForEvolveOperationResults
         {
-            public static readonly IEnumerable<Type> ExpectedSingletonServices = ErrorFactoryStartupExtensionsTest.AddForEvolveErrorFactory
+            public static readonly IEnumerable<Type> ExpectedSingletonServices = ForEvolveErrorFactoryStartupExtensionsTest.AddForEvolveErrorFactory
                 .ExpectedSingletonServices.Concat(new Type[]
                 {
                     typeof(IOperationResultFactory),

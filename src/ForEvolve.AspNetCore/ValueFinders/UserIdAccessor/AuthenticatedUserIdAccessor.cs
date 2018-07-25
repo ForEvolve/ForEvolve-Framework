@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.AspNetCore.UserIdFinder
 {
-    public class AuthenticatedUserIdFinder : IUserIdAccessor
+    public class AuthenticatedUserIdAccessor : IUserIdAccessor
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly AuthenticatedUserIdFinderSettings _options;
+        private readonly AuthenticatedUserIdAccessorSettings _options;
 
-        public AuthenticatedUserIdFinder(IHttpContextAccessor httpContextAccessor, AuthenticatedUserIdFinderSettings options)
+        public AuthenticatedUserIdAccessor(IHttpContextAccessor httpContextAccessor, AuthenticatedUserIdAccessorSettings options)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _options = options ?? throw new ArgumentNullException(nameof(options));

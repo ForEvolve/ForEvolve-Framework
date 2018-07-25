@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.AspNetCore
 {
-    public class HttpHeaderValueFinder : IHttpHeaderValueFinder
+    public class HttpHeaderValueAccessor : IHttpHeaderValueAccessor
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public HttpHeaderValueFinder(IHttpContextAccessor httpContextAccessor)
+        public HttpHeaderValueAccessor(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         }
@@ -24,7 +24,7 @@ namespace ForEvolve.AspNetCore
                 .FirstOrDefault();
             if (header == null)
             {
-                throw new HttpHeaderValueFinderException(key);
+                throw new HttpHeaderValueAccessorException(key);
             }
             return header;
         }

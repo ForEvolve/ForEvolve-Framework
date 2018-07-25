@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.Configuration
 {
-    public class InMemoryConfigurationBuilderExtensionsTest
+    public class ForEvolveInMemoryConfigurationBuilderExtensionsTest
     {
         public class AddKeyValue
         {

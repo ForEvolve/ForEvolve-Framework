@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public class ErrorFactoryStartupExtensionsTest
+    public class ForEvolveErrorFactoryStartupExtensionsTest
     {
         public class AddForEvolveErrorFactory
         {

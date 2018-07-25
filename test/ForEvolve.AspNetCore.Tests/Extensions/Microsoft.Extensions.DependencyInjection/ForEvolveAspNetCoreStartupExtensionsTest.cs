@@ -23,13 +23,13 @@ namespace Microsoft.Extensions.DependencyInjection
             public AddForEvolveAspNetCore()
             {
                 ExpectedSingletonServices =
-                    ErrorFactoryStartupExtensionsTest.AddForEvolveErrorFactory.ExpectedSingletonServices
-                    .Concat(OperationResultsStartupExtensionsTest.AddForEvolveOperationResults.ExpectedSingletonServices)
+                    ForEvolveErrorFactoryStartupExtensionsTest.AddForEvolveErrorFactory.ExpectedSingletonServices
+                    .Concat(ForEvolveOperationResultsStartupExtensionsTest.AddForEvolveOperationResults.ExpectedSingletonServices)
                     .Concat(new Type[]
                     {
                         typeof(ForEvolveAspNetCoreSettings),
                         typeof(IHttpContextAccessor),
-                        typeof(IHttpHeaderValueFinder),
+                        typeof(IHttpHeaderValueAccessor),
                         typeof(IEmailSender),
                         typeof(EmailOptions),
                     })

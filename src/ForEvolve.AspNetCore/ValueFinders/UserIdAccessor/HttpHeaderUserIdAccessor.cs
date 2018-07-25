@@ -4,12 +4,12 @@ using System.Text;
 
 namespace ForEvolve.AspNetCore.UserIdFinder
 {
-    public class HttpHeaderUserIdFinder : IUserIdAccessor
+    public class HttpHeaderUserIdAccessor : IUserIdAccessor
     {
-        private readonly IHttpHeaderValueFinder _httpRequestValueFinder;
-        private readonly HttpHeaderUserIdFinderSettings _userIdFinderSettings;
+        private readonly IHttpHeaderValueAccessor _httpRequestValueFinder;
+        private readonly HttpHeaderUserIdAccessorSettings _userIdFinderSettings;
 
-        public HttpHeaderUserIdFinder(HttpHeaderUserIdFinderSettings userIdFinderSettings, IHttpHeaderValueFinder httpRequestValueFinder)
+        public HttpHeaderUserIdAccessor(HttpHeaderUserIdAccessorSettings userIdFinderSettings, IHttpHeaderValueAccessor httpRequestValueFinder)
         {
             _userIdFinderSettings = userIdFinderSettings ?? throw new ArgumentNullException(nameof(userIdFinderSettings));
             _httpRequestValueFinder = httpRequestValueFinder ?? throw new ArgumentNullException(nameof(httpRequestValueFinder));
