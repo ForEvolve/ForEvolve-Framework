@@ -32,7 +32,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 .InternalAddForEvolveAspNetCore(settings)
 
                 // Emails
-                .AddEmailSender(settings)
+                .AddForEvolveEmailSender(settings)
                 ;
         }
 
@@ -54,7 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 .InternalAddForEvolveAspNetCore(settings)
 
                 // Emails
-                .AddEmailSender(emailOptions)
+                .AddForEvolveEmailSender(emailOptions)
                 ;
         }
 
@@ -74,7 +74,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 .InternalAddForEvolveAspNetCore(settings)
 
                 // Emails
-                .AddEmailSender(settings)
+                .AddForEvolveEmailSender(settings)
                 ;
         }
 
@@ -89,10 +89,10 @@ namespace Microsoft.Extensions.DependencyInjection
                 .AddForEvolveOperationResults()
 
                 // HttpHeaderValueAccessor
-                .AddHttpHeaderValueAccessor()
+                .AddForEvolveHttpHeaderValueAccessor()
 
                 // ViewRenderer
-                .AddViewRenderer()
+                .AddForEvolveViewRenderer()
                 ;
             return services;
         }

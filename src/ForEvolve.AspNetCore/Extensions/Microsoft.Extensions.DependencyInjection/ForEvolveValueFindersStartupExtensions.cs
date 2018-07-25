@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The <c>Microsoft.Extensions.DependencyInjection.IServiceCollection</c> to add the service to.</param>
         /// <returns>A reference to this instance after the operation has completed.</returns>
-        public static IServiceCollection AddHttpHeaderValueAccessor(this IServiceCollection services)
+        public static IServiceCollection AddForEvolveHttpHeaderValueAccessor(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
             services.TryAddSingleton<IHttpHeaderValueAccessor, HttpHeaderValueAccessor>();
@@ -30,12 +30,12 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <c>Microsoft.Extensions.DependencyInjection.IServiceCollection</c> to add the service to.</param>
         /// <param name="setupAction">An action used to configure the <c>HttpHeaderUserIdAccessorSettings</c>.</param>
         /// <returns>A reference to this instance after the operation has completed.</returns>
-        public static IServiceCollection AddHttpHeaderUserIdAccessor(this IServiceCollection services, Action<HttpHeaderUserIdAccessorSettings> setupAction = null)
+        public static IServiceCollection AddForEvolveHttpHeaderUserIdAccessor(this IServiceCollection services, Action<HttpHeaderUserIdAccessorSettings> setupAction = null)
         {
             var userIdFinderSettings = new HttpHeaderUserIdAccessorSettings();
             setupAction?.Invoke(userIdFinderSettings);
 
-            services.AddHttpHeaderValueAccessor();
+            services.AddForEvolveHttpHeaderValueAccessor();
             services.TryAddSingleton<IUserIdAccessor, HttpHeaderUserIdAccessor>();
             services.TryAddSingleton(userIdFinderSettings);
             return services;
@@ -47,7 +47,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <c>Microsoft.Extensions.DependencyInjection.IServiceCollection</c> to add the service to.</param>
         /// <param name="setupAction">An action used to configure the <c>AuthenticatedUserIdAccessorSettings</c>.</param>
         /// <returns>A reference to this instance after the operation has completed.</returns>
-        public static IServiceCollection AddAuthenticatedUserIdAccessor(this IServiceCollection services, Action<AuthenticatedUserIdAccessorSettings> setupAction = null)
+        public static IServiceCollection AddForEvolveAuthenticatedUserIdAccessor(this IServiceCollection services, Action<AuthenticatedUserIdAccessorSettings> setupAction = null)
         {
             var userIdFinderSettings = new AuthenticatedUserIdAccessorSettings();
             setupAction?.Invoke(userIdFinderSettings);

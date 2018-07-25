@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="services">The <c>Microsoft.Extensions.DependencyInjection.IServiceCollection</c> to add the service to.</param>
         /// <returns>A reference to this instance after the operation has completed.</returns>
-        public static IServiceCollection AddViewRenderer(this IServiceCollection services)
+        public static IServiceCollection AddForEvolveViewRenderer(this IServiceCollection services)
         {
             services.TryAddScoped<IViewRenderer, ViewRenderer>();
             return services;

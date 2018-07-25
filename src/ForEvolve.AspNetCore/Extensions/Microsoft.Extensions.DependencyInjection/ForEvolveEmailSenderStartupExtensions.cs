@@ -16,11 +16,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <c>Microsoft.Extensions.DependencyInjection.IServiceCollection</c> to add the service to.</param>
         /// <param name="emailOptionsAction">The action used to configure the <c>EmailOptions</c>.</param>
         /// <returns>A reference to this instance after the operation has completed.</returns>
-        public static IServiceCollection AddEmailSender(this IServiceCollection services, Action<EmailOptions> emailOptionsAction = null)
+        public static IServiceCollection AddForEvolveEmailSender(this IServiceCollection services, Action<EmailOptions> emailOptionsAction = null)
         {
             var emailOptions = new EmailOptions();
             emailOptionsAction?.Invoke(emailOptions);
-            return services.AddEmailSender(emailOptions);
+            return services.AddForEvolveEmailSender(emailOptions);
         }
 
         /// <summary>
@@ -34,11 +34,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// Make sure the Configuration and EmailOptionsConfigurationKey property are set.
         /// </param>
         /// <returns>A reference to this instance after the operation has completed.</returns>
-        public static IServiceCollection AddEmailSender(this IServiceCollection services, ForEvolveAspNetCoreSettings settings)
+        public static IServiceCollection AddForEvolveEmailSender(this IServiceCollection services, ForEvolveAspNetCoreSettings settings)
         {
             var emailOptions = new EmailOptions();
             settings.Configuration?.Bind(settings.EmailOptionsConfigurationKey, emailOptions);
-            return services.AddEmailSender(emailOptions);
+            return services.AddForEvolveEmailSender(emailOptions);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <c>Microsoft.Extensions.DependencyInjection.IServiceCollection</c> to add the service to.</param>
         /// <param name="emailOptions">The <c>EmailOptions</c> to be used.</param>
         /// <returns>A reference to this instance after the operation has completed.</returns>
-        public static IServiceCollection AddEmailSender(this IServiceCollection services, EmailOptions emailOptions)
+        public static IServiceCollection AddForEvolveEmailSender(this IServiceCollection services, EmailOptions emailOptions)
         {
             services.AddSingleton(emailOptions);
             services.TryAddSingleton<IEmailSender, DefaultEmailSender>();
