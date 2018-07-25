@@ -3,19 +3,19 @@ using System;
 
 namespace ForEvolve.AspNetCore.UserIdFinder
 {
-    public class UserIdFinderTraceDecorator : IUserIdFinder
+    public class UserIdAccessorTraceDecorator : IUserIdAccessor
     {
         private readonly ILogger _logger;
-        private readonly IUserIdFinder _decorated;
-        public UserIdFinderTraceDecorator(IUserIdFinder decorated, ILogger<UserIdFinderTraceDecorator> logger)
+        private readonly IUserIdAccessor _decorated;
+        public UserIdAccessorTraceDecorator(IUserIdAccessor decorated, ILogger<UserIdAccessorTraceDecorator> logger)
         {
             _decorated = decorated ?? throw new ArgumentNullException(nameof(decorated));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public string GetUserId()
+        public string FindUserId()
         {
-            var userId = _decorated.GetUserId();
+            var userId = _decorated.FindUserId();
             _logger.LogTrace($"UserId: {userId}");
             return userId;
         }

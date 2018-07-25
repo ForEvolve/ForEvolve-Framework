@@ -52,7 +52,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             // Others
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.TryAddSingleton<IHttpRequestValueFinder, HttpRequestValueFinder>();
+            services.TryAddSingleton<IHttpHeaderValueFinder, HttpHeaderValueFinder>();
 
             // Emails
             services.TryAddScoped<IViewRenderer, ViewRenderer>();

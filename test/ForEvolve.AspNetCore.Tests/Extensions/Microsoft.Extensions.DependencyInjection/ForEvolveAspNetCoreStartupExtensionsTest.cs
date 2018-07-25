@@ -29,7 +29,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     {
                         typeof(ForEvolveAspNetCoreSettings),
                         typeof(IHttpContextAccessor),
-                        typeof(IHttpRequestValueFinder),
+                        typeof(IHttpHeaderValueFinder),
                         typeof(IEmailSender),
                         typeof(EmailOptions),
                     })

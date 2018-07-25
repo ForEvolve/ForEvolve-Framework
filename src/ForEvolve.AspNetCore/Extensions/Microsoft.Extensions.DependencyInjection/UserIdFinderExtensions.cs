@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var userIdFinderSettings = new HttpHeaderUserIdFinderSettings();
             setupAction?.Invoke(userIdFinderSettings);
 
-            services.TryAddSingleton<IUserIdFinder, HttpHeaderUserIdFinder>();
+            services.TryAddSingleton<IUserIdAccessor, HttpHeaderUserIdFinder>();
             services.TryAddSingleton(userIdFinderSettings);
             return services;
         }
@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var userIdFinderSettings = new AuthenticatedUserIdFinderSettings();
             setupAction?.Invoke(userIdFinderSettings);
 
-            services.TryAddSingleton<IUserIdFinder, AuthenticatedUserIdFinder>();
+            services.TryAddSingleton<IUserIdAccessor, AuthenticatedUserIdFinder>();
             services.TryAddSingleton(userIdFinderSettings);
             return services;
         }
@@ -66,17 +66,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<HttpHeaderUserIdFinderSettings>();
             services.TryAddSingleton(userIdAccessor);
             return services;
-        }
-    }
-}
-namespace Microsoft.AspNetCore.Builder
-{
-    public static class UserIdFinderExtensions
-    {
-        public static IApplicationBuilder UseUserIdSetter(this IApplicationBuilder app)
-        {
-            app.UseMiddleware<SetUserIdHeaderMiddleware>();
-            return app;
         }
     }
 }

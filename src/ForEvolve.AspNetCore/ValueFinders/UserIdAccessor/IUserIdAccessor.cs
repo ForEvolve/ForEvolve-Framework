@@ -1,8 +1,8 @@
 ﻿namespace ForEvolve.AspNetCore
 {
-    public interface IUserIdFinder
+    public interface IUserIdAccessor
     {
-        string GetUserId();
+        string FindUserId();
         bool HasUserId();
     }
 }

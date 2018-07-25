@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForEvolve.AspNetCore
+namespace ForEvolve.AspNetCore.Middleware
 {
     public abstract class BaseMiddleware
     {
@@ -15,7 +15,7 @@ namespace ForEvolve.AspNetCore
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             await InternalInvokeAsync(context);
             await _next(context);

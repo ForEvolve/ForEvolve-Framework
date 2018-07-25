@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.AspNetCore
 {
-    public interface IHttpRequestValueFinder
+    public interface IHttpHeaderValueFinder
     {
-        string Find(string key);
+        string FindHeader(string key);
     }
 }

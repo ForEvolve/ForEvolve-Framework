@@ -6,32 +6,27 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.AspNetCore
 {
-    public class HttpRequestValueFinder : IHttpRequestValueFinder
+    public class HttpHeaderValueFinder : IHttpHeaderValueFinder
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public HttpRequestValueFinder(IHttpContextAccessor httpContextAccessor)
+        public HttpHeaderValueFinder(IHttpContextAccessor httpContextAccessor)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         }
 
-        public string Find(string key)
+        public string FindHeader(string key)
         {
-            var header = FindHeader(key);
-            if (header == null)
-            {
-                throw new HttpRequestValueFinderException(key);
-            }
-            return header;
-        }
-
-        private string FindHeader(string key)
-        {
-            return _httpContextAccessor
+            var header = _httpContextAccessor
                 .HttpContext
                 .Request
                 .Headers[key]
                 .FirstOrDefault();
+            if (header == null)
+            {
+                throw new HttpHeaderValueFinderException(key);
+            }
+            return header;
         }
     }
 }

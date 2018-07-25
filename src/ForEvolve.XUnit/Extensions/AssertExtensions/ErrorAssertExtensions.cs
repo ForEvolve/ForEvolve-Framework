@@ -4,7 +4,7 @@ using Xunit;
 
 namespace ForEvolve.Api.Contracts.Errors
 {
-    public static class AssertErrorExtensions
+    public static class ErrorAssertExtensions
     {
         public static JsonSerializerSettings JsonSerializerSettings => new JsonSerializerSettings
         {

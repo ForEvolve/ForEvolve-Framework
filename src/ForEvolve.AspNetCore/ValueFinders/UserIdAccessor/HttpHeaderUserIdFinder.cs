@@ -4,25 +4,25 @@ using System.Text;
 
 namespace ForEvolve.AspNetCore.UserIdFinder
 {
-    public class HttpHeaderUserIdFinder : IUserIdFinder
+    public class HttpHeaderUserIdFinder : IUserIdAccessor
     {
-        private readonly IHttpRequestValueFinder _httpRequestValueFinder;
+        private readonly IHttpHeaderValueFinder _httpRequestValueFinder;
         private readonly HttpHeaderUserIdFinderSettings _userIdFinderSettings;
 
-        public HttpHeaderUserIdFinder(HttpHeaderUserIdFinderSettings userIdFinderSettings, IHttpRequestValueFinder httpRequestValueFinder)
+        public HttpHeaderUserIdFinder(HttpHeaderUserIdFinderSettings userIdFinderSettings, IHttpHeaderValueFinder httpRequestValueFinder)
         {
             _userIdFinderSettings = userIdFinderSettings ?? throw new ArgumentNullException(nameof(userIdFinderSettings));
             _httpRequestValueFinder = httpRequestValueFinder ?? throw new ArgumentNullException(nameof(httpRequestValueFinder));
         }
         
-        public string GetUserId()
+        public string FindUserId()
         {
-            return _httpRequestValueFinder.Find(_userIdFinderSettings.HeaderName);
+            return _httpRequestValueFinder.FindHeader(_userIdFinderSettings.HeaderName);
         }
 
         public bool HasUserId()
         {
-            var id = GetUserId();
+            var id = FindUserId();
             return !string.IsNullOrWhiteSpace(id);
         }
     }

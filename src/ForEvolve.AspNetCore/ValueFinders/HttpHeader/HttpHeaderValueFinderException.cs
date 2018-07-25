@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.AspNetCore
 {
-    public class HttpRequestValueFinderException : ArgumentException
+    public class HttpHeaderValueFinderException : ArgumentException
     {
-        public HttpRequestValueFinderException(string key)
+        public HttpHeaderValueFinderException(string key)
             : base($"No value was found in the current HttpRequest for the specified key: {key}.", nameof(key))
         {
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.AspNetCore.UserIdFinder
 {
-    public class AuthenticatedUserIdFinder : IUserIdFinder
+    public class AuthenticatedUserIdFinder : IUserIdAccessor
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly AuthenticatedUserIdFinderSettings _options;
@@ -18,7 +18,7 @@ namespace ForEvolve.AspNetCore.UserIdFinder
             _options = options ?? throw new ArgumentNullException(nameof(options));
         }
 
-        public string GetUserId()
+        public string FindUserId()
         {
             var user = _httpContextAccessor.HttpContext.User;
             var userID = user.FindFirst(_options.UserIdClaimType);
