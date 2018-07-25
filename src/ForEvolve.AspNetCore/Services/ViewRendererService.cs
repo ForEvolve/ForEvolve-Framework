@@ -21,13 +21,13 @@ using System.Linq;
 
 namespace ForEvolve.AspNetCore.Services
 {
-    public class ViewRenderer : IViewRenderer
+    public class ViewRendererService : IViewRendererService
     {
         private readonly IRazorViewEngine _razorViewEngine;
         private readonly ITempDataProvider _tempDataProvider;
         private readonly IServiceProvider _serviceProvider;
 
-        public ViewRenderer(IRazorViewEngine razorViewEngine, ITempDataProvider tempDataProvider, IServiceProvider serviceProvider)
+        public ViewRendererService(IRazorViewEngine razorViewEngine, ITempDataProvider tempDataProvider, IServiceProvider serviceProvider)
         {
             _razorViewEngine = razorViewEngine ?? throw new ArgumentNullException(nameof(razorViewEngine));
             _tempDataProvider = tempDataProvider ?? throw new ArgumentNullException(nameof(tempDataProvider));

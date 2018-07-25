@@ -36,7 +36,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     .Distinct();
                 ExpectedScopedServices = new Type[]
                 {
-                    typeof(IViewRenderer),
+                    typeof(IViewRendererService),
                 };
             }
 

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.AspNetCore.Services
 {
-    public interface IViewRenderer
+    public interface IViewRendererService
     {
         Task<string> RenderAsync(string viewName, object viewModel);
         Task<string> RenderAsync(string controllerName, string viewName, object viewModel);
