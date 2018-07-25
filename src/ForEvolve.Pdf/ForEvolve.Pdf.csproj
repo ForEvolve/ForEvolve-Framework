@@ -7,13 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="PhantomJs\Root\rasterize.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="PhantomJs\Root\rasterize.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
   </ItemGroup>
   

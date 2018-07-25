@@ -7,23 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="PhantomJs\Root\linux64_phantomjs.exe" />
-    <None Remove="PhantomJs\Root\osx_phantomjs.exe" />
-    <None Remove="PhantomJs\Root\windows_phantomjs.exe" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="PhantomJs\Root\linux64_phantomjs.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="PhantomJs\Root\osx_phantomjs.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
     <Content Include="PhantomJs\Root\windows_phantomjs.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
     </Content>
   </ItemGroup>
 
