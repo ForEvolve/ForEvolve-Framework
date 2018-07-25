@@ -6,12 +6,12 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace ForEvolve.AspNetCore.Emails
+namespace ForEvolve.AspNetCore.Services
 {
-    public class DefaultEmailSender : IEmailSender
+    public class DefaultEmailSenderService : IEmailSenderService
     {
         private readonly EmailOptions _emailOptions;
-        public DefaultEmailSender(EmailOptions emailOptions)
+        public DefaultEmailSenderService(EmailOptions emailOptions)
         {
             _emailOptions = emailOptions ?? throw new ArgumentNullException(nameof(emailOptions));
         }
@@ -100,11 +100,5 @@ namespace ForEvolve.AspNetCore.Emails
             }
             return sb.ToString();
         }
-
-    }
-
-    public interface IEmailSender
-    {
-        Task SendEmailAsync(string email, string subject, string message);
     }
 }

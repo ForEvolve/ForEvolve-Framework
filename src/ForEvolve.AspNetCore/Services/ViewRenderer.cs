@@ -4,6 +4,8 @@
 // I may update this code at some point, until then, thanks to the author(s).
 // Link: https://ppolyzos.com/2016/09/09/asp-net-core-render-view-to-string/
 //
+// I made some changes.
+//
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;

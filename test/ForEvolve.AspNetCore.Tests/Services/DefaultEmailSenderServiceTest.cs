@@ -5,14 +5,14 @@ using System.Reflection;
 using System.Text;
 using Xunit;
 
-namespace ForEvolve.AspNetCore.Emails
+namespace ForEvolve.AspNetCore.Services
 {
-    public class DefaultEmailSenderTest
+    public class DefaultEmailSenderServiceTest
     {
-        private readonly DefaultEmailSender _senderUnderTest;
+        private readonly DefaultEmailSenderService _senderUnderTest;
         private readonly EmailOptions _emailOptions;
 
-        public DefaultEmailSenderTest()
+        public DefaultEmailSenderServiceTest()
         {
             _emailOptions = new EmailOptions
             {
@@ -20,11 +20,11 @@ namespace ForEvolve.AspNetCore.Emails
                 SenderEmailAddress = "some-sender@email.com"
             };
 
-            _senderUnderTest = new DefaultEmailSender(_emailOptions);
+            _senderUnderTest = new DefaultEmailSenderService(_emailOptions);
         }
 
         // Integration tests
-        public class SendEmailAsync : DefaultEmailSenderTest
+        public class SendEmailAsync : DefaultEmailSenderServiceTest
         {
             [Fact]
             public async System.Threading.Tasks.Task Should_write_file_when_using_SpecifiedPickupDirectory()

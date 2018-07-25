@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
                         typeof(ForEvolveAspNetCoreSettings),
                         typeof(IHttpContextAccessor),
                         typeof(IHttpHeaderValueAccessor),
-                        typeof(IEmailSender),
+                        typeof(IEmailSenderService),
                         typeof(EmailOptions),
                     })
                     .Distinct();
