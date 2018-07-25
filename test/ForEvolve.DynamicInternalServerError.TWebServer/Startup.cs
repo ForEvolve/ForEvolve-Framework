@@ -20,12 +20,12 @@ namespace ForEvolve.DynamicInternalServerError.TWebServer
         public void ConfigureServices(IServiceCollection services)
         {
             // Add DynamicInternalServerError
-            services.AddDynamicInternalServerError();
+            services.AddForEvolveDynamicInternalServerError();
 
             // Add framework services.
             services.AddMvc(options =>
             {
-                options.ConfigureDynamicInternalServerError();
+                options.ConfigureForEvolveDynamicInternalServerError();
             });
         }
 

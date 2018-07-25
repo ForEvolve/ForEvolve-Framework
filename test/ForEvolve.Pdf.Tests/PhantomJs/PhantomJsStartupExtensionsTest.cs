@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 _services = new ServiceCollection();
 
                 // Act
-                _services.AddPhantomJsHtmlToPdfConverter();
+                _services.AddForEvolvePhantomJsHtmlToPdfConverter();
             }
 
             [Fact]
@@ -63,7 +63,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var executedAction = false;
 
             // Act
-            services.AddPhantomJsHtmlToPdfConverter((options) => executedAction = true);
+            services.AddForEvolvePhantomJsHtmlToPdfConverter((options) => executedAction = true);
 
             // Assert
             Assert.True(executedAction, "optionsAction should be invoked by AddPhantomJsHtmlToPdfConverter()");

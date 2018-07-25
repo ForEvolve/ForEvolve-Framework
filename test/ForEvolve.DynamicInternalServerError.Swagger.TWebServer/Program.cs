@@ -22,13 +22,13 @@ namespace ForEvolve.DynamicInternalServerError.Swagger.TWebServer
                 .ConfigureServices(services =>
                 {
                     // Add DynamicInternalServerError & Swagger
-                    services.AddDynamicInternalServerError();
-                    services.AddDynamicInternalServerErrorSwagger();
+                    services.AddForEvolveDynamicInternalServerError();
+                    services.AddForEvolveDynamicInternalServerErrorSwagger();
 
                     // Add Mvc and configure DynamicInternalServerError.
                     services.AddMvc(options =>
                     {
-                        options.ConfigureDynamicInternalServerError();
+                        options.ConfigureForEvolveDynamicInternalServerError();
                     });
 
                     // Add and configure Swagger.
@@ -37,7 +37,7 @@ namespace ForEvolve.DynamicInternalServerError.Swagger.TWebServer
                         c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
 
                         // Add and configure DynamicInternalServerError.
-                        c.AddDynamicInternalServerError();
+                        c.AddForEvolveDynamicInternalServerError();
                     });
                 })
                 .Configure(app =>

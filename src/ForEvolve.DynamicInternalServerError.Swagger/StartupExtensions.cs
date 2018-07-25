@@ -8,16 +8,16 @@ using System.Text;
 
 namespace System
 {
-    public static class DynamicInternalServerErrorSwaggerStartupExtensions
+    public static class ForEvolveDynamicInternalServerErrorSwaggerStartupExtensions
     {
-        public static IServiceCollection AddDynamicInternalServerErrorSwagger(this IServiceCollection services)
+        public static IServiceCollection AddForEvolveDynamicInternalServerErrorSwagger(this IServiceCollection services)
         {
             services.TryAddSingleton<DynamicInternalServerErrorOperationFilter>();
             services.TryAddSingleton<DynamicValidationActionOperationFilter>();
             return services;
         }
 
-        public static SwaggerGenOptions AddDynamicInternalServerError(this SwaggerGenOptions options)
+        public static SwaggerGenOptions AddForEvolveDynamicInternalServerError(this SwaggerGenOptions options)
         {
             options.OperationFilter<DynamicInternalServerErrorOperationFilter>();
             options.OperationFilter<DynamicValidationActionOperationFilter>();

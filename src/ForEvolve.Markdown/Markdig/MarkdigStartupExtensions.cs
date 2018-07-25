@@ -11,7 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class MarkdigStartupExtensions
     {
-        public static IServiceCollection AddMarkdig(
+        public static IServiceCollection AddForEvolveMarkdig(
             this IServiceCollection services,
             Action<MarkdigOptions> optionsAction = null
             )

@@ -12,7 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class PhantomJsStartupExtensions
     {
-        public static IServiceCollection AddPhantomJsHtmlToPdfConverter(
+        public static IServiceCollection AddForEvolvePhantomJsHtmlToPdfConverter(
             this IServiceCollection services,
             Action<HtmlToPdfConverterOptions> optionsAction = null
             )

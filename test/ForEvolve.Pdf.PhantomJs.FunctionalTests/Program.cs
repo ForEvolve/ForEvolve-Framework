@@ -57,7 +57,7 @@ namespace ForEvolve.Pdf.PhantomJs.FunctionalTests
         private static IHtmlToPdfConverter CreateHtmlToPdfConverter()
         {
             var services = new ServiceCollection();
-            services.AddPhantomJsHtmlToPdfConverter();
+            services.AddForEvolvePhantomJsHtmlToPdfConverter();
             var serviceProvider = services.BuildServiceProvider();
             return serviceProvider.GetService<IHtmlToPdfConverter>();
         }
