@@ -6,6 +6,19 @@ namespace ForEvolve.Markdown
 {
     public class MarkdigMarkdownConverterTest
     {
+        public class Ctor : MarkdigMarkdownConverterTest
+        {
+            [Fact]
+            public void Should_guard_against_null()
+            {
+                // Arrange
+                var nullMarkdownPipeline = default(MarkdownPipeline);
+
+                // Act & Assert
+                Assert.Throws<ArgumentNullException>("pipeline", () => new MarkdigMarkdownConverter(nullMarkdownPipeline));
+            }
+        }
+
         public class ConvertToHtml : MarkdigMarkdownConverterTest
         {
             [Theory]
