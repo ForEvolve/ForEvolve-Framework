@@ -27,7 +27,7 @@ namespace ForEvolve.Azure.Storage.Table
             {
                 TableName = "TableStorageReaderTest"
             });
-            services.AddTableStorage();
+            services.AddForEvolveTableStorage();
         }
 
         protected override IWebHostBuilder ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder)

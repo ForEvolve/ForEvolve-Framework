@@ -25,7 +25,7 @@ namespace ForEvolve.Azure.Storage.Table
             {
                 TableName = "TableStorageRepositoryFactoryTest"
             });
-            services.AddTableStorage();
+            services.AddForEvolveTableStorage();
         }
         protected override IWebHostBuilder ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder)
         {

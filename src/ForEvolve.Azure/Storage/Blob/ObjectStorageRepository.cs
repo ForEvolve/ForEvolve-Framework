@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForEvolve.Azure.Storage.Object
+namespace ForEvolve.Azure.Storage.Blob
 {
     public class ObjectStorageRepository<TModel> : StorageRepository<IObjectStorageSettings>, IObjectStorageRepository<TModel>
     {

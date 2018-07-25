@@ -7,7 +7,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForEvolve.Azure.Storage.Object
+namespace ForEvolve.Azure.Storage.Blob
 {
     public class BlockBlobFileRepository : StorageRepository<IObjectStorageSettings>, IFileRepository
     {
