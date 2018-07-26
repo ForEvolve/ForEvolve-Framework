@@ -8,10 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
+    <PackageReference Include="ForEvolve.PhantomJs.Dependencies" Version=" 1.0.0-upsilon-436" />
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ForEvolve.Pdf.PhantomJs.Dependencies\ForEvolve.Pdf.PhantomJs.Dependencies.csproj" />
     <ProjectReference Include="..\..\src\ForEvolve.Pdf\ForEvolve.Pdf.csproj" />
   </ItemGroup>
   
