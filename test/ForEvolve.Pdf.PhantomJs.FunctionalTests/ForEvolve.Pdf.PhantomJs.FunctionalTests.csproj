@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
-    <PackageReference Include="ForEvolve.PhantomJs.Dependencies" Version=" 1.0.0-upsilon-436" />
+    <PackageReference Include="ForEvolve.PhantomJs.Dependencies" Version="[1.0.0-upsilon-436,2.0)" />
   </ItemGroup>
   
   <ItemGroup>
