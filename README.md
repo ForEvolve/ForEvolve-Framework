@@ -1,8 +1,15 @@
-# ForEvolve .Net Core Framework
+# ForEvolve Framework (or toolbox)
 
-This project contains some utilities that I was tired of copying from project to project or that I decided to add to facilitate my life (like Azure table repository, this is a great time saver and Dynamic InternalServerError, that handle Exceptions in web APIs for me).
+This project started as my personal toolbox, where I added utility classes that I was tired of copying from project to project, that I needed to facilitate my life or for any other reason toward reusability.
 
--   `master` build: ![VSTS master build](https://forevolve.visualstudio.com/_apis/public/build/definitions/fdc5922a-3dc1-4827-97a6-0f622b2fd497/26/badge)
+Then I cleaned this up a little to make it decent for a release version where other people would be able to depend on it; and here we are: `v1.0.0`.
+Each project is loadable on its own, or you can load bundles using meta-packages.
+
+Examples of features are Azure table repository, Azure blob repositories (JSON object and files), automatic conversion of `Exception` to JSON, markdown to HTML, HTML to pdf, generic operation results, test utilities, and more.
+
+Feel free to use the NuGet packages, fork it, contribute to it and post issues. These are ever-evolving projects!
+
+![VSTS master build](https://forevolve.visualstudio.com/_apis/public/build/definitions/fdc5922a-3dc1-4827-97a6-0f622b2fd497/26/badge)
 
 ## Versioning
 
@@ -10,6 +17,8 @@ As of `v1.0.0` and onward, the project follows `semver` to manage version number
 All version numbers are linked and located in the `src/Directory.Build.props` file.
 
 ## NuGet
+
+All packages are available on [https://www.nuget.org/profiles/ForEvolve](https://www.nuget.org/profiles/ForEvolve).
 
 To load all application packages, use the `ForEvolve.App` package:
 
@@ -25,7 +34,7 @@ dotnet add package ForEvolve.App
 
 See [ForEvolve/MetaPackages](https://github.com/ForEvolve/MetaPackages) for more information.
 
-### Individual packages
+### Individual packages (App)
 
 To load individual packages, you can:
 
@@ -40,9 +49,8 @@ Install-Package ForEvolve.AspNetCore.Localization
 Install-Package ForEvolve.Markdown.Abstractions
 Install-Package ForEvolve.Markdown
 Install-Package ForEvolve.Pdf.Abstractions
-Install-Package ForEvolve.Pdf.PhantomJs.Dependencies # Not included in ForEvolve.App
 Install-Package ForEvolve.Pdf
-Install-Package ForEvolve.XUnit # Not included in ForEvolve.App
+Install-Package ForEvolve.XUnit # Not included in ForEvolve.App metapackage
 ```
 
 or
@@ -58,9 +66,8 @@ dotnet add package ForEvolve.AspNetCore.Localization
 dotnet add package ForEvolve.Markdown.Abstractions
 dotnet add package ForEvolve.Markdown
 dotnet add package ForEvolve.Pdf.Abstractions
-dotnet add package ForEvolve.Pdf.PhantomJs.Dependencies # Not included in ForEvolve.App
 dotnet add package ForEvolve.Pdf
-dotnet add package ForEvolve.XUnit # Not included in ForEvolve.App
+dotnet add package ForEvolve.XUnit # Not included in ForEvolve.App metapackage
 ```
 
 ## Prerelease MyGet
@@ -73,164 +80,93 @@ Pre-release builds number are autoincremented.
 
 ## The projects
 
+In this section are quick descriptions of assemblies and links to their README file. _This is until I find the time to build a documentation website._
+
 ### ForEvolve
 
 You can find the meta-package that references all `ForEvolve.*` projects at the following repo: [ForEvolve/MetaPackages](https://github.com/ForEvolve/MetaPackages).
 
-### ForEvolve.ApplicationInsights
-
-This project aims at adding features over ApplicationInsights.
-For now, it contains only a `TrackExceptionsFilterAttribute`.
-
 ### ForEvolve.AspNetCore
 
 This project aims at adding features over Asp.Net Core.
+Example: `myObject.ToJsonHttpContent()`, `myObject.ToJson()`, `myHttpContent.ReadAsJsonObjectAsync<MyObjectType>()`, `anyString.ToObject<MyObjectType>()`, `IViewRendererService`, `IEmailSenderService`, `IHttpHeaderValueAccessor`, `IUserIdAccessor`, some base middlewares and more.
 
-#### Json Extensions
-
-##### Convert an `object` to a Json string `HttpContent`
-
-```CSharp
-var myHttpContent = myObject.ToJsonHttpContent();
-```
-
-##### Serialize an `object` to Json
-
-```CSharp
-var myJsonString = myObject.ToJson();
-```
-
-##### Read and deserialize a Json string from an `HttpContent`
-
-```CSharp
-var myObject = myHttpContent.ReadAsJsonObjectAsync<MyObjectType>();
-```
-
-##### Deserialize a json string
-
-```CSharp
-var myObject = anyString.ToObject<MyObjectType>();
-```
-
-#### Middleware
-
--   `AddRequestIdMiddleware` is a middleware that adds an HTTP Header containing a request id. This is useful if your system must do multiple remote HTTP calls, like in a Microservices architecture or a distributed system.
--   `SetRequestIdAsTraceIdentifier` is a middleware that set the `HttpContext.TraceIdentifier` to the request id HTTP Header (set by `AddRequestIdMiddleware`). It also allows transferring the request id header to the HTTP response (for client-side tracing).
-
-#### Services
-
--   `IViewRenderer` Allow you to render a view to string.
+See [ForEvolve.AspNetCore](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.AspNetCore) for more information.
 
 ### ForEvolve.Azure
 
 This project aims at adding features over the Azure SDK like Object (Blob), Queue, Table and KeyVault repositories.
 
-_I will write more docs later for this one..._
+See [ForEvolve.Azure](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Azure) for more information.
+
+### ForEvolve.Contracts
+
+This project contains shared models.
+
+See [ForEvolve.Contracts](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Contracts) for more information.
 
 ### ForEvolve.Core
 
-This project holds shared classes. For now, it only contains `ForEvolveException`.
+This project stand as the root of all projects. For now, it only contains the `ForEvolveException` class.
 
-### Dynamic InternalServerError
+See [ForEvolve.Core](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Core) for more information.
 
-A dynamic internal server error filter for ASP.NET Core, targetting Asp.Net Core 2.0, that translate Exceptions (status code 500) to JSON automatically.
+### ForEvolve.DynamicInternalServerError
+
+A dynamic internal server error filter for ASP.NET Core, that translate Exceptions (status code 500) to JSON automatically.
 
 Validation errors are also translated automatically, following the same convention, for response with status code 400.
 
-The error model is based on: [Microsoft REST API Guidelines](https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).
+See [ForEvolve.DynamicInternalServerError](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.DynamicInternalServerError) for more information.
 
-#### How to use
+### ForEvolve.DynamicInternalServerError.Swagger
 
-In your `Startup` class, you must `AddDynamicInternalServerError()` to add dependencies and `ConfigureDynamicInternalServerError()` to add the filter to MVC.
+Add `Swagger` support to `ForEvolve.DynamicInternalServerError`.
 
-```CSharp
-public void ConfigureServices(IServiceCollection services)
-{
-    // Add DynamicInternalServerError
-    services.AddForEvolveDynamicInternalServerError();
+See [ForEvolve.DynamicInternalServerError](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.DynamicInternalServerError) for more information.
 
-    // Add framework services.
-    services.AddMvc(options =>
-    {
-        options.ConfigureDynamicInternalServerError();
-    });
-}
-```
+### ForEvolve.Markdown
 
-Thats it, now exceptions are translated to JSON.
+Allows consumers to easily convert strings to Markdown using the `IMarkdownConverter` interface.
 
-#### How to add Swagger support
+See [ForEvolve.Markdown](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Markdown) for more information.
 
-In the `ConfigureServices` method, you must add `services.AddForEvolveDynamicInternalServerErrorSwagger();`.
-In the `services.AddSwaggerGen(c => { ... })` you must register swagger operation filters by calling `c.AddForEvolveDynamicInternalServerError();`.
+### ForEvolve.Markdown.Abstractions
 
-```CSharp
-public void ConfigureServices(IServiceCollection services)
-{
-    // Add DynamicInternalServerError
-    services.AddForEvolveDynamicInternalServerError();
-    services.AddForEvolveDynamicInternalServerErrorSwagger();
+This is the abstractions library. Only use this if you want to create your own custom implementation of the `IMarkdownConverter`.
 
-    // Add framework services.
-    services.AddMvc(options =>
-    {
-        options.ConfigureForEvolveDynamicInternalServerError();
-    });
+See the [`ForEvolve.Markdown`](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Markdown) project for more info.
 
-    // Add and configure Swagger.
-    services.AddSwaggerGen(c =>
-    {
-        c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+### ForEvolve.Pdf
 
-        // Add and configure DynamicInternalServerError.
-        c.AddForEvolveDynamicInternalServerError();
-    });
-}
-```
+This library contains implementations of the `ForEvolve.Pdf.Abstractions.IHtmlToPdfConverter` interface, allowing convertion of HTML to a PDF.
 
-#### Dynamic Validation
+See the [`ForEvolve.Pdf`](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Pdf) project for more info.
 
-`DynamicValidationActionFilter` translates `BadRequestObjectResult` that has a value of type `SerializableError` to an `ErrorResponse` object, following the same convention as `DynamicValidationActionFilter` do.
+### ForEvolve.Pdf.Abstractions
 
-##### How to use
+This is the abstractions library. Only use this if you want to create your own custom implementation of the `IHtmlToPdfConverter`.
 
-By default, by registering `DynamicInternalServerError` you also register `DynamicValidation`.
-Return `BadRequest(ModelState);` in a controller action. To define `ErrorResponse` automatically in the swagger definition file, simply decorat the action with `[ProducesResponseType(400)]` (do not specify a type).
+See the [`ForEvolve.Pdf.Abstractions`](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Pdf.Abstractions) project for more info.
 
-```CSharp
-[HttpPost]
-[ProducesResponseType(400)]
-public IActionResult Post([FromBody]string value)
-{
-    if(!ModelState.IsValid)
-    {
-        return BadRequest(ModelState);
-    }
-    // ...
-}
-```
+### ForEvolve.XUnit
 
-## ForEvolve.XUnit
+This project contains some testing utilities, mocks, extension methods, etc.
 
-This project contains some XUnit test utilities like:
+This package is not part of the `ForEvolve.App` metapackage.
 
--   `IdentityHelper` that creates the plumbing to Mock `SignInManager` and `UserManager`.
--   `HttpContextHelper` that creates the plumbing to Mock `HttpContext` and `HttpRequest`.
--   `MvcContextHelper` at creates the plumbing to Mock `IUrlHelper` and `ActionContext`.
--   `BaseStartupExtensionsTest` is a base class to help test startup extensions.
+_This package is still a prerelease project where breaking changes are not reflected by a major version number bump._
+
+See the [`ForEvolve.XUnit`](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.XUnit) project for more info.
 
 ## Whats next
 
-I plan on evolving theses libraries as I use them in multiple projects.
+I plan on evolving theses libraries as I use them in my projects.
 
-Examples of what I want to add:
+## How to contribute?
 
--   Azure table repository with memory cache (to save HTTP calls)
--   Azure table repository with distributed cache (to save HTTP calls)
--   Azure table repository with both memory and distributed cache (decorators?)
--   Azure table batch operations
--   Azure cognitive services helpers
--   Easy Azure Cosmos DB support
--   ...
+If you would like to contribute to the Framework, first, thank you for your interest and please read [Contributing to ForEvolve open source projects](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/CONTRIBUTING.md) for more information.
 
-If you would like to contribute to the Framework, feel free to contact me.
+### Contributor Covenant Code of Conduct
+
+Also, please read the [Contributor Covenant Code of Conduct](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/CODE_OF_CONDUCT.md) that applies to all ForEvolve repositories.
