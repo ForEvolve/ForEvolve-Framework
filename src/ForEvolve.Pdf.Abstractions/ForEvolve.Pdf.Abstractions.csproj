@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Allows consumers to easily convert HTML strings to PDF using the `IHtmlToPdfConverter` interface.</Description>
+    <PackageTags>forevolve,pdf,html to pdf,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
+  </PropertyGroup>
+
+</Project>

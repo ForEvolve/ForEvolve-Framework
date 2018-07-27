@@ -1,4 +1,5 @@
 ﻿#if SUPPORT_AZURE_EMULATOR
+using ForEvolve.XUnit;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using Xunit;
 
 namespace ForEvolve.Azure.Storage.Table
 {
+    [Trait(DependencyTrait.Name, DependencyTrait.Values.AzureStorageTable)]
     public class TableStorageRepositoryTest
     {
         protected TableStorageRepository<SomeTestEntity> RepositoryUnderTest { get; }
@@ -210,7 +212,7 @@ namespace ForEvolve.Azure.Storage.Table
                 Assert.Equal(2, result.Count());
                 var dbResult = await RepositoryUnderTest.ReadPartitionAsync(partitionName);
                 Assert.NotNull(dbResult);
-                Assert.Equal(0, dbResult.Count());
+                Assert.Empty(dbResult);
             }
         }
 

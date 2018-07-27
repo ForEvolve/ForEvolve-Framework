@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>Allows consumers to easily convert HTML strings to PDF using the `IHtmlToPdfConverter` interface. This package contains an implementation that use `PhantomJs`; you will also need the `ForEvolve.PhantomJs.Dependencies` package to load the PhantomJs binaries.</Description>
+    <PackageTags>forevolve,pdf,html to pdf,Phantom,PhantomJs,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="PhantomJs\Root\rasterize.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Pack>true</Pack>
+      <PackageCopyToOutput>true</PackageCopyToOutput>
+    </Content>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ForEvolve.Pdf.Abstractions\ForEvolve.Pdf.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

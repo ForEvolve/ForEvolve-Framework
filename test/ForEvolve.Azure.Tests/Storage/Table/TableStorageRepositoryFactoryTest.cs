@@ -1,4 +1,5 @@
-﻿using ForEvolve.XUnit.HttpTests;
+﻿using ForEvolve.XUnit;
+using ForEvolve.XUnit.HttpTests;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,7 +25,7 @@ namespace ForEvolve.Azure.Storage.Table
             {
                 TableName = "TableStorageRepositoryFactoryTest"
             });
-            services.AddTableStorage();
+            services.AddForEvolveTableStorage();
         }
         protected override IWebHostBuilder ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder)
         {

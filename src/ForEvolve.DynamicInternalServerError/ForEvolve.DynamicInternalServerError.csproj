@@ -2,26 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Authors>Carl-Hugo Marcotte</Authors>
-    <Company>ForEvolve</Company>
-    <Description>ASP.NET Core WebAPI dynamic internal server error filter.</Description>
-    <PackageProjectUrl>https://github.com/ForEvolve/DynamicInternalServerError</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/ForEvolve/DynamicInternalServerError/blob/master/LICENSE</PackageLicenseUrl>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.0-local-00001</Version>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Copyright>Carl-Hugo Marcotte</Copyright>
-    <IncludeSymbols>True</IncludeSymbols>
-    <IncludeSource>True</IncludeSource>
+    <Description>ASP.NET Core Web API dynamic internal server error filter. ForEvolve.DynamicInternalServerError converts your Exception to normalized errors.</Description>
+    <PackageTags>forevolve,error,internalservererror,exception,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForEvolve.Api.Contracts\ForEvolve.Api.Contracts.csproj" />

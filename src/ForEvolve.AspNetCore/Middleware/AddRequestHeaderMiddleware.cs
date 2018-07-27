@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForEvolve.AspNetCore
+namespace ForEvolve.AspNetCore.Middleware
 {
     public abstract class AddRequestHeaderMiddleware : BaseMiddleware
     {
@@ -24,7 +24,7 @@ namespace ForEvolve.AspNetCore
                 var value = GenerateHeaderValue(context);
                 context.Request.Headers.Add(HeaderName, value);
             }
-            return Task.FromResult(0);
+            return Task.CompletedTask;
         }
 
         protected abstract string GenerateHeaderValue(HttpContext context);

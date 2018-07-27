@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.DependencyInjection
             var services = new ServiceCollection();
 
             // Act
-            services.AddMarkdig();
+            services.AddForEvolveMarkdig();
 
             // Assert
             AssertMarkdownConverter(services);
@@ -34,7 +34,7 @@ namespace Microsoft.Extensions.DependencyInjection
             bool called = false;
 
             // Act
-            services.AddMarkdig(options => options.Configure = builder => called = true);
+            services.AddForEvolveMarkdig(options => options.Configure = builder => called = true);
 
             // Assert
             AssertMarkdownConverter(services);

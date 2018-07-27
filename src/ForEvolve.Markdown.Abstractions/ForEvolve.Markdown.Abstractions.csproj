@@ -1,21 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>ForEvolve.Markdown</RootNamespace>
-    <Authors>Carl-Hugo Marcotte</Authors>
-    <Company>ForEvolve</Company>
-    <Description>Abstractions of a simple markdown converter: IMarkdownConverter. See ForEvolve.Markdown for implementations.</Description>
-    <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve-Framework</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/ForEvolve/ForEvolve-Framework/blob/master/LICENSE</PackageLicenseUrl>
-    <RepositoryUrl></RepositoryUrl>
-    <PackageTags>asp.net core,markdown</PackageTags>
-    <Copyright>Carl-Hugo Marcotte</Copyright>
-
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <IncludeSymbols>True</IncludeSymbols>
-    <IncludeSource>True</IncludeSource>
+    <Description>Allows consumers to easily convert strings to Markdown using the `IMarkdownConverter` interface. This package is the abstractions of a simple markdown converter: IMarkdownConverter. See ForEvolve.Markdown for implementations.</Description>
+    <PackageTags>forevolve,markdown,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
 
 </Project>

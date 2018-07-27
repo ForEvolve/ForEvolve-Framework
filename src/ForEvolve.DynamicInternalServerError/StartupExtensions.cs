@@ -12,9 +12,9 @@ using Microsoft.Extensions.Logging;
 
 namespace System
 {
-    public static class DynamicInternalServerErrorCoreStartupExtensions
+    public static class ForEvolveDynamicInternalServerErrorCoreStartupExtensions
     {
-        public static IServiceCollection AddDynamicInternalServerError(this IServiceCollection services, params IDynamicExceptionResultFilter[] filters)
+        public static IServiceCollection AddForEvolveDynamicInternalServerError(this IServiceCollection services, params IDynamicExceptionResultFilter[] filters)
         {
             // Register services with container
             services.TryAddSingleton(filters ?? Enumerable.Empty<IDynamicExceptionResultFilter>());
@@ -22,7 +22,7 @@ namespace System
             return services;
         }
 
-        public static MvcOptions ConfigureDynamicInternalServerError(this MvcOptions options)
+        public static MvcOptions ConfigureForEvolveDynamicInternalServerError(this MvcOptions options)
         {
             // Register DynamicInternalServerErrorFilterAttribute with MVC
             options.Filters.Add(typeof(DynamicInternalServerErrorFilterAttribute));

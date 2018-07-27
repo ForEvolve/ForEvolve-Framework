@@ -24,7 +24,7 @@ namespace ForEvolve.AspNetCore
                 var sut = new BaseMiddlewareFake(RequestDelegate);
 
                 // Act
-                await sut.Invoke(contextMock.Object);
+                await sut.InvokeAsync(contextMock.Object);
 
                 // Assert
                 Assert.True(_nextHasBeenCalled);

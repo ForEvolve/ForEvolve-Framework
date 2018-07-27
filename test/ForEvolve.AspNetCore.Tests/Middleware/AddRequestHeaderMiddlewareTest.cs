@@ -11,13 +11,13 @@ namespace ForEvolve.AspNetCore
 {
     public class AddRequestHeaderMiddlewareTest
     {
-        public class Invoke
+        public class InvokeAsync
         {
             private readonly Mock<HttpContext> _contextMock = new Mock<HttpContext>();
             private readonly Mock<HttpRequest> _requestMock = new Mock<HttpRequest>();
             private readonly Mock<IHeaderDictionary> _headersMock = new Mock<IHeaderDictionary>();
 
-            public Invoke()
+            public InvokeAsync()
             {
                 // Arrange
                 _contextMock
@@ -38,7 +38,7 @@ namespace ForEvolve.AspNetCore
                 var middleware = new AddRequestHeaderMiddlewareFake(null);
 
                 // Act
-                var result = middleware.Invoke(_contextMock.Object);
+                var result = middleware.InvokeAsync(_contextMock.Object);
 
                 // Assert
                 _headersMock.Verify(
@@ -58,7 +58,7 @@ namespace ForEvolve.AspNetCore
                 );
 
                 // Act
-                var result = middleware.Invoke(_contextMock.Object);
+                var result = middleware.InvokeAsync(_contextMock.Object);
 
                 // Assert
                 _headersMock.Verify(

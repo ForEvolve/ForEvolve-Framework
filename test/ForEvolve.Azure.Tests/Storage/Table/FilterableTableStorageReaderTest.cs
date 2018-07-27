@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.Storage.Table;
+﻿using ForEvolve.XUnit;
+using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using Xunit;
 
 namespace ForEvolve.Azure.Storage.Table
 {
+    [Trait(DependencyTrait.Name, DependencyTrait.Values.AzureStorageTable)]
     public class FilterableTableStorageReaderTest
     {
         private readonly DevelopmentTableStorageSettings _settings;

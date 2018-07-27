@@ -1,0 +1,10 @@
+<Project>
+
+  <PropertyGroup>
+    <Product>ForEvolve Framework</Product>
+    <RepositoryUrl>https://github.com/ForEvolve/ForEvolve-Framework</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+</Project>

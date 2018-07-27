@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <RootNamespace>ForEvolve.Pdf</RootNamespace>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="ForEvolve.PhantomJs.Dependencies" Version="[1.0.0-upsilon-436,2.0)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ForEvolve.Pdf\ForEvolve.Pdf.csproj" />
+    <ProjectReference Include="..\..\src\ForEvolve.XUnit\ForEvolve.XUnit.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="PhantomJs\Target\.gitkeep">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="PhantomJs\TestRoot\.gitkeep">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="PhantomJs\Root\" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="cd ..\ArgsLoggerConsole&#xD;&#xA;dotnet publish -c $(ConfigurationName) -r win10-x64 -o ..\ForEvolve.Pdf.Tests\$(OutDir)\PhantomJs\Root" />
+  </Target>
+
+</Project>
