@@ -11,12 +11,12 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 
 namespace ForEvolve.AspNetCore
 {
     /// <summary>
-    /// Expose a method that builds an <c>ForEvolve.Api.Contracts.Errors</c> using raw values.
+    /// Expose a method that builds an <c>ForEvolve.Contracts.Errors</c> using raw values.
     /// </summary>
     public interface IErrorFromRawValuesFactory
     {

@@ -14,7 +14,7 @@
 namespace ForEvolve.AspNetCore
 {
     /// <summary>
-    /// Aggregate and expose <c>ForEvolve.Api.Contracts.Errors</c> building methods.
+    /// Aggregate and expose <c>ForEvolve.Contracts.Errors</c> building methods.
     /// </summary>
     /// <seealso cref="ForEvolve.AspNetCore.IErrorFromExceptionFactory" />
     /// <seealso cref="ForEvolve.AspNetCore.IErrorFromDictionaryFactory" />

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 
 namespace ForEvolve.AspNetCore.ErrorFactory.Implementations
 {

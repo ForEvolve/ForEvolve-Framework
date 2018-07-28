@@ -12,7 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ForEvolve.Api.Contracts\ForEvolve.Api.Contracts.csproj" />
+    <ProjectReference Include="..\ForEvolve.Contracts\ForEvolve.Contracts.csproj" />
     <ProjectReference Include="..\ForEvolve.AspNetCore\ForEvolve.AspNetCore.csproj" />
   </ItemGroup>
 </Project>

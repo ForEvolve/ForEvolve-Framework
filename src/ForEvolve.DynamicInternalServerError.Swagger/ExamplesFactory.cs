@@ -1,4 +1,4 @@
-﻿using ForEvolve.Api.Contracts.Errors;
+﻿using ForEvolve.Contracts.Errors;
 using ForEvolve.AspNetCore.ErrorFactory.Implementations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;

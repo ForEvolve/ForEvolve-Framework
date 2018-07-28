@@ -1,8 +1,8 @@
-﻿using ForEvolve.Api.Contracts.Errors;
+﻿using ForEvolve.Contracts.Errors;
 using Newtonsoft.Json;
 using Xunit;
 
-namespace ForEvolve.Api.Contracts.Errors
+namespace ForEvolve.Contracts.Errors
 {
     public static class ErrorAssertExtensions
     {

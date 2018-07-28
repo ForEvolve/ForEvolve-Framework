@@ -1,4 +1,4 @@
-﻿using ForEvolve.Api.Contracts.Errors;
+﻿using ForEvolve.Contracts.Errors;
 using ForEvolve.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;

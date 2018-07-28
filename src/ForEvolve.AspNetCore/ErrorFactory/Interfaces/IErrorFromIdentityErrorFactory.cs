@@ -1,4 +1,4 @@
-﻿using ForEvolve.Api.Contracts.Errors;
+﻿using ForEvolve.Contracts.Errors;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Text;
 namespace ForEvolve.AspNetCore
 {
     /// <summary>
-    /// Expose a method that builds an <c>ForEvolve.Api.Contracts.Errors</c> based on an IdentityError.
+    /// Expose a method that builds an <c>ForEvolve.Contracts.Errors</c> based on an IdentityError.
     /// </summary>
     public interface IErrorFromIdentityErrorFactory
     {

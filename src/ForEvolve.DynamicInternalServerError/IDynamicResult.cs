@@ -1,4 +1,4 @@
-﻿using ForEvolve.Api.Contracts.Errors;
+﻿using ForEvolve.Contracts.Errors;
 
 namespace ForEvolve.DynamicInternalServerError
 {

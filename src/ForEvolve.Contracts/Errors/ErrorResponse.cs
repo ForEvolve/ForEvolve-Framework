@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ForEvolve.Api.Contracts.Errors
+namespace ForEvolve.Contracts.Errors
 {
     public class ErrorResponse
     {

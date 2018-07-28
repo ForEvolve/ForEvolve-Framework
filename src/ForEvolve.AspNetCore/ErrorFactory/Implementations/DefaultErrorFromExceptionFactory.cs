@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 using Microsoft.AspNetCore.Hosting;
 using System.Collections;
 

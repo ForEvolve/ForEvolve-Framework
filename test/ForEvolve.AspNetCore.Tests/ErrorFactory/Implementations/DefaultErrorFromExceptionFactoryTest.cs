@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 using System.Collections;
 using System.Reflection;
 
