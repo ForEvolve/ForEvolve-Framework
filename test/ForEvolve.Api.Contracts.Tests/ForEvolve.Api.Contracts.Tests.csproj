@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>ForEvolve.Api.Contracts</RootNamespace>
+    <RootNamespace>ForEvolve.Contracts</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ForEvolve.Api.Contracts\ForEvolve.Api.Contracts.csproj" />
+    <ProjectReference Include="..\..\src\ForEvolve.Contracts\ForEvolve.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

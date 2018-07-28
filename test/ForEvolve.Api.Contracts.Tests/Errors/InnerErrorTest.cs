@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace ForEvolve.Api.Contracts.Errors
+namespace ForEvolve.Contracts.Errors
 {
     public class InnerErrorTest
     {

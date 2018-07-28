@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 using Microsoft.AspNetCore.Identity;
 
 namespace ForEvolve.AspNetCore

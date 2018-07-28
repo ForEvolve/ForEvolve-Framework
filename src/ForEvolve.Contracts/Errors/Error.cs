@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace ForEvolve.Api.Contracts.Errors
+namespace ForEvolve.Contracts.Errors
 {
     public class Error
     {

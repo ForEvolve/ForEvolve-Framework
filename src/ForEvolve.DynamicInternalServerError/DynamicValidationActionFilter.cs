@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using System.Text;
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 using ForEvolve.AspNetCore;
 
 namespace ForEvolve.DynamicInternalServerError

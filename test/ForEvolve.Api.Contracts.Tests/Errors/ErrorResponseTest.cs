@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ForEvolve.Api.Contracts.Errors
+namespace ForEvolve.Contracts.Errors
 {
     public class ErrorResponseTest
     {

@@ -5,7 +5,7 @@ using System.Text;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 
 namespace ForEvolve.DynamicInternalServerError.Swagger
 {

@@ -12,12 +12,12 @@
 // <summary></summary>
 // ***********************************************************************
 using System.Collections.Generic;
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 
 namespace ForEvolve.AspNetCore
 {
     /// <summary>
-    /// Expose a method that builds an <c>ForEvolve.Api.Contracts.Errors</c> using <c>KeyValuePair&lt;string, object&gt;</c>.
+    /// Expose a method that builds an <c>ForEvolve.Contracts.Errors</c> using <c>KeyValuePair&lt;string, object&gt;</c>.
     /// </summary>
     public interface IErrorFromKeyValuePairFactory
     {

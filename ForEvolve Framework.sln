@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.Azure.Tests", "te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.Core.Tests", "test\ForEvolve.Core.Tests\ForEvolve.Core.Tests.csproj", "{F8B5B30F-FC6B-41FD-B40D-68715A868B95}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.Api.Contracts", "src\ForEvolve.Api.Contracts\ForEvolve.Api.Contracts.csproj", "{18416CA4-FAA6-4FB0-8F3F-3E365942D950}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.Contracts", "src\ForEvolve.Contracts\ForEvolve.Contracts.csproj", "{18416CA4-FAA6-4FB0-8F3F-3E365942D950}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.Api.Contracts.Tests", "test\ForEvolve.Api.Contracts.Tests\ForEvolve.Api.Contracts.Tests.csproj", "{FAE5864E-1899-40FC-BDB3-7E77C6CDD3D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.Contracts.Tests", "test\ForEvolve.Contracts.Tests\ForEvolve.Contracts.Tests.csproj", "{FAE5864E-1899-40FC-BDB3-7E77C6CDD3D0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.XUnit", "src\ForEvolve.XUnit\ForEvolve.XUnit.csproj", "{276264F9-6F6E-4012-8FA3-CC17ABE93565}"
 EndProject

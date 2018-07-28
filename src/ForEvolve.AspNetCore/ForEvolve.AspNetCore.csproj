@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ForEvolve.Api.Contracts\ForEvolve.Api.Contracts.csproj" />
+    <ProjectReference Include="..\ForEvolve.Contracts\ForEvolve.Contracts.csproj" />
     <ProjectReference Include="..\ForEvolve.Core\ForEvolve.Core.csproj" />
   </ItemGroup>
 </Project>

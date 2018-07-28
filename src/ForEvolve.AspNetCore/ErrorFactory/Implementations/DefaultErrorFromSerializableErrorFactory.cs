@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForEvolve.AspNetCore.ErrorFactory.Implementations

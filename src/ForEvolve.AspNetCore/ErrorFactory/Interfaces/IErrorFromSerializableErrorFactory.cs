@@ -12,7 +12,7 @@
 // <summary></summary>
 // ***********************************************************************
 using System.Collections.Generic;
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ForEvolve.AspNetCore

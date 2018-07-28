@@ -1,4 +1,4 @@
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 using Microsoft.AspNetCore.Identity;
 using Moq;
 using Newtonsoft.Json;

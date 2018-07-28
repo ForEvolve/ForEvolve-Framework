@@ -12,12 +12,12 @@
 // <summary></summary>
 // ***********************************************************************
 using System;
-using ForEvolve.Api.Contracts.Errors;
+using ForEvolve.Contracts.Errors;
 
 namespace ForEvolve.AspNetCore
 {
     /// <summary>
-    /// Expose a method that builds an <c>ForEvolve.Api.Contracts.Errors</c> using an <c>Exception</c> object.
+    /// Expose a method that builds an <c>ForEvolve.Contracts.Errors</c> using an <c>Exception</c> object.
     /// </summary>
     public interface IErrorFromExceptionFactory
     {
