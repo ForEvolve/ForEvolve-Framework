@@ -17,13 +17,52 @@ namespace ForEvolve.AspNetCore.Services
             _emailOptions = emailOptions ?? throw new ArgumentNullException(nameof(emailOptions));
         }
 
-        public async Task SendEmailAsync(string email, string subject, string message)
+        public Task SendEmailAsync(string recipientEmail, string subject, string message)
+        {
+            return SendEmailAsync(
+                new MailAddress(_emailOptions.SenderEmailAddress), 
+                new MailAddress(recipientEmail), 
+                subject, 
+                message
+            );
+        }
+
+        public Task SendEmailAsync(MailAddress recipientEmail, string subject, string message)
+        {
+            return SendEmailAsync(
+                new MailAddress(_emailOptions.SenderEmailAddress),
+                recipientEmail,
+                subject,
+                message
+            );
+        }
+
+        public Task SendEmailAsync(string senderEmail, string recipientEmail, string subject, string message)
+        {
+            return SendEmailAsync(
+                new MailAddress(senderEmail),
+                new MailAddress(recipientEmail),
+                subject,
+                message
+            );
+        }
+
+        public Task SendEmailAsync(MailAddress senderEmail, string recipientEmail, string subject, string message)
+        {
+            return SendEmailAsync(
+                senderEmail,
+                new MailAddress(recipientEmail),
+                subject,
+                message
+            );
+        }
+
+        public async Task SendEmailAsync(MailAddress senderEmail, MailAddress recipientEmail, string subject, string message)
         {
             using (SmtpClient smtp = new SmtpClient())
             {
                 _emailOptions.SetupSmtpClient(smtp);
-
-                using (MailMessage msg = new MailMessage(_emailOptions.SenderEmailAddress, email))
+                using (MailMessage msg = new MailMessage(senderEmail, recipientEmail))
                 {
                     msg.Subject = subject;
                     switch (_emailOptions.EmailType)

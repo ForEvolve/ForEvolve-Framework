@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ForEvolve.AspNetCore.Services
@@ -33,7 +34,7 @@ namespace ForEvolve.AspNetCore.Services
         public class SendEmailAsync : DefaultEmailSenderServiceTest
         {
             [Fact]
-            public async System.Threading.Tasks.Task Should_write_file_when_using_SpecifiedPickupDirectory()
+            public async Task Should_write_file_when_using_SpecifiedPickupDirectory()
             {
                 // Arrange
                 var pickupDirectoryLocation = Path.Combine(
