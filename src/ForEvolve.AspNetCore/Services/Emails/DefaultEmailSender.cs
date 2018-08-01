@@ -17,54 +17,61 @@ namespace ForEvolve.AspNetCore.Services
             _emailOptions = emailOptions ?? throw new ArgumentNullException(nameof(emailOptions));
         }
 
-        public Task SendEmailAsync(string recipientEmail, string subject, string message)
+        public Task SendEmailAsync(string recipientEmail, string subject, string message, params Attachment[] attachments)
         {
             return SendEmailAsync(
                 new MailAddress(_emailOptions.SenderEmailAddress), 
                 new MailAddress(recipientEmail), 
                 subject, 
-                message
+                message,
+                attachments
             );
         }
 
-        public Task SendEmailAsync(MailAddress recipientEmail, string subject, string message)
+        public Task SendEmailAsync(MailAddress recipientEmail, string subject, string message, params Attachment[] attachments)
         {
             return SendEmailAsync(
                 new MailAddress(_emailOptions.SenderEmailAddress),
                 recipientEmail,
                 subject,
-                message
+                message,
+                attachments
             );
         }
 
-        public Task SendEmailAsync(string senderEmail, string recipientEmail, string subject, string message)
+        public Task SendEmailAsync(string senderEmail, string recipientEmail, string subject, string message, params Attachment[] attachments)
         {
             return SendEmailAsync(
                 new MailAddress(senderEmail),
                 new MailAddress(recipientEmail),
                 subject,
-                message
+                message,
+                attachments
             );
         }
 
-        public Task SendEmailAsync(MailAddress senderEmail, string recipientEmail, string subject, string message)
+        public Task SendEmailAsync(MailAddress senderEmail, string recipientEmail, string subject, string message, params Attachment[] attachments)
         {
             return SendEmailAsync(
                 senderEmail,
                 new MailAddress(recipientEmail),
                 subject,
-                message
+                message,
+                attachments
             );
         }
 
-        public async Task SendEmailAsync(MailAddress senderEmail, MailAddress recipientEmail, string subject, string message)
+        public async Task SendEmailAsync(MailAddress senderEmail, MailAddress recipientEmail, string subject, string message, params Attachment[] attachments)
         {
             using (SmtpClient smtp = new SmtpClient())
             {
+                // Setup the SMTP client
                 _emailOptions.SetupSmtpClient(smtp);
-                using (MailMessage msg = new MailMessage(senderEmail, recipientEmail))
+
+                // Create the message
+                using (MailMessage msg = new MailMessage(senderEmail, recipientEmail) { Subject = subject })
                 {
-                    msg.Subject = subject;
+                    // Add the message body
                     switch (_emailOptions.EmailType)
                     {
                         case EmailType.Both:
@@ -97,6 +104,17 @@ namespace ForEvolve.AspNetCore.Services
                             msg.IsBodyHtml = _emailOptions.EmailType == EmailType.Html;
                             break;
                     }
+
+                    // Add attachments
+                    if(attachments != null)
+                    {
+                        foreach (var attachment in attachments)
+                        {
+                            msg.Attachments.Add(attachment);
+                        }
+                    }
+
+                    // Send the message
                     await smtp.SendMailAsync(msg);
                 }
             }
