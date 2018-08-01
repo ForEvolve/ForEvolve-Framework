@@ -4,9 +4,13 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\ForEvolve.Pdf.PhantomJs.FunctionalTests\ForEvolve.Pdf.PhantomJs.FunctionalTests.csproj" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ForEvolve.Pdf.PhantomJs.AppConsole.FunctionalTests\ForEvolve.Pdf.PhantomJs.AppConsole.FunctionalTests.csproj" />
+    <ProjectReference Include="..\ForEvolve.Pdf.PhantomJs.AppWeb.FunctionalTests\ForEvolve.Pdf.PhantomJs.AppWeb.FunctionalTests.csproj" />
   </ItemGroup>
 
 </Project>

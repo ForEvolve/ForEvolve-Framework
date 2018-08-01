@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace ForEvolve.Pdf.PhantomJs
 {
@@ -63,6 +64,12 @@ namespace ForEvolve.Pdf.PhantomJs
         private static string GetDefaultPhantomRootDirectory()
         {
             var currentDirectory = Directory.GetCurrentDirectory();
+            // If the directory does not exist (like for web app)
+            // Try to find another one.
+            if (!Directory.Exists(currentDirectory))
+            {
+                currentDirectory = Environment.CurrentDirectory;
+            }
             return Path.Combine(currentDirectory, "PhantomJs", "Root");
         }
     }

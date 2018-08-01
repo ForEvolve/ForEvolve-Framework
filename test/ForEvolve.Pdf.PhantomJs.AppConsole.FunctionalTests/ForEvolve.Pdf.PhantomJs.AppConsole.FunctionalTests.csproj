@@ -10,9 +10,9 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.0" />
     <PackageReference Include="ForEvolve.PhantomJs.Dependencies" Version="[1.0.0-upsilon-436,2.0)" />
   </ItemGroup>
-  
+
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ForEvolve.Pdf\ForEvolve.Pdf.csproj" />
+    <ProjectReference Include="..\ForEvolve.Pdf.PhantomJs.AppShared.FunctionalTests\ForEvolve.Pdf.PhantomJs.AppShared.FunctionalTests.csproj" />
   </ItemGroup>
   
   <ItemGroup>
