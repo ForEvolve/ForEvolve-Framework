@@ -63,13 +63,26 @@ namespace ForEvolve.Pdf.PhantomJs
 
         private static string GetDefaultPhantomRootDirectory()
         {
-            var currentDirectory = Directory.GetCurrentDirectory();
+            var currentDirectory = SuffixPhantomJsRoot(Directory.GetCurrentDirectory());
             // If the directory does not exist (like for web app)
             // Try to find another one.
             if (!Directory.Exists(currentDirectory))
             {
-                currentDirectory = Environment.CurrentDirectory;
+                currentDirectory = SuffixPhantomJsRoot(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location));
+                if (!Directory.Exists(currentDirectory))
+                {
+                    currentDirectory = SuffixPhantomJsRoot(Environment.CurrentDirectory);
+                    if (!Directory.Exists(currentDirectory))
+                    {
+                        throw new DirectoryNotFoundException(PhantomJsConstants.ImpossibleToFindADefaultPhantomRootDirectory);
+                    }
+                }
             }
+            return currentDirectory;
+        }
+
+        private static string SuffixPhantomJsRoot(string currentDirectory)
+        {
             return Path.Combine(currentDirectory, "PhantomJs", "Root");
         }
     }

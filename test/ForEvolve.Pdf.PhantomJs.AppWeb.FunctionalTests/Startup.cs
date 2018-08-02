@@ -21,8 +21,7 @@ namespace ForEvolve.Pdf.PhantomJs.AppWeb.FunctionalTests
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddForEvolvePhantomJsHtmlToPdfConverter();
+            services.AddForEvolvePhantomJsHtmlToPdfConverter();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +40,7 @@ namespace ForEvolve.Pdf.PhantomJs.AppWeb.FunctionalTests
             }
 
             var htmlToPdfConverter = app.ApplicationServices.GetService<IHtmlToPdfConverter>();
+            var options = app.ApplicationServices.GetService<HtmlToPdfConverterOptions>();
             var testRunner = new TestCaseRunner();
 
             app.Run(async (context) =>
