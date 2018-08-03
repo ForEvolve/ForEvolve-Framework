@@ -254,3 +254,6 @@ paket-files/
 # Code coverage
 coverage/
 .nyc_output/
+
+# Local build scripts
+local-build.ps1
