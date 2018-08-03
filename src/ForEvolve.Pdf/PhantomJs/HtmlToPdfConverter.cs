@@ -29,7 +29,13 @@ namespace ForEvolve.Pdf.PhantomJs
             {
                 if (!Directory.Exists(outputDirectory))
                 {
-                    throw new ArgumentException(PhantomJsConstants.OutputDirectoryDoesNotExist, nameof(outputDirectory));
+                    var fullPath = Path.GetFullPath(outputDirectory);
+                    var message = string.Concat(
+                        PhantomJsConstants.OutputDirectoryDoesNotExist,
+                        Environment.NewLine,
+                        fullPath
+                    );
+                    throw new ArgumentException(message, nameof(outputDirectory));
                 }
                 return ExecutePhantomJs(htmlFileName, outputDirectory);
             }
