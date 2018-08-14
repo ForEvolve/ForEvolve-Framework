@@ -257,3 +257,6 @@ coverage/
 
 # Local build scripts
 local-build.ps1
+local-signed.ps1
+local-test.ps1
+local-test-output/
