@@ -64,7 +64,11 @@ namespace ForEvolve.AspNetCore.Services
 
                 if (viewResult.View == null)
                 {
-                    throw new ForEvolveException($"{viewName} does not match any available view");
+                    viewResult = _razorViewEngine.GetView(null, viewName, false);
+                    if (viewResult.View == null)
+                    {
+                        throw new ForEvolveException($"{viewName} does not match any available view");
+                    }
                 }
 
                 var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
