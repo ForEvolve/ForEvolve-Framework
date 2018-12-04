@@ -9,9 +9,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForEvolve.Pdf" Version="1.0.0-upsilon-474" />
-    <PackageReference Include="ForEvolve.PhantomJs.Dependencies" Version="1.0.0-upsilon-437" />
-    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="ForEvolve.Pdf" Version="$(ForEvolvePackagesVersion)" />
+    <PackageReference Include="ForEvolve.PhantomJs.Dependencies" Version="$(ForEvolvePhantomJsDependenciesPackagesVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="$(ForEvolveNetCoreVersion)" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,5 @@
 <Project>
+  <Import Project="Dependencies.Build.props" />
 
   <PropertyGroup>
     <Product>ForEvolve Framework</Product>

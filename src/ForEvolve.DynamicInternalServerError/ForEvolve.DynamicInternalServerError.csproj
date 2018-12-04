@@ -6,10 +6,10 @@
     <PackageTags>forevolve,error,internalservererror,exception,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.1.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="$(ForEvolveNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="$(ForEvolveNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="$(ForEvolveNetCoreVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="$(ForEvolveNetCoreVersion)" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForEvolve.Contracts\ForEvolve.Contracts.csproj" />
