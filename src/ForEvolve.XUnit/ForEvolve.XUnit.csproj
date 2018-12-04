@@ -7,15 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Moq" Version="4.8.3" />
-    <PackageReference Include="xunit" Version="2.3.1" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="2.1.0" />
-    <packageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="2.1.0" />
+    <PackageReference Include="Moq" Version="$(ForEvolveMoqVersion)" />
+    <PackageReference Include="xunit" Version="$(ForEvolveXunitVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="$(ForEvolveNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(ForEvolveNetCoreVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="$(ForEvolveIdentityVersion)" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="$(ForEvolveAspNetCoreTestHostVersion)" />
+    <packageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="$(ForEvolveNetCoreVersion)" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <ProjectReference Include="..\ForEvolve.AspNetCore\ForEvolve.AspNetCore.csproj" />
   </ItemGroup>

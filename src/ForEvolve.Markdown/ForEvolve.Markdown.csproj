@@ -8,7 +8,7 @@
   
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.15.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(ForEvolveNetCoreVersion)" />
   </ItemGroup>
   
   <ItemGroup>
