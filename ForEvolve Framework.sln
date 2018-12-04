@@ -76,6 +76,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{65517671
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{1ACBA303-2C89-4AC8-A594-AC2EAFCA3306}"
 	ProjectSection(SolutionItems) = preProject
+		Dependencies.Build.props = Dependencies.Build.props
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
