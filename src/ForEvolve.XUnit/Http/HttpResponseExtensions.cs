@@ -6,13 +6,18 @@ namespace ForEvolve.XUnit.Http
 {
     public static class HttpResponseExtensions
     {
-        public static void BodyEqual(this HttpResponse httpResponse, string expectedBody)
+        public static void BodyShouldEqual(this HttpResponse httpResponse, string expectedBody)
         {
-            httpResponse.Body.Seek(0, SeekOrigin.Begin);
-            using (var reader = new StreamReader(httpResponse.Body))
+            httpResponse.Body.ShouldEqual(expectedBody);
+        }
+
+        public static void ShouldEqual(this Stream stream, string expectedResult)
+        {
+            stream.Seek(0, SeekOrigin.Begin);
+            using (var reader = new StreamReader(stream))
             {
                 var result = reader.ReadToEnd();
-                Assert.Equal(expectedBody, result);
+                Assert.Equal(expectedResult, result);
             }
         }
     }
