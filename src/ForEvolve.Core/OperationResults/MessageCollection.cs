@@ -92,7 +92,7 @@ namespace ForEvolve.OperationResults
         /// <returns><c>true</c> if this instance contains error messages; otherwise, <c>false</c>.</returns>
         public virtual bool HasError()
         {
-            return _items.Any(x => x.Severity == OperationMessageLevel.Error);
+            return HasLevel(OperationMessageLevel.Error);
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace ForEvolve.OperationResults
         /// <returns><c>true</c> if this instance contains warning messages; otherwise, <c>false</c>.</returns>
         public virtual bool HasWarning()
         {
-            return _items.Any(x => x.Severity == OperationMessageLevel.Warning);
+            return HasLevel(OperationMessageLevel.Warning);
         }
 
         /// <summary>
@@ -110,7 +110,12 @@ namespace ForEvolve.OperationResults
         /// <returns><c>true</c> if this instance contains information messages; otherwise, <c>false</c>.</returns>
         public virtual bool HasInformation()
         {
-            return _items.Any(x => x.Severity == OperationMessageLevel.Information);
+            return HasLevel(OperationMessageLevel.Information);
+        }
+
+        private bool HasLevel(OperationMessageLevel level)
+        {
+            return _items.Any(x => x.Severity == level);
         }
     }
 }
