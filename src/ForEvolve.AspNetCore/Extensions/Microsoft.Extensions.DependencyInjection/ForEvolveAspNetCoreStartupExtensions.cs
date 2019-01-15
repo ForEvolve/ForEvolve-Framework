@@ -84,10 +84,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 // Setup configs
                 .AddSingleton(settings)
 
-                // Error and OperationResults
-                .AddForEvolveErrorFactory()
-                .AddForEvolveOperationResults()
-
                 // HttpHeaderValueAccessor
                 .AddForEvolveHttpHeaderValueAccessor()
 

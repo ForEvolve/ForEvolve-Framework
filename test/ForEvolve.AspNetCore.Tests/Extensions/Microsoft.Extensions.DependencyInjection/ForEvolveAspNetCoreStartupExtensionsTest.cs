@@ -21,19 +21,16 @@ namespace Microsoft.Extensions.DependencyInjection
             public readonly IEnumerable<Type> ExpectedScopedServices;
             public AddForEvolveAspNetCore()
             {
-                ExpectedSingletonServices =
-                    ForEvolveErrorFactoryStartupExtensionsTest.AddForEvolveErrorFactory.ExpectedSingletonServices
-                    .Concat(ForEvolveOperationResultsStartupExtensionsTest.AddForEvolveOperationResults.ExpectedSingletonServices)
-                    .Concat(new Type[]
-                    {
-                        typeof(ForEvolveAspNetCoreSettings),
-                        typeof(IHttpContextAccessor),
-                        typeof(IHttpHeaderValueAccessor),
-                        typeof(IEmailSenderService),
-                        typeof(EmailOptions),
-                        typeof(IHtmlToPlainTextEmailBodyConverter),
-                    })
-                    .Distinct();
+                ExpectedSingletonServices = new Type[]
+                {
+                    typeof(ForEvolveAspNetCoreSettings),
+                    typeof(IHttpContextAccessor),
+                    typeof(IHttpHeaderValueAccessor),
+                    typeof(IEmailSenderService),
+                    typeof(EmailOptions),
+                    typeof(IHtmlToPlainTextEmailBodyConverter),
+                    typeof(IHostingEnvironment),
+                };
                 ExpectedScopedServices = new Type[]
                 {
                     typeof(IViewRendererService),
