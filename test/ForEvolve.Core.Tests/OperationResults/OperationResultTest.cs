@@ -94,4 +94,44 @@ namespace ForEvolve.OperationResults
 
         }
     }
+
+    public class OperationResult_TValue
+    {
+        private readonly OperationResult<SomeValue> sut = new OperationResult<SomeValue>();
+
+        public class HasValue : OperationResult_TValue
+        {
+            [Fact]
+            public void Should_return_true_when_value_is_not_null()
+            {
+                // Arrange
+                sut.Value = new SomeValue { Prop = 123 };
+
+                // Act
+                var result = sut.HasValue();
+
+                // Assert
+                Assert.True(result);
+            }
+
+            [Fact]
+            public void Should_return_false_when_value_is_null()
+            {
+                // Arrange
+                sut.Value = null;
+
+                // Act
+                var result = sut.HasValue();
+
+                // Assert
+                Assert.False(result);
+            }
+
+        }
+
+        private class SomeValue
+        {
+            public int Prop { get; set; }
+        }
+    }
 }
