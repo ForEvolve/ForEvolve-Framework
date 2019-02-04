@@ -29,7 +29,6 @@ namespace Microsoft.Extensions.DependencyInjection
                     typeof(IEmailSenderService),
                     typeof(EmailOptions),
                     typeof(IHtmlToPlainTextEmailBodyConverter),
-                    typeof(IHostingEnvironment),
                 };
                 ExpectedScopedServices = new Type[]
                 {
@@ -43,8 +42,6 @@ namespace Microsoft.Extensions.DependencyInjection
                 // Arrange
                 var services = new ServiceCollection();
                 services
-                    .AddSingletonMock<IHostingEnvironment>()
-
                     // Act
                     .AddForEvolveAspNetCore(default(IConfiguration))
 

@@ -32,6 +32,19 @@ namespace ForEvolve.OperationResults
             _items.Add(item);
         }
 
+        /// <summary>
+        /// Adds the elements of the specified collection to the end of the current <see cref="ForEvolve.OperationResults.MessageCollection" />.
+        /// </summary>
+        /// <param name="collection">
+        /// The collection whose elements should be added to the end of the <see cref="ForEvolve.OperationResults.MessageCollection" />.
+        /// The collection itself cannot be null, but it can contain elements that are null.
+        /// </param>
+        /// <exception cref="System.ArgumentNullException">collection is null.</exception>
+        public void AddRange(IEnumerable<IMessage> collection)
+        {
+            _items.AddRange(collection);
+        }
+
         /// <inheritdoc />
         public void Clear()
         {
