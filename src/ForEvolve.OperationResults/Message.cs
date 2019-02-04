@@ -38,9 +38,9 @@ namespace ForEvolve.OperationResults
         /// <param name="ignoreNull">if set to <c>true</c> null properties will be ignored (not added in the <see cref="System.Collections.Generic.IDictionary{string, object}"/>).</param>
         /// <exception cref="ArgumentNullException">details</exception>
         public Message(OperationMessageLevel severity, object details, bool ignoreNull = true)
+            : this(severity)
         {
             if (details == null) { throw new ArgumentNullException(nameof(details)); }
-            Severity = severity;
             LoadDetails(details, ignoreNull);
         }
 
