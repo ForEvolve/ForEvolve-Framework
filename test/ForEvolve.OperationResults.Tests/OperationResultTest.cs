@@ -91,6 +91,60 @@ namespace ForEvolve.OperationResults
                 // Assert
                 Assert.False(result);
             }
+        }
+
+        public class Success : OperationResultTest
+        {
+            [Fact]
+            public void Should_return_a_successful_OperationResult()
+            {
+                // Act
+                var result = OperationResult.Success();
+
+                // Assert
+                Assert.True(result.Succeeded);
+            }
+        }
+
+        public class Failure : OperationResultTest
+        {
+            [Fact]
+            public void Should_throw_a_ArgumentNullException_when_no_messages_are_supplied()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    "messages",
+                    () => OperationResult.Failure()
+                );
+            }
+
+            [Fact]
+            public void Should_throw_a_ArgumentNullException_when_messages_is_null()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    "messages",
+                    () => OperationResult.Failure(null)
+                );
+            }
+
+            public static TheoryData<IMessage[]> FailureData = new TheoryData<IMessage[]>
+            {
+                new IMessage[] { new Message(OperationMessageLevel.Error) },
+                new IMessage[] { new Message(OperationMessageLevel.Error), new Message(OperationMessageLevel.Information) },
+                new IMessage[] { new Message(OperationMessageLevel.Error), new Message(OperationMessageLevel.Warning) },
+                new IMessage[] { new Message(OperationMessageLevel.Error), new Message(OperationMessageLevel.Warning), new Message(OperationMessageLevel.Information) },
+            };
+
+            [Theory]
+            [MemberData(nameof(FailureData))]
+            public void Should_return_a_not_successful_OperationResult(IMessage[] messages)
+            {
+                // Act
+                var result = OperationResult.Failure(messages);
+
+                // Assert
+                Assert.False(result.Succeeded);
+                Assert.Equal(messages, result.Messages);
+            }
 
         }
     }

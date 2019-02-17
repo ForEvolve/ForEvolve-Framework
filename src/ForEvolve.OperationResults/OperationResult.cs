@@ -28,6 +28,7 @@ namespace ForEvolve.OperationResults
 
         public static OperationResult Failure(params IMessage[] messages)
         {
+            if (messages == null || messages.Length == 0) { throw new ArgumentNullException(nameof(messages)); }
             var result = new OperationResult();
             result.Messages.AddRange(messages);
             return result;
