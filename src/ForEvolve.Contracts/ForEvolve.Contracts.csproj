@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.1;net461</TargetFrameworks>
+    <TargetFrameworks>$(ForEvolveTargetFrameworks);net461</TargetFrameworks>
     <Description>Shared contracts (models).</Description>
     <PackageTags>forevolve,api,contracts,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../../ForEvolve-Toolbox.snk</AssemblyOriginatorKeyFile>
