@@ -2,7 +2,7 @@
   <!-- <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" /> -->
   <Import Project="..\Directory.Build.props" />
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>$(ForEvolveTargetFrameworks)</TargetFrameworks>
     <IsPackable>True</IsPackable>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <Authors>Carl-Hugo Marcotte</Authors>
