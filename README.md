@@ -137,6 +137,12 @@ This is the abstractions library. Only use this if you want to create your own c
 
 See the [`ForEvolve.Markdown`](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Markdown) project for more info.
 
+### ForEvolve.OperationResults
+
+This contains a generic Operation Result implementation.
+
+See the [`ForEvolve.OperationResults`](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.OperationResults) project for more info.
+
 ### ForEvolve.Pdf
 
 This library contains implementations of the `ForEvolve.Pdf.Abstractions.IHtmlToPdfConverter` interface, allowing convertion of HTML to a PDF.
