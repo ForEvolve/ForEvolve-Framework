@@ -21,6 +21,8 @@ namespace ForEvolve.OperationResults
             return Messages.Count > 0;
         }
 
+        #region OperationResult Factory Methods
+
         public static OperationResult Success()
         {
             return new OperationResult();
@@ -33,6 +35,68 @@ namespace ForEvolve.OperationResults
             result.Messages.AddRange(messages);
             return result;
         }
+
+        public static OperationResult Failure(Exception exception)
+        {
+            if (exception == null) { throw new ArgumentNullException(nameof(exception)); }
+            var result = new OperationResult();
+            result.Messages.Add(new ExceptionMessage(exception));
+            return result;
+        }
+
+        public static OperationResult Failure(ProblemDetails problemDetails)
+        {
+            return Failure(problemDetails, OperationMessageLevel.Error);
+        }
+
+        public static OperationResult Failure(ProblemDetails problemDetails, OperationMessageLevel severity)
+        {
+            var result = new OperationResult();
+            result.Messages.Add(new ProblemDetailsMessage(problemDetails, severity));
+            return result;
+        }
+
+        #endregion
+
+        #region OperationResult<TValue> Factory Methods
+
+        public static OperationResult<TValue> Success<TValue>()
+        {
+            return new OperationResult<TValue>();
+        }
+
+        public static OperationResult<TValue> Success<TValue>(TValue value)
+        {
+            return new OperationResult<TValue> { Value = value };
+        }
+
+        public static OperationResult<TValue> Failure<TValue>(params IMessage[] messages)
+        {
+            var result = new OperationResult<TValue>();
+            result.Messages.AddRange(messages);
+            return result;
+        }
+
+        public static OperationResult<TValue> Failure<TValue>(Exception exception)
+        {
+            var result = new OperationResult<TValue>();
+            result.Messages.Add(new ExceptionMessage(exception));
+            return result;
+        }
+
+        public static OperationResult<TValue> Failure<TValue>(ProblemDetails problemDetails)
+        {
+            return Failure<TValue>(problemDetails, OperationMessageLevel.Error);
+        }
+
+        public static OperationResult<TValue> Failure<TValue>(ProblemDetails problemDetails, OperationMessageLevel severity)
+        {
+            var result = new OperationResult<TValue>();
+            result.Messages.Add(new ProblemDetailsMessage(problemDetails, severity));
+            return result;
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -53,27 +117,28 @@ namespace ForEvolve.OperationResults
         {
             return Value != null;
         }
-
-        public static new OperationResult<TValue> Success()
-        {
-            return new OperationResult<TValue>();
-        }
-
-        public static OperationResult<TValue> Success(TValue value)
-        {
-            return new OperationResult<TValue> { Value = value };
-        }
-
-        public static new OperationResult<TValue> Failure(params IMessage[] messages)
-        {
-            var result = new OperationResult<TValue>();
-            result.Messages.AddRange(messages);
-            return result;
-        }
     }
 
     public static class OperationResultExtensions
     {
+        public static TOperationResult On<TOperationResult>(this TOperationResult operationResult, 
+            Action<TOperationResult> success = null, 
+            Action<TOperationResult> failure = null
+            )
+            where TOperationResult : IOperationResult
+        {
+            var result = operationResult;
+            if (success != null)
+            {
+                result = result.OnSuccess(success);
+            }
+            if (failure != null)
+            {
+                result = result.OnFailure(failure);
+            }
+            return result;
+        }
+
         public static TOperationResult OnSuccess<TOperationResult>(this TOperationResult operationResult, Action<TOperationResult> successDelegate)
             where TOperationResult : IOperationResult
         {
@@ -112,6 +177,14 @@ namespace ForEvolve.OperationResults
             Operation()
                 .OnSuccess(r => Console.WriteLine("Success"))
                 .OnFailure(r => Console.WriteLine("Failure!"));
+        }
+
+        public void Consumer2()
+        {
+            Operation().On(
+                success: r => Console.WriteLine("Success"),
+                failure: r => Console.WriteLine("Failure!")
+            );
         }
     }
 }
