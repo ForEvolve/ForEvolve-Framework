@@ -1,5 +1,4 @@
-﻿using ForEvolve.XUnit.Http;
-using ForEvolve.XUnit.Mvc;
+﻿using ForEvolve.Testing.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Moq;
 using System;

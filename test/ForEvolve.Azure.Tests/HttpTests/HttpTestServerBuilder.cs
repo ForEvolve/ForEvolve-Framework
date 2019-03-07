@@ -8,6 +8,7 @@ using System.Net.Http;
 
 namespace ForEvolve.XUnit.HttpTests
 {
+    [Obsolete(ObsoleteMessage.Xunit, false)]
     public class HttpTestServerBuilder : IHttpTestServerBuilder
     {
         public virtual IHttpTestServer Create(Func<IWebHostBuilder> webHostBuilderImplementationFactory)
@@ -30,6 +31,7 @@ namespace ForEvolve.XUnit.HttpTests
         }
     }
 
+    [Obsolete(ObsoleteMessage.Xunit, false)]
     public class HttpTestServerBuilder<TStartup> : HttpTestServerBuilder, IHttpTestServerBuilder<TStartup>
          where TStartup : class
     {
