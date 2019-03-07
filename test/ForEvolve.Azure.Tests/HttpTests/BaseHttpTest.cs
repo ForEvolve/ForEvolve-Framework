@@ -11,12 +11,8 @@ using Microsoft.AspNetCore.Builder;
 using System.IO;
 using System.Reflection;
 
-namespace ForEvolve
-{
-}
 namespace ForEvolve.XUnit.HttpTests
 {
-
     [Obsolete(ObsoleteMessage.Xunit, false)]
     public abstract class BaseHttpTestWithMvcViews<TStartup> : BaseHttpTest<TStartup>
         where TStartup : class

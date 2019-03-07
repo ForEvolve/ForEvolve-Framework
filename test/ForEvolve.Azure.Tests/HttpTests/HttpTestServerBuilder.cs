@@ -11,6 +11,7 @@ namespace ForEvolve.XUnit.HttpTests
     [Obsolete(ObsoleteMessage.Xunit, false)]
     public class HttpTestServerBuilder : IHttpTestServerBuilder
     {
+        [Obsolete(ObsoleteMessage.Xunit, false)]
         public virtual IHttpTestServer Create(Func<IWebHostBuilder> webHostBuilderImplementationFactory)
         {
             TestServer server = null;
@@ -35,11 +36,13 @@ namespace ForEvolve.XUnit.HttpTests
     public class HttpTestServerBuilder<TStartup> : HttpTestServerBuilder, IHttpTestServerBuilder<TStartup>
          where TStartup : class
     {
+        [Obsolete(ObsoleteMessage.Xunit, false)]
         public virtual IHttpTestServer Create()
         {
             return Create(hostBuilder => { });
         }
 
+        [Obsolete(ObsoleteMessage.Xunit, false)]
         public virtual IHttpTestServer Create(Action<IWebHostBuilder> webHostBuilderSetup)
         {
             var hostBuilder = WebHost
