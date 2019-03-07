@@ -122,7 +122,29 @@ namespace ForEvolve.OperationResults
             {
                 Assert.Throws<ArgumentNullException>(
                     "messages",
-                    () => OperationResult.Failure(null)
+                    () => OperationResult.Failure(default(IMessage[]))
+                );
+            }
+
+            [Fact]
+            public void Should_throw_a_ArgumentNullException_when_exception_is_null()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    "exception",
+                    () => OperationResult.Failure(default(Exception))
+                );
+            }
+
+            [Fact]
+            public void Should_throw_a_ArgumentNullException_when_problemDetails_is_null()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    "problemDetails",
+                    () => OperationResult.Failure(default(ProblemDetails))
+                );
+                Assert.Throws<ArgumentNullException>(
+                    "problemDetails",
+                    () => OperationResult.Failure(default(ProblemDetails), OperationMessageLevel.Error)
                 );
             }
 

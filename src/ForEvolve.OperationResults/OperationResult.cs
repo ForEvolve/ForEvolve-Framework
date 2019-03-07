@@ -38,7 +38,6 @@ namespace ForEvolve.OperationResults
 
         public static OperationResult Failure(Exception exception)
         {
-            if (exception == null) { throw new ArgumentNullException(nameof(exception)); }
             var result = new OperationResult();
             result.Messages.Add(new ExceptionMessage(exception));
             return result;

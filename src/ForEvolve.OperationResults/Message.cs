@@ -139,6 +139,7 @@ namespace ForEvolve.OperationResults
         public ExceptionMessage(Exception exception)
             : base(OperationMessageLevel.Error)
         {
+            if (exception == null) { throw new ArgumentNullException(nameof(exception)); }
             LoadProblemDetails(new ProblemDetails
             {
                 Title = exception.GetType().Name,
