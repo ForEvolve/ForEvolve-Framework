@@ -13,9 +13,11 @@ using System.Reflection;
 
 namespace ForEvolve.XUnit.HttpTests
 {
+    [Obsolete(ObsoleteMessage.Xunit, false)]
     public abstract class BaseHttpTestWithMvcViews<TStartup> : BaseHttpTest<TStartup>
         where TStartup : class
     {
+
         protected override IWebHostBuilder ConfigureWebHostBuilder(IWebHostBuilder webHostBuilder)
         {
             var contentRoot = GetContentRoot();
@@ -35,6 +37,7 @@ namespace ForEvolve.XUnit.HttpTests
         protected virtual string SrcRoot => "../../../../../src";
     }
 
+    [Obsolete(ObsoleteMessage.Xunit, false)]
     public abstract class BaseHttpTest<TStartup> : BaseHttpTest
          where TStartup : class
     {
@@ -44,6 +47,7 @@ namespace ForEvolve.XUnit.HttpTests
         }
     }
 
+    [Obsolete(ObsoleteMessage.Xunit, false)]
     public abstract class BaseHttpTest : IDisposable
     {
         protected TestServer Server => _httpTestServer.Server;

@@ -1,5 +1,5 @@
 ﻿#if SUPPORT_AZURE_EMULATOR
-using ForEvolve.XUnit;
+using ForEvolve.Testing;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
