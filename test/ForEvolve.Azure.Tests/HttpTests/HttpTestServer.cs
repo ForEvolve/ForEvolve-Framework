@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ForEvolve.XUnit.HttpTests
 {
+    [Obsolete(ObsoleteMessage.Xunit, false)]
     public class HttpTestServer : IHttpTestServer
     {
         public HttpTestServer(TestServer server, HttpClient client)
