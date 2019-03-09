@@ -3,7 +3,7 @@
     <!-- ForEvolve packages -->
     <ForEvolvePackagesVersion Condition="'$(FOREVOLVE_PACKAGES_VERSION)'==''">[1.0.0-RC-1,2.0)</ForEvolvePackagesVersion>
     <ForEvolvePhantomJsDependenciesPackagesVersion Condition="'$(FOREVOLVE_PHANTOMJS_DEPENDENCIES_PACKAGES_VERSION)'==''">1.0.0-RC-1</ForEvolvePhantomJsDependenciesPackagesVersion>
-    <ForEvolveTestingVersion Condition="'$(FOREVOLVE_TESTING_VERSION)'==''">[1.0.0-CI-666,2.0)</ForEvolveTestingVersion>
+    <ForEvolveTestingVersion Condition="'$(FOREVOLVE_TESTING_VERSION)'==''">[1.0.0-CI-677,2.0)</ForEvolveTestingVersion>
     
     <!-- Source packages -->
     <ForEvolveNetCoreVersion Condition="'$(FOREVOLVE_ASPNETCORE_VERSION)'==''">[2.1.1,3.0)</ForEvolveNetCoreVersion>
