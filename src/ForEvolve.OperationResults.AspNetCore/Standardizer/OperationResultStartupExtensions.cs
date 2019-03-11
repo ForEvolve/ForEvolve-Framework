@@ -14,6 +14,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddForEvolveOperationResultStandardizer(this IServiceCollection services)
         {
             services
+                .AddLogging()
                 .AddSingleton<IPropertyNameFormatter, DefaultPropertyNameFormatter>()
                 .AddSingleton<IPropertyValueFormatter, DefaultPropertyValueFormatter>()
                 .AddSingleton<IOperationResultStandardizer, DefaultOperationResultStandardizer>()
