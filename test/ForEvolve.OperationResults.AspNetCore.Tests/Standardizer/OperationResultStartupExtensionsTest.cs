@@ -32,6 +32,13 @@ namespace ForEvolve.OperationResults.Standardizer
             expectedBody += "{\"messages\":[],\"succeeded\":true},";
             expectedBody += "\"someProp\":\"Oh Yeah!\",\"someOtherProp\":true}";
 
+            /*
+             * Can be inverted... see how to fix this to make the test result 
+             * consistent between test runs.
+             Expected: {"_operation":{"messages":[],"succeeded":true},"someProp"···
+             Actual:   {"_operation":{"succeeded":true,"messages":[]},"someProp"···
+            */
+
             // Act
             var result = await _server.Client.GetAsync("/OperationResultStartupExtensionsTestController/OkObjectResult");
 
