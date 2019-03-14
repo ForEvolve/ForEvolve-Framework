@@ -11,6 +11,11 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class OperationResultStartupExtensions
     {
+        /// <summary>
+        /// Adds the default ForEvolve operation result standardizer filters.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        /// <returns>IServiceCollection.</returns>
         public static IServiceCollection AddForEvolveOperationResultStandardizer(this IServiceCollection services)
         {
             services
