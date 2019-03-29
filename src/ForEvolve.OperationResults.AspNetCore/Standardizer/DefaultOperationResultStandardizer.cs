@@ -36,12 +36,14 @@ namespace ForEvolve.OperationResults.Standardizer
             if (operationResult == null) { throw new ArgumentNullException(nameof(operationResult)); }
 
             var dictionary = new Dictionary<string, object>();
-            dictionary.Add(_options.OperationName, new
+            if (!string.IsNullOrEmpty(_options.OperationName))
             {
-                operationResult.Messages,
-                operationResult.Succeeded
-            });
-            
+                dictionary.Add(_options.OperationName, new
+                {
+                    operationResult.Messages,
+                    operationResult.Succeeded
+                });
+            }
             try
             {
                 AddValueToDictionary(operationResult, dictionary);
