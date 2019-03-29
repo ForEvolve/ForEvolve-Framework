@@ -9,9 +9,9 @@ namespace ForEvolve.OperationResults.Standardizer
 {
     /// <summary>
     /// Represents the default <see cref="IOperationResult"/> standardizer.
-    /// Implements the <see cref="ForEvolve.OperationResults.IOperationResultStandardizer" />
+    /// Implements the <see cref="IOperationResultStandardizer" />
     /// </summary>
-    /// <seealso cref="ForEvolve.OperationResults.IOperationResultStandardizer" />
+    /// <seealso cref="IOperationResultStandardizer" />
     public class DefaultOperationResultStandardizer : IOperationResultStandardizer
     {
         private readonly IPropertyNameFormatter _propertyNameFormatter;
