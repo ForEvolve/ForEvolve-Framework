@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ForEvolve.EntityFrameworkCore.Seeders
 {
@@ -42,7 +43,11 @@ namespace ForEvolve.EntityFrameworkCore.Seeders
         /// </summary>
         public void Seed()
         {
-            var transaction = _db.Database.BeginTransaction();
+            if (_seeders.Count() == 0)
+            {
+                throw new NoSeederFoundException<TDbContext>();
+            }
+            _db.Database.BeginTransaction();
             try
             {
                 foreach (var seeder in _seeders)
