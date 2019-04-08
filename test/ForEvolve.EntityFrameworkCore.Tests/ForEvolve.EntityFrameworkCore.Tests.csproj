@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="ForEvolve.Testing" Version="1.0.0-CI-742" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>

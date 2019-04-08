@@ -22,7 +22,7 @@ namespace ForEvolve.EntityFrameworkCore.Seeders
 
         public SeederManagerTest()
         {
-            _db = SeederDbContext.Create("SeederManagerTest");
+            _db = SeederDbContext.CreateInMemory("SeederManagerTest");
             _seeders = new List<ISeeder<SeederDbContext>>();
             sut = new SeederManager<SeederDbContext>(_db, _seeders);
         }

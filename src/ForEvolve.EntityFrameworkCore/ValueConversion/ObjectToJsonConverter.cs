@@ -9,41 +9,41 @@ using System.Threading.Tasks;
 namespace ForEvolve.EntityFrameworkCore.ValueConversion
 {
     /// <summary>
-    /// Represent an EF Core ValueConverter that convert <see cref="object"/> to Json
+    /// Represent an EF Core ValueConverter that convert <see cref="object"/> to and from Json
     /// and vice versa.
     /// Implements the <see cref="ValueConverter{TKey, TValue}" />
     /// </summary>
     /// <seealso cref="ValueConverter{TKey, TValue}" />
-    public class ObjectToJsonConverter<TObject> : ValueConverter<TObject, string>
+    public class ObjectToJsonConverter : ValueConverter<object, string>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectToJsonConverter{TObject}"/> class.
+        /// Initializes a new instance of the <see cref="ObjectToJsonConverter"/> class.
         /// </summary>
         public ObjectToJsonConverter() : base(
-            input => SerializeObject(input),
-            input => DeserializeObject(input),
+            input => Serialize(input),
+            input => Deserialize(input),
             null
         )
         { }
 
         /// <summary>
-        /// Serializes the object to JSON.
+        /// Serializes the specified object.
         /// </summary>
-        /// <param name="obj">The object.</param>
-        /// <returns>System.String.</returns>
-        private static string SerializeObject(TObject obj)
+        /// <param name="obj">The object to serialize.</param>
+        /// <returns>The serialized <see cref="object"/> in the JSON format.</returns>
+        public static string Serialize(object obj)
         {
             return JsonConvert.SerializeObject(obj);
         }
 
         /// <summary>
-        /// Deserializes the object from JSON.
+        /// Deserializes the specified json.
         /// </summary>
         /// <param name="json">The json.</param>
-        /// <returns>Dictionary&lt;System.String, System.Object&gt;.</returns>
-        private static TObject DeserializeObject(string json)
+        /// <returns>The deserialized <see cref="object"/>.</returns>
+        public static object Deserialize(string json)
         {
-            return JsonConvert.DeserializeObject<TObject>(json);
+            return JsonConvert.DeserializeObject(json);
         }
     }
 }
