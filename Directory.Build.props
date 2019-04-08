@@ -5,6 +5,7 @@
     <Product>ForEvolve Framework</Product>
     <RepositoryUrl>https://github.com/ForEvolve/ForEvolve-Framework</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
 
 </Project>
