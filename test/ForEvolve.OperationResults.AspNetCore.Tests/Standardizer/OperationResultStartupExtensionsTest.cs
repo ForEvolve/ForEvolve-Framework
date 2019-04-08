@@ -18,7 +18,7 @@ namespace ForEvolve.OperationResults.Standardizer
     [Collection(OperationResultStartupExtensionsServerCollection.Name)]
     public class OperationResultStartupExtensionsTest
     {
-        private OperationResultStartupExtensionsServerFixture _server;
+        private readonly OperationResultStartupExtensionsServerFixture _server;
         public OperationResultStartupExtensionsTest(OperationResultStartupExtensionsServerFixture server)
         {
             _server = server ?? throw new ArgumentNullException(nameof(server));

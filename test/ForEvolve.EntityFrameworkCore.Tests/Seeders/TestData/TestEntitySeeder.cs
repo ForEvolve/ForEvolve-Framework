@@ -8,7 +8,7 @@ namespace ForEvolve.EntityFrameworkCore.Seeders.TestData
 {
     public class TestEntitySeeder : ISeeder<SeederDbContext>
     {
-        private Action<SeederDbContext> _seedDelegate;
+        private readonly Action<SeederDbContext> _seedDelegate;
 
         public TestEntitySeeder(Action<SeederDbContext> seedDelegate)
         {
