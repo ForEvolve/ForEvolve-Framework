@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForEvolve.Testing" Version="$(ForEvolveTestingVersion)" />
+    <PackageReference Include="ForEvolve.Testing" Version="1.0.0-CI-742" />
   </ItemGroup>
 
   <ItemGroup>
