@@ -18,7 +18,7 @@ namespace ForEvolve.OperationResults.Standardizer
     [Collection(OperationResultStartupExtensionsServerCollection.Name)]
     public class OperationResultStartupExtensionsTest
     {
-        private OperationResultStartupExtensionsServerFixture _server;
+        private readonly OperationResultStartupExtensionsServerFixture _server;
         public OperationResultStartupExtensionsTest(OperationResultStartupExtensionsServerFixture server)
         {
             _server = server ?? throw new ArgumentNullException(nameof(server));
@@ -31,6 +31,10 @@ namespace ForEvolve.OperationResults.Standardizer
             var expectedBody = "{\"" + DefaultOperationResultStandardizerOptions.DefaultOperationName + "\":";
             expectedBody += "{\"messages\":[],\"succeeded\":true},";
             expectedBody += "\"someProp\":\"Oh Yeah!\",\"someOtherProp\":true}";
+
+            var expectedBody2 = "{\"" + DefaultOperationResultStandardizerOptions.DefaultOperationName + "\":";
+            expectedBody2 += "{\"succeeded\":true,\"messages\":[]},";
+            expectedBody2 += "\"someProp\":\"Oh Yeah!\",\"someOtherProp\":true}";
 
             /*
              * Can be inverted... see how to fix this to make the test result 
@@ -45,7 +49,11 @@ namespace ForEvolve.OperationResults.Standardizer
             // Assert
             result.EnsureSuccessStatusCode();
             var body = await result.Content.ReadAsStringAsync();
-            Assert.Equal(expectedBody, body);
+            //Assert.Equal(expectedBody, body);
+            // Hack
+            var equality1 = body == expectedBody;
+            var equality2 = body == expectedBody2;
+            Assert.True(equality1 || equality2, "Invalid body.");
         }
 
     }
