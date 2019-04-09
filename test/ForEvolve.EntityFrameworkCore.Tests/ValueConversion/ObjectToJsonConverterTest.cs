@@ -8,7 +8,7 @@ namespace ForEvolve.EntityFrameworkCore.ValueConversion
 {
     public class ObjectToJsonConverterTest
     {
-        private readonly ObjectToJsonConverter sut = new ObjectToJsonConverter();
+        private readonly ObjectToJsonConverter<MyClass> sut = new ObjectToJsonConverter<MyClass>();
 
         public class Serialize : ObjectToJsonConverterTest
         {
@@ -19,7 +19,7 @@ namespace ForEvolve.EntityFrameworkCore.ValueConversion
                 var @object = new MyClass { Name = "Test name" };
 
                 // Act
-                var json = ObjectToJsonConverter.Serialize(@object);
+                var json = ObjectToJsonConverter<MyClass>.Serialize(@object);
 
                 // Assert
                 Assert.Equal("{\"Name\":\"Test name\"}", json);
@@ -55,8 +55,8 @@ namespace ForEvolve.EntityFrameworkCore.ValueConversion
                 var result = sut.ConvertFromProvider(json);
 
                 // Assert
-                var jObject= Assert.IsType<JObject>(result);
-                var myClass = jObject.ToObject<MyClass>();
+                var myClass = Assert.IsType<MyClass>(result);
+                //var myClass = jObject.ToObject<MyClass>();
                 Assert.Equal("Test name", myClass.Name);
             }
         }

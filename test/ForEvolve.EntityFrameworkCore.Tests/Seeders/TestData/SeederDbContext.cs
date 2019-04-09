@@ -7,7 +7,7 @@ namespace ForEvolve.EntityFrameworkCore.Seeders.TestData
 {
     public class SeederDbContext : DbContext
     {
-        private readonly ObjectToJsonConverter _objectToJsonConverter = new ObjectToJsonConverter();
+        private readonly ObjectToJsonConverter<object> _objectToJsonConverter = new ObjectToJsonConverter<object>();
         private readonly DictionaryToJsonConverter _dictionaryToJsonConverter = new DictionaryToJsonConverter();
 
         internal SeederDbContext(DbContextOptions options) : base(options)
