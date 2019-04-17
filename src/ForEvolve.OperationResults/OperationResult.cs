@@ -137,8 +137,19 @@ namespace ForEvolve.OperationResults
             }
             else
             {
-                var nonGenericResult = new OperationResult();
-                result = (TOperationResult)(IOperationResult)nonGenericResult;
+                var targetType = typeof(TOperationResult);
+                if (targetType.IsGenericType)
+                {
+                    var genericImplementationType = typeof(OperationResult<>);
+                    var genericArgs = targetType.GetGenericArguments();
+                    var finalType = genericImplementationType.MakeGenericType(genericArgs);
+                    result = (TOperationResult)Activator.CreateInstance(finalType);
+                }
+                else
+                {
+                    var nonGenericResult = new OperationResult();
+                    result = (TOperationResult)(IOperationResult)nonGenericResult;
+                }
             }
             result.Messages.AddRange(operationResult.Messages);
             return result;

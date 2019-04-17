@@ -109,6 +109,20 @@ namespace ForEvolve.OperationResults
                 Assert.NotNull(result);
                 Assert.IsType<OperationResult>(result);
             }
+
+            [Fact]
+            public void Should_convert_NonGenericResult_to_GenericResult()
+            {
+                // Arrange
+                var resultToConvert = OperationResult.Success();
+
+                // Act
+                var result = resultToConvert.ConvertTo<IOperationResult<ConvertTestClass>>();
+
+                // Assert
+                Assert.NotNull(result);
+                Assert.IsType<OperationResult<ConvertTestClass>>(result);
+            }
         }
         private class ConvertTestClass
         {
