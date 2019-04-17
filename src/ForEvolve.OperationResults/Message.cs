@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -133,13 +134,15 @@ namespace ForEvolve.OperationResults
         }
     }
 
-
     public class ExceptionMessage : ProblemDetailsMessage
     {
+        [JsonIgnore]
+        public Exception Exception { get; }
+
         public ExceptionMessage(Exception exception)
             : base(OperationMessageLevel.Error)
         {
-            if (exception == null) { throw new ArgumentNullException(nameof(exception)); }
+            Exception = exception ?? throw new ArgumentNullException(nameof(exception));
             LoadProblemDetails(new ProblemDetails
             {
                 Title = exception.GetType().Name,

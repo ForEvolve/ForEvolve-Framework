@@ -128,9 +128,9 @@ namespace ForEvolve.OperationResults
         {
             TOperationResult result;
             var type = typeof(TOperationResult);
-            if (type.IsGenericType && type.Name.Equals("IOperationResult`1"))
+            var genericOperationResultType = typeof(OperationResult<>);
+            if (type.IsGenericType && type.Name.Equals(genericOperationResultType.Name))
             {
-                var genericOperationResultType = typeof(OperationResult<>);
                 var genericArgs = type.GetGenericArguments();
                 var finalType = genericOperationResultType.MakeGenericType(genericArgs);
                 result = (TOperationResult)Activator.CreateInstance(finalType);
@@ -138,7 +138,6 @@ namespace ForEvolve.OperationResults
             else
             {
                 var nonGenericResult = new OperationResult();
-                nonGenericResult.Messages.AddRange(operationResult.Messages);
                 result = (TOperationResult)(IOperationResult)nonGenericResult;
             }
             result.Messages.AddRange(operationResult.Messages);
