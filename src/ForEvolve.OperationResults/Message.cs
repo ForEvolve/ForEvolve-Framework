@@ -121,16 +121,19 @@ namespace ForEvolve.OperationResults
         public virtual IDictionary<string, object> Details { get; }
 
         /// <inheritdoc />
+        [JsonIgnore]
         public virtual Type Type { get; }
 
         /// <summary>
         /// Gets if the <see cref="Type"/> was an anonymous type.
         /// </summary>
+        [JsonIgnore]
         public virtual bool IsAnonymous { get; }
 
         /// <summary>
         /// Gets the original object that was used to load the Details, if any.
         /// </summary>
+        [JsonIgnore]
         public virtual object OriginalObject { get; }
     }
 
