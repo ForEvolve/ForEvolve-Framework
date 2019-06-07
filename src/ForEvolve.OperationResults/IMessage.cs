@@ -18,5 +18,11 @@ namespace ForEvolve.OperationResults
         /// </summary>
         /// <value>The details.</value>
         IDictionary<string, object> Details { get; }
+
+        /// <summary>
+        /// Gets the message type.
+        /// </summary>
+        /// <value>The type of message.</value>
+        string Type { get; }
     }
 }

@@ -16,6 +16,7 @@ namespace ForEvolve.OperationResults
         /// Initializes a new instance of the <see cref="Message"/> class.
         /// </summary>
         /// <param name="severity">The severity.</param>
+        /// <param name="type">The message type.</param>
         public Message(OperationMessageLevel severity)
             : this(severity, new Dictionary<string, object>()) { }
 
@@ -24,11 +25,13 @@ namespace ForEvolve.OperationResults
         /// </summary>
         /// <param name="severity">The severity.</param>
         /// <param name="details">The details.</param>
+        /// <param name="type">The message type.</param>
         /// <exception cref="ArgumentNullException">details</exception>
-        public Message(OperationMessageLevel severity, IDictionary<string, object> details)
+        public Message(OperationMessageLevel severity, IDictionary<string, object> details, string type = null)
         {
             Severity = severity;
             Details = details ?? throw new ArgumentNullException(nameof(details));
+            Type = type;
         }
 
         /// <summary>
@@ -42,6 +45,11 @@ namespace ForEvolve.OperationResults
             : this(severity)
         {
             if (details == null) { throw new ArgumentNullException(nameof(details)); }
+            var detailsType = details.GetType();
+            if (!detailsType.Name.Contains("AnonymousType"))
+            {
+                Type = detailsType.Name;
+            }
             LoadDetails(details, ignoreNull);
         }
 
@@ -63,6 +71,9 @@ namespace ForEvolve.OperationResults
 
         /// <inheritdoc />
         public virtual IDictionary<string, object> Details { get; }
+
+        /// <inheritdoc />
+        public string Type { get; }
     }
 
     /// <summary>

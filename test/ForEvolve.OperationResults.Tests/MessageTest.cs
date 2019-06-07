@@ -125,6 +125,32 @@ namespace ForEvolve.OperationResults
                     Assert.Throws<ArgumentNullException>("details", () => new Message(_severity, null, IgnoreNull));
                 }
 
+                [Fact]
+                public void Should_set_the_Type_when_the_details_is_typed()
+                {
+                    // Arrange
+                    var details = new SomeClass();
+
+                    // Act
+                    var obj = new Message(_severity, details, IgnoreNull);
+
+                    // Assert
+                    Assert.Equal(nameof(SomeClass), obj.Type);
+                }
+
+                [Fact]
+                public void Should_not_set_the_Type_when_the_details_is_an_anonymous_type()
+                {
+                    // Arrange
+                    var details = new { SomeProp = true };
+
+                    // Act
+                    var obj = new Message(_severity, details, IgnoreNull);
+
+                    // Assert
+                    Assert.Null(obj.Type);
+                }
+
                 private class SomeClass
                 {
                     public string SomeProp { get; set; }
