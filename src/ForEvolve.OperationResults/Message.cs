@@ -27,7 +27,7 @@ namespace ForEvolve.OperationResults
         /// <param name="details">The details.</param>
         /// <param name="type">The message type.</param>
         /// <exception cref="ArgumentNullException">details</exception>
-        public Message(OperationMessageLevel severity, IDictionary<string, object> details, string type = null)
+        public Message(OperationMessageLevel severity, IDictionary<string, object> details, Type type = null)
         {
             Severity = severity;
             Details = details ?? throw new ArgumentNullException(nameof(details));
@@ -45,11 +45,9 @@ namespace ForEvolve.OperationResults
             : this(severity)
         {
             if (details == null) { throw new ArgumentNullException(nameof(details)); }
-            var detailsType = details.GetType();
-            if (!detailsType.Name.Contains("AnonymousType"))
-            {
-                Type = detailsType.Name;
-            }
+            Type = details.GetType();
+            IsAnonymous = Type.Name.Contains("AnonymousType");
+            OriginalObject = details;
             LoadDetails(details, ignoreNull);
         }
 
@@ -67,13 +65,73 @@ namespace ForEvolve.OperationResults
         }
 
         /// <inheritdoc />
+        public bool Is<TType>()
+        {
+            return typeof(TType) == Type;
+        }
+
+        /// <inheritdoc />
+        public bool Is(Type type)
+        {
+            return type == Type;
+        }
+
+        /// <inheritdoc />
+        public TType As<TType>()
+        {
+            if(!Is<TType>())
+            {
+                throw new TypeMismatchException(this, typeof(TType));
+            }
+            return (TType)As(typeof(TType));
+        }
+
+        /// <inheritdoc />
+        public object As(Type type)
+        {
+            if (!Is(type))
+            {
+                throw new TypeMismatchException(this, type);
+            }
+            if (CanReturnTheOriginalObject(type))
+            {
+                return OriginalObject;
+            }
+            var result = Activator­.CreateInstance(type);
+            var properties = TypeDescriptor.GetProperties(result);
+            foreach (PropertyDescriptor property in properties)
+            {
+                if (Details.ContainsKey(property.Name))
+                {
+                    property.SetValue(result, Details[property.Name]);
+                }
+            }
+            return result;
+        }
+
+        private bool CanReturnTheOriginalObject(Type type)
+        {
+            return OriginalObject != null && type.IsAssignableFrom(OriginalObject.GetType());
+        }
+
+        /// <inheritdoc />
         public virtual OperationMessageLevel Severity { get; }
 
         /// <inheritdoc />
         public virtual IDictionary<string, object> Details { get; }
 
         /// <inheritdoc />
-        public string Type { get; }
+        public virtual Type Type { get; }
+
+        /// <summary>
+        /// Gets if the <see cref="Type"/> was an anonymous type.
+        /// </summary>
+        public virtual bool IsAnonymous { get; }
+
+        /// <summary>
+        /// Gets the original object that was used to load the Details, if any.
+        /// </summary>
+        public virtual object OriginalObject { get; }
     }
 
     /// <summary>

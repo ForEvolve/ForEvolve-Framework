@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ForEvolve.OperationResults
 {
@@ -23,6 +24,36 @@ namespace ForEvolve.OperationResults
         /// Gets the message type.
         /// </summary>
         /// <value>The type of message.</value>
-        string Type { get; }
+        Type Type { get; }
+
+        /// <summary>
+        /// Validate if the <see cref="Type"/> value match the <typeparamref name="TType"/>.
+        /// </summary>
+        /// <typeparam name="TType">The type to validate.</typeparam>
+        /// <returns><c>true</c> is the <see cref="Type"/> matches <typeparamref name="TType"/>; otherwise <c>false</c>.</returns>
+        bool Is<TType>();
+
+        /// <summary>
+        /// Validate if the <see cref="Type"/> value match the specified type.
+        /// </summary>
+        /// <param name="type">The type to validate.</param>
+        /// <returns><c>true</c> is the <see cref="Type"/> matches the specified type; otherwise <c>false</c>.</returns>
+        bool Is(Type type);
+
+        /// <summary>
+        /// Convert the <see cref="Details"/> to the specified type, assuming they are compatible.
+        /// </summary>
+        /// <typeparam name="TType">The type of the expected object to return.</typeparam>
+        /// <returns>The converted object.</returns>
+        /// <exception cref="TypeMismatchException"></exception>
+        TType As<TType>();
+
+        /// <summary>
+        /// Convert the <see cref="Details"/> to the specified type, assuming they are compatible.
+        /// </summary>
+        /// <param name="type">The type of the expected object to return.</param>
+        /// <returns>The converted object.</returns>
+        /// <exception cref="TypeMismatchException"></exception>
+        object As(Type type);
     }
 }
