@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace ForEvolve.OperationResults
 {
     /// <summary>
-    /// Represents a collection of <see cref="ForEvolve.OperationResults.IMessage" />.
-    /// Implements the <see cref="System.Collections.Generic.IList{ForEvolve.OperationResults.IMessage}" />
+    /// Represents a collection of <see cref="IMessage" />.
+    /// Implements the <see cref="System.Collections.Generic.IList{T}" /> where T is a <see cref="IMessage"/>.
     /// </summary>
-    /// <seealso cref="System.Collections.Generic.IList{ForEvolve.OperationResults.IMessage}" />
+    /// <seealso cref="System.Collections.Generic.IList{T}" />
     public class MessageCollection : IList<IMessage>
     {
         private readonly List<IMessage> _items = new List<IMessage>();
@@ -157,6 +157,7 @@ namespace ForEvolve.OperationResults
         /// <typeparam name="TMessage">The type of message to look for.</typeparam>
         /// <returns>The first message.</returns>
         public TMessage GetFirst<TMessage>()
+            where TMessage : IMessage
         {
             return (TMessage)_items.First(x => x is TMessage);
         }
@@ -167,6 +168,7 @@ namespace ForEvolve.OperationResults
         /// <typeparam name="TMessage">The type of message to look for.</typeparam>
         /// <returns>The last message.</returns>
         public TMessage GetLast<TMessage>()
+            where TMessage : IMessage
         {
             return (TMessage)_items.Last(x => x is TMessage);
         }
@@ -177,26 +179,59 @@ namespace ForEvolve.OperationResults
         /// <typeparam name="TMessage">The type of message to look for.</typeparam>
         /// <returns>The all messages.</returns>
         public IEnumerable<TMessage> GetAll<TMessage>()
+            where TMessage : IMessage
         {
             return _items.Where(x => x is TMessage).Select(x => (TMessage)x);
-        }
-
-        //
-        // TODO: validate how/if we want that done
-        //
-        /// <summary>
-        /// Determines whether this instance contains a message having its <see cref="IMessage.Details"/> of type <typeparamref name="TMessageDetails"/>.
-        /// </summary>
-        /// <typeparam name="TMessageDetails">The type of <see cref="IMessage.Details"/> to search for.</typeparam>
-        /// <returns><c>true</c> if this instance contains a message having its <see cref="IMessage.Details"/> of the specified type; otherwise, <c>false</c>.</returns>
-        private bool ContainsDetails<TMessageDetails>()
-        {
-            return _items.Any(x => x.Is<TMessageDetails>());
         }
 
         private bool HasLevel(OperationMessageLevel level)
         {
             return _items.Any(x => x.Severity == level);
+        }
+    }
+
+    /// <summary>
+    /// Extensions to help handles OperationResults messages.
+    /// </summary>
+    public static class OperationResultsMessageExtensions
+    {
+        /// <summary>
+        /// Filters the messages and returns only those that <see cref="IMessage.Details"/> are of the specified <typeparamref name="TMessageDetails"/> type.
+        /// </summary>
+        /// <typeparam name="TMessage"></typeparam>
+        /// <typeparam name="TMessageDetails"></typeparam>
+        /// <param name="messages"></param>
+        /// <returns>The messages that <see cref="IMessage.Details"/> are of the specified <typeparamref name="TMessageDetails"/> type.</returns>
+        public static IEnumerable<TMessage> HavingDetailsOfType<TMessage, TMessageDetails>(this IEnumerable<TMessage> messages)
+            where TMessage : IMessage
+        {
+            return messages.Where(x => x.Is<TMessageDetails>());
+        }
+
+        /// <summary>
+        /// Determines whether this instance contains a message having its <see cref="IMessage.Details"/> of type <typeparamref name="TMessageDetails"/>.
+        /// </summary>
+        /// <typeparam name="TMessage">The message type that is inputted and outputted back.</typeparam>
+        /// <typeparam name="TMessageDetails">The type of <see cref="IMessage.Details"/> to search for.</typeparam>
+        /// <param name="messages"></param>
+        /// <returns><c>true</c> if the messages instance contains at least a message having its <see cref="IMessage.Details"/> of the specified type; otherwise, <c>false</c>.</returns>
+        public static bool ContainsDetails<TMessage, TMessageDetails>(this IEnumerable<TMessage> messages)
+            where TMessage : IMessage
+        {
+            return messages.Any(x => x.Is<TMessageDetails>());
+        }
+
+        /// <summary>
+        /// Filters the messages and returns their <see cref="IMessage.Details"/> that are of the specified <typeparamref name="TMessageDetails"/> type.
+        /// </summary>
+        /// <typeparam name="TMessageDetails">The type of <see cref="IMessage.Details"/> to search for.</typeparam>
+        /// <param name="messages"></param>
+        /// <returns>The filtered messages <see cref="IMessage.Details"/>.</returns>
+        public static IEnumerable<TMessageDetails> HavingDetailsOfTypeAs<TMessageDetails>(this IEnumerable<IMessage> messages)
+        {
+            return messages
+                .Where(x => x.Is<TMessageDetails>())
+                .Select(x => x.As<TMessageDetails>());
         }
     }
 }
