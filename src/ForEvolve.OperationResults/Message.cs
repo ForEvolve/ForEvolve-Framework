@@ -51,7 +51,7 @@ namespace ForEvolve.OperationResults
             LoadDetails(details, ignoreNull);
         }
 
-        protected void LoadDetails(object details, bool ignoreNull)
+        protected virtual void LoadDetails(object details, bool ignoreNull)
         {
             var properties = TypeDescriptor.GetProperties(details);
             foreach (PropertyDescriptor property in properties)
@@ -65,19 +65,19 @@ namespace ForEvolve.OperationResults
         }
 
         /// <inheritdoc />
-        public bool Is<TType>()
+        public virtual bool Is<TType>()
         {
             return typeof(TType) == Type;
         }
 
         /// <inheritdoc />
-        public bool Is(Type type)
+        public virtual bool Is(Type type)
         {
             return type == Type;
         }
 
         /// <inheritdoc />
-        public TType As<TType>()
+        public virtual TType As<TType>()
         {
             if(!Is<TType>())
             {
@@ -87,7 +87,7 @@ namespace ForEvolve.OperationResults
         }
 
         /// <inheritdoc />
-        public object As(Type type)
+        public virtual object As(Type type)
         {
             if (!Is(type))
             {

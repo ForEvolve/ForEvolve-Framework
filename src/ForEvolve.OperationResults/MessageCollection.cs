@@ -126,6 +126,64 @@ namespace ForEvolve.OperationResults
             return HasLevel(OperationMessageLevel.Information);
         }
 
+        //
+        // TODO: those next methods could maybe become extensions instead?
+        //
+        /// <summary>
+        /// Determines whether this instance contains a message of type <typeparamref name="TMessage"/>.
+        /// </summary>
+        /// <typeparam name="TMessage">The type of message to look for.</typeparam>
+        /// <returns><c>true</c> if this instance contains a message of the specified type; otherwise, <c>false</c>.</returns>
+        public bool ContainsMessageTyped<TMessage>() 
+            where TMessage : IMessage
+        {
+            return _items.Any(x => x is TMessage);
+        }
+
+        /// <summary>
+        /// Gets the single message of type <typeparamref name="TMessage"/>.
+        /// </summary>
+        /// <typeparam name="TMessage">The type of message to look for.</typeparam>
+        /// <returns>The single message.</returns>
+        public TMessage GetSingle<TMessage>()
+            where TMessage : IMessage
+        {
+            return (TMessage)_items.Single(x => x is TMessage);
+        }
+
+        /// <summary>
+        /// Gets the first message of type <typeparamref name="TMessage"/>.
+        /// </summary>
+        /// <typeparam name="TMessage">The type of message to look for.</typeparam>
+        /// <returns>The first message.</returns>
+        public TMessage GetFirst<TMessage>()
+        {
+            return (TMessage)_items.First(x => x is TMessage);
+        }
+
+        /// <summary>
+        /// Gets all messages of type <typeparamref name="TMessage"/>.
+        /// </summary>
+        /// <typeparam name="TMessage">The type of message to look for.</typeparam>
+        /// <returns>The all messages.</returns>
+        public IEnumerable<TMessage> GetAll<TMessage>()
+        {
+            return _items.Where(x => x is TMessage).Select(x => (TMessage)x);
+        }
+
+        //
+        // TODO: validate how/if we want that done
+        //
+        /// <summary>
+        /// Determines whether this instance contains a message having its <see cref="IMessage.Details"/> of type <typeparamref name="TMessageDetails"/>.
+        /// </summary>
+        /// <typeparam name="TMessageDetails">The type of <see cref="IMessage.Details"/> to search for.</typeparam>
+        /// <returns><c>true</c> if this instance contains a message having its <see cref="IMessage.Details"/> of the specified type; otherwise, <c>false</c>.</returns>
+        private bool ContainsDetails<TMessageDetails>()
+        {
+            return _items.Any(x => x.Is<TMessageDetails>());
+        }
+
         private bool HasLevel(OperationMessageLevel level)
         {
             return _items.Any(x => x.Severity == level);
