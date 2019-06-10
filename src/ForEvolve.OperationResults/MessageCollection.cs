@@ -162,6 +162,16 @@ namespace ForEvolve.OperationResults
         }
 
         /// <summary>
+        /// Gets the last message of type <typeparamref name="TMessage"/>.
+        /// </summary>
+        /// <typeparam name="TMessage">The type of message to look for.</typeparam>
+        /// <returns>The last message.</returns>
+        public TMessage GetLast<TMessage>()
+        {
+            return (TMessage)_items.Last(x => x is TMessage);
+        }
+
+        /// <summary>
         /// Gets all messages of type <typeparamref name="TMessage"/>.
         /// </summary>
         /// <typeparam name="TMessage">The type of message to look for.</typeparam>
