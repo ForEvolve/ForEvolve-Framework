@@ -206,23 +206,6 @@ namespace ForEvolve.OperationResults
         }
     }
 
-    public class ExceptionMessage : ProblemDetailsMessage
-    {
-        [JsonIgnore]
-        public Exception Exception { get; }
-
-        public ExceptionMessage(Exception exception)
-            : base(OperationMessageLevel.Error)
-        {
-            Exception = exception ?? throw new ArgumentNullException(nameof(exception));
-            LoadProblemDetails(new ProblemDetails
-            {
-                Title = exception.GetType().Name,
-                Detail = exception.Message
-            });
-        }
-    }
-
 
     /// <summary>
     /// A machine-readable format for specifying errors in HTTP API responses based on https://tools.ietf.org/html/rfc7807.
