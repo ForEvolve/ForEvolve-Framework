@@ -233,5 +233,19 @@ namespace ForEvolve.OperationResults
                 .Where(x => x.Is<TMessageDetails>())
                 .Select(x => x.As<TMessageDetails>());
         }
+
+        /// <summary>
+        /// Filters exception messages and returns their <see cref="ExceptionMessage.Exception"/> that are of the specified <typeparamref name="TException"/> type.
+        /// </summary>
+        /// <typeparam name="TException">The type of <see cref="Exception"/> to search for.</typeparam>
+        /// <param name="messages"></param>
+        /// <returns>The filtered messages <see cref="ExceptionMessage.Exception"/>.</returns>
+        public static IEnumerable<TException> GetExceptionsOfType<TException>(this MessageCollection messages)
+            where TException : Exception
+        {
+            return messages
+                .GetAll<ExceptionMessage>()
+                .HavingDetailsOfTypeAs<TException>();
+        }
     }
 }
