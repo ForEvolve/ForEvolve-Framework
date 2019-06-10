@@ -134,7 +134,7 @@ namespace ForEvolve.OperationResults
         /// </summary>
         /// <typeparam name="TMessage">The type of message to look for.</typeparam>
         /// <returns><c>true</c> if this instance contains a message of the specified type; otherwise, <c>false</c>.</returns>
-        public bool ContainsMessageTyped<TMessage>() 
+        public bool Contains<TMessage>() 
             where TMessage : IMessage
         {
             return _items.Any(x => x is TMessage);
