@@ -43,6 +43,8 @@ namespace ForEvolve.OperationResults.MediatR
         }
 
         /// <summary>
+        /// Automatic validators discovery and automatic validation of commands/queries into the MediatR pipeline
+        /// 
         /// Shortcut that calls <see cref="AddValidators"/> and <see cref="AddValidationBehaviors"/>.
         /// </summary>
         /// <param name="selector">The selector used to scan for classes.</param>

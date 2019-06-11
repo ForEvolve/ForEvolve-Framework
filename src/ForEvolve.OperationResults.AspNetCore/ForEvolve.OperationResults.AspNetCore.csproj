@@ -2,10 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>This package contains an operation result MVC filters that translate them automatically.</Description>
+    <Description>This package contains an operation result helpers for Asp.Net Core MVC and MediatR; for example: automatic validation.</Description>
     <PackageTags>forevolve,aspnetcore,mvc,filters,asp.net,core,aspnet,asp,operation,result,results,message,exception</PackageTags>
   </PropertyGroup>
-
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.4.0" />
@@ -14,7 +13,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(ForEvolveNetCoreVersion)" />
     <PackageReference Include="Scrutor" Version="3.0.2" />
   </ItemGroup>
-
 
   <ItemGroup>
     <ProjectReference Include="..\ForEvolve.OperationResults\ForEvolve.OperationResults.csproj" />
