@@ -29,5 +29,29 @@ namespace ForEvolve.OperationResults.MediatR
                 .As(typeof(IPipelineBehavior<,>))
                 .WithTransientLifetime();
         }
+
+        /// <summary>
+        /// Scans and registers all <see cref="IValidator{T}"/>.
+        /// </summary>
+        /// <param name="selector">The selector used to scan for classes.</param>
+        /// <returns>The selector.</returns>
+        public static IImplementationTypeSelector AddValidators(this IImplementationTypeSelector selector)
+        {
+            return selector.AddClasses(classes => classes.AssignableTo(typeof(IValidator<>)))
+                .AsImplementedInterfaces()
+                .WithScopedLifetime();
+        }
+
+        /// <summary>
+        /// Shortcut that calls <see cref="AddValidators"/> and <see cref="AddValidationBehaviors"/>.
+        /// </summary>
+        /// <param name="selector">The selector used to scan for classes.</param>
+        /// <returns>The selector.</returns>
+        public static IImplementationTypeSelector AddValidatorsAndBehaviors(this IImplementationTypeSelector selector)
+        {
+            return selector
+                .AddValidators()
+                .AddValidationBehaviors();
+        }
     }
 }
