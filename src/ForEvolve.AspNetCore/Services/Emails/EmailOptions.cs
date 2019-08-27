@@ -14,8 +14,8 @@ namespace ForEvolve.AspNetCore.Services
         public void SetupSmtpClient(SmtpClient client)
         {
             if (Smtp == null) { return; }
-            client.Credentials = Smtp.Credentials;
             client.UseDefaultCredentials = Smtp.UseDefaultCredentials.GetValueOrDefault(client.UseDefaultCredentials);
+            client.Credentials = Smtp.Credentials;
             client.Timeout = Smtp.Timeout.GetValueOrDefault(client.Timeout);
             client.TargetName = Smtp.TargetName ?? client.TargetName;
             client.Port = Smtp.Port.GetValueOrDefault(client.Port);
