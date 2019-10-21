@@ -5,12 +5,21 @@
     <Description>Multiple ASP.NET Core utilities, including email, configuration, access to HTTP headers, etc.</Description>
     <PackageTags>forevolve,aspnetcore,asp.net,core,aspnet,asp,email,configuration,http,json,middleware,operation,result,view,render</PackageTags>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="$(ForEvolveNetCoreVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(ForEvolveNetCoreVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="$(ForEvolveIdentityVersion)" />
-  </ItemGroup>
+
+  <Choose>
+    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' ">
+      <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore" Version="$(ForEvolveNetCoreVersion)" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(ForEvolveNetCoreVersion)" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity" Version="$(ForEvolveIdentityVersion)" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
 
   <ItemGroup>
     <ProjectReference Include="..\ForEvolve.Contracts\ForEvolve.Contracts.csproj" />

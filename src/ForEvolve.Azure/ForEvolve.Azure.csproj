@@ -4,8 +4,21 @@
     <Description>Microsoft Azure utilities, including table storage and blob object repositories, easy file upload to block blob and easy access to KeyVault.</Description>
     <PackageTags>forevolve,azure,storage,table,blob,queue,key,vault,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
+
+  <Choose>
+    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' ">
+      <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore" Version="$(ForEvolveNetCoreVersion)" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore" Version="$(ForEvolveNetCoreVersion)" />
     <PackageReference Include="Microsoft.Azure.KeyVault" Version="2.3.2" />
     <PackageReference Include="Microsoft.IdentityModel.Clients.ActiveDirectory" Version="3.19.4" />
     <PackageReference Include="WindowsAzure.Storage" Version="9.1.1" />
