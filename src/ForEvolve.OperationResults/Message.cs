@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 
@@ -15,6 +16,7 @@ namespace ForEvolve.OperationResults
         /// Initializes a new instance of the <see cref="Message"/> class.
         /// </summary>
         /// <param name="severity">The severity.</param>
+        /// <param name="type">The message type.</param>
         public Message(OperationMessageLevel severity)
             : this(severity, new Dictionary<string, object>()) { }
 
@@ -23,11 +25,13 @@ namespace ForEvolve.OperationResults
         /// </summary>
         /// <param name="severity">The severity.</param>
         /// <param name="details">The details.</param>
+        /// <param name="type">The message type.</param>
         /// <exception cref="ArgumentNullException">details</exception>
-        public Message(OperationMessageLevel severity, IDictionary<string, object> details)
+        public Message(OperationMessageLevel severity, IDictionary<string, object> details, Type type = null)
         {
             Severity = severity;
             Details = details ?? throw new ArgumentNullException(nameof(details));
+            Type = type;
         }
 
         /// <summary>
@@ -41,10 +45,13 @@ namespace ForEvolve.OperationResults
             : this(severity)
         {
             if (details == null) { throw new ArgumentNullException(nameof(details)); }
+            Type = details.GetType();
+            IsAnonymous = Type.Name.Contains("AnonymousType");
+            OriginalObject = details;
             LoadDetails(details, ignoreNull);
         }
 
-        protected void LoadDetails(object details, bool ignoreNull)
+        protected virtual void LoadDetails(object details, bool ignoreNull)
         {
             var properties = TypeDescriptor.GetProperties(details);
             foreach (PropertyDescriptor property in properties)
@@ -58,10 +65,76 @@ namespace ForEvolve.OperationResults
         }
 
         /// <inheritdoc />
+        public virtual bool Is<TType>()
+        {
+            return typeof(TType) == Type;
+        }
+
+        /// <inheritdoc />
+        public virtual bool Is(Type type)
+        {
+            return type == Type;
+        }
+
+        /// <inheritdoc />
+        public virtual TType As<TType>()
+        {
+            if(!Is<TType>())
+            {
+                throw new TypeMismatchException(this, typeof(TType));
+            }
+            return (TType)As(typeof(TType));
+        }
+
+        /// <inheritdoc />
+        public virtual object As(Type type)
+        {
+            if (!Is(type))
+            {
+                throw new TypeMismatchException(this, type);
+            }
+            if (CanReturnTheOriginalObject(type))
+            {
+                return OriginalObject;
+            }
+            var result = Activator­.CreateInstance(type);
+            var properties = TypeDescriptor.GetProperties(result);
+            foreach (PropertyDescriptor property in properties)
+            {
+                if (Details.ContainsKey(property.Name))
+                {
+                    property.SetValue(result, Details[property.Name]);
+                }
+            }
+            return result;
+        }
+
+        private bool CanReturnTheOriginalObject(Type type)
+        {
+            return OriginalObject != null && type.IsAssignableFrom(OriginalObject.GetType());
+        }
+
+        /// <inheritdoc />
         public virtual OperationMessageLevel Severity { get; }
 
         /// <inheritdoc />
         public virtual IDictionary<string, object> Details { get; }
+
+        /// <inheritdoc />
+        [JsonIgnore]
+        public virtual Type Type { get; }
+
+        /// <summary>
+        /// Gets if the <see cref="Type"/> was an anonymous type.
+        /// </summary>
+        [JsonIgnore]
+        public virtual bool IsAnonymous { get; }
+
+        /// <summary>
+        /// Gets the original object that was used to load the Details, if any.
+        /// </summary>
+        [JsonIgnore]
+        public virtual object OriginalObject { get; }
     }
 
     /// <summary>
@@ -130,21 +203,6 @@ namespace ForEvolve.OperationResults
             {
                 Details.Add(item);
             }
-        }
-    }
-
-
-    public class ExceptionMessage : ProblemDetailsMessage
-    {
-        public ExceptionMessage(Exception exception)
-            : base(OperationMessageLevel.Error)
-        {
-            if (exception == null) { throw new ArgumentNullException(nameof(exception)); }
-            LoadProblemDetails(new ProblemDetails
-            {
-                Title = exception.GetType().Name,
-                Detail = exception.Message
-            });
         }
     }
 

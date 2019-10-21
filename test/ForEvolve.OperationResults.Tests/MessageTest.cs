@@ -35,6 +35,7 @@ namespace ForEvolve.OperationResults
             }
 
         }
+
         public class Ctor2 : MessageTest
         {
             // Arrange
@@ -125,10 +126,69 @@ namespace ForEvolve.OperationResults
                     Assert.Throws<ArgumentNullException>("details", () => new Message(_severity, null, IgnoreNull));
                 }
 
-                private class SomeClass
+                [Fact]
+                public void Should_set_the_Type_when_the_details_is_typed()
                 {
-                    public string SomeProp { get; set; }
-                    public bool SomeCheck { get; set; }
+                    // Arrange
+                    var details = new SomeClass();
+
+                    // Act
+                    var obj = new Message(_severity, details, IgnoreNull);
+
+                    // Assert
+                    Assert.Equal(typeof(SomeClass), obj.Type);
+                }
+
+                [Fact]
+                public void Should_set_the_Type_when_the_details_is_anonymous()
+                {
+                    // Arrange
+                    var details = new { SomeProp = true };
+
+                    // Act
+                    var obj = new Message(_severity, details, IgnoreNull);
+
+                    // Assert
+                    Assert.Equal(details.GetType(), obj.Type);
+                }
+
+                [Fact]
+                public void Should_set_the_IsAnonymous_to_false_when_the_details_is_typed()
+                {
+                    // Arrange
+                    var details = new SomeClass();
+
+                    // Act
+                    var obj = new Message(_severity, details, IgnoreNull);
+
+                    // Assert
+                    Assert.False(obj.IsAnonymous);
+                }
+
+                [Fact]
+                public void Should_set_the_IsAnonymous_to_true_when_the_details_is_an_anonymous_type()
+                {
+                    // Arrange
+                    var details = new { SomeProp = true };
+
+                    // Act
+                    var obj = new Message(_severity, details, IgnoreNull);
+
+                    // Assert
+                    Assert.True(obj.IsAnonymous);
+                }
+
+                [Fact]
+                public void Should_set_the_OriginalObject()
+                {
+                    // Arrange
+                    var details = new SomeClass();
+
+                    // Act
+                    var obj = new Message(_severity, details, IgnoreNull);
+
+                    // Assert
+                    Assert.Same(obj.OriginalObject, details);
                 }
 
                 private void AssertDetailsKeyValue(KeyValuePair<string, object> pair, string expectedKey, object expectedValue)
@@ -147,6 +207,193 @@ namespace ForEvolve.OperationResults
             {
                 protected override bool IgnoreNull => false;
             }
+        }
+
+        public class Is_TType : MessageTest
+        {
+            [Fact(Skip = "This would need a good design to implement.")]
+            public void Should_return_true_when_the_types_are_compatible()
+            {
+                // Arrange
+
+
+                // Act
+
+
+                // Assert
+                throw new NotImplementedException();
+            }
+
+            [Fact]
+            public void Should_return_true_when_the_types_are_the_same()
+            {
+                // Arrange
+                var details = new SomeClass { SomeCheck = true, SomeProp = "Value!" };
+                var sut = new Message(_severity, details);
+
+                // Act
+                var result = sut.Is<SomeClass>();
+
+                // Assert
+                Assert.True(result);
+            }
+
+            [Fact]
+            public void Should_return_false_when_the_types_are_not_the_same()
+            {
+                // Arrange
+                var details = new SomeClass { SomeCheck = true, SomeProp = "Value!" };
+                var sut = new Message(_severity, details);
+
+                // Act
+                var result = sut.Is<SomeOtherClass>();
+
+                // Assert
+                Assert.False(result);
+            }
+        }
+
+        public class Is_Type : MessageTest
+        {
+            [Fact(Skip = "This would need a good design to implement.")]
+            public void Should_return_true_when_the_types_are_compatible()
+            {
+                // Arrange
+
+
+                // Act
+
+
+                // Assert
+                throw new NotImplementedException();
+            }
+
+            [Fact]
+            public void Should_return_true_when_the_types_are_the_same()
+            {
+                // Arrange
+                var details = new SomeClass { SomeCheck = true, SomeProp = "Value!" };
+                var sut = new Message(_severity, details);
+
+                // Act
+                var result = sut.Is(typeof(SomeClass));
+
+                // Assert
+                Assert.True(result);
+            }
+
+            [Fact]
+            public void Should_return_false_when_the_types_are_not_the_same()
+            {
+                // Arrange
+                var details = new SomeClass { SomeCheck = true, SomeProp = "Value!" };
+                var sut = new Message(_severity, details);
+
+                // Act
+                var result = sut.Is(typeof(SomeOtherClass));
+
+                // Assert
+                Assert.False(result);
+            }
+        }
+
+        public class As_TType : MessageTest
+        {
+            [Fact]
+            public void Should_convert_Details_back_to_the_specified_type()
+            {
+                // Arrange
+                var details = new SomeClass { SomeCheck = true, SomeProp = "Value!" };
+                var sut = new Message(_severity, details);
+
+                // Act
+                var result = sut.As<SomeClass>();
+
+                // Assert
+                Assert.Equal(details.SomeCheck, result.SomeCheck);
+                Assert.Equal(details.SomeProp, result.SomeProp);
+            }
+
+            [Fact]
+            public void Should_throw_a_TypeMismatchException_when_types_are_incompatible()
+            {
+                // Arrange
+                var details = new SomeClass { SomeCheck = true, SomeProp = "Value!" };
+                var sut = new Message(_severity, details);
+
+                // Act & Assert
+                Assert.Throws<TypeMismatchException>(() => sut.As<SomeOtherClass>());
+            }
+
+            [Fact]
+            public void Should_return_the_OriginalObject_when_one_exists()
+            {
+                // Arrange
+                var details = new SomeClass { SomeCheck = true, SomeProp = "Value!" };
+                var sut = new Message(_severity, details);
+
+                // Act
+                var result = sut.As<SomeClass>();
+
+                // Assert
+                Assert.Same(sut.OriginalObject, result);
+            }
+        }
+
+        public class As_Type : MessageTest
+        {
+            [Fact]
+            public void Should_convert_Details_back_to_the_specified_type()
+            {
+                // Arrange
+                var details = new SomeClass { SomeCheck = true, SomeProp = "Value!" };
+                var sut = new Message(_severity, details);
+
+                // Act
+                var result = sut.As(typeof(SomeClass));
+
+                // Assert
+                var typedResult = Assert.IsType<SomeClass>(result);
+                Assert.Equal(details.SomeCheck, typedResult.SomeCheck);
+                Assert.Equal(details.SomeProp, typedResult.SomeProp);
+            }
+
+            [Fact]
+            public void Should_throw_a_TypeMismatchException_when_types_are_incompatible()
+            {
+                // Arrange
+                var details = new SomeClass { SomeCheck = true, SomeProp = "Value!" };
+                var sut = new Message(_severity, details);
+
+                // Act & Assert
+                Assert.Throws<TypeMismatchException>(() => sut.As(typeof(SomeOtherClass)));
+            }
+
+            [Fact]
+            public void Should_return_the_OriginalObject_when_one_exists()
+            {
+                // Arrange
+                var details = new SomeClass { SomeCheck = true, SomeProp = "Value!" };
+                var sut = new Message(_severity, details);
+
+                // Act
+                var result = sut.As(typeof(SomeClass));
+
+                // Assert
+                Assert.Same(sut.OriginalObject, result);
+            }
+        }
+
+        private class SomeClass
+        {
+            public string SomeProp { get; set; }
+            public bool SomeCheck { get; set; }
+        }
+
+        private class SomeOtherClass
+        {
+            public int SomeProp { get; set; }
+            public bool SomeOtherProps { get; set; }
         }
     }
 }

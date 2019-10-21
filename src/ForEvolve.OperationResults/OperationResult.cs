@@ -23,12 +23,12 @@ namespace ForEvolve.OperationResults
 
         #region OperationResult Factory Methods
 
-        public static OperationResult Success()
+        public static IOperationResult Success()
         {
             return new OperationResult();
         }
 
-        public static OperationResult Failure(params IMessage[] messages)
+        public static IOperationResult Failure(params IMessage[] messages)
         {
             if (messages == null || messages.Length == 0) { throw new ArgumentNullException(nameof(messages)); }
             var result = new OperationResult();
@@ -36,19 +36,19 @@ namespace ForEvolve.OperationResults
             return result;
         }
 
-        public static OperationResult Failure(Exception exception)
+        public static IOperationResult Failure(Exception exception)
         {
             var result = new OperationResult();
             result.Messages.Add(new ExceptionMessage(exception));
             return result;
         }
 
-        public static OperationResult Failure(ProblemDetails problemDetails)
+        public static IOperationResult Failure(ProblemDetails problemDetails)
         {
             return Failure(problemDetails, OperationMessageLevel.Error);
         }
 
-        public static OperationResult Failure(ProblemDetails problemDetails, OperationMessageLevel severity)
+        public static IOperationResult Failure(ProblemDetails problemDetails, OperationMessageLevel severity)
         {
             var result = new OperationResult();
             result.Messages.Add(new ProblemDetailsMessage(problemDetails, severity));
@@ -59,36 +59,36 @@ namespace ForEvolve.OperationResults
 
         #region OperationResult<TValue> Factory Methods
 
-        public static OperationResult<TValue> Success<TValue>()
+        public static IOperationResult<TValue> Success<TValue>()
         {
             return new OperationResult<TValue>();
         }
 
-        public static OperationResult<TValue> Success<TValue>(TValue value)
+        public static IOperationResult<TValue> Success<TValue>(TValue value)
         {
             return new OperationResult<TValue> { Value = value };
         }
 
-        public static OperationResult<TValue> Failure<TValue>(params IMessage[] messages)
+        public static IOperationResult<TValue> Failure<TValue>(params IMessage[] messages)
         {
             var result = new OperationResult<TValue>();
             result.Messages.AddRange(messages);
             return result;
         }
 
-        public static OperationResult<TValue> Failure<TValue>(Exception exception)
+        public static IOperationResult<TValue> Failure<TValue>(Exception exception)
         {
             var result = new OperationResult<TValue>();
             result.Messages.Add(new ExceptionMessage(exception));
             return result;
         }
 
-        public static OperationResult<TValue> Failure<TValue>(ProblemDetails problemDetails)
+        public static IOperationResult<TValue> Failure<TValue>(ProblemDetails problemDetails)
         {
             return Failure<TValue>(problemDetails, OperationMessageLevel.Error);
         }
 
-        public static OperationResult<TValue> Failure<TValue>(ProblemDetails problemDetails, OperationMessageLevel severity)
+        public static IOperationResult<TValue> Failure<TValue>(ProblemDetails problemDetails, OperationMessageLevel severity)
         {
             var result = new OperationResult<TValue>();
             result.Messages.Add(new ProblemDetailsMessage(problemDetails, severity));
@@ -120,6 +120,52 @@ namespace ForEvolve.OperationResults
 
     public static class OperationResultExtensions
     {
+        #region Conversion operators
+
+        public static TOperationResult ConvertTo<TOperationResult>(
+            this IOperationResult operationResult)
+            where TOperationResult : IOperationResult
+        {
+            TOperationResult result;
+            var type = typeof(TOperationResult);
+            var genericOperationResultType = typeof(OperationResult<>);
+            if (type.IsGenericType && type.Name.Equals(genericOperationResultType.Name))
+            {
+                var genericArgs = type.GetGenericArguments();
+                var finalType = genericOperationResultType.MakeGenericType(genericArgs);
+                result = (TOperationResult)Activator.CreateInstance(finalType);
+            }
+            else
+            {
+                var targetType = typeof(TOperationResult);
+                if (targetType.IsGenericType)
+                {
+                    var genericImplementationType = typeof(OperationResult<>);
+                    var genericArgs = targetType.GetGenericArguments();
+                    var finalType = genericImplementationType.MakeGenericType(genericArgs);
+                    result = (TOperationResult)Activator.CreateInstance(finalType);
+                }
+                else
+                {
+                    var nonGenericResult = new OperationResult();
+                    result = (TOperationResult)(IOperationResult)nonGenericResult;
+                }
+            }
+            result.Messages.AddRange(operationResult.Messages);
+            return result;
+        }
+
+        public static IOperationResult<TValue> ConvertTo<TOperationResult, TValue>(
+            this IOperationResult operationResult)
+            where TOperationResult : IOperationResult<TValue>
+        {
+            var genericResult = new OperationResult<TValue>();
+            genericResult.Messages.AddRange(operationResult.Messages);
+            return genericResult;
+        }
+
+        #endregion
+
         public static TOperationResult On<TOperationResult>(this TOperationResult operationResult, 
             Action<TOperationResult> success = null, 
             Action<TOperationResult> failure = null
@@ -166,7 +212,7 @@ namespace ForEvolve.OperationResults
     /// </summary>
     class MyClass
     {
-        public OperationResult Operation()
+        public IOperationResult Operation()
         {
             return OperationResult.Success();
         }

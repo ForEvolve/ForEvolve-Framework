@@ -1,21 +1,47 @@
 <Project>
   <PropertyGroup>
     <!-- ForEvolve packages -->
-    <ForEvolvePackagesVersion Condition="'$(FOREVOLVE_PACKAGES_VERSION)'==''">[1.0.0-RC-1,2.0)</ForEvolvePackagesVersion>
-    <ForEvolvePhantomJsDependenciesPackagesVersion Condition="'$(FOREVOLVE_PHANTOMJS_DEPENDENCIES_PACKAGES_VERSION)'==''">1.0.0-RC-1</ForEvolvePhantomJsDependenciesPackagesVersion>
+    <ForEvolvePackagesVersion Condition="'$(FOREVOLVE_PACKAGES_VERSION)'==''">[2.0.0,3.0)</ForEvolvePackagesVersion>
+    <ForEvolvePhantomJsDependenciesPackagesVersion Condition="'$(FOREVOLVE_PHANTOMJS_DEPENDENCIES_PACKAGES_VERSION)'==''">1.0.0</ForEvolvePhantomJsDependenciesPackagesVersion>
     <ForEvolveTestingVersion Condition="'$(FOREVOLVE_TESTING_VERSION)'==''">[1.0.0-CI-677,2.0)</ForEvolveTestingVersion>
-  
-    <!-- Source packages -->
-    <ForEvolveNetCoreVersion Condition="'$(FOREVOLVE_ASPNETCORE_VERSION)'==''">[2.2.0,3.0)</ForEvolveNetCoreVersion>
-    <ForEvolveIdentityVersion Condition="'$(FOREVOLVE_IDENTITY_VERSION)'==''">[2.2.0,3.0)</ForEvolveIdentityVersion>
 
-    <!-- Tests packages -->
-    <ForEvolveAspNetCoreTestHostVersion Condition="'$(FOREVOLVE_ASPNETCORE_TESTHOST_VERSION)'==''">2.2.0</ForEvolveAspNetCoreTestHostVersion>
+    <!-- Versioning helpers -->
+    <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0</ForEvolveTargetFrameworks>
+  </PropertyGroup>
+
+  <!-- Source packages -->
+  <Choose>
+    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' ">
+      <PropertyGroup>
+        <ForEvolveNetCoreVersion Condition="'$(FOREVOLVE_ASPNETCORE_VERSION)'==''">[3.0.0,4.0)</ForEvolveNetCoreVersion>
+        <ForEvolveIdentityVersion Condition="'$(FOREVOLVE_IDENTITY_VERSION)'==''">[3.0.0,4.0)</ForEvolveIdentityVersion>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <ForEvolveNetCoreVersion Condition="'$(FOREVOLVE_ASPNETCORE_VERSION)'==''">[2.2.0,3.0)</ForEvolveNetCoreVersion>
+        <ForEvolveIdentityVersion Condition="'$(FOREVOLVE_IDENTITY_VERSION)'==''">[2.2.0,3.0)</ForEvolveIdentityVersion>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
+  <!-- Tests packages -->
+  <PropertyGroup>
     <ForEvolveXunitVersion Condition="'$(FOREVOLVE_XUNIT_VERSION)'==''">2.4.1</ForEvolveXunitVersion>
     <ForEvolveMoqVersion Condition="'$(FOREVOLVE_MOQ_VERSION)'==''">4.10.1</ForEvolveMoqVersion>
     <ForEvolveTestSdkVersion Condition="'$(FOREVOLVE_TEST_SDK_VERSION)'==''">16.0.1</ForEvolveTestSdkVersion>
-
-    <!-- Versioning helpers -->
-    <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.0;netcoreapp2.1;netcoreapp2.2</ForEvolveTargetFrameworks>
   </PropertyGroup>
+  <Choose>
+    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' ">
+      <PropertyGroup>
+        <ForEvolveAspNetCoreTestHostVersion Condition="'$(FOREVOLVE_ASPNETCORE_TESTHOST_VERSION)'==''">3.0.0</ForEvolveAspNetCoreTestHostVersion>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup>
+        <ForEvolveAspNetCoreTestHostVersion Condition="'$(FOREVOLVE_ASPNETCORE_TESTHOST_VERSION)'==''">2.2.0</ForEvolveAspNetCoreTestHostVersion>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
 </Project>
