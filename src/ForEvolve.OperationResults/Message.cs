@@ -79,7 +79,7 @@ namespace ForEvolve.OperationResults
         /// <inheritdoc />
         public virtual TType As<TType>()
         {
-            if(!Is<TType>())
+            if (!Is<TType>())
             {
                 throw new TypeMismatchException(this, typeof(TType));
             }
@@ -121,19 +121,28 @@ namespace ForEvolve.OperationResults
         public virtual IDictionary<string, object> Details { get; }
 
         /// <inheritdoc />
-        [JsonIgnore]
+#if NETCOREAPP_3
+        [System.Text.Json.Serialization.JsonIgnore]
+#endif
+        [Newtonsoft.Json.JsonIgnore]
         public virtual Type Type { get; }
 
         /// <summary>
         /// Gets if the <see cref="Type"/> was an anonymous type.
         /// </summary>
-        [JsonIgnore]
+#if NETCOREAPP_3
+        [System.Text.Json.Serialization.JsonIgnore]
+#endif
+        [Newtonsoft.Json.JsonIgnore]
         public virtual bool IsAnonymous { get; }
 
         /// <summary>
         /// Gets the original object that was used to load the Details, if any.
         /// </summary>
-        [JsonIgnore]
+#if NETCOREAPP_3
+        [System.Text.Json.Serialization.JsonIgnore]
+#endif
+        [Newtonsoft.Json.JsonIgnore]
         public virtual object OriginalObject { get; }
     }
 

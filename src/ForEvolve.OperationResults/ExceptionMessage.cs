@@ -11,7 +11,10 @@ namespace ForEvolve.OperationResults
         /// <summary>
         /// Get the exception represented by this message.
         /// </summary>
-        [JsonIgnore]
+#if NETCOREAPP_3
+        [System.Text.Json.Serialization.JsonIgnore]
+#endif
+        [Newtonsoft.Json.JsonIgnore]
         public Exception Exception { get; }
 
         /// <summary>

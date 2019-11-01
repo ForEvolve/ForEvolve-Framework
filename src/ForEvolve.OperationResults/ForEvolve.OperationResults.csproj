@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>$(ForEvolveTargetFrameworks)</TargetFrameworks>
     <Description>This package contains an operation result generic implementation that should fits most needs.</Description>
     <PackageTags>forevolve,aspnetcore,asp.net,core,aspnet,asp,operation,result,results,message,exception</PackageTags>
   </PropertyGroup>
