@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Internal;
 using Microsoft.Extensions.Options;
 using Moq;
 using System;
@@ -41,10 +40,12 @@ namespace ForEvolve.OperationResults.Standardizer
             _optionsMock.Setup(x => x.CurrentValue).Returns(_options);
 
             var logger = new ServiceCollection()
-                .AddLogging()
+                .AddLogging(builder =>
+                {
+                    builder.AddDebug();
+                })
                 .BuildServiceProvider()
                 .GetService<ILoggerFactory>()
-                .AddDebug()
                 .CreateLogger<DefaultOperationResultStandardizer>();
 
             sut = new DefaultOperationResultStandardizer(
