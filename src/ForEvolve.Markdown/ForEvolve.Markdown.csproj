@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>$(ForEvolveTargetFrameworks)</TargetFrameworks>
     <Description>Allows consumers to easily convert strings to Markdown using the `IMarkdownConverter` interface. Contains a markdown wrapper around `lunet-io/markdig`.</Description>
     <PackageTags>forevolve,markdown,markdig,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>

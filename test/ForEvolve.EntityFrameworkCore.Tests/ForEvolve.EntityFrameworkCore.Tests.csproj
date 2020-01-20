@@ -2,7 +2,7 @@
   
   <PropertyGroup>
     <RootNamespace>ForEvolve.EntityFrameworkCore</RootNamespace>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>$(ForEvolveTestTargetFramework)</TargetFramework>
   </PropertyGroup>
   
   <ItemGroup>

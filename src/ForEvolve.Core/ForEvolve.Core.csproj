@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>$(ForEvolveTargetFrameworks)</TargetFrameworks>
     <Description>ForEvolve Framework core classes.</Description>
     <PackageTags>forevolve,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
     <RootNamespace>ForEvolve</RootNamespace>

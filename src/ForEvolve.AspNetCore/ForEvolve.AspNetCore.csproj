@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>$(ForEvolveTargetFrameworks)</TargetFrameworks>
     <Description>Multiple ASP.NET Core utilities, including email, configuration, access to HTTP headers, etc.</Description>
     <PackageTags>forevolve,aspnetcore,asp.net,core,aspnet,asp,email,configuration,http,json,middleware,operation,result,view,render</PackageTags>
   </PropertyGroup>
 
   <Choose>
-    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' ">
+    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' or '$(TargetFramework)'=='netcoreapp3.1' ">
       <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
       </ItemGroup>

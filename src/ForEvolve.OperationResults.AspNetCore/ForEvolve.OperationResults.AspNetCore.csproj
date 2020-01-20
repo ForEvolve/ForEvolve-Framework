@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>$(ForEvolveTargetFrameworks)</TargetFrameworks>
     <Description>This package contains an operation result helpers for Asp.Net Core MVC and MediatR; for example: automatic validation.</Description>
     <PackageTags>forevolve,aspnetcore,mvc,filters,asp.net,core,aspnet,asp,operation,result,results,message,exception</PackageTags>
   </PropertyGroup>
@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <Choose>
-    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' ">
+    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' or '$(TargetFramework)'=='netcoreapp3.1' ">
       <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
       </ItemGroup>

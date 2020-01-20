@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>$(ForEvolveTargetFrameworks)</TargetFrameworks>
     <Description>Microsoft Azure utilities, including table storage and blob object repositories, easy file upload to block blob and easy access to KeyVault.</Description>
     <PackageTags>forevolve,azure,storage,table,blob,queue,key,vault,aspnetcore,asp.net,core,aspnet,asp</PackageTags>
   </PropertyGroup>
 
   <Choose>
-    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' ">
+    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' or '$(TargetFramework)'=='netcoreapp3.1' ">
       <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
       </ItemGroup>
