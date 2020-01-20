@@ -11,7 +11,7 @@ namespace ForEvolve.OperationResults
         /// <summary>
         /// Get the exception represented by this message.
         /// </summary>
-#if NETCOREAPP_3
+#if SYSTEM_TEXT_JSON
         [System.Text.Json.Serialization.JsonIgnore]
 #endif
         [Newtonsoft.Json.JsonIgnore]
@@ -33,9 +33,15 @@ namespace ForEvolve.OperationResults
         }
 
         /// <inheritdoc />
+#if SYSTEM_TEXT_JSON
+        [System.Text.Json.Serialization.JsonIgnore]
+#endif
         public override Type Type => Exception.GetType();
 
         /// <inheritdoc />
+#if SYSTEM_TEXT_JSON
+        [System.Text.Json.Serialization.JsonIgnore]
+#endif
         public override object OriginalObject => Exception;
     }
 }

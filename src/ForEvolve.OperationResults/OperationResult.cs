@@ -10,9 +10,15 @@ namespace ForEvolve.OperationResults
     public class OperationResult : IOperationResult
     {
         /// <inheritdoc />
+#if SYSTEM_TEXT_JSON
+        [System.Text.Json.Serialization.JsonIgnore]
+#endif
         public bool Succeeded => !Messages.HasError();
 
         /// <inheritdoc />
+#if SYSTEM_TEXT_JSON
+        [System.Text.Json.Serialization.JsonIgnore]
+#endif
         public MessageCollection Messages { get; } = new MessageCollection();
 
         /// <inheritdoc />

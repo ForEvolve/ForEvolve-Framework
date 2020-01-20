@@ -6,16 +6,18 @@
     <ForEvolveTestingVersion Condition="'$(FOREVOLVE_TESTING_VERSION)'==''">[1.0.0-CI-677,2.0)</ForEvolveTestingVersion>
 
     <!-- Versioning helpers -->
-    <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0</ForEvolveTargetFrameworks>
+    <!-- <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0</ForEvolveTargetFrameworks> -->
+    <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netcoreapp3.1</ForEvolveTargetFrameworks>
+    <ForEvolveTestTargetFramework Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netcoreapp3.1</ForEvolveTestTargetFramework>
   </PropertyGroup>
 
   <!-- Source packages -->
   <Choose>
-    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' ">
+    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' or '$(TargetFramework)'=='netcoreapp3.1' ">
       <PropertyGroup>
-        <ForEvolveNetCoreVersion Condition="'$(FOREVOLVE_ASPNETCORE_VERSION)'==''">[3.0.0,4.0)</ForEvolveNetCoreVersion>
-        <ForEvolveIdentityVersion Condition="'$(FOREVOLVE_IDENTITY_VERSION)'==''">[3.0.0,4.0)</ForEvolveIdentityVersion>
-        <DefineConstants>NETCOREAPP_3</DefineConstants>
+        <ForEvolveNetCoreVersion Condition="'$(FOREVOLVE_ASPNETCORE_VERSION)'==''">[3.0.0,3.1)</ForEvolveNetCoreVersion>
+        <ForEvolveIdentityVersion Condition="'$(FOREVOLVE_IDENTITY_VERSION)'==''">[3.0.0,3.1)</ForEvolveIdentityVersion>
+        <DefineConstants>SYSTEM_TEXT_JSON</DefineConstants>
       </PropertyGroup>
     </When>
     <Otherwise>

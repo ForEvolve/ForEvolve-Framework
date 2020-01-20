@@ -121,7 +121,7 @@ namespace ForEvolve.OperationResults
         public virtual IDictionary<string, object> Details { get; }
 
         /// <inheritdoc />
-#if NETCOREAPP_3
+#if SYSTEM_TEXT_JSON
         [System.Text.Json.Serialization.JsonIgnore]
 #endif
         [Newtonsoft.Json.JsonIgnore]
@@ -130,7 +130,7 @@ namespace ForEvolve.OperationResults
         /// <summary>
         /// Gets if the <see cref="Type"/> was an anonymous type.
         /// </summary>
-#if NETCOREAPP_3
+#if SYSTEM_TEXT_JSON
         [System.Text.Json.Serialization.JsonIgnore]
 #endif
         [Newtonsoft.Json.JsonIgnore]
@@ -139,7 +139,7 @@ namespace ForEvolve.OperationResults
         /// <summary>
         /// Gets the original object that was used to load the Details, if any.
         /// </summary>
-#if NETCOREAPP_3
+#if SYSTEM_TEXT_JSON
         [System.Text.Json.Serialization.JsonIgnore]
 #endif
         [Newtonsoft.Json.JsonIgnore]
