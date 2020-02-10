@@ -12,5 +12,6 @@
     <PackageReference Include="xunit" Version="$(ForEvolveXunitVersion)" />
     <PackageReference Include="xunit.runner.visualstudio" Version="$(ForEvolveXunitVersion)" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.4.0-beta.1.build3958" />
+    <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
 </Project>

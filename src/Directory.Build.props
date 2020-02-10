@@ -28,7 +28,9 @@
     <!-- <GenerateDocumentationFile>true</GenerateDocumentationFile> -->
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All"/>
   </ItemGroup>
 </Project>

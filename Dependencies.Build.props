@@ -9,6 +9,8 @@
     <!-- <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0</ForEvolveTargetFrameworks> -->
     <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netcoreapp3.1</ForEvolveTargetFrameworks>
     <ForEvolveTestTargetFramework Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netcoreapp3.1</ForEvolveTestTargetFramework>
+  
+    <NewtonsoftJsonVersion Condition="'$(NEWTONSOFT_JSON_VERSION)'==''">12.0.*</NewtonsoftJsonVersion>
   </PropertyGroup>
 
   <!-- Source packages -->
