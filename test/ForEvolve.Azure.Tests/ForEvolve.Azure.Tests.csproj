@@ -10,10 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForEvolve.Testing" Version="$(ForEvolveTestingVersion)" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\ForEvolve.AspNetCore\ForEvolve.AspNetCore.csproj" />
     <ProjectReference Include="..\..\src\ForEvolve.Azure\ForEvolve.Azure.csproj" />
   </ItemGroup>

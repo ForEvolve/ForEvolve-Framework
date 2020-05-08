@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="$(ForEvolveNetCoreVersion)" />
     <PackageReference Include="ForEvolve.PhantomJs.Dependencies" Version="$(ForEvolvePhantomJsDependenciesPackagesVersion)" />
   </ItemGroup>
 

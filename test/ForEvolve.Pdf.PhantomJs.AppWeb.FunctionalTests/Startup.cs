@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ForEvolve.Pdf.Abstractions;
 using ForEvolve.Pdf.PhantomJs.AppShared.FunctionalTests;
@@ -12,7 +13,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json;
 
 namespace ForEvolve.Pdf.PhantomJs.AppWeb.FunctionalTests
 {
@@ -47,7 +47,7 @@ namespace ForEvolve.Pdf.PhantomJs.AppWeb.FunctionalTests
             app.Run(async (context) =>
             {
                 var results = testRunner.RunAll(htmlToPdfConverter, targetDirectory);
-                var json = JsonConvert.SerializeObject(results);
+                var json = JsonSerializer.Serialize(results);
                 await context.Response.WriteAsync(json);
             });
         }
