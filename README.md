@@ -30,7 +30,7 @@ dotnet add package ForEvolve.Pdf
 
 [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.AspNetCore)](https://www.nuget.org/packages/ForEvolve.AspNetCore/)
 [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Azure)](https://www.nuget.org/packages/ForEvolve.Azure/)
-[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Contacts)](https://www.nuget.org/packages/ForEvolve.Contacts/)
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Contracts)](https://www.nuget.org/packages/ForEvolve.Contracts/)
 [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Core)](https://www.nuget.org/packages/ForEvolve.Core/)
 [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.EntityFrameworkCore)](https://www.nuget.org/packages/ForEvolve.EntityFrameworkCore/)
 [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Markdown)](https://www.nuget.org/packages/ForEvolve.Markdown/)
@@ -42,7 +42,7 @@ dotnet add package ForEvolve.Pdf
 
 [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.AspNetCore%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.AspNetCore/latest/download)
 [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Azure%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Azure/latest/download)
-[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Contacts%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Contacts/latest/download)
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Contracts%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Contracts/latest/download)
 [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Core%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Core/latest/download)
 [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.EntityFrameworkCore%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.EntityFrameworkCore/latest/download)
 [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Markdown%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Markdown/latest/download)
