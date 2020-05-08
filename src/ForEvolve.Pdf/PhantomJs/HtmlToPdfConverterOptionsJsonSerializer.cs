@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ForEvolve.Pdf.PhantomJs
@@ -23,7 +23,7 @@ namespace ForEvolve.Pdf.PhantomJs
                 settings.Add("clipRect", options.ClipRectangle.SerializeTo(new Dictionary<string, object>()));
             }
 
-            var json = JsonConvert.SerializeObject(settings);
+            var json = JsonSerializer.Serialize(settings);
             return json.Replace("\"", "\\\"");
         }
     }
