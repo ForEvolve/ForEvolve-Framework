@@ -1,0 +1,63 @@
+name: Build, Test, and Deploy master
+
+on:
+    push:
+        branches:
+            - master
+        paths-ignore:
+            - 'samples/**'
+
+    pull_request:
+        branches:
+            - master
+
+env:
+    DOTNET_VERSION: '5.0.100-preview.3.20216.6'
+    BUILD_CONFIGURATION: Release
+    PUBLIC_RELEASE: true
+    FEEDZ_SOURCE: https://f.feedz.io/forevolve/toolbox/nuget/index.json
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v1
+
+            - name: Setup .NET Core ${{ env.DOTNET_VERSION }}
+              uses: actions/setup-dotnet@v1
+              with:
+                  dotnet-version: ${{ env.DOTNET_VERSION }}
+
+            - name: Build
+              run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
+
+            - name: Unit Test
+              run: dotnet test --configuration ${{ env.BUILD_CONFIGURATION }} --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer" /p:CollectCoverage=true
+
+    deploy:
+        runs-on: ubuntu-latest
+        needs: build-and-test
+        steps:
+            - uses: actions/checkout@v1
+
+            - name: Setup .NET Core ${{ env.DOTNET_VERSION }}
+              uses: actions/setup-dotnet@v1
+              with:
+                  dotnet-version: ${{ env.DOTNET_VERSION }}
+
+            - uses: aarnott/nbgv@v0.3
+              with:
+                  setAllVars: true
+                  PublicRelease: ${{ env.PUBLIC_RELEASE }}
+
+            - name: Pack
+              run: dotnet pack --configuration ${{ env.BUILD_CONFIGURATION }}
+
+            - name: Push to feedz.io
+              run: dotnet nuget push **/*.nupkg -k ${{ secrets.FEEDZ_API_KEY }} -s ${{ env.FEEDZ_SOURCE }}
+              if: github.event_name == 'pull_request'
+
+            - name: Push to NuGet.org
+              run: dotnet nuget push **/*.nupkg -k ${{ secrets.NUGET_API_KEY }} -s https://api.nuget.org/v3/index.json
+              if: github.event_name == 'push'
