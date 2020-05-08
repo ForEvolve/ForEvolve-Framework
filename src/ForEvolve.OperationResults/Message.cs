@@ -1,15 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Text.Json.Serialization;
 
 namespace ForEvolve.OperationResults
 {
     /// <summary>
     /// Represents a generic operation result message.
-    /// Implements the <see cref="ForEvolve.OperationResults.IMessage" />
+    /// Implements the <see cref="IMessage" />
     /// </summary>
-    /// <seealso cref="ForEvolve.OperationResults.IMessage" />
+    /// <seealso cref="IMessage" />
     public class Message : IMessage
     {
         /// <summary>
@@ -38,8 +38,8 @@ namespace ForEvolve.OperationResults
         /// Initializes a new instance of the <see cref="Message"/> class.
         /// </summary>
         /// <param name="severity">The message severity.</param>
-        /// <param name="details">The message details that will be loaded in the <see cref="System.Collections.Generic.IDictionary{string, object}"/>.</param>
-        /// <param name="ignoreNull">if set to <c>true</c> null properties will be ignored (not added in the <see cref="System.Collections.Generic.IDictionary{string, object}"/>).</param>
+        /// <param name="details">The message details that will be loaded in the <see cref="IDictionary{string, object}"/>.</param>
+        /// <param name="ignoreNull">if set to <c>true</c> null properties will be ignored (not added in the <see cref="IDictionary{string, object}"/>).</param>
         /// <exception cref="ArgumentNullException">details</exception>
         public Message(OperationMessageLevel severity, object details, bool ignoreNull = true)
             : this(severity)
@@ -121,36 +121,27 @@ namespace ForEvolve.OperationResults
         public virtual IDictionary<string, object> Details { get; }
 
         /// <inheritdoc />
-#if SYSTEM_TEXT_JSON
-        [System.Text.Json.Serialization.JsonIgnore]
-#endif
-        [Newtonsoft.Json.JsonIgnore]
+        [JsonIgnore]
         public virtual Type Type { get; }
 
         /// <summary>
         /// Gets if the <see cref="Type"/> was an anonymous type.
         /// </summary>
-#if SYSTEM_TEXT_JSON
-        [System.Text.Json.Serialization.JsonIgnore]
-#endif
-        [Newtonsoft.Json.JsonIgnore]
+        [JsonIgnore]
         public virtual bool IsAnonymous { get; }
 
         /// <summary>
         /// Gets the original object that was used to load the Details, if any.
         /// </summary>
-#if SYSTEM_TEXT_JSON
-        [System.Text.Json.Serialization.JsonIgnore]
-#endif
-        [Newtonsoft.Json.JsonIgnore]
+        [JsonIgnore]
         public virtual object OriginalObject { get; }
     }
 
     /// <summary>
     /// Represents an operation result message build around [RFC3986] <see cref="OperationResults.ProblemDetails"/>.
-    /// Implements the <see cref="ForEvolve.OperationResults.Message" />
+    /// Implements the <see cref="Message" />
     /// </summary>
-    /// <seealso cref="ForEvolve.OperationResults.Message" />
+    /// <seealso cref="Message" />
     public class ProblemDetailsMessage : Message
     {
         /// <summary>

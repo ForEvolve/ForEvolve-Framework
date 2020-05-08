@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace ForEvolve.OperationResults
 {
@@ -11,10 +11,7 @@ namespace ForEvolve.OperationResults
         /// <summary>
         /// Get the exception represented by this message.
         /// </summary>
-#if SYSTEM_TEXT_JSON
-        [System.Text.Json.Serialization.JsonIgnore]
-#endif
-        [Newtonsoft.Json.JsonIgnore]
+        [JsonIgnore]
         public Exception Exception { get; }
 
         /// <summary>
@@ -33,15 +30,11 @@ namespace ForEvolve.OperationResults
         }
 
         /// <inheritdoc />
-#if SYSTEM_TEXT_JSON
-        [System.Text.Json.Serialization.JsonIgnore]
-#endif
+        [JsonIgnore]
         public override Type Type => Exception.GetType();
 
         /// <inheritdoc />
-#if SYSTEM_TEXT_JSON
-        [System.Text.Json.Serialization.JsonIgnore]
-#endif
+        [JsonIgnore]
         public override object OriginalObject => Exception;
     }
 }
