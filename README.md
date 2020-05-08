@@ -14,43 +14,25 @@ Examples of features are Azure table repository, Azure blob repositories (JSON o
 
 The packages follows _semantic versioning_ and uses [Nerdbank.GitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning) under the hood to automate versioning based on Git commits.
 
-## NuGet
+## Packages
 
-All packages are available on [https://www.nuget.org/profiles/ForEvolve](https://www.nuget.org/profiles/ForEvolve).
-
-For example, you can load packages like that:
-
-```PowerShell
-dotnet add package ForEvolve.AspNetCore
-dotnet add package ForEvolve.Azure
-dotnet add package ForEvolve.Contracts
-dotnet add package ForEvolve.Markdown
-dotnet add package ForEvolve.Pdf
-```
-
-[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.AspNetCore)](https://www.nuget.org/packages/ForEvolve.AspNetCore/)
-[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Azure)](https://www.nuget.org/packages/ForEvolve.Azure/)
-[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Contracts)](https://www.nuget.org/packages/ForEvolve.Contracts/)
-[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Core)](https://www.nuget.org/packages/ForEvolve.Core/)
-[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.EntityFrameworkCore)](https://www.nuget.org/packages/ForEvolve.EntityFrameworkCore/)
-[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Markdown)](https://www.nuget.org/packages/ForEvolve.Markdown/)
-[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Markdown.Abstractions)](https://www.nuget.org/packages/ForEvolve.Markdown.Abstractions/)
-[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Pdf)](https://www.nuget.org/packages/ForEvolve.Pdf/)
-[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Pdf.Abstractions)](https://www.nuget.org/packages/ForEvolve.Pdf.Abstractions/)
-
-## Prerelease packages
-
-[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.AspNetCore%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.AspNetCore/latest/download)
-[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Azure%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Azure/latest/download)
-[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Contracts%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Contracts/latest/download)
-[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Core%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Core/latest/download)
-[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.EntityFrameworkCore%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.EntityFrameworkCore/latest/download)
-[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Markdown%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Markdown/latest/download)
-[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Markdown.Abstractions%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Markdown.Abstractions/latest/download)
-[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Pdf%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Pdf/latest/download)
-[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Pdf.Abstractions%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Pdf.Abstractions/latest/download)
+Packages are available on NuGet [https://www.nuget.org/profiles/ForEvolve](https://www.nuget.org/profiles/ForEvolve).
 
 For the pre-release packages, use the ForEvolve/Toolbox [feedz.io](https://f.feedz.io/forevolve/toolbox/nuget/index.json) packages source.
+
+**List of packages**
+
+| Name                            | NuGet.org                                                                                                                                          | feedz.io                                                                                                                                                                                                                                                     | dotnet CLI                                           |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------- |
+| ForEvolve.AspNetCore            | [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.AspNetCore)](https://www.nuget.org/packages/ForEvolve.AspNetCore/)                       | [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.AspNetCore%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.AspNetCore/latest/download)                       | `dotnet add package ForEvolve.AspNetCore`            |
+| ForEvolve.Azure                 | [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Azure)](https://www.nuget.org/packages/ForEvolve.Azure/)                                 | [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Azure%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Azure/latest/download)                                 | `dotnet add package ForEvolve.Azure`                 |
+| ForEvolve.Contracts             | [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Contracts)](https://www.nuget.org/packages/ForEvolve.Contracts/)                         | [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Contracts%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Contracts/latest/download)                         | `dotnet add package ForEvolve.Contracts`             |
+| ForEvolve.Core                  | [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Core)](https://www.nuget.org/packages/ForEvolve.Core/)                                   | [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Core%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Core/latest/download)                                   | `dotnet add package ForEvolve.Core`                  |
+| ForEvolve.EntityFrameworkCore   | [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.EntityFrameworkCore)](https://www.nuget.org/packages/ForEvolve.EntityFrameworkCore/)     | [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.EntityFrameworkCore%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.EntityFrameworkCore/latest/download)     | `dotnet add package ForEvolve.EntityFrameworkCore`   |
+| ForEvolve.Markdown              | [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Markdown)](https://www.nuget.org/packages/ForEvolve.Markdown/)                           | [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Markdown%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Markdown/latest/download)                           | `dotnet add package ForEvolve.Markdown`              |
+| ForEvolve.Markdown.Abstractions | [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Markdown.Abstractions)](https://www.nuget.org/packages/ForEvolve.Markdown.Abstractions/) | [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Markdown.Abstractions%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Markdown.Abstractions/latest/download) | `dotnet add package ForEvolve.Markdown.Abstractions` |
+| ForEvolve.Pdf                   | [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Pdf)](https://www.nuget.org/packages/ForEvolve.Pdf/)                                     | [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Pdf%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Pdf/latest/download)                                     | `dotnet add package ForEvolve.Pdf`                   |
+| ForEvolve.Pdf.Abstractions      | [![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Pdf.Abstractions)](https://www.nuget.org/packages/ForEvolve.Pdf.Abstractions/)           | [![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Pdf.Abstractions%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Pdf.Abstractions/latest/download)           | `dotnet add package ForEvolve.Pdf.Abstractions`      |
 
 ## The projects
 
