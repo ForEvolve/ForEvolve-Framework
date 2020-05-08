@@ -71,11 +71,12 @@ namespace ForEvolve.OperationResults.Standardizer
                 .ConfigureServices(services =>
                 {
                     services.AddForEvolveOperationResultStandardizer();
-                    services.AddMvc();
+                    services.AddControllers();
                 })
                 .Configure(app =>
                 {
-                    app.UseMvc();
+                    app.UseRouting();
+                    app.UseEndpoints(c => c.MapControllers());
                 })
                 ;
             Server = new TestServer(hostBuilder);

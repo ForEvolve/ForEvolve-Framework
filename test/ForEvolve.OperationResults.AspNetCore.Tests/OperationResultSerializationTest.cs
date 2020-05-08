@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -39,20 +40,7 @@ namespace ForEvolve.OperationResults
             var operationResult = MakeOperationResult();
 
             // Act
-            var json = System.Text.Json.JsonSerializer.Serialize(operationResult);
-
-            // Assert
-            Assert.NotNull(json);
-        }
-
-        [Fact]
-        public void Should_serialize_using_JsonNET()
-        {
-            // Arrange
-            var operationResult = MakeOperationResult();
-
-            // Act
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(operationResult);
+            var json = JsonSerializer.Serialize(operationResult);
 
             // Assert
             Assert.NotNull(json);
