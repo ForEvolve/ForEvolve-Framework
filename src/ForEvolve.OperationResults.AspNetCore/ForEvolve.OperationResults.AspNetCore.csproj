@@ -7,24 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FluentValidation" Version="8.4.0" />
-    <PackageReference Include="MediatR" Version="7.0.0" />
-    <PackageReference Include="Scrutor" Version="3.0.2" />
+    <PackageReference Include="FluentValidation" Version="8.6.2" />
+    <PackageReference Include="MediatR" Version="8.0.1" />
+    <PackageReference Include="Scrutor" Version="3.2.1" />
   </ItemGroup>
-
-  <Choose>
-    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' or '$(TargetFramework)'=='netcoreapp3.1' ">
-      <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore" Version="$(ForEvolveNetCoreVersion)" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(ForEvolveNetCoreVersion)" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
 
   <ItemGroup>
     <ProjectReference Include="..\ForEvolve.OperationResults\ForEvolve.OperationResults.csproj" />

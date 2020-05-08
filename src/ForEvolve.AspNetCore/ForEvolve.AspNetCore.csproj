@@ -6,21 +6,6 @@
     <PackageTags>forevolve,aspnetcore,asp.net,core,aspnet,asp,email,configuration,http,json,middleware,operation,result,view,render</PackageTags>
   </PropertyGroup>
 
-  <Choose>
-    <When Condition=" '$(TargetFramework)'=='netcoreapp3.0' or '$(TargetFramework)'=='netcoreapp3.1' ">
-      <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
-      </ItemGroup>
-    </When>
-    <Otherwise>
-      <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore" Version="$(ForEvolveNetCoreVersion)" />
-        <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="$(ForEvolveNetCoreVersion)" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity" Version="$(ForEvolveIdentityVersion)" />
-      </ItemGroup>
-    </Otherwise>
-  </Choose>
-
   <ItemGroup>
     <ProjectReference Include="..\ForEvolve.Contracts\ForEvolve.Contracts.csproj" />
     <ProjectReference Include="..\ForEvolve.Core\ForEvolve.Core.csproj" />

@@ -6,6 +6,7 @@ using Xunit;
 using Moq;
 using System.Threading.Tasks;
 using ForEvolve.AspNetCore.Middleware.Helpers;
+using Microsoft.Extensions.Primitives;
 
 namespace ForEvolve.AspNetCore
 {
@@ -27,7 +28,7 @@ namespace ForEvolve.AspNetCore
                     .Setup(x => x.Headers)
                     .Returns(_headersMock.Object);
                 _headersMock
-                    .Setup(x => x.Add(It.IsAny<string>(), It.IsAny<string>()))
+                    .Setup(x => x.Add(It.IsAny<string>(), It.IsAny<StringValues>()))
                     .Verifiable();
             }
 

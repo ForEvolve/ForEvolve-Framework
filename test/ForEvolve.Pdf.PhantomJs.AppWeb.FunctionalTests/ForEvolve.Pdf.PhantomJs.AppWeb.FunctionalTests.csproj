@@ -8,14 +8,8 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework)'!='netcoreapp3.0' and '$(TargetFramework)'!='netcoreapp3.1' ">
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="$(ForEvolveNetCoreVersion)" />
-  </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="ForEvolve.Pdf" Version="$(ForEvolvePackagesVersion)" />
     <PackageReference Include="ForEvolve.PhantomJs.Dependencies" Version="$(ForEvolvePhantomJsDependenciesPackagesVersion)" />
-    <PackageReference Include="Newtonsoft.Json" Version="$(NewtonsoftJsonVersion)" />
   </ItemGroup>
 
   <ItemGroup>

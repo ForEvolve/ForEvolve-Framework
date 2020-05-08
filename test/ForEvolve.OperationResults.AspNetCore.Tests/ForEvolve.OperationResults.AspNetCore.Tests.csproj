@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForEvolve.Testing" Version="1.0.0-CI-742" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\ForEvolve.OperationResults.AspNetCore\ForEvolve.OperationResults.AspNetCore.csproj" />
   </ItemGroup>
 

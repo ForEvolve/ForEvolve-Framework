@@ -8,10 +8,10 @@ using Xunit;
 
 namespace ForEvolve.Pdf.PhantomJs.FunctionalTests.Runner
 {
-    public class PhantomJsAppWebFunctionalTests : PhantomJsBaseFunctionalTests, IClassFixture<WebApplicationFactory<AppWeb.FunctionalTests.Program>>
+    public class PhantomJsAppWebFunctionalTests : PhantomJsBaseFunctionalTests, IClassFixture<WebApplicationFactory<AppWeb.FunctionalTests.Startup>>
     {
-        private readonly WebApplicationFactory<AppWeb.FunctionalTests.Program> _appFactory;
-        public PhantomJsAppWebFunctionalTests(WebApplicationFactory<AppWeb.FunctionalTests.Program> appFactory)
+        private readonly WebApplicationFactory<AppWeb.FunctionalTests.Startup> _appFactory;
+        public PhantomJsAppWebFunctionalTests(WebApplicationFactory<AppWeb.FunctionalTests.Startup> appFactory)
         {
             _appFactory = appFactory ?? throw new ArgumentNullException(nameof(appFactory));
         }

@@ -6,11 +6,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETCOREAPP2,SUPPORT_AZURE_EMULATOR</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SUPPORT_AZURE_EMULATOR</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ForEvolve.Testing" Version="1.0.0-CI-742" />
+    <PackageReference Include="ForEvolve.Testing" Version="$(ForEvolveTestingVersion)" />
   </ItemGroup>
 
   <ItemGroup>
