@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <RootNamespace>ForEvolve.EntityFrameworkCore</RootNamespace>
+    <TargetFramework>$(ForEvolveTestTargetFramework)</TargetFramework>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(ForEvolveEFCoreVersion)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(ForEvolveEFCoreVersion)" />
+  </ItemGroup>
+    
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ForEvolve.EntityFrameworkCore\ForEvolve.EntityFrameworkCore.csproj" />
+  </ItemGroup>
+
+</Project>

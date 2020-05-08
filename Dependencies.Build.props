@@ -1,20 +1,30 @@
 <Project>
   <PropertyGroup>
     <!-- ForEvolve packages -->
-    <ForEvolvePackagesVersion Condition="'$(FOREVOLVE_PACKAGES_VERSION)'==''">[1.0.0-RC-1,2.0)</ForEvolvePackagesVersion>
-    <ForEvolvePhantomJsDependenciesPackagesVersion Condition="'$(FOREVOLVE_PHANTOMJS_DEPENDENCIES_PACKAGES_VERSION)'==''">1.0.0-RC-1</ForEvolvePhantomJsDependenciesPackagesVersion>
-
-    <!-- Source packages -->
-    <ForEvolveNetCoreVersion Condition="'$(FOREVOLVE_ASPNETCORE_VERSION)'==''">[2.1.1,3.0)</ForEvolveNetCoreVersion>
-    <ForEvolveIdentityVersion Condition="'$(FOREVOLVE_IDENTITY_VERSION)'==''">[2.1.2,3.0)</ForEvolveIdentityVersion>
-
-    <!-- Tests packages -->
-    <ForEvolveAspNetCoreTestHostVersion Condition="'$(FOREVOLVE_ASPNETCORE_TESTHOST_VERSION)'==''">2.1.1</ForEvolveAspNetCoreTestHostVersion>
-    <ForEvolveXunitVersion Condition="'$(FOREVOLVE_XUNIT_VERSION)'==''">2.4.1</ForEvolveXunitVersion>
-    <ForEvolveMoqVersion Condition="'$(FOREVOLVE_MOQ_VERSION)'==''">4.8.3</ForEvolveMoqVersion>
-    <ForEvolveTestSdkVersion Condition="'$(FOREVOLVE_TEST_SDK_VERSION)'==''">15.8.0</ForEvolveTestSdkVersion>
+    <ForEvolvePackagesVersion Condition="'$(FOREVOLVE_PACKAGES_VERSION)'==''">[2.0.0,3.0)</ForEvolvePackagesVersion>
+    <ForEvolvePhantomJsDependenciesPackagesVersion Condition="'$(FOREVOLVE_PHANTOMJS_DEPENDENCIES_PACKAGES_VERSION)'==''">1.0.0</ForEvolvePhantomJsDependenciesPackagesVersion>
 
     <!-- Versioning helpers -->
-    <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.0;netcoreapp2.1;netcoreapp2.2</ForEvolveTargetFrameworks>
+    <!-- <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1</ForEvolveTargetFrameworks> -->
+    <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">net5.0</ForEvolveTargetFrameworks>
+    <ForEvolveTestTargetFramework Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">net5.0</ForEvolveTestTargetFramework>
   </PropertyGroup>
+
+  <!-- Source packages -->
+  <PropertyGroup>
+    <ForEvolveNetCoreVersion Condition="'$(FOREVOLVE_ASPNETCORE_VERSION)'==''">5.0.0</ForEvolveNetCoreVersion>
+    <ForEvolveIdentityVersion Condition="'$(FOREVOLVE_IDENTITY_VERSION)'==''">5.0.0</ForEvolveIdentityVersion>
+    <ForEvolveEFCoreVersion Condition="'$(FOREVOLVE_EFCORE_VERSION)'==''">5.0.0-preview.3.20181.2</ForEvolveEFCoreVersion>
+    <DefineConstants>SYSTEM_TEXT_JSON</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Tests packages -->
+  <PropertyGroup>
+    <ForEvolveTestingVersion Condition="'$(FOREVOLVE_TESTING_VERSION)'==''">1.0.6</ForEvolveTestingVersion>
+    <ForEvolveXunitVersion Condition="'$(FOREVOLVE_XUNIT_VERSION)'==''">2.4.1</ForEvolveXunitVersion>
+    <ForEvolveMoqVersion Condition="'$(FOREVOLVE_MOQ_VERSION)'==''">4.14.1</ForEvolveMoqVersion>
+    <ForEvolveTestSdkVersion Condition="'$(FOREVOLVE_TEST_SDK_VERSION)'==''">16.6.1</ForEvolveTestSdkVersion>
+    <ForEvolveAspNetCoreTestHostVersion Condition="'$(FOREVOLVE_ASPNETCORE_TESTHOST_VERSION)'==''">5.0.0-preview.3.20215.14</ForEvolveAspNetCoreTestHostVersion>
+  </PropertyGroup>
+
 </Project>

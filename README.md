@@ -1,82 +1,56 @@
 # ForEvolve Framework (or toolbox)
 
-This project started as my personal toolbox, where I added utility classes that I was tired of copying from project to project, that I needed to facilitate my life or for any other reason toward reusability.
+<!-- ![Build, Test, and Deploy master](https://github.com/ForEvolve/ForEvolve.Testing/workflows/Build,%20Test,%20and%20Deploy%20master/badge.svg) -->
 
-Then I cleaned this up a little to make it decent for a release version where other people would be able to depend on it; and here we are: `v1.0.0`.
-Each project is loadable on its own, or you can load bundles using meta-packages.
+[![VSTS master build](https://forevolve.visualstudio.com/ForEvolve-Framework/_apis/build/status/ForEvolve.ForEvolve-Framework?branchName=master)](https://forevolve.visualstudio.com/ForEvolve-Framework/_build/latest?definitionId=50&branchName=master)
 
-Examples of features are Azure table repository, Azure blob repositories (JSON object and files), automatic conversion of `Exception` to JSON, markdown to HTML, HTML to pdf, generic operation results, test utilities, and more.
+This project is my personal toolbox, where I add utility classes that I was tired of copying from project to project, that I needed to facilitate my life or for any other reason toward reusability.
 
-Feel free to use the NuGet packages, fork it, contribute to it and post issues. These are ever-evolving projects!
+Examples of features are Azure table repository, Azure blob repositories (JSON object and files), markdown to HTML, HTML to pdf, and more.
 
-![VSTS master build](https://forevolve.visualstudio.com/_apis/public/build/definitions/fdc5922a-3dc1-4827-97a6-0f622b2fd497/26/badge)
+<!-- ![VSTS master build](https://forevolve.visualstudio.com/_apis/public/build/definitions/fdc5922a-3dc1-4827-97a6-0f622b2fd497/26/badge) -->
 
 ## Versioning
 
-As of `v1.0.0` and onward, the project follows `semver` to manage version numbers.
-All version numbers are linked and located in the `src/Directory.Build.props` file.
+The packages follows _semantic versioning_ and uses [Nerdbank.GitVersioning](https://github.com/dotnet/Nerdbank.GitVersioning) under the hood to automate versioning based on Git commits.
 
 ## NuGet
 
 All packages are available on [https://www.nuget.org/profiles/ForEvolve](https://www.nuget.org/profiles/ForEvolve).
 
-To load all application packages, use the `ForEvolve.App` package:
-
-```PowerShell
-Install-Package ForEvolve.App
-```
-
-or
-
-```PowerShell
-dotnet add package ForEvolve.App
-```
-
-See [ForEvolve/MetaPackages](https://github.com/ForEvolve/MetaPackages) for more information.
-
-### Individual packages (App)
-
-To load individual packages, you can:
-
-```PowerShell
-Install-Package ForEvolve.AspNetCore
-Install-Package ForEvolve.Azure
-Install-Package ForEvolve.Contracts
-Install-Package ForEvolve.Core
-Install-Package ForEvolve.DynamicInternalServerError.Swagger
-Install-Package ForEvolve.DynamicInternalServerError
-Install-Package ForEvolve.AspNetCore.Localization
-Install-Package ForEvolve.Markdown.Abstractions
-Install-Package ForEvolve.Markdown
-Install-Package ForEvolve.Pdf.Abstractions
-Install-Package ForEvolve.Pdf
-Install-Package ForEvolve.XUnit # Not included in ForEvolve.App metapackage
-```
-
-or
+For example, you can load packages like that:
 
 ```PowerShell
 dotnet add package ForEvolve.AspNetCore
 dotnet add package ForEvolve.Azure
 dotnet add package ForEvolve.Contracts
-dotnet add package ForEvolve.Core
-dotnet add package ForEvolve.DynamicInternalServerError.Swagger
-dotnet add package ForEvolve.DynamicInternalServerError
-dotnet add package ForEvolve.AspNetCore.Localization
-dotnet add package ForEvolve.Markdown.Abstractions
 dotnet add package ForEvolve.Markdown
-dotnet add package ForEvolve.Pdf.Abstractions
 dotnet add package ForEvolve.Pdf
-dotnet add package ForEvolve.XUnit # Not included in ForEvolve.App metapackage
 ```
 
-## Prerelease MyGet
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.AspNetCore)](https://www.nuget.org/packages/ForEvolve.AspNetCore/)
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Azure)](https://www.nuget.org/packages/ForEvolve.Azure/)
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Contacts)](https://www.nuget.org/packages/ForEvolve.Contacts/)
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Core)](https://www.nuget.org/packages/ForEvolve.Core/)
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.EntityFrameworkCore)](https://www.nuget.org/packages/ForEvolve.EntityFrameworkCore/)
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Markdown)](https://www.nuget.org/packages/ForEvolve.Markdown/)
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Markdown.Abstractions)](https://www.nuget.org/packages/ForEvolve.Markdown.Abstractions/)
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Pdf)](https://www.nuget.org/packages/ForEvolve.Pdf/)
+[![NuGet.org](https://img.shields.io/nuget/vpre/ForEvolve.Pdf.Abstractions)](https://www.nuget.org/packages/ForEvolve.Pdf.Abstractions/)
 
-For the pre-release packages, use the ForEvolve [NuGet V3 feed URL](https://www.myget.org/F/forevolve/api/v3/index.json) packages source. See the [Table of content](https://github.com/ForEvolve/Toc) project for more info.
+## Prerelease packages
 
-### Pre-release build number
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.AspNetCore%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.AspNetCore/latest/download)
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Azure%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Azure/latest/download)
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Contacts%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Contacts/latest/download)
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Core%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Core/latest/download)
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.EntityFrameworkCore%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.EntityFrameworkCore/latest/download)
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Markdown%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Markdown/latest/download)
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Markdown.Abstractions%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Markdown.Abstractions/latest/download)
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Pdf%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Pdf/latest/download)
+[![feedz.io](https://img.shields.io/badge/endpoint.svg?url=https%3A%2F%2Ff.feedz.io%2Fforevolve%toolbox%2Fshield%2FForEvolve.Pdf.Abstractions%2Flatest)](https://f.feedz.io/forevolve/toolbox/packages/ForEvolve.Pdf.Abstractions/latest/download)
 
-Pre-release builds number are autoincremented.
+For the pre-release packages, use the ForEvolve/Toolbox [feedz.io](https://f.feedz.io/forevolve/toolbox/nuget/index.json) packages source.
 
 ## The projects
 
@@ -111,20 +85,6 @@ This project stand as the root of all projects. For now, it only contains the `F
 
 See [ForEvolve.Core](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Core) for more information.
 
-### ForEvolve.DynamicInternalServerError
-
-A dynamic internal server error filter for ASP.NET Core, that translate Exceptions (status code 500) to JSON automatically.
-
-Validation errors are also translated automatically, following the same convention, for response with status code 400.
-
-See [ForEvolve.DynamicInternalServerError](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.DynamicInternalServerError) for more information.
-
-### ForEvolve.DynamicInternalServerError.Swagger
-
-Add `Swagger` support to `ForEvolve.DynamicInternalServerError`.
-
-See [ForEvolve.DynamicInternalServerError](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.DynamicInternalServerError) for more information.
-
 ### ForEvolve.Markdown
 
 Allows consumers to easily convert strings to Markdown using the `IMarkdownConverter` interface.
@@ -148,20 +108,6 @@ See the [`ForEvolve.Pdf`](https://github.com/ForEvolve/ForEvolve-Framework/tree/
 This is the abstractions library. Only use this if you want to create your own custom implementation of the `IHtmlToPdfConverter`.
 
 See the [`ForEvolve.Pdf.Abstractions`](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Pdf.Abstractions) project for more info.
-
-### ForEvolve.XUnit
-
-This project contains some testing utilities, mocks, extension methods, etc.
-
-This package is not part of the `ForEvolve.App` metapackage.
-
-_This package is still a prerelease project where breaking changes are not reflected by a major version number bump._
-
-See the [`ForEvolve.XUnit`](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.XUnit) project for more info.
-
-## Whats next
-
-I plan on evolving theses libraries as I use them in my projects.
 
 ## How to contribute?
 

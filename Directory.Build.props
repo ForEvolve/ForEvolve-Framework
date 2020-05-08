@@ -5,7 +5,11 @@
     <Product>ForEvolve Framework</Product>
     <RepositoryUrl>https://github.com/ForEvolve/ForEvolve-Framework</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
+  
+  <ItemGroup Condition="'$(TargetFramework)'!='net461'">
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
 </Project>

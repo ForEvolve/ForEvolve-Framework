@@ -1,5 +1,4 @@
-﻿using ForEvolve.XUnit.HttpTests;
-using System;
+﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Xunit;
 using Microsoft.WindowsAzure.Storage.Table;
-using ForEvolve.XUnit;
+using ForEvolve.Testing;
+using ForEvolve.XUnit.HttpTests;
 
 namespace ForEvolve.Azure.Storage.Table
 {

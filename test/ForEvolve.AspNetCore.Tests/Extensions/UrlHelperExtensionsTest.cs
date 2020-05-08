@@ -1,5 +1,4 @@
-﻿using ForEvolve.XUnit.Http;
-using ForEvolve.XUnit.Mvc;
+﻿using ForEvolve.Testing.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http;
 using Moq;
 using System;
@@ -22,8 +21,8 @@ namespace Microsoft.AspNetCore.Mvc
                 var inputUri = "/toto.html";
                 var expectedUri = "http://a.com/toto.html";
                 var httpHelper = new MvcContextHelper();
-                httpHelper.HttpContextHelper.HttpRequest.Host = new HostString("a.com");
-                httpHelper.HttpContextHelper.HttpRequest.Scheme = "http";
+                httpHelper.HttpContextHelper.HttpRequestFake.Host = new HostString("a.com");
+                httpHelper.HttpContextHelper.HttpRequestFake.Scheme = "http";
 
                 // Act
                 var result = httpHelper.UrlHelperMock.Object.ToFullyQualifiedUri(inputUri);
@@ -39,8 +38,8 @@ namespace Microsoft.AspNetCore.Mvc
                 var inputUri = "/toto.html";
                 var expectedUri = "http://a.com:1234/toto.html";
                 var httpHelper = new MvcContextHelper();
-                httpHelper.HttpContextHelper.HttpRequest.Host = new HostString("a.com", 1234);
-                httpHelper.HttpContextHelper.HttpRequest.Scheme = "http";
+                httpHelper.HttpContextHelper.HttpRequestFake.Host = new HostString("a.com", 1234);
+                httpHelper.HttpContextHelper.HttpRequestFake.Scheme = "http";
 
                 // Act
                 var result = httpHelper.UrlHelperMock.Object.ToFullyQualifiedUri(inputUri);

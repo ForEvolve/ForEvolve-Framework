@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>$(ForEvolveTestTargetFramework)</TargetFramework>
     <RootNamespace>ForEvolve.Pdf</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
   </PropertyGroup>
@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ForEvolve.Pdf\ForEvolve.Pdf.csproj" />
-    <ProjectReference Include="..\..\src\ForEvolve.XUnit\ForEvolve.XUnit.csproj" />
   </ItemGroup>
 
   <ItemGroup>

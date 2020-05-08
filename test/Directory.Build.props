@@ -3,14 +3,18 @@
   <PropertyGroup>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
-
+  
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.0-preview.3.20215.14" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="$(ForEvolveAspNetCoreTestHostVersion)" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="$(ForEvolveNetCoreVersion)" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(ForEvolveTestSdkVersion)" />
     <PackageReference Include="Moq" Version="$(ForEvolveMoqVersion)" />
     <PackageReference Include="xunit" Version="$(ForEvolveXunitVersion)" />
     <PackageReference Include="xunit.runner.visualstudio" Version="$(ForEvolveXunitVersion)" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.4.0-beta.1.build3958" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ForEvolve.Testing" Version="$(ForEvolveTestingVersion)" />
+  </ItemGroup>
+  
 </Project>

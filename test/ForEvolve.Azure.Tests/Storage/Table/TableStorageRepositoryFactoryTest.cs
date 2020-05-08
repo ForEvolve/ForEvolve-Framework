@@ -1,4 +1,4 @@
-﻿using ForEvolve.XUnit;
+﻿using ForEvolve.Testing;
 using ForEvolve.XUnit.HttpTests;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

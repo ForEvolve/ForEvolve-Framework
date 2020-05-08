@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace System
 {
@@ -18,7 +18,7 @@ namespace System
 
         public static string ToJson(this object model)
         {
-            var json = JsonConvert.SerializeObject(model);
+            var json = JsonSerializer.Serialize(model);
             return json;
         }
 
@@ -27,14 +27,14 @@ namespace System
             var json = await httpContent.ReadAsStringAsync();
             if (string.IsNullOrWhiteSpace(json))
             {
-                return default(T);
+                return default;
             }
             return json.ToObject<T>();
         }
 
         public static T ToObject<T>(this string json)
         {
-            return JsonConvert.DeserializeObject<T>(json);
+            return JsonSerializer.Deserialize<T>(json);
         }
     }
 }

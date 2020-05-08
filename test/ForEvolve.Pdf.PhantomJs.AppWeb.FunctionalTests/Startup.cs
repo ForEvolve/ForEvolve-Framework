@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ForEvolve.Pdf.Abstractions;
 using ForEvolve.Pdf.PhantomJs.AppShared.FunctionalTests;
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
+using Microsoft.Extensions.Hosting;
 
 namespace ForEvolve.Pdf.PhantomJs.AppWeb.FunctionalTests
 {
@@ -25,7 +26,7 @@ namespace ForEvolve.Pdf.PhantomJs.AppWeb.FunctionalTests
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -46,7 +47,7 @@ namespace ForEvolve.Pdf.PhantomJs.AppWeb.FunctionalTests
             app.Run(async (context) =>
             {
                 var results = testRunner.RunAll(htmlToPdfConverter, targetDirectory);
-                var json = JsonConvert.SerializeObject(results);
+                var json = JsonSerializer.Serialize(results);
                 await context.Response.WriteAsync(json);
             });
         }

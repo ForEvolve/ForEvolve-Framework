@@ -1,0 +1,60 @@
+trigger:
+  - master
+pr:
+  - master
+
+pool:
+  name: Hosted VS2017
+
+variables:
+  BuildConfiguration: Release
+  NetCoreVersion: net5.0
+  NetCoreSdkVersion: '5.0.100-preview.3.20216.6'
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .NET Core sdk $(NetCoreSdkVersion)'
+  inputs:
+    version: $(NetCoreSdkVersion)
+    includePreviewVersions: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build net5.0'
+  inputs:
+    projects: 'src/**/*.csproj'
+    arguments: '--configuration $(BuildConfiguration) --framework $(NetCoreVersion)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build net461'
+  inputs:
+    projects: src/ForEvolve.Contracts/ForEvolve.Contracts.csproj
+    arguments: '--configuration $(BuildConfiguration) --framework net461'
+
+- task: DotNetCoreCLI@2
+  displayName: Test
+  inputs:
+    command: test
+    projects: 'test/*.Tests/*.csproj'
+    arguments: '--configuration $(BuildConfiguration) --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer" /p:CollectCoverage=true'
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results **/*.trx'
+  inputs:
+    testResultsFormat: VSTest
+    testResultsFiles: '**/*.trx'
+    searchFolder: '$(Agent.TempDirectory)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
+  inputs:
+    command: pack
+    packagesToPack: 'src/**/*.csproj'
+    nobuild: true
+    includesymbols: true
+    includesource: true
+    verbosityPack: Normal
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+    PathtoPublish: '$(build.artifactstagingdirectory)'
