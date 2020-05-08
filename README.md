@@ -1,6 +1,8 @@
 # ForEvolve Framework (or toolbox)
 
-![Build, Test, and Deploy master](https://github.com/ForEvolve/ForEvolve.Testing/workflows/Build,%20Test,%20and%20Deploy%20master/badge.svg)
+<!-- ![Build, Test, and Deploy master](https://github.com/ForEvolve/ForEvolve.Testing/workflows/Build,%20Test,%20and%20Deploy%20master/badge.svg) -->
+
+[![VSTS master build](https://forevolve.visualstudio.com/ForEvolve-Framework/_apis/build/status/ForEvolve.ForEvolve-Framework?branchName=master)](https://forevolve.visualstudio.com/ForEvolve-Framework/_build/latest?definitionId=50&branchName=master)
 
 This project is my personal toolbox, where I add utility classes that I was tired of copying from project to project, that I needed to facilitate my life or for any other reason toward reusability.
 
