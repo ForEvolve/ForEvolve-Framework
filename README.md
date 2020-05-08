@@ -96,3 +96,7 @@ If you would like to contribute to the Framework, first, thank you for your inte
 ### Contributor Covenant Code of Conduct
 
 Also, please read the [Contributor Covenant Code of Conduct](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/CODE_OF_CONDUCT.md) that applies to all ForEvolve repositories.
+
+# Release notes
+
+I'll try to write something out in the future to help with changes.
