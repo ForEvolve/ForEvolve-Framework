@@ -1,5 +1,4 @@
-﻿#if SUPPORT_AZURE_EMULATOR
-using ForEvolve.Testing;
+﻿using ForEvolve.Testing;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
@@ -336,4 +335,3 @@ namespace ForEvolve.Azure.Storage.Table
         }
     }
 }
-#endif

@@ -5,10 +5,6 @@
     <RootNamespace>ForEvolve.Azure</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;SUPPORT_AZURE_EMULATOR</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\ForEvolve.AspNetCore\ForEvolve.AspNetCore.csproj" />
     <ProjectReference Include="..\..\src\ForEvolve.Azure\ForEvolve.Azure.csproj" />
