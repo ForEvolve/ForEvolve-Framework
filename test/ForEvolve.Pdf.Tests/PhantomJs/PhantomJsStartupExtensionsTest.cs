@@ -29,28 +29,28 @@ namespace Microsoft.Extensions.DependencyInjection
             public void HtmlToPdfConverter_to_IHtmlToPdfConverter()
             {
                 // Assert
-                _services.AssertSingletonServiceImplementationExists<IHtmlToPdfConverter, HtmlToPdfConverter>();
+                _services.AssertSingletonServiceExists<IHtmlToPdfConverter, HtmlToPdfConverter>();
             }
 
             [Fact]
             public void OperatingSystemFinder_to_IOperatingSystemFinder()
             {
                 // Assert
-                _services.AssertSingletonServiceImplementationExists<IOperatingSystemFinder, OperatingSystemFinder>();
+                _services.AssertSingletonServiceExists<IOperatingSystemFinder, OperatingSystemFinder>();
             }
 
             [Fact]
             public void HtmlToPdfConverterOptionsJsonSerializer_to_IHtmlToPdfConverterOptionsSerializer()
             {
                 // Assert
-                _services.AssertSingletonServiceImplementationExists<IHtmlToPdfConverterOptionsSerializer, HtmlToPdfConverterOptionsJsonSerializer>();
+                _services.AssertSingletonServiceExists<IHtmlToPdfConverterOptionsSerializer, HtmlToPdfConverterOptionsJsonSerializer>();
             }
 
             [Fact]
             public void ExecutableNameFinder_to_IExecutableNameFinder()
             {
                 // Assert
-                _services.AssertSingletonServiceImplementationExists<IExecutableNameFinder, ExecutableNameFinder>();
+                _services.AssertSingletonServiceExists<IExecutableNameFinder, ExecutableNameFinder>();
             }
 
         }
