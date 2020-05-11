@@ -99,4 +99,10 @@ Also, please read the [Contributor Covenant Code of Conduct](https://github.com/
 
 # Release notes
 
-I'll try to write something out in the future to help with changes.
+## Version 2.1
+
+-   Add the `app.Seed<MyDbContext>();` extension method to help seed the database without writing boilerplate code.
+
+## Version 2.0
+
+-   Original version after the switch to GitVersioning
