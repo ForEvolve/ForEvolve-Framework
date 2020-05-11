@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using ForEvolve.EntityFrameworkCore.Seeders;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForEvolve.EntityFrameworkCore.Seeders
+namespace Microsoft.AspNetCore.Builder
 {
     public static class SeederApplicationBuilderExtensions
     {
