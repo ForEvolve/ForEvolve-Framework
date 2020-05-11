@@ -39,7 +39,7 @@ namespace ForEvolve.EntityFrameworkCore.ValueConversion
 
                 // Assert
                 var json = Assert.IsType<string>(result);
-                Assert.Equal("{Name:\"Test name\"}", json);
+                Assert.Equal("{\"Name\":\"Test name\"}", json);
             }
         }
 
@@ -49,7 +49,7 @@ namespace ForEvolve.EntityFrameworkCore.ValueConversion
             public void Should_deserialize_json_to_MyClass()
             {
                 // Arrange
-                var json = "{Name:\"Test name\"}";
+                var json = "{\"Name\":\"Test name\"}";
 
                 // Act
                 var result = sut.ConvertFromProvider(json);
