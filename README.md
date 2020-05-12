@@ -65,6 +65,12 @@ This project stand as the root of all projects. For now, it only contains the `F
 
 See [ForEvolve.Core](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.Core) for more information.
 
+### ForEvolve.EntityFrameworkCore
+
+This project adds EF Core utilities, like easy data seeding, and value conversion.
+
+See [ForEvolve.EntityFrameworkCore](https://github.com/ForEvolve/ForEvolve-Framework/tree/master/src/ForEvolve.EntityFrameworkCore) for more information.
+
 ### ForEvolve.Markdown
 
 Allows consumers to easily convert strings to Markdown using the `IMarkdownConverter` interface.
@@ -99,5 +105,10 @@ Also, please read the [Contributor Covenant Code of Conduct](https://github.com/
 
 # Release notes
 
-I'll try to write something out in the future to help with changes.
+## Version 2.1
 
+-   Add the `app.Seed<MyDbContext>();` extension method to help seed the database without writing boilerplate code.
+
+## Version 2.0
+
+-   Original version after the switch to GitVersioning

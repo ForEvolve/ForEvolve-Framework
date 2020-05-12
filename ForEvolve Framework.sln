@@ -61,6 +61,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{1ACBA303
 		Dependencies.Build.props = Dependencies.Build.props
 		Directory.Build.props = Directory.Build.props
 		nuget.config = nuget.config
+		version.json = version.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForEvolve.EntityFrameworkCore", "src\ForEvolve.EntityFrameworkCore\ForEvolve.EntityFrameworkCore.csproj", "{93E3F444-24F9-4993-85A9-EBC618500FD1}"

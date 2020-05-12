@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace ForEvolve.EntityFrameworkCore.ValueConversion
 {
@@ -13,9 +13,9 @@ namespace ForEvolve.EntityFrameworkCore.ValueConversion
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectToJsonConverter{TObject}"/> class.
         /// </summary>
-        public ObjectToJsonConverter() : base(
-            input => Serialize(input),
-            input => Deserialize(input),
+        public ObjectToJsonConverter(JsonSerializerOptions options = null) : base(
+            input => Serialize(input, options),
+            input => Deserialize(input, options),
             null
         )
         { }
@@ -25,9 +25,9 @@ namespace ForEvolve.EntityFrameworkCore.ValueConversion
         /// </summary>
         /// <param name="obj">The object to serialize.</param>
         /// <returns>The serialized <see cref="TObject"/> in the JSON format.</returns>
-        public static string Serialize(TObject obj)
+        public static string Serialize(TObject obj, JsonSerializerOptions options = null)
         {
-            return JsonConvert.SerializeObject(obj);
+            return JsonSerializer.Serialize(obj, options);
         }
 
         /// <summary>
@@ -35,9 +35,9 @@ namespace ForEvolve.EntityFrameworkCore.ValueConversion
         /// </summary>
         /// <param name="json">The json.</param>
         /// <returns>The deserialized <see cref="TObject"/>.</returns>
-        public static TObject Deserialize(string json)
+        public static TObject Deserialize(string json, JsonSerializerOptions options = null)
         {
-            return JsonConvert.DeserializeObject<TObject>(json);
+            return JsonSerializer.Deserialize<TObject>(json, options);
         }
     }
 }
