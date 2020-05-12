@@ -13,8 +13,8 @@ namespace Microsoft.AspNetCore.Builder
     public static class SeederApplicationBuilderExtensions
     {
         /// <summary>
-        /// Find the <see cref="ISeederManager{TDbContext}"/> and call its Seed method,
-        /// executing all the <see cref="ISeeder{TDbContext}"/> that were registered.
+        /// Find the <see cref="ISeederManager{TDbContext}"/> and call its Seed method.
+        /// By default, it should be executing all <see cref="ISeeder{TDbContext}"/> that were registered.
         /// </summary>
         /// <typeparam name="TDbContext"></typeparam>
         /// <param name="app"></param>
