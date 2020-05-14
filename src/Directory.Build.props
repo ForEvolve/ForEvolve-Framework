@@ -16,7 +16,7 @@
     <!-- <IncludeSource>True</IncludeSource> -->
     <!-- <DebugType>portable</DebugType> -->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <!-- <EmbedUntrackedSources>true</EmbedUntrackedSources> -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <!--<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>-->
     <!--
