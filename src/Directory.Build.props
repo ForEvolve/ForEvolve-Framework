@@ -24,6 +24,12 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     -->
     <!-- <GenerateDocumentationFile>true</GenerateDocumentationFile> -->
+    <!-- 
+      Deterministic packages seems disabled; see:
+      https://github.com/NuGet/Home/wiki/%5BSpec%5D-Deterministic-Pack
+    -->
+    <!-- <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild> -->
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Nerdbank.GitVersioning" Version="3.0.50" PrivateAssets="All" />
