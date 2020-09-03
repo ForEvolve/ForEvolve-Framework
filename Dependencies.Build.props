@@ -12,7 +12,7 @@
 
   <!-- ForEvolve.AspNetCore -->
   <PropertyGroup>
-    <ForEvolveAspNetCoreTargetFrameworks Condition="'$(FOREVOLVE_ASPNETCORE_TARGET_FRAMEWORKS)'==''">net5.0</ForEvolveAspNetCoreTargetFrameworks>
+    <ForEvolveAspNetCoreTargetFrameworks Condition="'$(FOREVOLVE_ASPNETCORE_TARGET_FRAMEWORKS)'==''">netcoreapp3.1;net5.0</ForEvolveAspNetCoreTargetFrameworks>
   </PropertyGroup>
 
   <!-- ForEvolve.EntityFrameworkCore -->
