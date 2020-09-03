@@ -65,6 +65,12 @@ Doing that will allow removing the dependency on Microsoft.AspNetCore.Http.Featu
             return await blockBlob.DeleteIfExistsAsync();
         }
 
+        public Task<bool> ExistsAsync(string fileName)
+        {
+            var blockBlob = Find(fileName);
+            return blockBlob.ExistsAsync();
+        }
+
         public Task<Stream> OpenReadAsync(string fileName)
         {
             return Find(fileName)
