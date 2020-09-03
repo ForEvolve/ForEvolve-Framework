@@ -13,7 +13,13 @@ namespace ForEvolve.Azure.Storage.Blob
     public interface IFileRepository
     {
         Task<Stream> OpenReadAsync(string fileName);
-        Task<string> UploadFileAsync(IFormFile file, string fileName);
+        Task<string> UploadFileAsync(byte[] file, string fileName);
+        Task<string> UploadFileAsync(Stream fileStream, string fileName);
         Task<bool> RemoveFileAsync(string fileName);
+        Task<bool> ExistsAsync(string fileName);
+
+        [Obsolete(@"This method will be moved to an extension into another project in a future major release.
+Doing that will allow removing the dependency on Microsoft.AspNetCore.Http.Features", error: false)]
+        Task<string> UploadFileAsync(IFormFile file, string fileName);
     }
 }
