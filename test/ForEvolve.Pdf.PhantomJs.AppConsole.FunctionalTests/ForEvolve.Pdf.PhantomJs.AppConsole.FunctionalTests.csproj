@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="ForEvolve.PhantomJs.Dependencies" Version="$(ForEvolvePhantomJsDependenciesPackagesVersion)" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.7" />
   </ItemGroup>
 
   <ItemGroup>
