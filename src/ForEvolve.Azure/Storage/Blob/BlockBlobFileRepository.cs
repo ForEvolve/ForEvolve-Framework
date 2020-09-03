@@ -28,17 +28,31 @@ namespace ForEvolve.Azure.Storage.Blob
             return container.GetBlockBlobReference(fileName);
         }
 
+        [Obsolete(@"This method will be moved to an extension into another project in a future major release.
+Doing that will allow removing the dependency on Microsoft.AspNetCore.Http.Features", error: false)]
         public async Task<string> UploadFileAsync(IFormFile file, string fileName)
+        {
+            using var fileStream = file.OpenReadStream();
+            return await UploadFileAsync(fileStream, fileName);
+        }
+
+        public async Task<string> UploadFileAsync(byte[] file, string fileName)
+        {
+            using var fileStream = new MemoryStream();
+            using var binaryWriter = new BinaryWriter(fileStream);
+            binaryWriter.Write(file);
+            return await UploadFileAsync(fileStream, fileName);
+        }
+
+        public async Task<string> UploadFileAsync(Stream fileStream, string fileName)
         {
             // Get a reference to a blob 
             var blockBlob = Find(fileName);
 
             // Create or overwrite the blob with the contents of a local file
-            using (var fileStream = file.OpenReadStream())
-            {
-                await blockBlob.UploadFromStreamAsync(fileStream);
-            }
+            await blockBlob.UploadFromStreamAsync(fileStream);
 
+            // Return the blob uri
             return blockBlob.Uri.AbsoluteUri;
         }
 
