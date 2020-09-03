@@ -22,10 +22,12 @@ steps:
       displayName: 'Build net5.0'
       inputs:
           projects: 'src/**/*.csproj'
-          arguments: '--configuration $(BuildConfiguration) --framework $(NetCoreVersion)'
+          arguments: '--configuration $(BuildConfiguration)'
+          # --framework $(NetCoreVersion)
 
     - task: DotNetCoreCLI@2
       displayName: 'Build net461'
+      enabled: false
       inputs:
           projects: src/ForEvolve.Contracts/ForEvolve.Contracts.csproj
           arguments: '--configuration $(BuildConfiguration) --framework net461'
