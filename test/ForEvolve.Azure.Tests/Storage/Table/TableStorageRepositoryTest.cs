@@ -12,12 +12,12 @@ namespace ForEvolve.Azure.Storage.Table
     public class TableStorageRepositoryTest
     {
         protected TableStorageRepository<SomeTestEntity> RepositoryUnderTest { get; }
-        protected DevelopmentTableStorageSettings Settings { get; }
+        protected ITableStorageSettings Settings { get; }
         private const string DefaultTableName = "MyTestTable";
 
         public TableStorageRepositoryTest(string tableName = DefaultTableName)
         {
-            Settings = new DevelopmentTableStorageSettings { TableName = tableName };
+            Settings = new CosmosDbLocalEmulatorSettings(tableName);
             RepositoryUnderTest = new TableStorageRepository<SomeTestEntity>(Settings);
         }
 

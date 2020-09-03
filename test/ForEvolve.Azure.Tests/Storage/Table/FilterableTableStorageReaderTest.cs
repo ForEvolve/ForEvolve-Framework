@@ -1,4 +1,5 @@
 ﻿using ForEvolve.Testing;
+using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Collections.Generic;
@@ -12,17 +13,15 @@ namespace ForEvolve.Azure.Storage.Table
     [Trait(DependencyTrait.Name, DependencyTrait.Values.AzureStorageTable)]
     public class FilterableTableStorageReaderTest
     {
-        private readonly DevelopmentTableStorageSettings _settings;
+        private readonly ITableStorageSettings _settings;
         private readonly IFilterableTableStorageReader<MyTestModel> sut;
 
         private readonly TableStorageRepository<MyTestModel> _myTestModelRepository;
 
+
         public FilterableTableStorageReaderTest()
         {
-            _settings = new DevelopmentTableStorageSettings
-            {
-                TableName = "FilterableTableStorageReaderTest"
-            };
+            _settings = new CosmosDbLocalEmulatorSettings("FilterableTableStorageReaderTest");
             sut = new FilterableTableStorageReader<MyTestModel>(_settings);
             _myTestModelRepository = new TableStorageRepository<MyTestModel>(_settings);
         }

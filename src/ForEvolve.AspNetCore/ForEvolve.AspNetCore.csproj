@@ -1,10 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>$(ForEvolveTargetFrameworks)</TargetFrameworks>
+    <TargetFrameworks>$(ForEvolveAspNetCoreTargetFrameworks)</TargetFrameworks>
     <Description>Multiple ASP.NET Core utilities, including email, configuration, access to HTTP headers, etc.</Description>
     <PackageTags>forevolve,aspnetcore,asp.net,core,aspnet,asp,email,configuration,http,json,middleware,operation,result,view,render</PackageTags>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ForEvolve.Contracts\ForEvolve.Contracts.csproj" />

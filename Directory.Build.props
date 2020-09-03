@@ -8,8 +8,4 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   
-  <ItemGroup Condition="'$(TargetFramework)'!='net461'">
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-
 </Project>
