@@ -6,15 +6,31 @@
 
     <!-- Versioning helpers -->
     <!-- <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1</ForEvolveTargetFrameworks> -->
-    <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">net5.0</ForEvolveTargetFrameworks>
+    <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.1</ForEvolveTargetFrameworks>
     <ForEvolveTestTargetFramework Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">net5.0</ForEvolveTestTargetFramework>
+  </PropertyGroup>
+  
+  <!-- ForEvolve.AspNetCore -->
+  <PropertyGroup>
+    <ForEvolveAspNetCoreTargetFrameworks Condition="'$(FOREVOLVE_ASPNETCORE_TARGET_FRAMEWORKS)'==''">net5.0</ForEvolveAspNetCoreTargetFrameworks>
+  </PropertyGroup>
+
+  <!-- ForEvolve.EntityFrameworkCore -->
+  <PropertyGroup>
+    <ForEvolveEFCoreTargetFrameworks Condition="'$(FOREVOLVE_EFCORE_TARGET_FRAMEWORKS)'==''">netcoreapp3.1;net5.0</ForEvolveEFCoreTargetFrameworks>
+    <ForEvolveEFCore5Version Condition="'$(FOREVOLVE_EFCORE5_VERSION)'==''">5.0.0-preview.3.20181.2</ForEvolveEFCore5Version>
+    <ForEvolveEFCore3Version Condition="'$(FOREVOLVE_EFCORE3_VERSION)'==''">3.1</ForEvolveEFCore3Version>
+  </PropertyGroup>
+
+  <!--ForEvolve.Pdf-->
+  <PropertyGroup>
+    <ForEvolvePDFTargetFrameworks Condition="'$(FOREVOLVE_PDF_TARGET_FRAMEWORKS)'==''">netcoreapp3.1;net5.0</ForEvolvePDFTargetFrameworks>
   </PropertyGroup>
 
   <!-- Source packages -->
   <PropertyGroup>
     <ForEvolveNetCoreVersion Condition="'$(FOREVOLVE_ASPNETCORE_VERSION)'==''">5.0.0</ForEvolveNetCoreVersion>
     <ForEvolveIdentityVersion Condition="'$(FOREVOLVE_IDENTITY_VERSION)'==''">5.0.0</ForEvolveIdentityVersion>
-    <ForEvolveEFCoreVersion Condition="'$(FOREVOLVE_EFCORE_VERSION)'==''">5.0.0-preview.3.20181.2</ForEvolveEFCoreVersion>
     <DefineConstants>SYSTEM_TEXT_JSON</DefineConstants>
   </PropertyGroup>
 
@@ -26,5 +42,7 @@
     <ForEvolveTestSdkVersion Condition="'$(FOREVOLVE_TEST_SDK_VERSION)'==''">16.6.1</ForEvolveTestSdkVersion>
     <ForEvolveAspNetCoreTestHostVersion Condition="'$(FOREVOLVE_ASPNETCORE_TESTHOST_VERSION)'==''">5.0.0-preview.3.20215.14</ForEvolveAspNetCoreTestHostVersion>
   </PropertyGroup>
+
+
 
 </Project>

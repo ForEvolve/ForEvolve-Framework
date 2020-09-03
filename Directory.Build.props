@@ -8,10 +8,4 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
   
-  <!--
-  <ItemGroup>
-    <FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-  -->
-
 </Project>
