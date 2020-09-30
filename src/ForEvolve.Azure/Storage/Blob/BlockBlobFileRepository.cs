@@ -16,13 +16,17 @@ namespace ForEvolve.Azure.Storage.Blob
         {
         }
 
-        public CloudBlockBlob Find(string fileName)
+        protected async Task<CloudBlobContainer> GetContainerAsync()
         {
-            // Create a blob client.
             var blobClient = CloudStorageAccount.CreateCloudBlobClient();
-
-            // Get a reference to a container 
             var container = blobClient.GetContainerReference(StorageSettings.ContainerName);
+            await container.CreateIfNotExistsAsync();
+            return container;
+        }
+
+        protected async Task<CloudBlockBlob> FindAsync(string fileName)
+        {
+            var container = await GetContainerAsync();
 
             // Get a reference to a blob 
             return container.GetBlockBlobReference(fileName);
@@ -47,7 +51,7 @@ Doing that will allow removing the dependency on Microsoft.AspNetCore.Http.Featu
         public async Task<string> UploadFileAsync(Stream fileStream, string fileName)
         {
             // Get a reference to a blob 
-            var blockBlob = Find(fileName);
+            var blockBlob = await FindAsync(fileName);
 
             // Create or overwrite the blob with the contents of a local file
             await blockBlob.UploadFromStreamAsync(fileStream);
@@ -59,21 +63,21 @@ Doing that will allow removing the dependency on Microsoft.AspNetCore.Http.Featu
         public async Task<bool> RemoveFileAsync(string fileName)
         {
             // Get a reference to a blob 
-            var blockBlob = Find(fileName);
+            var blockBlob = await FindAsync(fileName);
 
             // Delete the blob if it is existing
             return await blockBlob.DeleteIfExistsAsync();
         }
 
-        public Task<bool> ExistsAsync(string fileName)
+        public async Task<bool> ExistsAsync(string fileName)
         {
-            var blockBlob = Find(fileName);
-            return blockBlob.ExistsAsync();
+            var blockBlob = await FindAsync(fileName);
+            return await blockBlob.ExistsAsync();
         }
 
-        public Task<Stream> OpenReadAsync(string fileName)
+        public async Task<Stream> OpenReadAsync(string fileName)
         {
-            return Find(fileName)
+            return await (await FindAsync(fileName))
                 .OpenReadAsync();
         }
     }
