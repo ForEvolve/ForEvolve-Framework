@@ -8,11 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(ForEvolveEFCore6Version)" Condition="'$(TargetFramework)'=='net6.0'" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(ForEvolveEFCore5Version)" Condition="'$(TargetFramework)'=='net5.0'" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(ForEvolveEFCore3Version)" Condition="'$(TargetFramework)'=='netcoreapp3.1'" />
     <PackageReference Include="Scrutor" Version="3.2.1" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\ForEvolve.Core\ForEvolve.Core.csproj" />
   </ItemGroup>
