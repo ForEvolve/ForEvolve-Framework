@@ -8,7 +8,7 @@ pool:
 
 variables:
     BuildConfiguration: Release
-    NetCoreSdkVersion: '5.0.100-preview.8.20417.9'
+    NetCoreSdkVersion: '6.0.100'
 
 steps:
     - task: UseDotNet@2
