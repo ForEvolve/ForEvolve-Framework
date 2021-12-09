@@ -21,7 +21,7 @@ namespace ForEvolve.Azure.Storage.Table
 
         public FilterableTableStorageReaderTest()
         {
-            _settings = new CosmosDbLocalEmulatorSettings("FilterableTableStorageReaderTest");
+            _settings = new DevelopmentTableStorageSettings("FilterableTableStorageReaderTest");
             sut = new FilterableTableStorageReader<MyTestModel>(_settings);
             _myTestModelRepository = new TableStorageRepository<MyTestModel>(_settings);
         }
