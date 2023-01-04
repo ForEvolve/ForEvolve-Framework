@@ -11,17 +11,19 @@ on:
             - master
 
 env:
-    DOTNET_VERSION: '5.0.100-preview.3.20216.6'
+    DOTNET_VERSION: '6.0.100'
     BUILD_CONFIGURATION: Release
     PUBLIC_RELEASE: true
     FEEDZ_SOURCE: https://f.feedz.io/forevolve/toolbox/nuget/index.json
 
 jobs:
-    build-and-test:
+    build-test-and-deploy:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
 
             - name: Setup .NET Core ${{ env.DOTNET_VERSION }}
               uses: actions/setup-dotnet@v1
@@ -32,23 +34,11 @@ jobs:
               run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
 
             - name: Unit Test
-              run: dotnet test --configuration ${{ env.BUILD_CONFIGURATION }} --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer" /p:CollectCoverage=true
+              run: dotnet test --configuration ${{ env.BUILD_CONFIGURATION }} --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer"
 
-    deploy:
-        runs-on: ubuntu-latest
-        needs: build-and-test
-        steps:
-            - uses: actions/checkout@v1
-
-            - name: Setup .NET Core ${{ env.DOTNET_VERSION }}
-              uses: actions/setup-dotnet@v1
-              with:
-                  dotnet-version: ${{ env.DOTNET_VERSION }}
-
-            - uses: aarnott/nbgv@v0.3
+            - uses: dotnet/nbgv@master
               with:
                   setAllVars: true
-                  PublicRelease: ${{ env.PUBLIC_RELEASE }}
 
             - name: Pack
               run: dotnet pack --configuration ${{ env.BUILD_CONFIGURATION }}
