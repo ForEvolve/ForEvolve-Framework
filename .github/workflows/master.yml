@@ -13,7 +13,6 @@ on:
 env:
     DOTNET_VERSION: '6.0.100'
     BUILD_CONFIGURATION: Release
-    PUBLIC_RELEASE: true
     FEEDZ_SOURCE: https://f.feedz.io/forevolve/toolbox/nuget/index.json
 
 jobs:
@@ -33,8 +32,11 @@ jobs:
             - name: Build
               run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
 
-            - name: Unit Test
-              run: dotnet test --configuration ${{ env.BUILD_CONFIGURATION }} --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer"
+            - name: Unit Tests
+              run: find ./test -name "*.Tests.csproj" -exec dotnet test '{}' --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer" -v q \;
+
+            - name: Functional Tests
+              run: find ./test -name "*.FunctionalTests.csproj" -exec dotnet test '{}' --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer" -v q \;
 
             - uses: dotnet/nbgv@master
               with:
