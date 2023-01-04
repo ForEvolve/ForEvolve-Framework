@@ -31,7 +31,7 @@
     <Exec Command="cd ..\ArgsLoggerConsole&#xD;&#xA;dotnet publish -c $(ConfigurationName) -r win10-x64 --no-self-contained -o ..\ForEvolve.Pdf.Tests\$(OutDir)\PhantomJs\Root" />
   </Target>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' == 'UNIX' ">
-    <Exec Command="cd .. &#xD;&#xA; cd ArgsLoggerConsole &#xD;&#xA; dotnet publish -r linux-x64 --no-self-contained -o ..\ForEvolve.Pdf.Tests\$(OutDir)\PhantomJs\Root" />
+    <Exec Command="cd .. &#xD;&#xA; cd ArgsLoggerConsole &#xD;&#xA; dotnet publish -c $(ConfigurationName) -r linux-x64 --no-self-contained -o ..\ForEvolve.Pdf.Tests\$(OutDir)\PhantomJs\Root" />
   </Target>
 
 </Project>
