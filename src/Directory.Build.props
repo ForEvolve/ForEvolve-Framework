@@ -7,7 +7,7 @@
     <Authors>Carl-Hugo Marcotte</Authors>
     <Company>ForEvolve</Company>
     <PackageProjectUrl>https://github.com/ForEvolve/ForEvolve-Framework</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/ForEvolve/ForEvolve-Framework/blob/master/LICENSE</PackageLicenseUrl>
+    <License>MIT</License>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Copyright>Carl-Hugo Marcotte</Copyright>
 
