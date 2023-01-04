@@ -30,13 +30,13 @@ jobs:
                   dotnet-version: ${{ env.DOTNET_VERSION }}
 
             - name: Build
-              run: dotnet build --configuration ${{ env.BUILD_CONFIGURATION }}
+              run: find . -name "*.csproj" -exec dotnet build '{}' --configuration ${{ env.BUILD_CONFIGURATION }} -v q \;
 
             - name: Unit Tests
-              run: find ./test -name "*.Tests.csproj" -exec dotnet test '{}' --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer" -v q \;
+              run: find ./test -name "*.Tests.csproj" -exec dotnet test '{}' --no-build --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer" -v q \;
 
             - name: Functional Tests
-              run: find ./test -name "*.FunctionalTests.csproj" -exec dotnet test '{}' --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer" -v q \;
+              run: find ./test -name "*.FunctionalTests.csproj" -exec dotnet test '{}' --no-build --filter "Dependency!=AzureStorageTable&Dependency!=SqlServer" -v q \;
 
             - uses: dotnet/nbgv@master
               with:
