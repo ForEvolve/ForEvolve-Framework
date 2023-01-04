@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="cd ..\ArgsLoggerConsole&#xD;&#xA;dotnet publish -c $(ConfigurationName) -r win10-x64 -o ..\ForEvolve.Pdf.Tests\$(OutDir)\PhantomJs\Root" />
+    <Exec Command="cd ..\ArgsLoggerConsole&#xD;&#xA;dotnet publish -c $(ConfigurationName) -r win10-x64 --self-contained -o ..\ForEvolve.Pdf.Tests\$(OutDir)\PhantomJs\Root" />
   </Target>
 
 </Project>
