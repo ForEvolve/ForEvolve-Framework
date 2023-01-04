@@ -6,15 +6,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="$(ForEvolveAspNetCoreTestHostVersion)" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(ForEvolveTestSdkVersion)" />
-    <PackageReference Include="Moq" Version="$(ForEvolveMoqVersion)" />
-    <PackageReference Include="xunit" Version="$(ForEvolveXunitVersion)" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="$(ForEvolveXunitVersion)" />
-    <DotNetCliToolReference Include="dotnet-xunit" Version="2.4.0-beta.1.build3958" />
+    <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="6.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ForEvolve.Testing" Version="$(ForEvolveTestingVersion)" />
+    <PackageReference Include="ForEvolve.Testing" Version="1.0.6" />
   </ItemGroup>
 
 </Project>
