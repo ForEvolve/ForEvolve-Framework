@@ -17,7 +17,7 @@ namespace ForEvolve.Azure.Storage.Table
 
         public TableStorageRepositoryTest(string tableName = DefaultTableName)
         {
-            Settings = new CosmosDbLocalEmulatorSettings(tableName);
+            Settings = new DevelopmentTableStorageSettings(tableName);
             RepositoryUnderTest = new TableStorageRepository<SomeTestEntity>(Settings);
         }
 

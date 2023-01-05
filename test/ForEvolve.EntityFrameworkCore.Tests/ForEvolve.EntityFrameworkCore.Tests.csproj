@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  
+
   <PropertyGroup>
     <RootNamespace>ForEvolve.EntityFrameworkCore</RootNamespace>
     <TargetFramework>$(ForEvolveTestTargetFramework)</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netcoreapp3.1'">
-    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(ForEvolveEFCore3Version)" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(ForEvolveEFCore3Version)" />
-  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)'=='net5.0'">
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(ForEvolveEFCore5Version)" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(ForEvolveEFCore5Version)" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net6.0'">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="$(ForEvolveEFCore6Version)" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(ForEvolveEFCore6Version)" />
   </ItemGroup>
 
   <ItemGroup>

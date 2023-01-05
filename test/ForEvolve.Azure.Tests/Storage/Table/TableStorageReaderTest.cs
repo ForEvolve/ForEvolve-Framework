@@ -16,11 +16,11 @@ namespace ForEvolve.Azure.Storage.Table
     public class TableStorageReaderTest : BaseHttpTest
     {
         private ITableStorageReader SubjectUnderTest => Server.Host.Services.GetService<ITableStorageReader>();
-        private readonly ITableStorageSettings tableStorageSettings2 = new CosmosDbLocalEmulatorSettings("TableStorageReaderTest2");
+        private readonly ITableStorageSettings tableStorageSettings2 = new DevelopmentTableStorageSettings("TableStorageReaderTest2");
         protected override void ConfigureServices(IServiceCollection services)
         {
             base.ConfigureServices(services);
-            services.AddSingleton<ITableStorageSettings>(new CosmosDbLocalEmulatorSettings("TableStorageReaderTest"));
+            services.AddSingleton<ITableStorageSettings>(new DevelopmentTableStorageSettings("TableStorageReaderTest"));
             services.AddForEvolveTableStorage();
         }
 

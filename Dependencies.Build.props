@@ -1,48 +1,33 @@
 <Project>
   <PropertyGroup>
     <!-- ForEvolve packages -->
-    <ForEvolvePackagesVersion Condition="'$(FOREVOLVE_PACKAGES_VERSION)'==''">[2.0.0,3.0)</ForEvolvePackagesVersion>
     <ForEvolvePhantomJsDependenciesPackagesVersion Condition="'$(FOREVOLVE_PHANTOMJS_DEPENDENCIES_PACKAGES_VERSION)'==''">1.0.0</ForEvolvePhantomJsDependenciesPackagesVersion>
 
     <!-- Versioning helpers -->
-    <!-- <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.0;netcoreapp2.1;netcoreapp2.2;netcoreapp3.0;netcoreapp3.1</ForEvolveTargetFrameworks> -->
     <ForEvolveTargetFrameworks Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">netstandard2.1</ForEvolveTargetFrameworks>
-    <ForEvolveTestTargetFramework Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">net5.0</ForEvolveTestTargetFramework>
+    <ForEvolveTestTargetFramework Condition="'$(FOREVOLVE_TARGET_FRAMEWORKS)'==''">net6.0</ForEvolveTestTargetFramework>
   </PropertyGroup>
 
   <!-- ForEvolve.AspNetCore -->
   <PropertyGroup>
-    <ForEvolveAspNetCoreTargetFrameworks Condition="'$(FOREVOLVE_ASPNETCORE_TARGET_FRAMEWORKS)'==''">netcoreapp3.1;net5.0</ForEvolveAspNetCoreTargetFrameworks>
+    <ForEvolveAspNetCoreTargetFrameworks Condition="'$(FOREVOLVE_ASPNETCORE_TARGET_FRAMEWORKS)'==''">net5.0;net6.0</ForEvolveAspNetCoreTargetFrameworks>
   </PropertyGroup>
 
   <!-- ForEvolve.EntityFrameworkCore -->
   <PropertyGroup>
-    <ForEvolveEFCoreTargetFrameworks Condition="'$(FOREVOLVE_EFCORE_TARGET_FRAMEWORKS)'==''">netcoreapp3.1;net5.0</ForEvolveEFCoreTargetFrameworks>
-    <ForEvolveEFCore5Version Condition="'$(FOREVOLVE_EFCORE5_VERSION)'==''">5.0.0-preview.8.20407.4</ForEvolveEFCore5Version>
-    <ForEvolveEFCore3Version Condition="'$(FOREVOLVE_EFCORE3_VERSION)'==''">3.1</ForEvolveEFCore3Version>
+    <ForEvolveEFCoreTargetFrameworks Condition="'$(FOREVOLVE_EFCORE_TARGET_FRAMEWORKS)'==''">net5.0;net6.0</ForEvolveEFCoreTargetFrameworks>
+    <ForEvolveEFCore6Version Condition="'$(FOREVOLVE_EFCORE6_VERSION)'==''">6.0</ForEvolveEFCore6Version>
+    <ForEvolveEFCore5Version Condition="'$(FOREVOLVE_EFCORE5_VERSION)'==''">5.0</ForEvolveEFCore5Version>
   </PropertyGroup>
 
   <!--ForEvolve.Pdf-->
   <PropertyGroup>
-    <ForEvolvePDFTargetFrameworks Condition="'$(FOREVOLVE_PDF_TARGET_FRAMEWORKS)'==''">netcoreapp3.1;net5.0</ForEvolvePDFTargetFrameworks>
+    <ForEvolvePDFTargetFrameworks Condition="'$(FOREVOLVE_PDF_TARGET_FRAMEWORKS)'==''">net5.0;net6.0</ForEvolvePDFTargetFrameworks>
   </PropertyGroup>
 
   <!-- Source packages -->
   <PropertyGroup>
-    <ForEvolveNetCoreVersion Condition="'$(FOREVOLVE_ASPNETCORE_VERSION)'==''">5.0.0</ForEvolveNetCoreVersion>
-    <ForEvolveIdentityVersion Condition="'$(FOREVOLVE_IDENTITY_VERSION)'==''">5.0.0</ForEvolveIdentityVersion>
     <DefineConstants>SYSTEM_TEXT_JSON</DefineConstants>
   </PropertyGroup>
-
-  <!-- Tests packages -->
-  <PropertyGroup>
-    <ForEvolveTestingVersion Condition="'$(FOREVOLVE_TESTING_VERSION)'==''">1.0.6</ForEvolveTestingVersion>
-    <ForEvolveXunitVersion Condition="'$(FOREVOLVE_XUNIT_VERSION)'==''">2.4.1</ForEvolveXunitVersion>
-    <ForEvolveMoqVersion Condition="'$(FOREVOLVE_MOQ_VERSION)'==''">4.14.1</ForEvolveMoqVersion>
-    <ForEvolveTestSdkVersion Condition="'$(FOREVOLVE_TEST_SDK_VERSION)'==''">16.6.1</ForEvolveTestSdkVersion>
-    <ForEvolveAspNetCoreTestHostVersion Condition="'$(FOREVOLVE_ASPNETCORE_TESTHOST_VERSION)'==''">5.0.0-preview.8.20414.8</ForEvolveAspNetCoreTestHostVersion>
-  </PropertyGroup>
-
-
 
 </Project>
